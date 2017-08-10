@@ -1,8 +1,15 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import routes from "./routes";
-import "./index.css";
+import { render } from "react-dom";
+import { HashRouter } from "react-router-dom";
+import App from "./App";
 import registerServiceWorker from "./registerServiceWorker";
 
-ReactDOM.render(routes, document.getElementById("root"));
+import "./index.css";
+
+render(
+  <HashRouter>
+    <App />
+  </HashRouter>,
+  document.getElementById("root")
+);
 registerServiceWorker();
