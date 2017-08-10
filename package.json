@@ -1,7 +1,7 @@
 {
   "name": "jordanjanzen.com",
   "version": "0.1.0",
-  "homepage": "http://www.jordanjanzen.com",
+  "homepage": "https://jordandrako.github.io/jordanjanzen",
   "private": true,
   "dependencies": {
     "prop-types": "^15.5.10",
