@@ -1,7 +1,7 @@
 {
   "name": "jordanjanzen.com",
   "version": "0.1.0",
-  "homepage": "https://www.jordandrako.github.io/jordanjanzen",
+  "homepage": "https://jordandrako.github.io/jordanjanzen",
   "private": true,
   "dependencies": {
     "gh-pages": "^1.0.0",
