@@ -24,6 +24,6 @@
     "deploy": "gh-pages -d build"
   },
   "devDependencies": {
-    "styled-components": "^2.1.2",
+    "styled-components": "^2.1.2"
   }
 }
