@@ -17,7 +17,6 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "node-sass-chokidar": "^0.0.3",
     "webpack": "^3.5.2"
   }
 }
