@@ -21,7 +21,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "predeploy": "git checkout master && npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build && git checkout dev"
   },
   "devDependencies": {
     "styled-components": "^2.1.2"
