@@ -4,15 +4,20 @@
   "homepage": "jordanjanzen.com",
   "private": true,
   "dependencies": {
+    "aws-sdk": "^2.97.0",
+    "fs": "^0.0.1-security",
     "husky": "^0.14.3",
     "lint-staged": "^4.0.3",
+    "mime-types": "^2.1.16",
+    "path": "^0.12.7",
     "prettier": "^1.5.3",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-loadable": "^4.0.4",
     "react-router-dom": "^4.1.2",
-    "react-scripts": "1.0.11"
+    "react-scripts": "1.0.11",
+    "s3": "^4.4.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -20,7 +25,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "predeploy": "git checkout master && npm run build",
-    "deploy": "npm run predeploy && aws s3 sync build/ s3://jordanjanzen.com && git checkout dev"
+    "deploy": "node ./scripts/s3_deploy.js && git checkout dev"
   },
   "devDependencies": {
     "styled-components": "^2.1.2"
