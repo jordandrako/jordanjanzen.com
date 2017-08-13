@@ -1,7 +1,6 @@
 {
   "name": "jordanjanzen.com",
   "version": "0.1.0",
-  "homepage": "jordanjanzen.com",
   "private": true,
   "dependencies": {
     "aws-sdk": "^2.97.0",
@@ -25,7 +24,8 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "predeploy": "git checkout master && npm run build",
-    "deploy": "node ./scripts/s3_deploy.js && git checkout dev"
+    "deploy": "aws s3 sync build/ s3://jordanjanzen.com && git checkout dev",
+    "postdeploy": "aws cloudfront create-invalidation --distribution-id E1SASUQHSLUTW3 --paths /*"
   },
   "devDependencies": {
     "styled-components": "^2.1.2"
