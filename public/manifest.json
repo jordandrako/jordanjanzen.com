@@ -1,10 +1,15 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Jordan Janzen",
+  "name": "Jordan Janzen's Portfolio",
   "icons": [
     {
       "src": "favicon.ico",
       "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "favicon.ico",
+      "sizes": "512x512",
       "type": "image/png"
     }
   ],
