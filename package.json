@@ -4,30 +4,23 @@
   "private": true,
   "dependencies": {
     "aws-sdk": "^2.97.0",
-    "fs": "^0.0.1-security",
-    "husky": "^0.14.3",
-    "lint-staged": "^4.0.3",
-    "mime-types": "^2.1.16",
-    "path": "^0.12.7",
-    "prettier": "^1.5.3",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
+    "react-document-title": "^2.0.3",
     "react-dom": "^15.6.1",
     "react-loadable": "^4.0.4",
     "react-router-dom": "^4.1.2",
     "react-scripts": "1.0.11",
-    "s3": "^4.4.0"
+    "styled-components": "^2.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "predeploy": "git checkout master && npm run build",
-    "deploy": "aws s3 sync build/ s3://jordanjanzen.com && git checkout dev",
+    "predeploy": "npm run build",
+    "deploy": "aws s3 sync build/ s3://jordanjanzen.com",
     "postdeploy": "aws cloudfront create-invalidation --distribution-id E1SASUQHSLUTW3 --paths /*"
   },
-  "devDependencies": {
-    "styled-components": "^2.1.2"
-  }
+  "devDependencies": {}
 }
