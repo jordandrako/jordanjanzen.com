@@ -1,12 +1,15 @@
 import React from "react";
+import Navigation from "./Navigation";
 
-import logo from "../logo.svg";
-import MainNav from "./MainNav";
-
-const Header = () =>
+const Header = props =>
   <header>
-    <img src={logo} alt="Logo" width="120" />
-    <MainNav />
+    <h1>Jordan Janzen</h1>
+    <h3 className="tagline">
+      <span>
+        {props.tagline}
+      </span>
+    </h3>
+    <Navigation />
   </header>;
 
 export default Header;
