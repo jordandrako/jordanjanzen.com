@@ -4,7 +4,7 @@ import Main from "./components/Main";
 
 const App = () =>
   <wrapper>
-    <Header />
+    <Header tagline="Never. Stop. Learning." />
     <Main />
   </wrapper>;
 
