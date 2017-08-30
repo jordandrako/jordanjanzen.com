@@ -1,11 +1,12 @@
-import React from "react";
-import Header from "./components/Header";
-import Main from "./components/Main";
+import React from 'react';
+import Header from './components/Header';
+import Main from './components/Main';
 
-const App = () =>
+const App = () => (
   <wrapper>
     <Header tagline="Never. Stop. Learning." />
     <Main />
-  </wrapper>;
+  </wrapper>
+);
 
 export default App;

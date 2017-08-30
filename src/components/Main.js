@@ -1,27 +1,27 @@
-import React from "react";
-import { Switch, Route } from "react-router-dom";
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
 
-import Loadable from "react-loadable";
-import MyLoadingComponent from "./Loading";
+import Loadable from 'react-loadable';
+import MyLoadingComponent from './Loading';
 
 const AsyncHome = Loadable({
-  loader: () => import("./containers/Home"),
-  loading: MyLoadingComponent
+  loader: () => import('./containers/Home'),
+  loading: MyLoadingComponent,
 });
 const AsyncAbout = Loadable({
-  loader: () => import("./containers/About"),
-  loading: MyLoadingComponent
+  loader: () => import('./containers/About'),
+  loading: MyLoadingComponent,
 });
 const AsyncPortfolio = Loadable({
-  loader: () => import("./containers/Portfolio"),
-  loading: MyLoadingComponent
+  loader: () => import('./containers/Portfolio'),
+  loading: MyLoadingComponent,
 });
 const AsyncNotFound = Loadable({
-  loader: () => import("./containers/NotFound"),
-  loading: MyLoadingComponent
+  loader: () => import('./containers/NotFound'),
+  loading: MyLoadingComponent,
 });
 
-const Main = () =>
+const Main = () => (
   <Switch>
     <Route exact path="/" component={AsyncHome} />
     <Route exact path="/home" component={AsyncHome} />
@@ -31,6 +31,7 @@ const Main = () =>
 
     {/* Unmatched URLs */}
     <Route component={AsyncNotFound} />
-  </Switch>;
+  </Switch>
+);
 
 export default Main;
