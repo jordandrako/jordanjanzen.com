@@ -2,23 +2,23 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import Loadable from 'react-loadable';
-import MyLoadingComponent from './Loading';
+import Loading from './Loading';
 
 const AsyncHome = Loadable({
   loader: () => import('../containers/Home'),
-  loading: MyLoadingComponent,
+  loading: Loading,
 });
 const AsyncAbout = Loadable({
   loader: () => import('../containers/About'),
-  loading: MyLoadingComponent,
+  loading: Loading,
 });
 const AsyncPortfolio = Loadable({
   loader: () => import('../containers/Portfolio'),
-  loading: MyLoadingComponent,
+  loading: Loading,
 });
 const AsyncNotFound = Loadable({
   loader: () => import('../containers/NotFound'),
-  loading: MyLoadingComponent,
+  loading: Loading,
 });
 
 const Main = () => (

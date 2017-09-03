@@ -7,33 +7,10 @@ injectGlobal`
     src: url("./fonts/FiraCode/distr/eot/FiraCode-Regular.eot");
     src: url("./fonts/FiraCode/distr/eot/FiraCode-Regular.eot?#iefix")
         format("embedded-opentype"),
+        url("./fonts/FiraCode/distr/woff2/FiraCode-Regular.woff2") format("woff2"),
       url("./fonts/FiraCode/distr/woff/FiraCode-Regular.woff") format("woff"),
       url("./fonts/FiraCode/distr/ttf/FiraCode-Regular.ttf") format("truetype");
     font-weight: normal;
-    font-style: normal;
-    font-feature-settings: "calt" 1;
-  }
-
-  @font-face {
-    font-family: "FiraCode";
-    src: url("./fonts/FiraCode/distr/eot/FiraCode-Bold.eot");
-    src: url("./fonts/FiraCode/distr/eot/FiraCode-Bold.eot?#iefix")
-        format("embedded-opentype"),
-      url("./fonts/FiraCode/distr/woff/FiraCode-Bold.woff") format("woff"),
-      url("./fonts/FiraCode/distr/ttf/FiraCode-Bold.ttf") format("truetype");
-    font-weight: bold;
-    font-style: normal;
-    font-feature-settings: "calt" 1;
-  }
-
-  @font-face {
-    font-family: "FiraCode";
-    src: url("./fonts/FiraCode/distr/eot/FiraCode-Light.eot");
-    src: url("./fonts/FiraCode/distr/eot/FiraCode-Light.eot?#iefix")
-        format("embedded-opentype"),
-      url("./fonts/FiraCode/distr/woff/FiraCode-Light.woff") format("woff"),
-      url("./fonts/FiraCode/distr/ttf/FiraCode-Light.ttf") format("truetype");
-    font-weight: lighter;
     font-style: normal;
     font-feature-settings: "calt" 1;
   }

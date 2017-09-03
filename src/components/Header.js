@@ -4,16 +4,14 @@ import Navigation from './Navigation';
 
 const Header = props => (
   <header>
-    <h1>Jordan Janzen</h1>
-    <h3 className="tagline">
-      <span>{props.tagline}</span>
-    </h3>
-    <Navigation className="main-nav" />
+    <h1>JORDAN JANZEN</h1>
+    {props.tagline}
+    <Navigation navType="main-nav" />
   </header>
 );
 
 Header.propTypes = {
-  tagline: PropTypes.string.isRequired,
+  // tagline: PropTypes.func.isRequired,
 };
 
 export default Header;
