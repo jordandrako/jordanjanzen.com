@@ -4,7 +4,7 @@ import { HashRouter } from 'react-router-dom';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
-import './index.css';
+import injectGlobal from './theme/globalStyle'; // eslint-disable-line
 
 render(
   <HashRouter>

@@ -22,8 +22,7 @@
     "postdeploy":
       "aws cloudfront create-invalidation --distribution-id E1SASUQHSLUTW3 --paths /*"
   },
-  "devDependencies": {
-    "aws-sdk": "^2.97.0",
-    "eslint-config-airbnb": "^15.1.0"
+  "devDependencies": {},
+  "eslintConfig": {
   }
 }

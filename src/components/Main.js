@@ -5,19 +5,19 @@ import Loadable from 'react-loadable';
 import MyLoadingComponent from './Loading';
 
 const AsyncHome = Loadable({
-  loader: () => import('./containers/Home'),
+  loader: () => import('../containers/Home'),
   loading: MyLoadingComponent,
 });
 const AsyncAbout = Loadable({
-  loader: () => import('./containers/About'),
+  loader: () => import('../containers/About'),
   loading: MyLoadingComponent,
 });
 const AsyncPortfolio = Loadable({
-  loader: () => import('./containers/Portfolio'),
+  loader: () => import('../containers/Portfolio'),
   loading: MyLoadingComponent,
 });
 const AsyncNotFound = Loadable({
-  loader: () => import('./containers/NotFound'),
+  loader: () => import('../containers/NotFound'),
   loading: MyLoadingComponent,
 });
 
