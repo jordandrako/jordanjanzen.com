@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { colors, theme } from '../theme/variables';
+import { colors, theme, typography } from '../theme/variables';
 
 const Title = styled.header`
-  background: ${colors.black};
+  border-bottom: 3px solid ${colors.black};
   width: 100%;
 
   h2 {
     color: ${theme.secondaryColor};
     display: inline-block;
     width: 100%;
-    font-family: 'FiraCode', monospace;
+    font-family: ${typography.monospace};
     text-transform: lowercase;
     text-align: center;
 
