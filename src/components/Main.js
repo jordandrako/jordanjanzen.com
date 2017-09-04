@@ -1,7 +1,11 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-
+import { Fade } from 'react-router-transitions';
 import Loadable from 'react-loadable';
+import styled from 'styled-components';
+
+import { layout } from '../theme/variables';
+
 import Loading from './Loading';
 
 const AsyncHome = Loadable({
@@ -26,9 +30,7 @@ const Main = () => (
     <Route exact path="/" component={AsyncHome} />
     <Route exact path="/home" component={AsyncHome} />
     <Route exact path="/about" component={AsyncAbout} />
-    <Route exact path="/portfolio" component={AsyncPortfolio} />
-    <Route exact path="/projects" component={AsyncPortfolio} />
-
+    <Route exact path="/portfolio" component={AsyncPortfolio} />\
     {/* Unmatched URLs */}
     <Route component={AsyncNotFound} />
   </Switch>

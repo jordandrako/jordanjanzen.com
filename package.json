@@ -5,11 +5,13 @@
   "dependencies": {
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
+    "react-addons-css-transition-group": "^15.6.0",
     "react-document-title": "^2.0.3",
     "react-dom": "^15.6.1",
     "react-fontawesome": "^1.6.1",
     "react-loadable": "^4.0.4",
     "react-router-dom": "^4.1.2",
+    "react-router-transitions": "^2.2.1",
     "react-scripts": "1.0.11",
     "styled-components": "^2.1.2"
   },
@@ -22,6 +24,5 @@
     "deploy": "aws s3 sync build/ s3://www.jordanjanzen.com",
     "postdeploy": "aws cloudfront create-invalidation --distribution-id E1SASUQHSLUTW3 --paths /*"
   },
-  "devDependencies": {},
-  "eslintConfig": {}
+  "devDependencies": {}
 }

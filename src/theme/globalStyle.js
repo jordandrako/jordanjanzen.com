@@ -1,24 +1,38 @@
 import { injectGlobal } from 'styled-components';
 
+import { colors, theme, typography, layout } from './variables';
+import FiraCode from './fonts/FiraCode-Regular.ttf';
+
 /* eslint-disable */
 injectGlobal`
   @font-face {
     font-family: "FiraCode";
-    src: url("./fonts/FiraCode/distr/eot/FiraCode-Regular.eot");
-    src: url("./fonts/FiraCode/distr/eot/FiraCode-Regular.eot?#iefix")
-        format("embedded-opentype"),
-        url("./fonts/FiraCode/distr/woff2/FiraCode-Regular.woff2") format("woff2"),
-      url("./fonts/FiraCode/distr/woff/FiraCode-Regular.woff") format("woff"),
-      url("./fonts/FiraCode/distr/ttf/FiraCode-Regular.ttf") format("truetype");
+    src: url(${FiraCode});
     font-weight: normal;
     font-style: normal;
     font-feature-settings: "calt" 1;
   }
 
-  body {
-    font-family: 'FiraCode', monospace;
-    font-size: 18px;
+  *, *:before, *:after {
+    box-sizing: inherit;
   }
+
+  html {
+    box-sizing: border-box;
+  }
+
+  html, body {
+    min-height: 100%;
+  }
+
+  body {
+    font-family: ${typography.fontFamily};
+    color: ${theme.textColor}
+    font-size: 18px;
+    margin: 0;
+    padding: 0;
+  }
+
   .large {
     display: hidden;
   }
