@@ -1,6 +1,6 @@
 import { injectGlobal } from 'styled-components';
 
-import { colors, theme, typography, layout } from './variables';
+import { theme, typography } from './variables';
 import FiraCode from './fonts/FiraCode-Regular.ttf';
 
 /* eslint-disable */
@@ -27,7 +27,7 @@ injectGlobal`
 
   body {
     font-family: ${typography.fontFamily};
-    color: ${theme.textColor}
+    color: ${theme.textColor};
     font-size: 18px;
     margin: 0;
     padding: 0;
@@ -36,10 +36,12 @@ injectGlobal`
   .large {
     display: hidden;
   }
+
   @media only screen and (min-width: 800px) {
     .mobile {
       display: none;
     }
+
     .large {
       display: block;
     }

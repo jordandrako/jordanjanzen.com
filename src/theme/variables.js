@@ -20,6 +20,7 @@ export const theme = {
 
 export const typography = {
   fontFamily: 'Roboto, sans-serif',
+  monospace: 'FiraCode, monospace',
 };
 
 export const layout = {

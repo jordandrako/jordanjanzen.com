@@ -1,10 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { Fade } from 'react-router-transitions';
 import Loadable from 'react-loadable';
-import styled from 'styled-components';
-
-import { layout } from '../theme/variables';
 
 import Loading from './Loading';
 
@@ -27,7 +23,7 @@ const AsyncNotFound = Loadable({
 
 const Main = () => (
   <Switch>
-    <Route exact path="/" component={AsyncHome} />
+    <Route exact path="/" onlyActiveOnIndex component={AsyncHome} />
     <Route exact path="/home" component={AsyncHome} />
     <Route exact path="/about" component={AsyncAbout} />
     <Route exact path="/portfolio" component={AsyncPortfolio} />\
