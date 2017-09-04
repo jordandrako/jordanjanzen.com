@@ -4,6 +4,8 @@ import { HashRouter } from 'react-router-dom';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
+import '../node_modules/font-awesome/css/font-awesome.min.css';
+
 import injectGlobal from './theme/globalStyle'; // eslint-disable-line
 
 render(
