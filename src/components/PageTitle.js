@@ -12,7 +12,6 @@ const Title = styled.header`
     display: inline-block;
     width: 100%;
     font-family: ${typography.monospace};
-    text-transform: lowercase;
     text-align: center;
 
     &:before {

@@ -24,7 +24,6 @@ const App = () => (
   <Wrapper className="wrapper">
     <Header tagline={tagline} />
     <Main />
-    <FA name="Rocket" size="2x" />
   </Wrapper>
 );
 

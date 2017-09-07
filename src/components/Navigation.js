@@ -43,7 +43,7 @@ const Navigation = props => (
   <nav>
     <NavList className={props.navType}>
       <li>
-        <Link onlyActiveOnIndex to="/">
+        <Link exact to="/">
           Home
         </Link>
       </li>

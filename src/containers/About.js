@@ -10,7 +10,7 @@ const Main = styled.main`flex: ${layout.mainFlex};`;
 const About = () => (
   <DocumentTitle title="Jordan Janzen | About Me">
     <Main>
-      <PageTitle title="About, Skills and Interests" />
+      <PageTitle title="About" />
       <p>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum quasi et eveniet, aut,
         eligendi pariatur voluptatum facilis officia, ad expedita nihil neque optio totam error

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Switch, Route } from 'react-router-dom';
 import Loadable from 'react-loadable';
 
@@ -21,15 +22,19 @@ const AsyncNotFound = Loadable({
   loading: Loading,
 });
 
-const Main = () => (
+const Main = props => (
   <Switch>
-    <Route exact path="/" onlyActiveOnIndex component={AsyncHome} />
-    <Route exact path="/home" component={AsyncHome} />
-    <Route exact path="/about" component={AsyncAbout} />
-    <Route exact path="/portfolio" component={AsyncPortfolio} />\
+    <Route exact key={props.path} path="/" component={AsyncHome} />
+    <Route exact key={props.path} path="/home" component={AsyncHome} />
+    <Route exact key={props.path} path="/about" component={AsyncAbout} />
+    <Route exact key={props.path} path="/portfolio" component={AsyncPortfolio} />
     {/* Unmatched URLs */}
-    <Route component={AsyncNotFound} />
+    <Route key={props.path} component={AsyncNotFound} />
   </Switch>
 );
+
+Main.propTypes = {
+  path: PropTypes.string.isRequired,
+};
 
 export default Main;
