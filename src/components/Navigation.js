@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { colors, typography } from '../theme/variables';
+import Button from './Button';
 
 const NavList = styled.ul`
   list-style: none;
@@ -39,6 +40,8 @@ const Link = styled(NavLink)`
   }
 `;
 
+const loggedIn = false;
+
 const Navigation = props => (
   <nav>
     <NavList className={props.navType}>
@@ -52,6 +55,12 @@ const Navigation = props => (
       </li>
       <li>
         <Link to="/portfolio">Portfolio</Link>
+      </li>
+      <li>
+        <Link to="/todo">Todo</Link>
+      </li>
+      <li>
+        <Button type="login" arrows text={loggedIn ? 'Log Out' : 'Log In'} />
       </li>
     </NavList>
   </nav>

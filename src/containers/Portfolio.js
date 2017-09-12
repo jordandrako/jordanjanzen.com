@@ -1,11 +1,8 @@
 import React from 'react';
 import DocumentTitle from 'react-document-title';
-import styled from 'styled-components';
-import { layout } from '../theme/variables';
 
+import Main from '../components/Main';
 import PageTitle from '../components/PageTitle';
-
-const Main = styled.main`flex: ${layout.mainFlex};`;
 
 const Portfolio = () => (
   <DocumentTitle title="Jordan Janzen | Portfolio">

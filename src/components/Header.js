@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import FontAwesome from 'react-fontawesome';
 
 import { colors, typography } from '../theme/variables';
 import Navigation from './Navigation';
@@ -50,14 +49,7 @@ const Header = () => (
       <br />
       <span>JANZEN</span>
     </Logo>
-    <Tagline>
-      Never&nbsp;
-      <FontAwesome name="caret-right" />
-      &nbsp;Stop&nbsp;
-      <FontAwesome name="caret-right" />
-      &nbsp;Learning&nbsp;
-      <FontAwesome name="caret-right" />
-    </Tagline>
+    <Tagline>Never Stop Learning</Tagline>
     <Navigation navType="main-nav" />
   </SiteHeader>
 );

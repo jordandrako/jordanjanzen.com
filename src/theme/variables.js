@@ -12,12 +12,6 @@ export const colors = {
   lightwhite: '#ffffff',
 };
 
-export const theme = {
-  primaryColor: colors.blue,
-  secondaryColor: colors.red,
-  textColor: colors.black,
-};
-
 export const typography = {
   fontFamily: 'Roboto, sans-serif',
   monospace: 'FiraCode, monospace',
@@ -25,4 +19,14 @@ export const typography = {
 
 export const layout = {
   mainFlex: '4',
+  mainPadding: '30px',
+};
+
+export const theme = {
+  primaryColor: colors.blue,
+  secondaryColor: colors.red,
+  textColor: colors.black,
+  linkColor: colors.cyan,
+  buttonColor: colors.lightblue,
+  buttonText: colors.black,
 };

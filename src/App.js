@@ -3,11 +3,14 @@ import FontAwesome from 'react-fontawesome';
 import styled from 'styled-components';
 
 import Header from './components/Header';
-import Main from './components/Main';
+import ContentRouter from './components/ContentRouter';
 
 const FA = FontAwesome;
 
-const Wrapper = styled.div`display: flex;`;
+const Wrapper = styled.div`
+  display: flex;
+  height: 100%;
+`;
 
 const tagline = () => (
   <h3 className="tagline">
@@ -23,7 +26,7 @@ const tagline = () => (
 const App = () => (
   <Wrapper className="wrapper">
     <Header tagline={tagline} />
-    <Main />
+    <ContentRouter />
   </Wrapper>
 );
 

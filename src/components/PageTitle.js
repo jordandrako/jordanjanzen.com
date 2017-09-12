@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+
+import { toTitleCase } from '../helpers';
 import { colors, theme, typography } from '../theme/variables';
 
 const Title = styled.header`
@@ -28,11 +30,15 @@ const Title = styled.header`
   }
 `;
 
-const PageTitle = props => (
-  <Title>
-    <h2>{props.title}</h2>
-  </Title>
-);
+const PageTitle = (props) => {
+  const title = toTitleCase(props.title);
+
+  return (
+    <Title>
+      <h2>{title}</h2>
+    </Title>
+  );
+};
 
 PageTitle.propTypes = {
   title: PropTypes.string.isRequired,
