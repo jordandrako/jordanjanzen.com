@@ -23,7 +23,8 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "aws s3 sync build/ s3://www.jordanjanzen.com",
-    "postdeploy": "aws cloudfront create-invalidation --distribution-id E1SASUQHSLUTW3 --paths /*"
+    "postdeploy":
+      "aws cloudfront create-invalidation --distribution-id E1SASUQHSLUTW3 --paths /*"
   },
   "devDependencies": {}
 }
