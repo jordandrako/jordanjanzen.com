@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { colors, typography } from '../theme/variables';
@@ -53,9 +52,5 @@ const Header = () => (
     <Navigation navType="main-nav" />
   </SiteHeader>
 );
-
-Header.propTypes = {
-  tagline: PropTypes.func.isRequired,
-};
 
 export default Header;
