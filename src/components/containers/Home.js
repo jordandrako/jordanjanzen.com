@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import DocumentTitle from 'react-document-title';
 
-import Main from '../components/Main';
-import PageTitle from '../components/PageTitle';
+import Main from '../Main';
+import PageTitle from '../PageTitle';
 
 const Home = () => (
   <DocumentTitle title="Jordan Janzen">

@@ -1,8 +1,8 @@
 import React from 'react';
 import DocumentTitle from 'react-document-title';
 
-import Main from '../components/Main';
-import PageTitle from '../components/PageTitle';
+import Main from '../Main';
+import PageTitle from '../PageTitle';
 
 const Portfolio = () => (
   <DocumentTitle title="Jordan Janzen | Portfolio">
