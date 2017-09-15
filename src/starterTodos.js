@@ -1,0 +1,58 @@
+module.exports = {
+  todo1: {
+    name: 'finish variables',
+    desc: '',
+    cat: '',
+    link: '',
+    status: 'incomplete',
+  },
+  todo2: {
+    name: 'react router transitions',
+    desc: '',
+    cat: '',
+    link: '',
+    status: 'incomplete',
+  },
+  todo3: {
+    name: 'animate active link',
+    desc: '',
+    cat: '',
+    link: '',
+    status: 'incomplete',
+  },
+  todo4: {
+    name: 'Modernizr integration',
+    desc: '',
+    cat: '',
+    link: '',
+    status: 'incomplete',
+  },
+  todo5: {
+    name: 'Flexbox layout',
+    desc: '',
+    cat: '',
+    link: '',
+    status: 'incomplete',
+  },
+  todo6: {
+    name: 'CSS Grid layout',
+    desc: '',
+    cat: '',
+    link: '',
+    status: 'incomplete',
+  },
+  todo7: {
+    name: 'tagline arrows',
+    desc: '',
+    cat: '',
+    link: '',
+    status: 'incomplete',
+  },
+  todo8: {
+    name: 'firebase database',
+    desc: '',
+    cat: '',
+    link: '',
+    status: 'incomplete',
+  },
+};
