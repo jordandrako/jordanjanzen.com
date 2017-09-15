@@ -63,7 +63,7 @@ const Button = props => (
     color={props.color}
     arrows={props.arrows}
   >
-    {props.text}
+    {props.text || props.children}
   </Btn>
 );
 
@@ -78,7 +78,7 @@ Button.propTypes = {
 };
 
 Button.defaultProps = {
-  text: '',
+  text: null,
   color: theme.buttonText,
   small: false,
   large: false,
