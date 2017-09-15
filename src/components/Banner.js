@@ -1,43 +1,86 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import Button from './Button';
 import { colors, typography } from '../theme/variables';
+import { toTitleCase } from '../helpers';
 
 const Alert = styled.div`
-  background: ${props => props.type === 'info' && colors.lightblack};
-  background: ${props => props.type === 'alert' && colors.yellow};
-  background: ${props => props.type === 'success' && colors.green};
-  background: ${props => props.type === 'error' && colors.red};
+  background: ${(props) => {
+    const type = props.type;
+    if (type === 'alert') {
+      return colors.yellow;
+    } else if (type === 'success') {
+      return colors.yellow;
+    } else if (type === 'error') {
+      return colors.yellow;
+    }
+    return colors.lightblack;
+  }};
   padding: 2em;
   margin: 1.5em;
   border-radius: 0.25em;
   border: inset solid 3px rgba(255, 255, 255, 0.5);
   font-family: ${typography.monospace};
   position: relative;
-  .action {
+
+  .showHide {
     position: absolute;
-    top: .5em;
-    right: .5em;
+    top: 0.5em;
+    right: 0.5em;
     width: 2em;
     height: 2em;
-    background: black;
   }
+
   h4 {
-    margin: 0;
+    margin-top: 0;
   }
 `;
 
-const Banner = props => (
-  <Alert type={props.type}>
-    <h4>{props.text}</h4>
-    <span className="action" />
-  </Alert>
-);
+class Banner extends Component {
+  constructor() {
+    super();
+    this.doAction = this.doAction.bind(this);
+
+    this.state = {
+      action: this.props.action,
+    };
+  }
+
+  doAction() {
+    const action = this.props.action;
+    if (action === 'reload' || 'retry') {
+      this.setState.action = 'Reloading...';
+      return this.forceUpdate();
+    }
+    this.setState.action = 'Unknown action';
+    return null;
+  }
+
+  render() {
+    const actionButton = this.props.action ? (
+      <Button className="action" onClick={this.doAction} text={toTitleCase(this.state.action)} />
+    ) : null;
+
+    return (
+      <Alert type={this.props.type}>
+        <h4 className="alert">{this.props.text}</h4>
+        {actionButton}
+      </Alert>
+    );
+  }
+}
 
 Banner.propTypes = {
-  type: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
+  type: PropTypes.string,
+  action: PropTypes.string,
+};
+
+Banner.defaultProps = {
+  type: 'info',
+  action: null,
 };
 
 export default Banner;

@@ -4,11 +4,6 @@ import styled from 'styled-components';
 
 import { theme, typography } from '../theme/variables';
 
-const a = styled.a`
-  text-decoration: none;
-  color: ${theme.linkColor};
-`;
-
 const BtnColor = props => props.color || theme.buttonText;
 
 const Btn = styled.button`
@@ -60,25 +55,22 @@ const Btn = styled.button`
 `;
 
 const Button = props => (
-  <a href={props.type === 'login' ? '' : props.href}>
-    <Btn
-      type={props.type}
-      wide={props.wide}
-      small={props.small}
-      large={props.large}
-      color={props.color}
-      arrows={props.arrows}
-    >
-      {props.text}
-    </Btn>
-  </a>
+  <Btn
+    type={props.type}
+    wide={props.wide}
+    small={props.small}
+    large={props.large}
+    color={props.color}
+    arrows={props.arrows}
+  >
+    {props.text}
+  </Btn>
 );
 
 Button.propTypes = {
   type: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
+  text: PropTypes.string,
   color: PropTypes.string,
-  href: PropTypes.string,
   small: PropTypes.bool,
   large: PropTypes.bool,
   wide: PropTypes.bool,
@@ -86,8 +78,8 @@ Button.propTypes = {
 };
 
 Button.defaultProps = {
+  text: '',
   color: theme.buttonText,
-  href: '#',
   small: false,
   large: false,
   wide: false,
