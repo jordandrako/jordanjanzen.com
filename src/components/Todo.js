@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 import Button from './Button';
 import { colors } from '../theme/variables';
+
+const Input = styled.input``;
 
 class Todo extends Component {
   constructor() {
@@ -15,16 +18,7 @@ class Todo extends Component {
     // take a copy of that fish and update it with the new data
     const updatedTodo = {
       ...todo,
-      [e.target.name]: e.target.value,
-    };
-    this.props.updateTodo(key, updatedTodo);
-  }
-  handleCheckbox(e, key) {
-    const todo = this.props.todos[key];
-    // take a copy of that fish and update it with the new data
-    const updatedTodo = {
-      ...todo,
-      [e.target.name]: e.target.checked,
+      [e.target.name]: e.target.type === 'checkbox' ? e.target.checked : e.target.value,
     };
     this.props.updateTodo(key, updatedTodo);
   }
@@ -34,19 +28,19 @@ class Todo extends Component {
     const isComplete = details.complete === 'true';
     return (
       <li className="todo-item" key={index}>
-        <input
+        <Input
           type="text"
           name="name"
           defaultValue={details.name}
           placeholder="Todo"
           onChange={e => this.handleChange(e, index)}
         />
-        <input
+        <Input
           type="checkbox"
           name="complete"
           defaultChecked={details.complete}
           defaultValue={details.complete}
-          onChange={e => this.handleCheckbox(e, index)}
+          onChange={e => this.handleChange(e, index)}
         />
         Complete
         <select
@@ -82,12 +76,22 @@ class Todo extends Component {
 
 Todo.propTypes = {
   removeTodo: PropTypes.func.isRequired,
+  updateTodo: PropTypes.func.isRequired,
   details: PropTypes.shape({
     name: 'string',
     cat: 'string',
     desc: 'string',
     link: 'string',
     status: 'string',
+  }).isRequired,
+  todos: PropTypes.shape({
+    key: {
+      name: 'string',
+      cat: 'string',
+      desc: 'string',
+      link: 'string',
+      status: 'string',
+    },
   }).isRequired,
   index: PropTypes.string.isRequired,
 };
