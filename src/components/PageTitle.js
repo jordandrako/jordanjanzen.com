@@ -8,6 +8,7 @@ import { colors, theme, typography } from '../theme/variables';
 const Title = styled.header`
   border-bottom: 3px solid ${colors.black};
   width: 100%;
+  margin-bottom: 2em;
 
   h2 {
     color: ${theme.secondaryColor};

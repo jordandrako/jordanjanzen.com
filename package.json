@@ -8,6 +8,7 @@
     "re-base": "^3.0.3",
     "react": "^15.6.1",
     "react-addons-css-transition-group": "^15.6.0",
+    "react-autosize-textarea": "^0.4.8",
     "react-document-title": "^2.0.3",
     "react-dom": "^15.6.1",
     "react-fontawesome": "^1.6.1",
@@ -25,8 +26,7 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "aws s3 sync build/ s3://www.jordanjanzen.com",
-    "postdeploy":
-      "aws cloudfront create-invalidation --distribution-id E1SASUQHSLUTW3 --paths /*"
+    "postdeploy": "aws cloudfront create-invalidation --distribution-id E1SASUQHSLUTW3 --paths /*"
   },
   "devDependencies": {
     "babel-eslint": "^8.0.0",
@@ -45,12 +45,19 @@
       "jquery": true,
       "node": true
     },
-    "plugins": ["import", "jsx-a11y", "react"],
+    "plugins": [
+      "import",
+      "jsx-a11y",
+      "react"
+    ],
     "rules": {
       "react/jsx-filename-extension": [
         1,
         {
-          "extensions": [".js", ".jsx"]
+          "extensions": [
+            ".js",
+            ".jsx"
+          ]
         }
       ]
     }

@@ -28,6 +28,7 @@ injectGlobal`
   body {
     font-family: ${typography.fontFamily};
     color: ${theme.textColor};
+    background: #e7e7e7;
     font-size: 18px;
     margin: 0;
     padding: 0;

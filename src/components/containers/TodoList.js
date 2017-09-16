@@ -1,19 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import DocumentTitle from 'react-document-title';
+import styled from 'styled-components';
 
 import Main from '../Main';
 import PageTitle from '../PageTitle';
 import AddTodoForm from '../AddTodoForm';
 import Todo from '../Todo';
 
+const ListOfTodos = styled.ul`
+  padding: 0;
+  max-width: 480px;
+`;
+
 const TodoList = props => (
   <DocumentTitle title="Jordan Janzen | todo">
     <Main>
       <PageTitle title="Todo" />
-      <h3>Checklist</h3>
       <AddTodoForm addTodo={props.addTodo} />
-      <ul className="todo-list">
+      <h3>Checklist</h3>
+      <ListOfTodos className="todo-list">
         {Object.keys(props.todos).map(key => (
           <Todo
             key={key}
@@ -24,7 +30,7 @@ const TodoList = props => (
             removeTodo={props.removeTodo}
           />
         ))}
-      </ul>
+      </ListOfTodos>
       <button onClick={props.loadSamples}>Load Example Todos</button>
       <h3>Inspiration</h3>
       <ul>
@@ -58,18 +64,19 @@ const TodoList = props => (
 );
 
 TodoList.propTypes = {
-  // todos: PropTypes.shape({
-  //   key: {
-  //     name: 'string',
-  //     cat: 'string',
-  //     desc: 'string',
-  //     link: 'string',
-  //     status: 'string',
-  //   },
-  // }).isRequired,
-  // addTodo: PropTypes.func.isRequired,
-  // updateTodo: PropTypes.func.isRequired,
-  // removeTodo: PropTypes.func.isRequired,
+  todos: PropTypes.shape({
+    key: {
+      name: 'string',
+      cat: 'string',
+      desc: 'string',
+      link: 'string',
+      status: 'string',
+    },
+  }).isRequired,
+  addTodo: PropTypes.func.isRequired,
+  updateTodo: PropTypes.func.isRequired,
+  removeTodo: PropTypes.func.isRequired,
+  loadSamples: PropTypes.func.isRequired,
 };
 
 export default TodoList;
