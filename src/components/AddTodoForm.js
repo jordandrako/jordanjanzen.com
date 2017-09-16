@@ -19,7 +19,7 @@ class AddTodoForm extends Component {
     return (
       <form
         ref={input => (this.todoForm = input)}
-        className="todo-edit"
+        className="add-todo"
         onSubmit={e => this.createTodo(e)}
       >
         <input ref={input => (this.name = input)} type="text" placeholder="Todo" />
@@ -31,7 +31,7 @@ class AddTodoForm extends Component {
         </select>
         <textarea ref={input => (this.desc = input)} type="text" placeholder="Todo Desc" />
         <input ref={input => (this.link = input)} type="text" placeholder="Todo link" />
-        <button type="submit">+ Add Item</button>
+        <button type="submit">+ Add Todo</button>
       </form>
     );
   }

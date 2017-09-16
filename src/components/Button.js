@@ -68,7 +68,7 @@ const Button = props => (
 );
 
 Button.propTypes = {
-  type: PropTypes.string.isRequired,
+  type: PropTypes.oneOf(['primary', 'secondary', 'login']).isRequired,
   text: PropTypes.string,
   color: PropTypes.string,
   small: PropTypes.bool,

@@ -13,17 +13,18 @@ const TodoList = props => (
       <PageTitle title="Todo" />
       <h3>Checklist</h3>
       <AddTodoForm addTodo={props.addTodo} />
-      {/* <ul className="todo-list">
+      <ul className="todo-list">
         {Object.keys(props.todos).map(key => (
           <Todo
             key={key}
             index={key}
+            todos={props.todos}
             details={props.todos[key]}
             updateTodo={props.updateTodo}
             removeTodo={props.removeTodo}
           />
         ))}
-      </ul> */}
+      </ul>
       <button onClick={props.loadSamples}>Load Example Todos</button>
       <h3>Inspiration</h3>
       <ul>
@@ -56,19 +57,19 @@ const TodoList = props => (
   </DocumentTitle>
 );
 
-// TodoList.propTypes = {
-//   todos: PropTypes.shape({
-//     key: {
-//       name: 'string',
-//       cat: 'string',
-//       desc: 'string',
-//       link: 'string',
-//       status: 'string',
-//     },
-//   }).isRequired,
-//   addTodo: PropTypes.func.isRequired,
-//   updateTodo: PropTypes.func.isRequired,
-//   removeTodo: PropTypes.func.isRequired,
-// };
+TodoList.propTypes = {
+  // todos: PropTypes.shape({
+  //   key: {
+  //     name: 'string',
+  //     cat: 'string',
+  //     desc: 'string',
+  //     link: 'string',
+  //     status: 'string',
+  //   },
+  // }).isRequired,
+  // addTodo: PropTypes.func.isRequired,
+  // updateTodo: PropTypes.func.isRequired,
+  // removeTodo: PropTypes.func.isRequired,
+};
 
 export default TodoList;

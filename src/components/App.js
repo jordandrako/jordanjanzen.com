@@ -16,6 +16,7 @@ class App extends Component {
   constructor() {
     super();
     this.addTodo = this.addTodo.bind(this);
+    this.updateTodo = this.updateTodo.bind(this);
     this.removeTodo = this.removeTodo.bind(this);
     this.addProject = this.addProject.bind(this);
     this.updateProject = this.updateProject.bind(this);
@@ -89,16 +90,17 @@ class App extends Component {
     });
   }
 
+  removeTodo(key) {
+    const todos = { ...this.state.todos };
+    console.log('Deleting todo');
+    delete todos[key];
+    this.setState({ todos });
+  }
+
   loadSamples() {
     this.setState({
       todos: sampleTodos,
     });
-  }
-
-  removeTodo(key) {
-    const todos = { ...this.state.todos };
-    todos[key] = null;
-    this.setState({ todos });
   }
 
   addProject(project) {
