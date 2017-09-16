@@ -56,19 +56,19 @@ const TodoList = props => (
   </DocumentTitle>
 );
 
-TodoList.propTypes = {
-  todos: PropTypes.shape({
-    key: {
-      name: 'string',
-      cat: 'string',
-      desc: 'string',
-      link: 'string',
-      status: 'string',
-    },
-  }).isRequired,
-  addTodo: PropTypes.func.isRequired,
-  updateTodo: PropTypes.func.isRequired,
-  removeTodo: PropTypes.func.isRequired,
-};
+// TodoList.propTypes = {
+//   todos: PropTypes.shape({
+//     key: {
+//       name: 'string',
+//       cat: 'string',
+//       desc: 'string',
+//       link: 'string',
+//       status: 'string',
+//     },
+//   }).isRequired,
+//   addTodo: PropTypes.func.isRequired,
+//   updateTodo: PropTypes.func.isRequired,
+//   removeTodo: PropTypes.func.isRequired,
+// };
 
 export default TodoList;
