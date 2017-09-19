@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, withRouter } from 'react-router-dom';
 
 import Home from './containers/Home';
 import About from './containers/About';
@@ -31,7 +31,6 @@ const Router = props => (
   <Switch>
     <Route exact path="/" component={Home} />
     <Route
-      exact
       path="/about"
       render={() => (
         <About
@@ -43,7 +42,6 @@ const Router = props => (
       )}
     />
     <Route
-      exact
       path="/portfolio"
       render={() => (
         <Portfolio
@@ -88,4 +86,4 @@ Router.propTypes = {
   loadSamples: PropTypes.func.isRequired,
 };
 
-export default Router;
+export default withRouter(Router);
