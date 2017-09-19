@@ -1,15 +1,15 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { HashRouter } from 'react-router-dom';
+import { HashRouter as Router } from 'react-router-dom';
 import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 
 import injectGlobal from './theme/globalStyle'; // eslint-disable-line
 
 render(
-  <HashRouter>
+  <Router>
     <App />
-  </HashRouter>,
+  </Router>,
   document.getElementById('root'),
 );
 registerServiceWorker();
