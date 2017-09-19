@@ -30,6 +30,9 @@ const StyledForm = styled.div`
       border-color: ${colors.blue};
     }
   }
+  textarea {
+    resize: none;
+  }
 `;
 
 export default StyledForm;
