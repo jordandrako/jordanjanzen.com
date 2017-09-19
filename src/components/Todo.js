@@ -19,18 +19,45 @@ const Item = styled.li`
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: ${colors.blue};
-    color: ${colors.white};
+    background: ${props => (props.isComplete ? colors.green : colors.lightblack)};
+    color: ${colors.black};
     padding: 5px;
     white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.15s ease-in-out;
 
-    input[type='checkbox'] {
+    .checkbox {
+      width: 20px;
+      height: 20px;
+      border: 2px solid ${colors.black};
+      border-radius: 50%;
+      position: relative;
+
+      ::after {
+        transition: all 0.1s ease-in-out;
+        content: '';
+        display: block;
+        background: ${colors.black};
+        width: 12px;
+        height: 12px;
+        top: 2px;
+        left: 2px;
+        transform: ${props => (props.isComplete ? 'scale(1)' : 'scale(0)')};
+        border-radius: 50%;
+        position: absolute;
+      }
     }
 
-    label {
+    .label {
       transform: rotate(90deg);
       width: 0;
+      user-select: none;
     }
+  }
+
+  Button {
+    margin-top: auto;
+    align-self: flex-end;
   }
 `;
 
@@ -52,6 +79,13 @@ class Todo extends Component {
     this.props.updateTodo(key, updatedProp);
   }
 
+  toggleComplete(e, key) {
+    const updatedProp = {
+      complete: !this.props.details.complete,
+    };
+    this.props.updateTodo(key, updatedProp);
+  }
+
   renderTodo() {
     const { details, index } = this.props;
     const link = details.link ? (
@@ -63,16 +97,10 @@ class Todo extends Component {
     ) : null;
 
     return (
-      <Item className="todo-item" key={index}>
-        <div className="complete">
-          <input
-            type="checkbox"
-            name="complete"
-            defaultChecked={details.complete}
-            defaultValue={details.complete}
-            onChange={e => this.handleChange(e, index)}
-          />
-          <label htmlFor="complete">COMPLETE</label>
+      <Item className="todo-item" key={index} isComplete={details.complete}>
+        <div className="complete" onClick={e => this.toggleComplete(e, index)} role="input">
+          <div className="checkbox" />
+          <p className="label">COMPLETE</p>
         </div>
         <StyledForm>
           <input
