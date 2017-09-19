@@ -18,10 +18,11 @@ class AddTodoForm extends Component {
       name: this.name.value,
       category: this.category.value,
       desc: this.desc.value,
-      link: this.link.value,
+      link: encodeURI(this.link.value),
       complete: false,
     };
     this.props.addTodo(todo);
+    this.todoForm.reset();
   }
 
   render() {
@@ -34,10 +35,17 @@ class AddTodoForm extends Component {
             className="add-todo"
             onSubmit={e => this.createTodo(e)}
           >
-            <input ref={input => (this.name = input)} type="text" placeholder="Todo" required />
+            <input
+              ref={input => (this.name = input)}
+              type="text"
+              name="name"
+              placeholder="Todo"
+              required
+            />
             <select
               ref={input => (this.category = input)}
               type="text"
+              name="category"
               placeholder="Todo Category"
               required
             >
@@ -47,12 +55,21 @@ class AddTodoForm extends Component {
               <option value="quality">Quality</option>
               <option value="backend">Backend</option>
             </select>
-            <TextareaAutosize
+            <textarea
               ref={input => (this.desc = input)}
               type="text"
+              name="desc"
               placeholder="Todo Description"
+              value={null}
+              required
             />
-            <input ref={input => (this.link = input)} type="text" placeholder="Todo link" />
+            <input
+              ref={input => (this.link = input)}
+              type="text"
+              name="link"
+              placeholder="Todo link"
+              value={null}
+            />
             <Button type="submit" styleType="success" arrows={colors.lightwhite}>
               + Add Todo
             </Button>

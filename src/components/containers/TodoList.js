@@ -15,7 +15,7 @@ const ListOfTodos = styled.ul`
   justify-content: space-between;
 
   li {
-    max-width: 50%;
+    width: 50%;
   }
 `;
 
@@ -27,6 +27,7 @@ const TodoList = props => (
         <Row>
           <AddTodoForm addTodo={props.addTodo} />
         </Row>
+
         <Row>
           <h3>Checklist</h3>
           <ListOfTodos className="todo-list">
@@ -40,9 +41,8 @@ const TodoList = props => (
               />
             ))}
           </ListOfTodos>
-
-          <button onClick={props.loadSamples}>Load Example Todos</button>
         </Row>
+
         <Row>
           <h3>Inspiration</h3>
           <ul>
@@ -82,7 +82,6 @@ TodoList.propTypes = {
   addTodo: PropTypes.func.isRequired,
   updateTodo: PropTypes.func.isRequired,
   removeTodo: PropTypes.func.isRequired,
-  loadSamples: PropTypes.func.isRequired,
 };
 
 export default TodoList;

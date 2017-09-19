@@ -13,6 +13,7 @@ const Item = styled.li`
   margin-bottom: 1em;
   flex-grow: 1;
   padding: 0 0.2em;
+  max-width: 50%;
 
   .flag {
     display: flex;
@@ -25,6 +26,7 @@ const Item = styled.li`
       background: ${props => (props.isComplete ? colors.green : colors.lightblack)};
       color: ${colors.black};
       padding: 5px;
+      border: none;
       white-space: nowrap;
       cursor: pointer;
       transition: all 0.15s ease-in-out;
@@ -37,7 +39,7 @@ const Item = styled.li`
         border-radius: 50%;
         position: relative;
 
-        ::after {
+        :after {
           transition: all 0.1s ease-in-out;
           content: '';
           display: block;
@@ -66,6 +68,7 @@ const Item = styled.li`
       position: relative;
       padding: 0;
       margin: 0;
+      cursor: pointer;
       div {
         position: absolute;
         top: calc(50% - 2px);
@@ -109,7 +112,7 @@ class Todo extends Component {
     const link = details.link ? (
       <p>
         <a target="_blank" rel="noopener noreferrer" href={details.link}>
-          {details.link}
+          {decodeURI(details.link)}
         </a>
       </p>
     ) : null;
@@ -117,10 +120,10 @@ class Todo extends Component {
     return (
       <Item className="todo-item" key={index} isComplete={details.complete}>
         <div className="flag">
-          <div className="complete" onClick={e => this.toggleComplete(e, index)} role="input">
+          <button className="complete" onClick={e => this.toggleComplete(e, index)}>
             <div className="checkbox" />
             <p className="label">COMPLETE</p>
-          </div>
+          </button>
           <button className="remove" onClick={e => this.removeTodo(e, index)}>
             <div />
           </button>

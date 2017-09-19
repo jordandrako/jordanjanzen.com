@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-// import base from '../base';
+import base from '../base';
 import Sidebar from './Header';
 import Router from './Router';
-
-import sampleTodos from '../starterTodos';
 
 const Wrapper = styled.div`
   display: flex;
@@ -23,7 +21,6 @@ class App extends Component {
     this.removeProject = this.removeProject.bind(this);
     this.addSkill = this.addSkill.bind(this);
     this.removeSkill = this.removeSkill.bind(this);
-    this.loadSamples = this.loadSamples.bind(this);
 
     this.state = {
       todos: {},
@@ -33,10 +30,20 @@ class App extends Component {
   }
 
   componentWillMount() {
-    // this.ref = base.syncState('todos', {
-    //   context: this,
-    //   state: 'todos',
-    // });
+    this.ref = [
+      base.syncState('todos', {
+        context: this,
+        state: 'todos',
+      }),
+      base.syncState('projects', {
+        context: this,
+        state: 'projects',
+      }),
+      base.syncState('skills', {
+        context: this,
+        state: 'skills',
+      }),
+    ];
 
     const localStorageTodoRef = localStorage.getItem('todos');
     if (localStorageTodoRef) {
@@ -67,14 +74,14 @@ class App extends Component {
   }
 
   componentWillUnmount() {
-    // base.removeBinding(this.ref);
+    base.removeBinding(this.ref);
   }
 
   // update our state
   addTodo(todo) {
     const todos = { ...this.state.todos };
     const timestamp = Date.now();
-    todos[`todo-${timestamp}`] = todo;
+    todos[`todo-${timestamp}`] = { ...todo };
     this.setState({ todos }); // same as this.setState({ todos: todos })
   }
 
@@ -94,14 +101,9 @@ class App extends Component {
   removeTodo(key) {
     const todos = { ...this.state.todos };
     console.log('Deleting todo');
-    delete todos[key];
+    // delete todos[key];
+    todos[key] = null;
     this.setState({ todos });
-  }
-
-  loadSamples() {
-    this.setState({
-      todos: sampleTodos,
-    });
   }
 
   addProject(project) {
@@ -169,7 +171,6 @@ class App extends Component {
           addSkill={this.addSkill}
           updateSkill={this.updateSkill}
           removeSkill={this.removeSkill}
-          loadSamples={this.loadSamples}
         />
       </Wrapper>
     );
