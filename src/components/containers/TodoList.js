@@ -24,7 +24,6 @@ const TodoList = props => (
           <Todo
             key={key}
             index={key}
-            todos={props.todos}
             details={props.todos[key]}
             updateTodo={props.updateTodo}
             removeTodo={props.removeTodo}

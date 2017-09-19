@@ -44,13 +44,10 @@ class Todo extends Component {
   }
 
   handleChange(e, key) {
-    const todo = this.props.todos[key];
-    // take a copy of that fish and update it with the new data
-    const updatedTodo = {
-      ...todo,
+    const updatedProp = {
       [e.target.name]: e.target.type === 'checkbox' ? e.target.checked : e.target.value,
     };
-    this.props.updateTodo(key, updatedTodo);
+    this.props.updateTodo(key, updatedProp);
   }
 
   renderTodo() {
@@ -120,7 +117,6 @@ Todo.propTypes = {
   removeTodo: PropTypes.func.isRequired,
   updateTodo: PropTypes.func.isRequired,
   details: PropTypes.object.isRequired,
-  todos: PropTypes.object.isRequired,
 };
 
 export default Todo;

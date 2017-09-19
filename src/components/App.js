@@ -82,8 +82,13 @@ class App extends Component {
     this.setState({ todos }); // same as this.setState({ todos: todos })
   }
 
-  updateTodo(key, updatedTodo) {
+  updateTodo(key, updatedProp) {
     const todos = { ...this.state.todos };
+    const todo = todos[key];
+    const updatedTodo = {
+      ...todo,
+      ...updatedProp,
+    };
     todos[key] = updatedTodo;
     this.setState({
       todos,
@@ -155,8 +160,8 @@ class App extends Component {
 
   render() {
     return (
-      <Wrapper className="wrapper">
-        <Header />
+      <Wrapper className="App wrapper">
+        <Header className="Sidebar" />
         <Router
           {...this.state}
           addTodo={this.addTodo}
