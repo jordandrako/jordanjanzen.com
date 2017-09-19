@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 
 // import base from '../base';
-import Header from './Header';
+import Sidebar from './Header';
 import Router from './Router';
 
 import sampleTodos from '../starterTodos';
 
 const Wrapper = styled.div`
   display: flex;
-  max-width: 1200px;
   height: 100%;
 `;
 
@@ -158,7 +157,7 @@ class App extends Component {
   render() {
     return (
       <Wrapper className="App wrapper">
-        <Header className="Sidebar" />
+        <Sidebar className="Sidebar" />
         <Router
           {...this.state}
           addTodo={this.addTodo}

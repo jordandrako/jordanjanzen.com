@@ -9,23 +9,30 @@ import { colors, typography } from '../theme/variables';
 const NavList = styled.ul`
   list-style: none;
   padding: 0;
+  margin: 0;
 
   li {
-    text-align: center;
-    padding: 15px;
-    width: 100%;
-
-    font-family: ${typography.monospace};
-    text-transform: lowercase;
+    border-top: 1px inset ${colors.darkblack};
+    border-bottom: 1px inset ${colors.lightblack};
   }
 `;
 
 const Link = styled(NavLink)`
+  display: block;
   text-decoration: none;
   color: ${colors.white};
+  text-align: center;
+  padding: 10px 15px;
+  width: 100%;
+
+  font-family: ${typography.monospace};
+  text-transform: lowercase;
+  transition: all 0.2s ease-in-out;
+
   &.active {
     color: ${colors.red};
     font-size: 1.15em;
+    padding: 15px;
 
     &:before {
       content: '==';

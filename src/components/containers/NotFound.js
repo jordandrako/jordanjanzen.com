@@ -1,14 +1,17 @@
 import React from 'react';
 import DocumentTitle from 'react-document-title';
 
-import Main from '../Main';
+import { MainColumn, Main, Row } from '../Grid';
 import PageTitle from '../PageTitle';
 
 const NotFound = () => (
   <DocumentTitle title="Jordan Janzen | Not Found">
-    <Main>
+    <MainColumn>
       <PageTitle title="404 Not Found" />
-    </Main>
+      <Main>
+        <Row />
+      </Main>
+    </MainColumn>
   </DocumentTitle>
 );
 

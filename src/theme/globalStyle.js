@@ -21,17 +21,31 @@ injectGlobal`
     box-sizing: border-box;
   }
 
-  html, body {
-    min-height: 100%;
+  html, body, #root {
+    height: 100%;
   }
 
   body {
+    overflow: hidden;
     font-family: ${typography.fontFamily};
     color: ${theme.textColor};
     background: ${theme.siteBackground};
     font-size: 18px;
     margin: 0;
     padding: 0;
+
+    &::-webkit-scrollbar {
+      width: 1em;
+    }
+
+    &::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: darkgrey;
+      outline: 1px solid slategrey;
+    }
   }
 
   .large {

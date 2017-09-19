@@ -3,12 +3,11 @@ import styled from 'styled-components';
 import { colors, typography } from '../theme/variables';
 
 const StyledForm = styled.div`
-  max-width: 480px;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   padding: 1em;
-  border: 3px double ${colors.black};
+  border: 5px double ${colors.black};
 
   form {
     display: flex;

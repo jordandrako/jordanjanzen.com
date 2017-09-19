@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import DocumentTitle from 'react-document-title';
 
-import Main from '../Main';
+import { MainColumn, Main, Row } from '../Grid';
 import PageTitle from '../PageTitle';
 import Banner from '../Banner';
 
@@ -13,24 +13,32 @@ const Loading = ({ isLoading }) => {
   if (isLoading) {
     return (
       <DocumentTitle title="Loading...">
-        <Main>
+        <MainColumn>
           <PageTitle title="Loading..." />
-          <img src={Pacman} className="pacman" alt="loading..." />
-        </Main>
+          <Main>
+            <Row>
+              <img src={Pacman} className="pacman" alt="loading..." />
+            </Row>
+          </Main>
+        </MainColumn>
       </DocumentTitle>
     );
   }
   // Handle the error state
   return (
     <DocumentTitle title="😥 Sorry">
-      <Main>
+      <MainColumn>
         <PageTitle title="😥 Sorry" />
-        <Banner
-          type="error"
-          text="There seems to have been a problem loading this page..."
-          action="reload"
-        />
-      </Main>
+        <Main>
+          <Row>
+            <Banner
+              type="error"
+              text="There seems to have been a problem loading this page..."
+              action="reload"
+            />
+          </Row>
+        </Main>
+      </MainColumn>
     </DocumentTitle>
   );
 };
