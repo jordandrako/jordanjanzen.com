@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import TextareaAutosize from 'react-autosize-textarea';
 
 import StyledForm from './StyledForm';
-import Button from './Button';
 import { colors } from '../theme/variables';
 
 const Item = styled.li`
@@ -15,49 +14,68 @@ const Item = styled.li`
   flex-grow: 1;
   padding: 0 0.2em;
 
-  .complete {
+  .flag {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    background: ${props => (props.isComplete ? colors.green : colors.lightblack)};
-    color: ${colors.black};
-    padding: 5px;
-    white-space: nowrap;
-    cursor: pointer;
-    transition: all 0.15s ease-in-out;
 
-    .checkbox {
-      width: 20px;
-      height: 20px;
-      border: 2px solid ${colors.black};
-      border-radius: 50%;
-      position: relative;
+    .complete {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: ${props => (props.isComplete ? colors.green : colors.lightblack)};
+      color: ${colors.black};
+      padding: 5px;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 0.15s ease-in-out;
+      flex-grow: 1;
 
-      ::after {
-        transition: all 0.1s ease-in-out;
-        content: '';
-        display: block;
-        background: ${colors.black};
-        width: 12px;
-        height: 12px;
-        top: 2px;
-        left: 2px;
-        transform: ${props => (props.isComplete ? 'scale(1)' : 'scale(0)')};
+      .checkbox {
+        width: 20px;
+        height: 20px;
+        border: 2px solid ${colors.black};
         border-radius: 50%;
-        position: absolute;
+        position: relative;
+
+        ::after {
+          transition: all 0.1s ease-in-out;
+          content: '';
+          display: block;
+          background: ${colors.black};
+          width: 12px;
+          height: 12px;
+          top: 2px;
+          left: 2px;
+          transform: ${props => (props.isComplete ? 'scale(1)' : 'scale(0)')};
+          border-radius: 50%;
+          position: absolute;
+        }
+      }
+
+      .label {
+        transform: rotate(90deg);
+        width: 0;
+        user-select: none;
       }
     }
-
-    .label {
-      transform: rotate(90deg);
-      width: 0;
-      user-select: none;
+    .remove {
+      border: none;
+      background: ${colors.red};
+      width: 100%;
+      height: 30px;
+      position: relative;
+      padding: 0;
+      margin: 0;
+      div {
+        position: absolute;
+        top: calc(50% - 2px);
+        left: 20%;
+        width: 60%;
+        height: 4px;
+        background: ${colors.black};
+        border-radius: 2px;
+      }
     }
-  }
-
-  Button {
-    margin-top: auto;
-    align-self: flex-end;
   }
 `;
 
@@ -68,7 +86,7 @@ class Todo extends Component {
     this.renderTodo = this.renderTodo.bind(this);
   }
 
-  removeTodo(key) {
+  removeTodo(e, key) {
     this.props.removeTodo(key);
   }
 
@@ -98,9 +116,14 @@ class Todo extends Component {
 
     return (
       <Item className="todo-item" key={index} isComplete={details.complete}>
-        <div className="complete" onClick={e => this.toggleComplete(e, index)} role="input">
-          <div className="checkbox" />
-          <p className="label">COMPLETE</p>
+        <div className="flag">
+          <div className="complete" onClick={e => this.toggleComplete(e, index)} role="input">
+            <div className="checkbox" />
+            <p className="label">COMPLETE</p>
+          </div>
+          <button className="remove" onClick={e => this.removeTodo(e, index)}>
+            <div />
+          </button>
         </div>
         <StyledForm>
           <input
@@ -130,9 +153,6 @@ class Todo extends Component {
             onChange={e => this.handleChange(e, index)}
           />
           {link}
-          <Button small styleType="warn" onClick={() => this.removeTodo(index)}>
-            - Remove Todo
-          </Button>
         </StyledForm>
       </Item>
     );
