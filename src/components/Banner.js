@@ -39,14 +39,14 @@ const Alert = styled.div`
 `;
 
 class Banner extends Component {
-  constructor() {
-    super();
-    this.doAction = this.doAction.bind(this);
+  // constructor() {
+  //   super();
+  //   this.doAction = this.doAction.bind(this);
 
-    this.state = {
-      action: this.props.action,
-    };
-  }
+  //   this.state = {
+  //     action: this.props.action,
+  //   };
+  // }
 
   doAction() {
     const action = this.props.action;
@@ -65,7 +65,7 @@ class Banner extends Component {
 
     return (
       <Alert type={this.props.type}>
-        <h4 className="alert">{this.props.text}</h4>
+        <h4 className="alert">{this.props.children}</h4>
         {actionButton}
       </Alert>
     );
@@ -73,7 +73,7 @@ class Banner extends Component {
 }
 
 Banner.propTypes = {
-  text: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
   type: PropTypes.string,
   action: PropTypes.string,
 };
