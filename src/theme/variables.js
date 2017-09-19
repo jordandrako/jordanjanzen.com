@@ -9,7 +9,7 @@ export const colors = {
   green: '#98c379',
   yellow: '#d19a66',
   white: '#abb2bf',
-  lightwhite: '#ffffff',
+  lightwhite: '#e7e7e7',
 };
 
 export const typography = {
@@ -23,6 +23,7 @@ export const layout = {
 };
 
 export const theme = {
+  siteBackground: colors.lightwhite,
   primaryColor: colors.blue,
   secondaryColor: colors.red,
   textColor: colors.black,
