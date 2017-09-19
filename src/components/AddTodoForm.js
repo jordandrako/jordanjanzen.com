@@ -50,7 +50,7 @@ class AddTodoForm extends Component {
             <TextareaAutosize
               ref={input => (this.desc = input)}
               type="text"
-              placeholder="Todo Desc"
+              placeholder="Todo Description"
             />
             <input ref={input => (this.link = input)} type="text" placeholder="Todo link" />
             <Button type="submit" styleType="success" arrows={colors.lightwhite}>

@@ -28,6 +28,7 @@ const StyledForm = styled.div`
     outline: none;
     :focus {
       outline: none;
+      border-color: ${colors.blue};
     }
   }
 `;

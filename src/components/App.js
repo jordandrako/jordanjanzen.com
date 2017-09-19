@@ -9,6 +9,7 @@ import sampleTodos from '../starterTodos';
 
 const Wrapper = styled.div`
   display: flex;
+  max-width: 1200px;
   height: 100%;
 `;
 
@@ -39,26 +40,25 @@ class App extends Component {
     // });
 
     const localStorageTodoRef = localStorage.getItem('todos');
-
     if (localStorageTodoRef) {
       this.setState({
         todos: JSON.parse(localStorageTodoRef),
       });
     }
-    // const localStorageProjectRef = localStorage.getItem('projects');
 
-    // if (localStorageProjectRef) {
-    //   this.setState({
-    //     projects: JSON.parse(localStorageProjectRef),
-    //   });
-    // }
-    // const localStorageSkillRef = localStorage.getItem('skills');
+    const localStorageProjectRef = localStorage.getItem('projects');
+    if (localStorageProjectRef) {
+      this.setState({
+        projects: JSON.parse(localStorageProjectRef),
+      });
+    }
 
-    // if (localStorageSkillRef) {
-    //   this.setState({
-    //     skills: JSON.parse(localStorageSkillRef),
-    //   });
-    // }
+    const localStorageSkillRef = localStorage.getItem('skills');
+    if (localStorageSkillRef) {
+      this.setState({
+        skills: JSON.parse(localStorageSkillRef),
+      });
+    }
   }
 
   componentWillUpdate(nextProps, nextState) {
@@ -71,14 +71,11 @@ class App extends Component {
     // base.removeBinding(this.ref);
   }
 
+  // update our state
   addTodo(todo) {
-    // update our state
-    // copy our state
     const todos = { ...this.state.todos };
-    // add in our new todo
     const timestamp = Date.now();
     todos[`todo-${timestamp}`] = todo;
-    // set state
     this.setState({ todos }); // same as this.setState({ todos: todos })
   }
 

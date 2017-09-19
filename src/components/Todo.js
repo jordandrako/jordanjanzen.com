@@ -12,12 +12,14 @@ const Item = styled.li`
   display: flex;
   flex-direction: row;
   margin-bottom: 1em;
+  flex-grow: 1;
+  padding: 0 0.2em;
 
   .complete {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: colors.blue;
+    background: ${colors.blue};
     color: ${colors.white};
     padding: 5px;
     white-space: nowrap;

@@ -10,7 +10,13 @@ import Todo from '../Todo';
 
 const ListOfTodos = styled.ul`
   padding: 0;
-  max-width: 480px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+
+  li {
+    max-width: 50%;
+  }
 `;
 
 const TodoList = props => (
