@@ -61,7 +61,6 @@ const Router = props => (
           addTodo={props.addTodo}
           updateTodo={props.updateTodo}
           removeTodo={props.removeTodo}
-          loadSamples={props.loadSamples}
         />
       )}
     />
