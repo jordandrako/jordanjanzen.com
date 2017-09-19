@@ -64,15 +64,7 @@ const TodoList = props => (
 );
 
 TodoList.propTypes = {
-  todos: PropTypes.shape({
-    key: {
-      name: 'string',
-      cat: 'string',
-      desc: 'string',
-      link: 'string',
-      status: 'string',
-    },
-  }).isRequired,
+  todos: PropTypes.object.isRequired,
   addTodo: PropTypes.func.isRequired,
   updateTodo: PropTypes.func.isRequired,
   removeTodo: PropTypes.func.isRequired,

@@ -73,16 +73,19 @@ const Router = props => (
 );
 
 Router.propTypes = {
-  // addProject: PropTypes.func.isRequired,
-  // updateProject: PropTypes.func.isRequired,
-  // removeProject: PropTypes.func.isRequired,
-  // addSkill: PropTypes.func.isRequired,
-  // updateSkill: PropTypes.func.isRequired,
-  // removeSkill: PropTypes.func.isRequired,
-  // addTodo: PropTypes.func.isRequired,
-  // updateTodo: PropTypes.func.isRequired,
-  // removeTodo: PropTypes.func.isRequired,
-  // loadSamples: PropTypes.func.isRequired,
+  todos: PropTypes.object.isRequired,
+  projects: PropTypes.object.isRequired,
+  skills: PropTypes.object.isRequired,
+  addProject: PropTypes.func.isRequired,
+  updateProject: PropTypes.func.isRequired,
+  removeProject: PropTypes.func.isRequired,
+  addSkill: PropTypes.func.isRequired,
+  updateSkill: PropTypes.func.isRequired,
+  removeSkill: PropTypes.func.isRequired,
+  addTodo: PropTypes.func.isRequired,
+  updateTodo: PropTypes.func.isRequired,
+  removeTodo: PropTypes.func.isRequired,
+  loadSamples: PropTypes.func.isRequired,
 };
 
 export default Router;
