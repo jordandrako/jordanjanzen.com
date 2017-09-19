@@ -1,57 +1,57 @@
 module.exports = {
-  todo1: {
+  'todo-1': {
     name: 'Finish variables',
     desc: 'Use past sass projects for inspo.',
-    cat: 'design',
+    category: 'design',
     link: '',
     complete: false,
   },
-  todo2: {
+  'todo-2': {
     name: 'React Router Transitions',
     desc: 'Animate page transitioning in and out',
-    cat: 'design',
+    category: 'design',
     link: '',
     complete: false,
   },
-  todo3: {
+  'todo-3': {
     name: 'Animate Active Link',
     desc: 'Arrows going in and out on click',
-    cat: 'design',
+    category: 'design',
     link: '',
     complete: false,
   },
-  todo4: {
+  'todo-4': {
     name: 'Modernizr integration',
     desc: 'Make sure it looks the same on most browsers',
-    cat: 'component',
+    category: 'component',
     link: '',
     complete: false,
   },
-  todo5: {
+  'todo-5': {
     name: 'Flexbox',
     desc: 'Use flexbox for internal element layout',
-    cat: 'design',
+    category: 'design',
     link: '',
     complete: false,
   },
-  todo6: {
+  'todo-6': {
     name: 'CSS Grid layout',
     desc: 'Use grid for main layout',
-    cat: 'design',
+    category: 'design',
     link: '',
     complete: false,
   },
-  todo7: {
+  'todo-7': {
     name: 'Tagline powerline',
     desc: 'Set up powerline-like arrows and colors for the tagline',
-    cat: 'design',
+    category: 'design',
     link: '',
     complete: false,
   },
-  todo8: {
+  'todo-8': {
     name: 'Firebase Database',
-    desc: 'Get database working for projects, skills, and todos',
-    cat: 'backend',
+    desc: 'Get database working for projects, skills, and todo',
+    category: 'backend',
     link: '',
     complete: false,
   },
