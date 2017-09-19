@@ -117,6 +117,7 @@ Todo.propTypes = {
   removeTodo: PropTypes.func.isRequired,
   updateTodo: PropTypes.func.isRequired,
   details: PropTypes.object.isRequired,
+  index: PropTypes.string.isRequired,
 };
 
 export default Todo;
