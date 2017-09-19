@@ -8,13 +8,13 @@ const BtnColor = props => props.color || theme.buttonText;
 const Background = (props) => {
   if (props.bg) {
     return props.bg;
-  } else if (props.type === 'secondary') {
+  } else if (props.styleType === 'secondary') {
     return colors.cyan;
-  } else if (props.type === 'success') {
+  } else if (props.styleType === 'success' || props.styleType === 'submit') {
     return colors.green;
-  } else if (props.type === 'warn') {
+  } else if (props.styleType === 'warn') {
     return colors.red;
-  } else if (props.type === 'login') {
+  } else if (props.styleType === 'login') {
     return colors.lightblack;
   }
   return theme.buttonColor;
@@ -27,6 +27,7 @@ const Btn = styled.button`
   color: ${BtnColor};
   font-family: ${typography.monospace};
   background: ${Background};
+
   width: ${props => (props.wide ? '100%' : 'auto')};
   font-size: ${(props) => {
     if (props.small) {
@@ -53,7 +54,7 @@ const Btn = styled.button`
     -webkit-transform: translateY(-50%) rotate(45deg);
     transform: translateY(-50%) rotate(45deg);
     transition: 0.2s ease-in;
-    background: ${BtnColor};
+    background: ${props => props.arrows || BtnColor};
     index: 9;
   }
   :after {
@@ -75,6 +76,7 @@ const Btn = styled.button`
 const Button = props => (
   <Btn
     type={props.type}
+    styleType={props.styleType}
     wide={props.wide}
     small={props.small}
     large={props.large}
@@ -87,21 +89,26 @@ const Button = props => (
 );
 
 Button.propTypes = {
-  children: PropTypes.element.isRequired,
-  type: PropTypes.oneOf(['primary', 'secondary', 'login', 'success', 'warn']).isRequired,
+  styleType: PropTypes.oneOf(['primary', 'secondary', 'login', 'success', 'warn', 'submit'])
+    .isRequired,
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
+  type: PropTypes.string,
   text: PropTypes.string,
   color: PropTypes.string,
   small: PropTypes.bool,
   large: PropTypes.bool,
   wide: PropTypes.bool,
-  arrows: PropTypes.bool,
+  arrows: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   bg: PropTypes.string,
 };
 
 Button.defaultProps = {
+  styleType: 'primary',
+  children: null,
   text: null,
+  type: null,
   color: theme.buttonText,
-  bg: theme.buttonColor,
+  bg: null,
   small: false,
   large: false,
   wide: false,
