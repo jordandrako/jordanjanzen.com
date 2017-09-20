@@ -2,38 +2,38 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Route, withRouter } from 'react-router-dom';
 
-import Home from './containers/Home';
-import About from './containers/About';
-import Portfolio from './containers/Portfolio';
-import TodoList from './containers/TodoList';
-import NotFound from './containers/NotFound';
+// import Home from './containers/Home';
+// import About from './containers/About';
+// import Portfolio from './containers/Portfolio';
+// import TodoList from './containers/TodoList';
+// import NotFound from './containers/NotFound';
 
-// import MyLoadable from './MyLoadable';
+import MyLoadable from './MyLoadable';
 // import Loading from './containers/Loading';
 
-// const AsyncHome = MyLoadable({
-//   loader: () => import('./containers/Home'),
-// });
-// const AsyncAbout = MyLoadable({
-//   loader: () => import('./containers/About'),
-// });
-// const AsyncPortfolio = MyLoadable({
-//   loader: () => import('./containers/Portfolio'),
-// });
-// const AsyncTodoList = MyLoadable({
-//   loader: () => import('./containers/TodoList'),
-// });
-// const AsyncNotFound = MyLoadable({
-//   loader: () => import('./containers/NotFound'),
-// });
+const AsyncHome = MyLoadable({
+  loader: () => import('./containers/Home'),
+});
+const AsyncAbout = MyLoadable({
+  loader: () => import('./containers/About'),
+});
+const AsyncPortfolio = MyLoadable({
+  loader: () => import('./containers/Portfolio'),
+});
+const AsyncTodoList = MyLoadable({
+  loader: () => import('./containers/TodoList'),
+});
+const AsyncNotFound = MyLoadable({
+  loader: () => import('./containers/NotFound'),
+});
 
-const Router = props => (
+const Router = (props) => (
   <Switch>
-    <Route exact path="/" component={Home} />
+    <Route exact path="/" component={AsyncHome} />
     <Route
       path="/about"
       render={() => (
-        <About
+        <AsyncAbout
           skills={props.skills}
           addSkill={props.addSkill}
           updateSkill={props.updateSkill}
@@ -44,7 +44,7 @@ const Router = props => (
     <Route
       path="/portfolio"
       render={() => (
-        <Portfolio
+        <AsyncPortfolio
           projects={props.projects}
           addProject={props.addProject}
           updateProject={props.updateProject}
@@ -56,7 +56,7 @@ const Router = props => (
       exact
       path="/todo"
       render={() => (
-        <TodoList
+        <AsyncTodoList
           todos={props.todos}
           addTodo={props.addTodo}
           updateTodo={props.updateTodo}
@@ -65,7 +65,7 @@ const Router = props => (
       )}
     />
     {/* Unmatched URLs */}
-    <Route component={NotFound} />
+    <Route component={AsyncNotFound} />
   </Switch>
 );
 
@@ -82,7 +82,6 @@ Router.propTypes = {
   addTodo: PropTypes.func.isRequired,
   updateTodo: PropTypes.func.isRequired,
   removeTodo: PropTypes.func.isRequired,
-  loadSamples: PropTypes.func.isRequired,
 };
 
 export default withRouter(Router);
