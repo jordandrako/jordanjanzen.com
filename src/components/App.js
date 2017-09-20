@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-import base from '../base';
+import { base } from '../base';
 import Sidebar from './Header';
 import Router from './Router';
 

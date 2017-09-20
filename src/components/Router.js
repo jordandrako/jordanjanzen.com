@@ -2,14 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Route, withRouter } from 'react-router-dom';
 
-// import Home from './containers/Home';
-// import About from './containers/About';
-// import Portfolio from './containers/Portfolio';
-// import TodoList from './containers/TodoList';
-// import NotFound from './containers/NotFound';
-
 import MyLoadable from './MyLoadable';
-// import Loading from './containers/Loading';
 
 const AsyncHome = MyLoadable({
   loader: () => import('./containers/Home'),
@@ -25,6 +18,9 @@ const AsyncTodoList = MyLoadable({
 });
 const AsyncNotFound = MyLoadable({
   loader: () => import('./containers/NotFound'),
+});
+const AsyncLogin = MyLoadable({
+  loader: () => import('./containers/Login'),
 });
 
 const Router = (props) => (
@@ -59,6 +55,16 @@ const Router = (props) => (
         <AsyncTodoList
           todos={props.todos}
           addTodo={props.addTodo}
+          updateTodo={props.updateTodo}
+          removeTodo={props.removeTodo}
+        />
+      )}
+    />
+    <Route
+      exact
+      path="/login"
+      render={() => (
+        <AsyncLogin
           updateTodo={props.updateTodo}
           removeTodo={props.removeTodo}
         />
