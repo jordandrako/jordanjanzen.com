@@ -42,6 +42,18 @@ export function getFileExtension() {
     'txt',
     'asp',
     'xml',
+    'scss',
+    'coffee',
+    'sql',
+    'bat',
+    'rss',
+    'xhtml',
+    'conf',
+    'json',
+    'lua',
+    'py',
+    'vb',
+    'java',
   ];
 
   return `.${rando(fileExtensions)}`;
