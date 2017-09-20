@@ -13,13 +13,9 @@ const ListOfTodos = styled.ul`
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
-
-  li {
-    width: 50%;
-  }
 `;
 
-const TodoList = props => (
+const TodoList = (props) => (
   <DocumentTitle title="Jordan Janzen | todo">
     <MainColumn>
       <PageTitle title="Todo" />
@@ -31,7 +27,7 @@ const TodoList = props => (
         <Row>
           <h3>Checklist</h3>
           <ListOfTodos className="todo-list">
-            {Object.keys(props.todos).map(key => (
+            {Object.keys(props.todos).map((key) => (
               <Todo
                 key={key}
                 index={key}
@@ -47,17 +43,29 @@ const TodoList = props => (
           <h3>Inspiration</h3>
           <ul>
             <li>
-              <a target="_blank" rel="noopener noreferrer" href="http://sambedingfield.com/">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="http://sambedingfield.com/"
+              >
                 Sam Bedingfield
               </a>
             </li>
             <li>
-              <a target="_blank" rel="noopener noreferrer" href="http://wesbos.com">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="http://wesbos.com"
+              >
                 Wes Bos
               </a>
             </li>
             <li>
-              <a target="_blank" rel="noopener noreferrer" href="http://ivesvh.com/">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="http://ivesvh.com/"
+              >
                 Ives van Hoorne
               </a>
             </li>

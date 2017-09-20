@@ -13,7 +13,6 @@ const Item = styled.li`
   margin-bottom: 1em;
   flex-grow: 1;
   padding: 0 0.2em;
-  max-width: 50%;
 
   .flag {
     display: flex;
@@ -23,7 +22,8 @@ const Item = styled.li`
       display: flex;
       flex-direction: column;
       align-items: center;
-      background: ${props => (props.isComplete ? colors.green : colors.lightblack)};
+      background: ${(props) =>
+        props.isComplete ? colors.green : colors.lightblack};
       color: ${colors.black};
       padding: 5px;
       border: none;
@@ -48,7 +48,7 @@ const Item = styled.li`
           height: 12px;
           top: 2px;
           left: 2px;
-          transform: ${props => (props.isComplete ? 'scale(1)' : 'scale(0)')};
+          transform: ${(props) => (props.isComplete ? 'scale(1)' : 'scale(0)')};
           border-radius: 50%;
           position: absolute;
         }
@@ -95,7 +95,8 @@ class Todo extends Component {
 
   handleChange(e, key) {
     const updatedProp = {
-      [e.target.name]: e.target.type === 'checkbox' ? e.target.checked : e.target.value,
+      [e.target.name]:
+        e.target.type === 'checkbox' ? e.target.checked : e.target.value,
     };
     this.props.updateTodo(key, updatedProp);
   }
@@ -120,11 +121,14 @@ class Todo extends Component {
     return (
       <Item className="todo-item" key={index} isComplete={details.complete}>
         <div className="flag">
-          <button className="complete" onClick={e => this.toggleComplete(e, index)}>
+          <button
+            className="complete"
+            onClick={(e) => this.toggleComplete(e, index)}
+          >
             <div className="checkbox" />
             <p className="label">COMPLETE</p>
           </button>
-          <button className="remove" onClick={e => this.removeTodo(e, index)}>
+          <button className="remove" onClick={(e) => this.removeTodo(e, index)}>
             <div />
           </button>
         </div>
@@ -134,13 +138,13 @@ class Todo extends Component {
             name="name"
             defaultValue={details.name}
             placeholder="Todo"
-            onChange={e => this.handleChange(e, index)}
+            onChange={(e) => this.handleChange(e, index)}
           />
           <select
             type="text"
             name="category"
             defaultValue={details.category}
-            onChange={e => this.handleChange(e, index)}
+            onChange={(e) => this.handleChange(e, index)}
           >
             <option>Category</option>
             <option value="design">Design</option>
@@ -153,7 +157,7 @@ class Todo extends Component {
             name="desc"
             defaultValue={details.desc}
             placeholder="Description"
-            onChange={e => this.handleChange(e, index)}
+            onChange={(e) => this.handleChange(e, index)}
           />
           {link}
         </StyledForm>
