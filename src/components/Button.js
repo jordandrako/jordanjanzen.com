@@ -44,31 +44,26 @@ const Btn = styled.button`
     color: ${colors.black};
   }
 
-  :before {
-    content: '';
-    display: ${(props) => (props.arrows ? 'block' : 'none')};
-    position: absolute;
-    top: 50%;
-    left: -0.6em;
-    width: 1.2em;
-    height: 1.2em;
-    transform: translateY(-50%) scaleX(0.75) rotate(45deg);
-    transition: 0.2s ease-in;
-    background: ${(props) => props.arrows || BtnColor};
-    index: 9;
-  }
+  :before,
   :after {
     content: '';
     display: ${(props) => (props.arrows ? 'block' : 'none')};
     position: absolute;
     top: 50%;
-    right: -0.6em;
     width: 1.2em;
     height: 1.2em;
-    transform: translateY(-50%) scaleX(0.75) rotate(45deg);
     transition: 0.2s ease-in;
+  }
+
+  :before {
+    transform: translateY(-50%) scaleX(0.75) rotate(45deg);
+    background: ${(props) => props.arrows || BtnColor};
+    left: -0.6em;
+  }
+  :after {
+    transform: translateY(-50%) scaleX(0.75) rotate(45deg);
     background: ${Background};
-    index: 9;
+    right: -0.6em;
   }
 `;
 
