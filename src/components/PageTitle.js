@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { toTitleCase } from '../helpers';
-import { colors, theme, typography } from '../theme/variables';
+import { toTitleCase, getFileExtension } from '../helpers';
+import { colors, typography } from '../theme/variables';
 
 const Title = styled.header`
   background: ${colors.black};
@@ -45,8 +45,12 @@ const Title = styled.header`
       .close {
         opacity: 0.7;
         color: ${colors.red};
-        cursor: pointer;
+        background: transparent;
         transition: all 0.15s ease-in;
+        border: none;
+        margin: 0;
+        padding: 0;
+        cursor: pointer;
         &:hover {
           opacity: 1;
         }
@@ -64,21 +68,20 @@ const Title = styled.header`
     }
   }
 `;
+
+const fileExtention = getFileExtension();
 // TODO: Add breadcrumbs
 const PageTitle = (props) => {
-  const title = toTitleCase(props.title);
+  const ext = props.ext === true && fileExtention;
+  const title = [toTitleCase(props.title), ext];
 
   return (
     <Title>
       <ul>
         <li>
           <i className="fa fa-file-code-o file" aria-hidden="true" />
-          <h4>{'PreviousPage.js'}</h4>
-        </li>
-        <li>
-          <i className="fa fa-file-code-o file" aria-hidden="true" />
-          <h1>{`${title}.js`}</h1>
-          <i className="fa fa-times-circle close" aria-hidden="true" />
+          <h1>{title}</h1>
+          <button className="fa fa-times-circle close" aria-hidden="true" />
         </li>
       </ul>
     </Title>
@@ -87,6 +90,11 @@ const PageTitle = (props) => {
 
 PageTitle.propTypes = {
   title: PropTypes.string.isRequired,
+  ext: PropTypes.bool,
+};
+
+PageTitle.defaultProps = {
+  ext: true,
 };
 
 export default PageTitle;
