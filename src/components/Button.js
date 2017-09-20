@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { colors, theme, typography } from '../theme/variables';
 
-const BtnColor = props => props.color || theme.buttonText;
+const BtnColor = (props) => props.color || theme.buttonText;
 const Background = (props) => {
   if (props.bg) {
     return props.bg;
@@ -22,13 +22,14 @@ const Background = (props) => {
 
 const Btn = styled.button`
   border: none;
-  padding: ${props => (props.arrows ? '0.25em 0.8em 0.25em 1.5em' : '.25em .7em')};
+  padding: ${(props) =>
+    props.arrows ? '0.25em 0.8em 0.25em 1.5em' : '.25em .7em'};
   position: relative;
   color: ${BtnColor};
   font-family: ${typography.monospace};
   background: ${Background};
 
-  width: ${props => (props.wide ? '100%' : 'auto')};
+  width: ${(props) => (props.wide ? '100%' : 'auto')};
   font-size: ${(props) => {
     if (props.small) {
       return '.8rem';
@@ -45,35 +46,33 @@ const Btn = styled.button`
 
   :before {
     content: '';
-    display: ${props => (props.arrows ? 'block' : 'none')};
+    display: ${(props) => (props.arrows ? 'block' : 'none')};
     position: absolute;
     top: 50%;
-    left: -.6em;
+    left: -0.6em;
     width: 1.2em;
     height: 1.2em;
-    -webkit-transform: translateY(-50%) rotate(45deg);
-    transform: translateY(-50%) rotate(45deg);
+    transform: translateY(-50%) scaleX(0.75) rotate(45deg);
     transition: 0.2s ease-in;
-    background: ${props => props.arrows || BtnColor};
+    background: ${(props) => props.arrows || BtnColor};
     index: 9;
   }
   :after {
     content: '';
-    display: ${props => (props.arrows ? 'block' : 'none')};
+    display: ${(props) => (props.arrows ? 'block' : 'none')};
     position: absolute;
     top: 50%;
-    right: -.6em;
+    right: -0.6em;
     width: 1.2em;
     height: 1.2em;
-    -webkit-transform: translateY(-50%) rotate(45deg);
-    transform: translateY(-50%) rotate(45deg);
+    transform: translateY(-50%) scaleX(0.75) rotate(45deg);
     transition: 0.2s ease-in;
     background: ${Background};
     index: 9;
   }
 `;
 
-const Button = props => (
+const Button = (props) => (
   <Btn
     type={props.type}
     styleType={props.styleType}
@@ -89,9 +88,18 @@ const Button = props => (
 );
 
 Button.propTypes = {
-  styleType: PropTypes.oneOf(['primary', 'secondary', 'login', 'success', 'warn', 'submit'])
-    .isRequired,
-  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
+  styleType: PropTypes.oneOf([
+    'primary',
+    'secondary',
+    'login',
+    'success',
+    'warn',
+    'submit',
+  ]).isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]),
   type: PropTypes.string,
   text: PropTypes.string,
   color: PropTypes.string,
