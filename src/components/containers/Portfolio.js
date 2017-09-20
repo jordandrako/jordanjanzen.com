@@ -35,7 +35,9 @@ const Portfolio = () => (
         <Row>
           <Route
             match="portfolio/:projectId"
-            render={state => <p>This is Project {state.match.params.projectId}</p>}
+            render={(state) => (
+              <p>This is Project {state.match.params.projectId}</p>
+            )}
           />
         </Row>
       </Main>

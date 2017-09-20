@@ -47,7 +47,7 @@ const Link = styled(NavLink)`
   }
 `;
 // TODO: Hide todo page unless logged in
-const Navigation = props => (
+const Navigation = (props) => (
   <nav>
     <NavList className={props.navType}>
       <li>
