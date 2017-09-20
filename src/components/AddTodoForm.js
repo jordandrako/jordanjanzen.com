@@ -30,19 +30,25 @@ class AddTodoForm extends Component {
         <h3>Add a new todo item</h3>
         <StyledForm>
           <form
-            ref={input => (this.todoForm = input)}
+            ref={(input) => {
+              this.todoForm = input;
+            }}
             className="add-todo"
-            onSubmit={e => this.createTodo(e)}
+            onSubmit={(e) => this.createTodo(e)}
           >
             <input
-              ref={input => (this.name = input)}
+              ref={(input) => {
+                this.name = input;
+              }}
               type="text"
               name="name"
               placeholder="Todo"
               required
             />
             <select
-              ref={input => (this.category = input)}
+              ref={(input) => {
+                this.category = input;
+              }}
               type="text"
               name="category"
               placeholder="Todo Category"
@@ -55,7 +61,9 @@ class AddTodoForm extends Component {
               <option value="backend">Backend</option>
             </select>
             <textarea
-              ref={input => (this.desc = input)}
+              ref={(input) => {
+                this.desc = input;
+              }}
               type="text"
               name="desc"
               placeholder="Todo Description"
@@ -63,13 +71,19 @@ class AddTodoForm extends Component {
               required
             />
             <input
-              ref={input => (this.link = input)}
+              ref={(input) => {
+                this.link = input;
+              }}
               type="text"
               name="link"
               placeholder="Todo link"
               value={null}
             />
-            <Button type="submit" styleType="success" arrows={colors.lightwhite}>
+            <Button
+              type="submit"
+              styleType="success"
+              arrows={colors.lightwhite}
+            >
               + Add Todo
             </Button>
           </form>
