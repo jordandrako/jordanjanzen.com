@@ -6,7 +6,7 @@ import { MainColumn, Main, Row } from '../Grid';
 import PageTitle from '../PageTitle';
 import Banner from '../Banner';
 
-import Pacman from '../../theme/images/Pacman.svg';
+import CodeLoader from '../../theme/images/codeLoader.svg';
 
 const Loading = ({ isLoading }) => {
   // Handle the loading state
@@ -14,11 +14,9 @@ const Loading = ({ isLoading }) => {
     return (
       <DocumentTitle title="Loading...">
         <MainColumn>
-          <PageTitle title="Loading..." />
+          <PageTitle title="Loading..." ext={false} />
           <Main>
-            <Row>
-              <img src={Pacman} className="pacman" alt="loading..." />
-            </Row>
+            <Row><img src={CodeLoader} className="CodeLoader" alt="loading..." /></Row>
           </Main>
         </MainColumn>
       </DocumentTitle>
@@ -28,7 +26,7 @@ const Loading = ({ isLoading }) => {
   return (
     <DocumentTitle title="😥 Sorry">
       <MainColumn>
-        <PageTitle title="😥 Sorry" />
+        <PageTitle title="😥 Sorry" ext={false} />
         <Main>
           <Row>
             <Banner

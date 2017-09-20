@@ -3,6 +3,7 @@ import DocumentTitle from 'react-document-title';
 
 import { MainColumn, Main, Row } from '../Grid';
 import PageTitle from '../PageTitle';
+import CodeLoader from '../../theme/images/codeLoader.svg';
 
 const Home = () => (
   <DocumentTitle title="Jordan Janzen">
@@ -10,6 +11,7 @@ const Home = () => (
       <PageTitle title="Home" />
       <Main>
         <Row>
+        <img src={CodeLoader} className="CodeLoader" alt="loading..." />
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis
             vero eius ut doloremque nam ea modi cumque, labore, amet,
