@@ -28,7 +28,8 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "aws s3 sync build/ s3://www.jordanjanzen.com",
-    "postdeploy": "aws cloudfront create-invalidation --distribution-id E1SASUQHSLUTW3 --paths /*"
+    "postdeploy":
+      "aws cloudfront create-invalidation --distribution-id E1SASUQHSLUTW3 --paths /*"
   },
   "devDependencies": {
     "babel-eslint": "^8.0.0",
@@ -38,30 +39,5 @@
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.3.0"
-  },
-  "eslintConfig": {
-    "extends": "airbnb",
-    "parser": "babel-eslint",
-    "env": {
-      "browser": true,
-      "jquery": true,
-      "node": true
-    },
-    "plugins": [
-      "import",
-      "jsx-a11y",
-      "react"
-    ],
-    "rules": {
-      "react/jsx-filename-extension": [
-        1,
-        {
-          "extensions": [
-            ".js",
-            ".jsx"
-          ]
-        }
-      ]
-    }
   }
 }
