@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import TextareaAutosize from 'react-autosize-textarea';
 
 import StyledForm from './StyledForm';
 import Button from './Button';
