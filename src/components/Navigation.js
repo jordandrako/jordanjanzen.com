@@ -29,20 +29,39 @@ const Link = styled(NavLink)`
   text-transform: lowercase;
   transition: all 0.2s ease-in-out;
 
+  span {
+    background: ${colors.black};
+    position: relative;
+    z-index: 2;
+  }
+
+  &:before,
+  &:after {
+    display: inline-block;
+    color: ${colors.red};
+    opacity: 0;
+    transition: all 0.2s ease-in-out;
+    z-index: 1;
+  }
+
+  &:before {
+    content: '==';
+    transform: translateX(100%);
+  }
+  &:after {
+    content: '=>';
+    transform: translateX(-100%);
+  }
+
   &.active {
     color: ${colors.red};
     font-size: 1.15em;
     padding: 15px;
 
-    &:before {
-      content: '==';
-      display: inline-block;
-      padding-right: 0.2em;
-    }
+    &:before,
     &:after {
-      content: '=>';
-      display: inline-block;
-      padding-left: 0.2em;
+      transform: translateX(0);
+      opacity: 1;
     }
   }
 `;
@@ -52,17 +71,23 @@ const Navigation = (props) => (
     <NavList className={props.navType}>
       <li>
         <Link exact to="/">
-          Home
+          <span>Home</span>
         </Link>
       </li>
       <li>
-        <Link to="/about">About</Link>
+        <Link to="/about">
+          <span>About</span>
+        </Link>
       </li>
       <li>
-        <Link to="/portfolio">Portfolio</Link>
+        <Link to="/portfolio">
+          <span>Portfolio</span>
+        </Link>
       </li>
       <li>
-        <Link to="/todo">Todo</Link>
+        <Link to="/todo">
+          <span>Todo</span>
+        </Link>
       </li>
     </NavList>
   </nav>
