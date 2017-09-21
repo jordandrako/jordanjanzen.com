@@ -4,55 +4,55 @@
     </title>
 <!--IN THIS PEN WE: - Adjusted the height of the "viewbox" to hide the extra "lines" down below-->
     <g id="group1" x="0" y="0" visibility="visible">
-        <rect id="line1" width="50" height="20" x="0" y="0" rx="10" ry="10" style="fill:#3092ec">
+        <rect id="line1" width="50" height="20" x="0" y="0" rx="10" ry="10" style="fill:#1167ae">
             <animate id="line1_anim" fill="freeze" attributeName="width" dur="0.3s" from="50" to="350"/>
         </rect>
-        <rect id="line2" width="0" height="20" x="30" y="30" rx="10" ry="10" style="fill:#ab6cfe">
+        <rect id="line2" width="0" height="20" x="30" y="30" rx="10" ry="10" style="fill:#c678dd">
             <animate id="line2_anim" fill="freeze" attributeName="width" begin="line1_anim.end" dur="0.3s" from="0" to="200"/>
         </rect>
-        <rect id="line3" width="0" height="20" x="60" y="60" rx="10" ry="10" style="fill:#fd8085">
+        <rect id="line3" width="0" height="20" x="60" y="60" rx="10" ry="10" style="fill:#e06c75">
             <animate id="line3_anim" fill="freeze" attributeName="width" begin="line2_anim.end" dur="0.3s" from="0" to="160"/>
         </rect>
-        <rect id="line4" width="0" height="20" x="90" y="90" rx="10" ry="10" style="fill:lightgrey">
+        <rect id="line4" width="0" height="20" x="90" y="90" rx="10" ry="10" style="fill:#848d9f">
             <animate id="line4_anim" fill="freeze" attributeName="width" begin="line3_anim.end" dur="0.2s" from="0" to="200"/>
         </rect>
-        <rect id="line5" width="0" height="20" x="90" y="120" rx="10" ry="10" style="fill:lightgrey">
+        <rect id="line5" width="0" height="20" x="90" y="120" rx="10" ry="10" style="fill:#848d9f">
             <animate id="line5_anim" fill="freeze" attributeName="width" begin="line4_anim.end" dur="0.2s" from="0" to="200"/>
         </rect>
-        <rect id="line6" width="0" height="20" x="60" y="150" rx="10" ry="10" style="fill:#fd8085">
+        <rect id="line6" width="0" height="20" x="60" y="150" rx="10" ry="10" style="fill:#e06c75">
             <animate id="line6_anim" fill="freeze" attributeName="width" begin="line5_anim.end" dur="0.2s" from="0" to="120"/>
         </rect>
-        <rect id="line7" width="0" height="20" x="30" y="180" rx="10" ry="10" style="fill:#ab6cfe">
+        <rect id="line7" width="0" height="20" x="30" y="180" rx="10" ry="10" style="fill:#c678dd">
             <animate id="line7_anim" fill="freeze" attributeName="width" begin="line6_anim.end" dur="0.2s" from="0" to="90"/>
         </rect>
-        <rect id="line8" width="0" height="20" x="0" y="210" rx="10" ry="10" style="fill:#3092ec">
+        <rect id="line8" width="0" height="20" x="0" y="210" rx="10" ry="10" style="fill:#1167ae">
             <animate id="line8_anim" fill="freeze" attributeName="width" begin="line7_anim.end" dur="0.3s" from="50" to="130"/>
         </rect>
         <animateMotion begin="line8_anim.end" dur="2s" from="0,0" repeatCount="indefinite" to="0,-250"/>
     </g>
     <g id="group2">
-        <rect id="line9" width="0" height="20" x="0" y="250" rx="10" ry="10" style="fill:#3092ec">
+        <rect id="line9" width="0" height="20" x="0" y="250" rx="10" ry="10" style="fill:#1167ae">
             <animate id="line9_anim" fill="freeze" attributeName="width" begin="line8_anim.end;line9_anim.end+1.75" dur="0.25s" from="0" to="350"/>
         </rect>
-        <rect id="line10" width="0" height="20" x="30" y="280" rx="10" ry="10" style="fill:#ab6cfe">
+        <rect id="line10" width="0" height="20" x="30" y="280" rx="10" ry="10" style="fill:#c678dd">
             <animate id="line10_anim" fill="freeze" attributeName="width" begin="line9_anim.end" dur="0.25s" from="0" to="200"/>
         </rect>
-        <rect id="line11" width="0" height="20" x="60" y="310" rx="10" ry="10" style="fill:#fd8085">
+        <rect id="line11" width="0" height="20" x="60" y="310" rx="10" ry="10" style="fill:#e06c75">
             <animate id="line11_anim" fill="freeze" attributeName="width" begin="line10_anim.end" dur="0.25s" from="0" to="160"/>
         </rect>
-        <rect id="line12" width="0" height="20" x="90" y="340" rx="10" ry="10" style="fill:lightgrey">
+        <rect id="line12" width="0" height="20" x="90" y="340" rx="10" ry="10" style="fill:#848d9f">
             <animate id="line12_anim" fill="freeze" attributeName="width" begin="line11_anim.end" dur="0.25s" from="0" to="200"/>
         </rect>
-        <rect id="line13" width="0" height="20" x="90" y="370" rx="10" ry="10" style="fill:lightgrey">
+        <rect id="line13" width="0" height="20" x="90" y="370" rx="10" ry="10" style="fill:#848d9f">
             <animate id="line13_anim" fill="freeze" attributeName="width" begin="line12_anim.end" dur="0.25s" from="0" to="200"/>
         </rect>
-        <rect id="line14" width="0" height="20" x="60" y="400" rx="10" ry="10" style="fill:#fd8085">
+        <rect id="line14" width="0" height="20" x="60" y="400" rx="10" ry="10" style="fill:#e06c75">
             <animate id="line14_anim" fill="freeze" attributeName="width" begin="line13_anim.end" dur="0.25s" from="0" to="120"/>
         </rect>
-        <rect id="line15" width="0" height="20" x="30" y="430" rx="10" ry="10" style="fill:#ab6cfe">
+        <rect id="line15" width="0" height="20" x="30" y="430" rx="10" ry="10" style="fill:#c678dd">
             <animate id="line15_anim" fill="freeze" attributeName="width" begin="line14_anim.end" dur="0.25s" from="0" to="90"/>
         </rect>
-        <rect id="line16" width="0" height="20" x="0" y="460" rx="10" ry="10" style="fill:#3092ec">
+        <rect id="line16" width="0" height="20" x="0" y="460" rx="10" ry="10" style="fill:#1167ae">
             <animate id="line16_anim" fill="freeze" attributeName="width" begin="line15_anim.end" dur="0.25s" from="0" to="130"/>
         </rect>
         <animateMotion id="scroll_anim" begin="2s" dur="2s" from="0,0" repeatCount="indefinite" to="0,-250"/>
