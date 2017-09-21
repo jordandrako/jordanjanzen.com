@@ -1,12 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import DocumentTitle from 'react-document-title';
+import styled from 'styled-components';
 
 import { MainColumn, Main, Row } from '../Grid';
 import PageTitle from '../PageTitle';
 import Banner from '../Banner';
 
 import CodeLoader from '../../theme/images/codeLoader.svg';
+
+const Load = styled(Main)`
+  align-items: center;
+  justify-content: center;
+`;
 
 const Loading = ({ isLoading }) => {
   // Handle the loading state
@@ -15,9 +21,9 @@ const Loading = ({ isLoading }) => {
       <DocumentTitle title="Loading...">
         <MainColumn>
           <PageTitle title="Loading..." ext={false} />
-          <Main>
-            <Row><img src={CodeLoader} className="CodeLoader" alt="loading..." /></Row>
-          </Main>
+          <Load>
+            <img src={CodeLoader} className="CodeLoader" alt="loading..." />
+          </Load>
         </MainColumn>
       </DocumentTitle>
     );
@@ -27,7 +33,7 @@ const Loading = ({ isLoading }) => {
     <DocumentTitle title="😥 Sorry">
       <MainColumn>
         <PageTitle title="😥 Sorry" ext={false} />
-        <Main>
+        <Load>
           <Row>
             <Banner
               type="error"
@@ -35,7 +41,7 @@ const Loading = ({ isLoading }) => {
               action="reload"
             />
           </Row>
-        </Main>
+        </Load>
       </MainColumn>
     </DocumentTitle>
   );

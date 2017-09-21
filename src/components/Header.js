@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { darken } from 'polished';
 
 import { colors, typography } from '../theme/variables';
 import Navigation from './Navigation';
@@ -13,7 +14,9 @@ const LeftColumn = styled.aside`
   display: flex;
   flex: 1;
   flex-direction: column;
-  border-right: 2px solid ${colors.darkblack};
+  position: relative;
+  border-top: 3px solid ${colors.lightblue};
+  box-shadow: 2px 0 0 ${colors.darkblack};
 `;
 
 const Top = styled.section`flex-shrink: 0;`;
@@ -21,6 +24,7 @@ const Top = styled.section`flex-shrink: 0;`;
 const Bottom = styled.section`
   flex-grow: 1;
   overflow-y: auto;
+  background: ${darken(0.05, colors.black)};
 `;
 
 const Logo = styled.h2`

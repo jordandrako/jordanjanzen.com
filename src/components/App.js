@@ -4,10 +4,12 @@ import styled from 'styled-components';
 import { base } from '../base';
 import Sidebar from './Header';
 import Router from './Router';
+import { colors } from '../theme/variables';
 
 const Wrapper = styled.div`
   display: flex;
   height: 100%;
+  border-top: 2px solid ${colors.darkblack};
 `;
 
 class App extends Component {

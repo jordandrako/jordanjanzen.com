@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
-// import base from '../base';
 import { colors, typography } from '../theme/variables';
 
 const NavList = styled.ul`
@@ -12,8 +11,9 @@ const NavList = styled.ul`
   margin: 0;
 
   li {
-    border-top: 1px inset ${colors.darkblack};
-    border-bottom: 1px inset ${colors.lightblack};
+    background: ${colors.black};
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
   }
 `;
 
@@ -27,7 +27,7 @@ const Link = styled(NavLink)`
 
   font-family: ${typography.monospace};
   text-transform: lowercase;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s ease-in-out;
 
   span {
     background: ${colors.black};
@@ -40,7 +40,7 @@ const Link = styled(NavLink)`
     display: inline-block;
     color: ${colors.red};
     opacity: 0;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.5s ease-in-out;
     z-index: 1;
   }
 

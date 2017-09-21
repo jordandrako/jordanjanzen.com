@@ -17,6 +17,7 @@ const Item = styled.li`
   .flag {
     display: flex;
     flex-direction: column;
+    border: 5px double ${colors.black};
 
     .complete {
       display: flex;
@@ -60,8 +61,10 @@ const Item = styled.li`
         user-select: none;
       }
     }
+
     .remove {
       border: none;
+      border-top: 2px solid ${colors.black};
       background: ${colors.red};
       width: 100%;
       height: 30px;
@@ -69,6 +72,7 @@ const Item = styled.li`
       padding: 0;
       margin: 0;
       cursor: pointer;
+
       div {
         position: absolute;
         top: calc(50% - 2px);

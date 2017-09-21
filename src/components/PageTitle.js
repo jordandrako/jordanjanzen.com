@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { darken, lighten } from 'polished';
 
 import { toTitleCase, getFileExtension } from '../helpers';
 import { colors, typography } from '../theme/variables';
 
 const Title = styled.header`
-  background: ${colors.black};
+  background: ${darken(0.05, colors.black)};
   border-bottom: 2px solid ${colors.darkblack};
   width: 100%;
   flex-shrink: 0;
@@ -22,7 +24,6 @@ const Title = styled.header`
       display: inline-flex;
       align-items: center;
       color: ${colors.white};
-      border-right: 1px solid ${colors.darkblack};
 
       h1,
       h4 {
@@ -32,6 +33,10 @@ const Title = styled.header`
         font-size: 1rem;
         font-weight: 300;
         text-shadow: 0 2px 3px rgba(0, 0, 0, 0.45);
+      }
+
+      h1 {
+        font-style: italic;
       }
 
       .file,
@@ -57,10 +62,11 @@ const Title = styled.header`
       }
     }
     li:last-child {
-      background: rgba(255, 255, 255, 0.1);
+      background: ${lighten(0.05, colors.black)};
       color: ${colors.lightwhite};
       padding: 15px;
-
+      border-top: 3px solid ${colors.lightblue};
+      box-shadow: 2px 0 0 ${colors.darkblack};
       text-shadow: 0 2px 3px rgba(0, 0, 0, 0.45);
       h1 {
         font-size: 1.15rem;
@@ -81,7 +87,9 @@ const PageTitle = (props) => {
         <li>
           <i className="fa fa-file-code-o file" aria-hidden="true" />
           <h1>{title}</h1>
-          <button className="fa fa-times-circle close" aria-hidden="true" />
+          <Link to="/">
+            <button className="fa fa-times-circle close" aria-hidden="true" />
+          </Link>
         </li>
       </ul>
     </Title>
