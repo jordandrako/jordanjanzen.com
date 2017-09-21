@@ -16,7 +16,7 @@ const ListOfTodos = styled.ul`
 `;
 
 const TodoList = (props) => (
-  <DocumentTitle title="Jordan Janzen | todo">
+  <DocumentTitle title="Jordan Janzen | Todo">
     <MainColumn>
       <PageTitle title="Todo" />
       <Main>
