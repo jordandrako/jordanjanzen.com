@@ -54,6 +54,12 @@ export function getFileExtension() {
     'py',
     'vb',
     'java',
+    '⚛',
+    '💾',
+    '💻',
+    '☕',
+    '🎉',
+    '🔥',
   ];
 
   return `.${rando(fileExtensions)}`;
