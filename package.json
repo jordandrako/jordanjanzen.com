@@ -29,8 +29,9 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "aws s3 sync build/ s3://www.jordanjanzen.com",
-    "postdeploy":
-      "aws cloudfront create-invalidation --distribution-id E1SASUQHSLUTW3 --paths /*"
+    "postdeploy": "aws cloudfront create-invalidation --distribution-id E1SASUQHSLUTW3 --paths /*",
+    "prestaging": "npm run predeploy",
+    "staging": "aws s3 sync build/ s3://staging.jordanjanzen.com"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
@@ -45,7 +46,11 @@
     "prettier": "^1.7.0"
   },
   "eslintConfig": {
-    "extends": ["airbnb", "prettier", "prettier/react"],
+    "extends": [
+      "airbnb",
+      "prettier",
+      "prettier/react"
+    ],
     "parser": "babel-eslint",
     "parserOptions": {
       "ecmaVersion": 8,
@@ -67,8 +72,14 @@
           "argsIgnorePattern": "res|next|^err"
         }
       ],
-      "arrow-body-style": [2, "as-needed"],
-      "arrow-parens": [2, "always"],
+      "arrow-body-style": [
+        2,
+        "as-needed"
+      ],
+      "arrow-parens": [
+        2,
+        "always"
+      ],
       "no-param-reassign": [
         2,
         {
@@ -91,7 +102,10 @@
       "react/jsx-filename-extension": [
         1,
         {
-          "extensions": [".js", ".jsx"]
+          "extensions": [
+            ".js",
+            ".jsx"
+          ]
         }
       ],
       "radix": 0,
@@ -99,7 +113,14 @@
         2,
         {
           "hoist": "all",
-          "allow": ["resolve", "reject", "done", "next", "err", "error"]
+          "allow": [
+            "resolve",
+            "reject",
+            "done",
+            "next",
+            "err",
+            "error"
+          ]
         }
       ],
       "quotes": [
@@ -114,10 +135,14 @@
       "jsx-a11y/anchor-is-valid": [
         "warn",
         {
-          "aspects": ["invalidHref"]
+          "aspects": [
+            "invalidHref"
+          ]
         }
       ]
     },
-    "plugins": ["html"]
+    "plugins": [
+      "html"
+    ]
   }
 }
