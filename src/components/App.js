@@ -47,24 +47,16 @@ class App extends Component {
       }),
     ];
 
-    const localStorageTodoRef = localStorage.getItem('todos');
-    if (localStorageTodoRef) {
+    const localStorageRef = {
+      todos: localStorage.getItem('todos'),
+      projects: localStorage.getItem('projects'),
+      skills: localStorage.getItem('skills'),
+    };
+    if (localStorageRef) {
       this.setState({
-        todos: JSON.parse(localStorageTodoRef),
-      });
-    }
-
-    const localStorageProjectRef = localStorage.getItem('projects');
-    if (localStorageProjectRef) {
-      this.setState({
-        projects: JSON.parse(localStorageProjectRef),
-      });
-    }
-
-    const localStorageSkillRef = localStorage.getItem('skills');
-    if (localStorageSkillRef) {
-      this.setState({
-        skills: JSON.parse(localStorageSkillRef),
+        todos: JSON.parse(localStorageRef.todos),
+        projects: JSON.parse(localStorageRef.projects),
+        skills: JSON.parse(localStorageRef.skills),
       });
     }
   }
