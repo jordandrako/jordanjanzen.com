@@ -9,7 +9,7 @@ import Banner from '../Banner';
 
 import CodeLoader from '../../theme/images/codeLoader.svg';
 
-const Load = styled(Main)`
+const Load = styled(Main) `
   align-items: center;
   justify-content: center;
 `;
@@ -33,15 +33,9 @@ const Loading = ({ isLoading }) => {
     <DocumentTitle title="😥 Sorry">
       <MainColumn>
         <PageTitle title="😥 Sorry" ext={false} />
-        <Load>
-          <Row>
-            <Banner
-              type="error"
-              text="There seems to have been a problem loading this page..."
-              action="reload"
-            />
-          </Row>
-        </Load>
+        <Row>
+          <Banner type="error" action="reload">There seems to have been a problem loading this page...</Banner>
+        </Row>
       </MainColumn>
     </DocumentTitle>
   );
