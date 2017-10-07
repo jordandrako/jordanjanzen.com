@@ -67,7 +67,6 @@ class AddTodoForm extends Component {
               type="text"
               name="desc"
               placeholder="Todo Description"
-              value={null}
               required
             />
             <input
@@ -77,7 +76,6 @@ class AddTodoForm extends Component {
               type="text"
               name="link"
               placeholder="Todo link"
-              value={null}
             />
             <Button
               type="submit"
