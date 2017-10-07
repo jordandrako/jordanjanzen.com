@@ -35,10 +35,6 @@ const Title = styled.header`
         text-shadow: 0 2px 3px rgba(0, 0, 0, 0.45);
       }
 
-      h1 {
-        font-style: italic;
-      }
-
       .file,
       .close {
       }
