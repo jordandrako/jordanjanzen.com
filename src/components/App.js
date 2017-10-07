@@ -94,7 +94,6 @@ class App extends Component {
 
   removeTodo(key) {
     const todos = { ...this.state.todos };
-    console.log('Deleting todo');
     // delete todos[key];
     todos[key] = null;
     this.setState({ todos });
