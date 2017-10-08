@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { layout } from '../theme/variables';
 
-export const MainColumn = styled.div`
+export const MainContainer = styled.div`
   flex: ${layout.mainFlex};
   height: 100%;
   display: flex;

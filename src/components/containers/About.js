@@ -1,12 +1,12 @@
 import React from 'react';
 import DocumentTitle from 'react-document-title';
 
-import { MainColumn, Main, Row } from '../Grid';
+import { MainContainer, Main, Row } from '../Grid';
 import PageTitle from '../PageTitle';
 
 const About = () => (
   <DocumentTitle title="Jordan Janzen | About">
-    <MainColumn>
+    <MainContainer>
       <PageTitle title="About" />
       <Main>
         <Row>
@@ -22,7 +22,7 @@ const About = () => (
           </p>
         </Row>
       </Main>
-    </MainColumn>
+    </MainContainer>
   </DocumentTitle>
 );
 

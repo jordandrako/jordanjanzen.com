@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import DocumentTitle from 'react-document-title';
 import styled from 'styled-components';
 
-import { MainColumn, Main, Row } from '../Grid';
+import { MainContainer, Main, Row } from '../Grid';
 import PageTitle from '../PageTitle';
 import AddTodoForm from '../AddTodoForm';
 import Todo from '../Todo';
@@ -17,7 +17,7 @@ const ListOfTodos = styled.ul`
 
 const TodoList = (props) => (
   <DocumentTitle title="Jordan Janzen | Todo">
-    <MainColumn>
+    <MainContainer>
       <PageTitle title="Todo" />
       <Main>
         <Row>
@@ -81,7 +81,7 @@ const TodoList = (props) => (
           </ul>
         </Row>
       </Main>
-    </MainColumn>
+    </MainContainer>
   </DocumentTitle>
 );
 

@@ -2,12 +2,12 @@ import React from 'react';
 import DocumentTitle from 'react-document-title';
 import { Link, Route } from 'react-router-dom';
 
-import { MainColumn, Main, Row } from '../Grid';
+import { MainContainer, Main, Row } from '../Grid';
 import PageTitle from '../PageTitle';
 
 const Portfolio = () => (
   <DocumentTitle title="Jordan Janzen | Portfolio">
-    <MainColumn>
+    <MainContainer>
       <PageTitle title="Portfolio" />
       <Main>
         <Row>
@@ -41,7 +41,7 @@ const Portfolio = () => (
           />
         </Row>
       </Main>
-    </MainColumn>
+    </MainContainer>
   </DocumentTitle>
 );
 
