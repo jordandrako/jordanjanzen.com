@@ -77,11 +77,7 @@ class AddTodoForm extends Component {
               name="link"
               placeholder="Todo link"
             />
-            <Button
-              type="submit"
-              styleType="success"
-              arrows={colors.lightwhite}
-            >
+            <Button type="success" arrows={colors.lightwhite}>
               + Add Todo
             </Button>
           </form>

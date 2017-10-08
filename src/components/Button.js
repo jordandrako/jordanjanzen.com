@@ -8,13 +8,13 @@ const BtnColor = (props) => props.color || theme.buttonText;
 const Background = (props) => {
   if (props.bg) {
     return props.bg;
-  } else if (props.styleType === 'secondary') {
+  } else if (props.type === 'secondary') {
     return colors.cyan;
-  } else if (props.styleType === 'success' || props.styleType === 'submit') {
+  } else if (props.type === 'success' || props.type === 'submit') {
     return colors.green;
-  } else if (props.styleType === 'warn') {
+  } else if (props.type === 'warn') {
     return colors.red;
-  } else if (props.styleType === 'login') {
+  } else if (props.type === 'login') {
     return colors.lightblack;
   }
   return theme.buttonColor;
@@ -70,20 +70,20 @@ const Btn = styled.button`
 const Button = (props) => (
   <Btn
     type={props.type}
-    styleType={props.styleType}
     wide={props.wide}
     small={props.small}
     large={props.large}
     color={props.color}
     arrows={props.arrows}
     bg={props.bg}
+    onClick={props.onClick}
   >
     {props.text || props.children}
   </Btn>
 );
 
 Button.propTypes = {
-  styleType: PropTypes.oneOf([
+  type: PropTypes.oneOf([
     'primary',
     'secondary',
     'login',
@@ -95,7 +95,6 @@ Button.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]),
-  type: PropTypes.string,
   text: PropTypes.string,
   color: PropTypes.string,
   small: PropTypes.bool,
@@ -103,19 +102,20 @@ Button.propTypes = {
   wide: PropTypes.bool,
   arrows: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   bg: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 Button.defaultProps = {
-  styleType: 'primary',
+  type: 'primary',
   children: null,
   text: null,
-  type: null,
   color: theme.buttonText,
   bg: null,
   small: false,
   large: false,
   wide: false,
   arrows: false,
+  onClick: null,
 };
 
 export default Button;
