@@ -23,10 +23,10 @@ injectGlobal`
 
   html, body, #root {
     height: 100%;
+    overflow: hidden;
   }
 
   body {
-    overflow: hidden;
     font-family: ${typography.fontFamily};
     color: ${theme.textColor};
     background: ${theme.siteBackground};

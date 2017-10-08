@@ -19,9 +19,6 @@ const AsyncTodoList = MyLoadable({
 const AsyncNotFound = MyLoadable({
   loader: () => import('./containers/NotFound'),
 });
-const AsyncLogin = MyLoadable({
-  loader: () => import('./containers/Login'),
-});
 const AsyncUnauthenticated = MyLoadable({
   loader: () => import('./containers/Unauthenticated'),
 });
@@ -67,16 +64,6 @@ const Router = (props) => (
         ) : (
           <AsyncUnauthenticated />
         )}
-    />
-    <Route
-      exact
-      path="/login"
-      render={() => (
-        <AsyncLogin
-          updateTodo={props.updateTodo}
-          removeTodo={props.removeTodo}
-        />
-      )}
     />
     {/* Unmatched URLs */}
     <Route component={AsyncNotFound} />

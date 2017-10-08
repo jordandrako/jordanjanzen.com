@@ -6,9 +6,11 @@ import Sidebar from './Sidebar';
 import Router from './Router';
 
 import { colors } from '../theme/variables';
+import { media } from '../theme/style-utils';
 
 const Wrapper = styled.div`
   display: flex;
+  ${media.tablet`flex-direction: column`};
   height: 100%;
   border-top: 2px solid ${colors.darkblack};
 `;
@@ -99,8 +101,6 @@ class App extends Component {
   }
 
   authHandler(authData) {
-    console.log(authData);
-
     const uid = authData.user.uid || authData.uid;
     const rootRef = database.ref();
     rootRef.once('value').then((snapshot) => {
@@ -109,17 +109,20 @@ class App extends Component {
       if (!data.owner) {
         rootRef.set({
           ...data,
-          owner: uid,
+          owner: {
+            uid,
+            provider: 'google',
+          },
         });
         this.setState({
           uid,
           owner: data.owner || uid,
         });
       }
-      if (data.owner === uid) {
+      if (data.owner.uid === uid) {
         this.setState({
           uid,
-          owner: data.owner || uid,
+          owner: data.owner.uid || uid,
         });
       } else {
         console.warn('You are not the owner of this site.');

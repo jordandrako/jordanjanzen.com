@@ -40,23 +40,23 @@ const Link = styled(NavLink)`
     display: inline-block;
     color: ${colors.red};
     opacity: 0;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.3s ease-in-out;
     z-index: 1;
   }
 
   &:before {
     content: '==';
+    padding-right: 0.25em;
     transform: translateX(100%);
   }
   &:after {
     content: '=>';
+    padding-left: 0.25em;
     transform: translateX(-100%);
   }
 
   &.active {
     color: ${colors.red};
-    font-size: 1.15em;
-    padding: 15px;
 
     &:before,
     &:after {

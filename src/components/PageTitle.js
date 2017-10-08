@@ -6,6 +6,7 @@ import { darken, lighten } from 'polished';
 
 import { toTitleCase, getFileExtension } from '../helpers';
 import { colors, typography } from '../theme/variables';
+import { media } from '../theme/style-utils';
 
 const Title = styled.header`
   background: ${darken(0.05, colors.black)};
@@ -18,12 +19,15 @@ const Title = styled.header`
   ul {
     margin: 0;
     padding: 0;
+    width: 100%;
 
     li {
       padding: 15px 0 15px 15px;
       display: inline-flex;
       align-items: center;
       color: ${colors.white};
+
+      ${media.tablet`display: none`};
 
       h1,
       h4 {
@@ -33,10 +37,6 @@ const Title = styled.header`
         font-size: 1rem;
         font-weight: 300;
         text-shadow: 0 2px 3px rgba(0, 0, 0, 0.45);
-      }
-
-      .file,
-      .close {
       }
 
       .file {
@@ -64,15 +64,29 @@ const Title = styled.header`
       border-top: 3px solid ${colors.lightblue};
       box-shadow: 2px 0 0 ${colors.darkblack};
       text-shadow: 0 2px 3px rgba(0, 0, 0, 0.45);
+
       h1 {
         font-size: 1.15rem;
       }
+
+      ${media.tablet`
+        display: inline-flex;
+        background: transparent;
+        border: none;
+        width: 100%;
+        padding: 6px 8px;
+        justify-content: space-between;
+
+        h1 {
+          font-size: 1em;
+        }
+
+      `};
     }
   }
 `;
 
 const fileExtention = getFileExtension();
-// TODO: Add breadcrumbs
 const PageTitle = (props) => {
   const ext = props.ext === true && fileExtention;
   const title = [toTitleCase(props.title), ext];
