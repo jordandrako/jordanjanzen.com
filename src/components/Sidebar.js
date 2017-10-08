@@ -21,9 +21,7 @@ const LeftColumn = styled.aside`
   box-shadow: 2px 0 0 ${colors.darkblack};
 `;
 
-const Top = styled.section`
-  flex-shrink: 0;
-`;
+const Top = styled.section`flex-shrink: 0;`;
 
 const Bottom = styled.section`
   flex-grow: 1;
@@ -68,7 +66,7 @@ const renderLogin = (props) => (
 );
 
 const renderLogout = (props) => (
-  <Button className="logout" small onClick={props.logout()}>
+  <Button className="logout" small type="login" onClick={() => props.logout()}>
     Log Out
   </Button>
 );
@@ -84,18 +82,18 @@ const Sidebar = (props) => (
       <Tagline>Never Stop Learning</Tagline>
     </Top>
     <Bottom>
-      <Navigation navType="main-nav" user={props.user} />
-      {!props.user ? renderLogin(props) : renderLogout(props)}
+      <Navigation navType="main-nav" uid={props.uid} />
+      {!props.uid ? renderLogin(props) : renderLogout(props)}
     </Bottom>
   </LeftColumn>
 );
 
 Sidebar.propTypes = {
-  user: PropTypes.object,
+  uid: PropTypes.string,
 };
 
 Sidebar.defaultProps = {
-  user: null,
+  uid: null,
 };
 
 export default Sidebar;

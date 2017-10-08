@@ -24,6 +24,9 @@ const Alert = styled.div`
   border: inset solid 3px rgba(255, 255, 255, 0.5);
   font-family: ${typography.monospace};
   position: relative;
+  height: auto;
+
+  transition: all 0.5s ease-in-out;
 
   .showHide {
     position: absolute;
@@ -49,20 +52,11 @@ const Alert = styled.div`
     }
   }
 
-  h4,
-  .actionButton {
-    height: auto;
-    display: block;
-    opacity: 1;
-    transition: all 0.5s ease-in-out;
-  }
-
   h4 {
-    margin: 0;
+    margin-top: 0;
   }
 
   .actionButton {
-    margin: 0.5em 0 0;
     background: transparent;
     border: 2px solid ${colors.black};
     font-family: ${typography.monospace};
@@ -70,11 +64,8 @@ const Alert = styled.div`
   }
 
   &.closed {
-    h4,
-    .actionButton {
-      height: 0;
-      display: none;
-      opacity: 0;
+    h4 {
+      margin: 0;
     }
     .showHide {
       .vertical {
@@ -133,20 +124,28 @@ class Banner extends Component {
         <span className="vertical" />
       </button>
     );
-    const actionButton = (
+    const actionButton = !this.state.closed ? (
       <button
         className="actionButton"
         onClick={action === 'hide' ? this.showHide : this.handleAction}
       >
         {toTitleCase(this.props.actionText)}
       </button>
-    );
+    ) : null;
+
+    const bannerContent = !this.state.closed ? (
+      <p>{this.props.children}</p>
+    ) : null;
 
     return (
       <Alert type={this.props.type} className={closed}>
-        {this.state.closed ? `${toTitleCase(this.props.type)} Message` : null}
+        <h4>
+          {this.props.title
+            ? this.props.title
+            : `${toTitleCase(this.props.type)} Message`}
+        </h4>
         {showHideButton}
-        <h4>{this.props.children}</h4>
+        {bannerContent}
         {actionButton}
       </Alert>
     );

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-import { base, auth, provider } from '../base';
+import { database, base, auth, provider } from '../base';
 import Sidebar from './Sidebar';
 import Router from './Router';
 
@@ -17,7 +17,8 @@ class App extends Component {
   constructor() {
     super();
     // Authentication
-    this.login = this.login.bind(this);
+    this.authenticate = this.authenticate.bind(this);
+    this.authHandler = this.authHandler.bind(this);
     this.logout = this.logout.bind(this);
     // Database management
     this.addTodo = this.addTodo.bind(this);
@@ -33,7 +34,8 @@ class App extends Component {
       todos: {},
       projects: {},
       skills: {},
-      user: null,
+      uid: null,
+      owner: null,
     };
   }
 
@@ -68,11 +70,11 @@ class App extends Component {
   }
 
   componentDidMount() {
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        this.setState({ user });
-      }
-    });
+    // auth.onAuthStateChanged((user) => {
+    //   if (user) {
+    //     this.setState({ uid: user.uid });
+    //   }
+    // });
   }
 
   componentWillUpdate(nextProps, nextState) {
@@ -85,22 +87,40 @@ class App extends Component {
     base.removeBinding(this.ref);
   }
 
-  login() {
-    auth.signInWithPopup(provider).then((result) => {
-      const user = result.user;
-      this.setState({
-        user,
-      })
-    });
+  authenticate() {
+    auth.signInWithPopup(provider).then((result) => this.authHandler(result));
   }
 
   logout() {
-    auth.signOut()
-      .then(() => {
-        this.setState({ user: null });
-        console.log('logout');
-      });
-  };
+    auth.signOut().then(() => {
+      this.setState({ uid: null });
+      console.log('Logout');
+    });
+  }
+
+  authHandler(authData) {
+    const rootRef = database.ref();
+    rootRef.once('value').then((snapshot) => {
+      const data = snapshot.val() || {};
+
+      if (!data.owner) {
+        rootRef.set({
+          ...data,
+          owner: authData.user.uid,
+        });
+        this.setState({
+          uid: authData.user.uid,
+          owner: data.owner || authData.user.uid,
+        });
+      }
+      if (data.owner === authData.user.uid) {
+        this.setState({
+          uid: authData.user.uid,
+          owner: data.owner || authData.user.uid,
+        });
+      }
+    });
+  }
 
   // update our state
   addTodo(todo) {
@@ -185,8 +205,8 @@ class App extends Component {
       <Wrapper className="App wrapper">
         <Sidebar
           className="Sidebar"
-          user={this.state.user}
-          login={this.login}
+          uid={this.state.uid}
+          login={this.authenticate}
           logout={this.logout}
         />
         <Router
@@ -200,7 +220,7 @@ class App extends Component {
           addSkill={this.addSkill}
           updateSkill={this.updateSkill}
           removeSkill={this.removeSkill}
-          login={this.login}
+          login={this.authenticate}
           logout={this.logout}
         />
       </Wrapper>

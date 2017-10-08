@@ -17,7 +17,7 @@ const NavList = styled.ul`
   }
 `;
 
-const Link = styled(NavLink) `
+const Link = styled(NavLink)`
   display: block;
   text-decoration: none;
   color: ${colors.white};
@@ -84,28 +84,24 @@ const Navigation = (props) => (
           <span>Portfolio</span>
         </Link>
       </li>
-      {
-        props.user
-          ? (
-            <li>
-              <Link to="/todo">
-                <span>Todo</span>
-              </Link>
-            </li>
-          )
-          : null
-      }
+      {props.uid ? (
+        <li>
+          <Link to="/todo">
+            <span>Todo</span>
+          </Link>
+        </li>
+      ) : null}
     </NavList>
   </nav>
 );
 
 Navigation.propTypes = {
   navType: PropTypes.string.isRequired,
-  user: PropTypes.object,
+  uid: PropTypes.string,
 };
 
 Navigation.defaultProps = {
-  user: null,
-}
+  uid: null,
+};
 
 export default Navigation;

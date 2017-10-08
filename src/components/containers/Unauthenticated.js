@@ -7,6 +7,7 @@ import Banner from '../Banner';
 
 const GoBack = () => {
   // this.context.router.goBack();
+  console.log('Going Back');
 };
 
 const About = () => (
@@ -15,7 +16,12 @@ const About = () => (
       <PageTitle title="Please Log In" />
       <Main>
         <Row>
-          <Banner type="alert" action={GoBack()} actionText="Go Back">
+          <Banner
+            type="alert"
+            title="Not Logged In."
+            action={() => GoBack()}
+            actionText="Go Back"
+          >
             You aren't logged in. Please log in to view this page.
           </Banner>
         </Row>

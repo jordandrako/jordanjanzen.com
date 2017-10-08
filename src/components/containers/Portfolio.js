@@ -1,15 +1,22 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import DocumentTitle from 'react-document-title';
 import { Link, Route } from 'react-router-dom';
 
 import { MainContainer, Main, Row } from '../Grid';
 import PageTitle from '../PageTitle';
+import AddProjectForm from '../AddProjectForm';
 
-const Portfolio = () => (
+const Portfolio = (props) => (
   <DocumentTitle title="Jordan Janzen | Portfolio">
     <MainContainer>
       <PageTitle title="Portfolio" />
       <Main>
+        {props.uid ? (
+          <Row>
+            <AddProjectForm addProject={props.addProject} />
+          </Row>
+        ) : null}
         <Row>
           <ul>
             <li>
@@ -44,5 +51,14 @@ const Portfolio = () => (
     </MainContainer>
   </DocumentTitle>
 );
+
+Portfolio.propTypes = {
+  uid: PropTypes.string,
+  addProject: PropTypes.func.isRequired,
+};
+
+Portfolio.defaultProps = {
+  uid: null,
+};
 
 export default Portfolio;

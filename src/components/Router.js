@@ -33,6 +33,7 @@ const Router = (props) => (
       path="/about"
       render={() => (
         <AsyncAbout
+          uid={props.uid}
           skills={props.skills}
           addSkill={props.addSkill}
           updateSkill={props.updateSkill}
@@ -44,6 +45,7 @@ const Router = (props) => (
       path="/portfolio"
       render={() => (
         <AsyncPortfolio
+          uid={props.uid}
           projects={props.projects}
           addProject={props.addProject}
           updateProject={props.updateProject}
@@ -55,7 +57,7 @@ const Router = (props) => (
       exact
       path="/todo"
       render={() =>
-        props.user ? (
+        props.uid ? (
           <AsyncTodoList
             todos={props.todos}
             addTodo={props.addTodo}
@@ -82,7 +84,7 @@ const Router = (props) => (
 );
 
 Router.propTypes = {
-  user: PropTypes.oneOfType([null, PropTypes.object]),
+  uid: PropTypes.string,
   todos: PropTypes.object.isRequired,
   projects: PropTypes.object.isRequired,
   skills: PropTypes.object.isRequired,
@@ -95,6 +97,10 @@ Router.propTypes = {
   addTodo: PropTypes.func.isRequired,
   updateTodo: PropTypes.func.isRequired,
   removeTodo: PropTypes.func.isRequired,
+};
+
+Router.defaultProps = {
+  uid: null,
 };
 
 export default withRouter(Router);

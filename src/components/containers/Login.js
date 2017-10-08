@@ -21,9 +21,9 @@ class Login extends Component {
   }
 
   componentDidMount() {
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        this.setState({ user });
+    auth.onAuthStateChanged((uid) => {
+      if (uid) {
+        this.setState({ uid });
       }
     });
   }
@@ -37,27 +37,22 @@ class Login extends Component {
       const uid = result.user.uid;
       this.setState({
         uid,
-      })
+      });
     });
   }
 
   logout() {
-    auth.signOut()
-      .then(() => {
-        this.setState({ uid: null });
-        console.log('logout');
-      });
-  };
+    auth.signOut().then(() => {
+      this.setState({ uid: null });
+      console.log('logout');
+    });
+  }
 
   renderLogin() {
     return (
       <Row>
         <p>Sign in to manage your store's inventory.</p>
-        <Button
-          onClick={() => this.login()}
-        >
-          Log In with Google
-        </Button>
+        <Button onClick={() => this.login()}>Log In with Google</Button>
       </Row>
     );
   }
@@ -66,10 +61,7 @@ class Login extends Component {
     return (
       <Row>
         <p>You are logged in. Do you want to log out?</p>
-        <Button
-          className="logout"
-          onClick={this.logout()}
-        >
+        <Button className="logout" onClick={this.logout()}>
           Log Out
         </Button>
       </Row>
@@ -82,10 +74,7 @@ class Login extends Component {
         <MainContainer>
           <PageTitle title="Login" />
           <Main>
-            {!this.state.uid
-              ? this.renderLogin()
-              : this.renderLogout()
-            }
+            {!this.state.uid ? this.renderLogin() : this.renderLogout()}
           </Main>
         </MainContainer>
       </DocumentTitle>
