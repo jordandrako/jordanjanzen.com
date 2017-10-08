@@ -70,11 +70,11 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // auth.onAuthStateChanged((user) => {
-    //   if (user) {
-    //     this.setState({ uid: user.uid });
-    //   }
-    // });
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        this.authHandler({ user });
+      }
+    });
   }
 
   componentWillUpdate(nextProps, nextState) {
@@ -99,6 +99,9 @@ class App extends Component {
   }
 
   authHandler(authData) {
+    console.log(authData);
+
+    const uid = authData.user.uid || authData.uid;
     const rootRef = database.ref();
     rootRef.once('value').then((snapshot) => {
       const data = snapshot.val() || {};
@@ -106,18 +109,20 @@ class App extends Component {
       if (!data.owner) {
         rootRef.set({
           ...data,
-          owner: authData.user.uid,
+          owner: uid,
         });
         this.setState({
-          uid: authData.user.uid,
-          owner: data.owner || authData.user.uid,
+          uid,
+          owner: data.owner || uid,
         });
       }
-      if (data.owner === authData.user.uid) {
+      if (data.owner === uid) {
         this.setState({
-          uid: authData.user.uid,
-          owner: data.owner || authData.user.uid,
+          uid,
+          owner: data.owner || uid,
         });
+      } else {
+        console.warn('You are not the owner of this site.');
       }
     });
   }
