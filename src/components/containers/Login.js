@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import DocumentTitle from 'react-document-title';
-import { app, base } from '../../base';
+import { auth, provider } from '../../base';
 
-import { MainColumn, Main, Row } from '../Grid';
+import { MainContainer, Main, Row } from '../Grid';
 import PageTitle from '../PageTitle';
+import Button from '../Button';
 
 class Login extends Component {
   constructor(props) {
@@ -12,103 +12,66 @@ class Login extends Component {
 
     this.renderLogin = this.renderLogin.bind(this);
     this.renderLogout = this.renderLogout.bind(this);
+    this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.authenticate = this.authenticate.bind(this);
-    this.authHandler = this.authHandler.bind(this);
 
     this.state = {
       uid: null,
-      owner: null,
     };
   }
 
   componentDidMount() {
-    app.auth().onAuthStatechanged((user) => {
+    auth.onAuthStateChanged((user) => {
       if (user) {
-        this.authHandler(null, { user });
+        this.setState({ user });
       }
     });
   }
 
-  authenticate(provider) {
-    console.log(`Trying to log in with ${provider}`);
-    app.signInWithPopup(provider).then(this.authHandler);
+  handleChange() {
+    //
+  }
+
+  login() {
+    auth.signInWithPopup(provider).then((result) => {
+      const uid = result.user.uid;
+      this.setState({
+        uid,
+      })
+    });
   }
 
   logout() {
-    app.unauth();
-    this.setState({ uid: null });
-    console.log('logout');
-  }
-
-  authHandler(err, authData) {
-    console.log(authData);
-    if (err) {
-      console.error(err);
-      return;
-    }
-
-    // grab the store info
-    const siteRef = base.database().ref('jordan-janzen');
-
-    // query the firebase once for the store data
-    siteRef.once('value', (snapshot) => {
-      const data = snapshot.val() || {};
-
-      // claim it as our own if there is no owner already
-      if (!data.owner) {
-        siteRef.set({
-          owner: authData.user.uid,
-        });
-      }
-
-      this.setState({
-        uid: authData.user.uid,
-        owner: data.owner || authData.user.uid,
+    auth.signOut()
+      .then(() => {
+        this.setState({ uid: null });
+        console.log('logout');
       });
-    });
-  }
+  };
 
   renderLogin() {
     return (
       <Row>
-        <nav className="login">
-          <p>Sign in to manage your store's inventory.</p>
-          <button
-            className="google"
-            onClick={() => this.authenticate('google')}
-          >
-            Log In with Google
-          </button>
-          <button
-            className="github"
-            onClick={() => this.authenticate('github')}
-          >
-            Log In with Github
-          </button>
-        </nav>
+        <p>Sign in to manage your store's inventory.</p>
+        <Button
+          onClick={() => this.login()}
+        >
+          Log In with Google
+        </Button>
       </Row>
     );
   }
+
   renderLogout() {
     return (
       <Row>
-        <nav className="login">
-          <p>Sign in to manage your store's inventory.</p>
-          <button
-            className="google"
-            onClick={() => this.authenticate('google')}
-          >
-            Log In with Google
-          </button>
-          <button
-            className="github"
-            onClick={() => this.authenticate('github')}
-          >
-            Log In with Github
-          </button>
-        </nav>
+        <p>You are logged in. Do you want to log out?</p>
+        <Button
+          className="logout"
+          onClick={this.logout()}
+        >
+          Log Out
+        </Button>
       </Row>
     );
   }
@@ -116,13 +79,15 @@ class Login extends Component {
   render() {
     return (
       <DocumentTitle title="Jordan Janzen | Login">
-        <MainColumn>
+        <MainContainer>
           <PageTitle title="Login" />
           <Main>
-            {this.renderLogin}
-            {this.renderLogout}
+            {!this.state.uid
+              ? this.renderLogin()
+              : this.renderLogout()
+            }
           </Main>
-        </MainColumn>
+        </MainContainer>
       </DocumentTitle>
     );
   }

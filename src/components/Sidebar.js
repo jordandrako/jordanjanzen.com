@@ -1,9 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { darken } from 'polished';
 
 import { colors, typography } from '../theme/variables';
 import Navigation from './Navigation';
+import Button from './Button';
 
 const LeftColumn = styled.aside`
   padding-top: 30px;
@@ -19,7 +21,9 @@ const LeftColumn = styled.aside`
   box-shadow: 2px 0 0 ${colors.darkblack};
 `;
 
-const Top = styled.section`flex-shrink: 0;`;
+const Top = styled.section`
+  flex-shrink: 0;
+`;
 
 const Bottom = styled.section`
   flex-grow: 1;
@@ -57,7 +61,19 @@ const Tagline = styled.h3`
   margin: 15px 0 0;
 `;
 
-const Sidebar = () => (
+const renderLogin = (props) => (
+  <Button className="login" small type="login" onClick={() => props.login()}>
+    Log In with Google
+  </Button>
+);
+
+const renderLogout = (props) => (
+  <Button className="logout" small onClick={props.logout()}>
+    Log Out
+  </Button>
+);
+
+const Sidebar = (props) => (
   <LeftColumn>
     <Top>
       <Logo>
@@ -68,9 +84,18 @@ const Sidebar = () => (
       <Tagline>Never Stop Learning</Tagline>
     </Top>
     <Bottom>
-      <Navigation navType="main-nav" />
+      <Navigation navType="main-nav" user={props.user} />
+      {!props.user ? renderLogin(props) : renderLogout(props)}
     </Bottom>
   </LeftColumn>
 );
+
+Sidebar.propTypes = {
+  user: PropTypes.object,
+};
+
+Sidebar.defaultProps = {
+  user: null,
+};
 
 export default Sidebar;

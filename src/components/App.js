@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-import { base } from '../base';
-import Sidebar from './Header';
+import { base, auth, provider } from '../base';
+import Sidebar from './Sidebar';
 import Router from './Router';
+
 import { colors } from '../theme/variables';
 
 const Wrapper = styled.div`
@@ -15,6 +16,10 @@ const Wrapper = styled.div`
 class App extends Component {
   constructor() {
     super();
+    // Authentication
+    this.login = this.login.bind(this);
+    this.logout = this.logout.bind(this);
+    // Database management
     this.addTodo = this.addTodo.bind(this);
     this.updateTodo = this.updateTodo.bind(this);
     this.removeTodo = this.removeTodo.bind(this);
@@ -28,6 +33,7 @@ class App extends Component {
       todos: {},
       projects: {},
       skills: {},
+      user: null,
     };
   }
 
@@ -61,6 +67,14 @@ class App extends Component {
     }
   }
 
+  componentDidMount() {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({ user });
+      }
+    });
+  }
+
   componentWillUpdate(nextProps, nextState) {
     localStorage.setItem('todos', JSON.stringify(nextState.todos));
     localStorage.setItem('projects', JSON.stringify(nextState.projects));
@@ -70,6 +84,23 @@ class App extends Component {
   componentWillUnmount() {
     base.removeBinding(this.ref);
   }
+
+  login() {
+    auth.signInWithPopup(provider).then((result) => {
+      const user = result.user;
+      this.setState({
+        user,
+      })
+    });
+  }
+
+  logout() {
+    auth.signOut()
+      .then(() => {
+        this.setState({ user: null });
+        console.log('logout');
+      });
+  };
 
   // update our state
   addTodo(todo) {
@@ -152,7 +183,12 @@ class App extends Component {
   render() {
     return (
       <Wrapper className="App wrapper">
-        <Sidebar className="Sidebar" />
+        <Sidebar
+          className="Sidebar"
+          user={this.state.user}
+          login={this.login}
+          logout={this.logout}
+        />
         <Router
           {...this.state}
           addTodo={this.addTodo}
@@ -164,6 +200,8 @@ class App extends Component {
           addSkill={this.addSkill}
           updateSkill={this.updateSkill}
           removeSkill={this.removeSkill}
+          login={this.login}
+          logout={this.logout}
         />
       </Wrapper>
     );

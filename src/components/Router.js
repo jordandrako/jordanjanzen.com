@@ -22,6 +22,9 @@ const AsyncNotFound = MyLoadable({
 const AsyncLogin = MyLoadable({
   loader: () => import('./containers/Login'),
 });
+const AsyncUnauthenticated = MyLoadable({
+  loader: () => import('./containers/Unauthenticated'),
+});
 
 const Router = (props) => (
   <Switch>
@@ -51,14 +54,17 @@ const Router = (props) => (
     <Route
       exact
       path="/todo"
-      render={() => (
-        <AsyncTodoList
-          todos={props.todos}
-          addTodo={props.addTodo}
-          updateTodo={props.updateTodo}
-          removeTodo={props.removeTodo}
-        />
-      )}
+      render={() =>
+        props.user ? (
+          <AsyncTodoList
+            todos={props.todos}
+            addTodo={props.addTodo}
+            updateTodo={props.updateTodo}
+            removeTodo={props.removeTodo}
+          />
+        ) : (
+          <AsyncUnauthenticated />
+        )}
     />
     <Route
       exact
@@ -76,6 +82,7 @@ const Router = (props) => (
 );
 
 Router.propTypes = {
+  user: PropTypes.oneOfType([null, PropTypes.object]),
   todos: PropTypes.object.isRequired,
   projects: PropTypes.object.isRequired,
   skills: PropTypes.object.isRequired,
