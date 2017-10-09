@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-import { layout } from '../theme/variables';
 import { mediaMax } from '../theme/style-utils';
 
 export const MainContainer = styled.div`

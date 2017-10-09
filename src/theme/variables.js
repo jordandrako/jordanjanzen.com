@@ -18,11 +18,6 @@ export const typography = {
   monospace: 'FiraCode, monospace',
 };
 
-export const layout = {
-  mainFlex: '4',
-  mainPadding: '30px',
-};
-
 export const theme = {
   siteBackground: colors.lightwhite,
   primaryColor: colors.blue,
