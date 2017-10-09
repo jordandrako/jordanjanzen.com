@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { darken } from 'polished';
 
 import { colors } from '../theme/variables';
-import { sizes, mediaMax } from '../theme/style-utils';
+import { mediaMax } from '../theme/style-utils';
 import Navigation from './Navigation';
 import Button from './Button';
 import SocialButton from './SocialButton';

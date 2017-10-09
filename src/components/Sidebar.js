@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { darken } from 'polished';
 
 import { colors, typography } from '../theme/variables';
-import { sizes, mediaMax } from '../theme/style-utils';
+import { mediaMax } from '../theme/style-utils';
 import Footer from './Footer';
-import Navigation from './Navigation';
 import Button from './Button';
 
 import JJMark from '../theme/images/JJMark.svg';
