@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import TextareaAutosize from 'react-autosize-textarea';
 
+import { truncate } from '../helpers';
+
 import StyledForm from './StyledForm';
 import { colors } from '../theme/variables';
 
@@ -117,7 +119,7 @@ class Todo extends Component {
     const link = details.link ? (
       <p>
         <a target="_blank" rel="noopener noreferrer" href={details.link}>
-          {decodeURI(details.link)}
+          {truncate(decodeURI(details.link), 30)}
         </a>
       </p>
     ) : null;

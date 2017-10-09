@@ -62,3 +62,7 @@ export function getFileExtension() {
 
   return rando(fileExtensions);
 }
+
+export function truncate(string, length = 20) {
+  return string.substring(0, length);
+}
