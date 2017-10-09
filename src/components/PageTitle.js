@@ -6,7 +6,7 @@ import { darken, lighten } from 'polished';
 
 import { toTitleCase, getFileExtension } from '../helpers';
 import { colors, typography } from '../theme/variables';
-import { media } from '../theme/style-utils';
+import { mediaMax } from '../theme/style-utils';
 
 const Title = styled.header`
   background: ${darken(0.05, colors.black)};
@@ -27,7 +27,7 @@ const Title = styled.header`
       align-items: center;
       color: ${colors.white};
 
-      ${media.tablet`display: none`};
+      ${mediaMax.tablet`display: none`};
 
       h1,
       h4 {
@@ -69,8 +69,9 @@ const Title = styled.header`
         font-size: 1.15rem;
       }
 
-      ${media.tablet`
+      ${mediaMax.tablet`
         display: inline-flex;
+        display: none;
         background: transparent;
         border: none;
         width: 100%;
