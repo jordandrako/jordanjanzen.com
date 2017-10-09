@@ -4,20 +4,23 @@ import styled from 'styled-components';
 import { database, base, auth, provider } from '../base';
 import Sidebar from './Sidebar';
 import Router from './Router';
+import Footer from './Footer';
 
 import { colors } from '../theme/variables';
-import { mediaMax } from '../theme/style-utils';
+import { sizes, mediaMax } from '../theme/style-utils';
 
 const Wrapper = styled.div`
   display: flex;
   ${mediaMax.tablet`flex-direction: column`};
   height: 100%;
   border-top: 2px solid ${colors.darkblack};
+  flex-wrap: wrap;
 `;
 
 class App extends Component {
   constructor() {
     super();
+    this.updateSize = this.updateSize.bind(this);
     // Authentication
     this.authenticate = this.authenticate.bind(this);
     this.authHandler = this.authHandler.bind(this);
@@ -38,6 +41,7 @@ class App extends Component {
       skills: {},
       uid: null,
       owner: null,
+      isMobile: window.innerWidth <= sizes.tablet,
     };
   }
 
@@ -87,6 +91,14 @@ class App extends Component {
 
   componentWillUnmount() {
     base.removeBinding(this.ref);
+  }
+
+  updateSize() {
+    if (window.innerWidth <= sizes.tablet) {
+      this.setState({ isMobile: true });
+    } else {
+      this.setState({ isMobile: false });
+    }
   }
 
   authenticate() {
@@ -209,13 +221,15 @@ class App extends Component {
   }
 
   render() {
+    window.addEventListener('resize', this.updateSize);
     return (
       <Wrapper className="App wrapper">
         <Sidebar
-          className="Sidebar"
           uid={this.state.uid}
+          isMobile={this.state.isMobile}
           login={this.authenticate}
           logout={this.logout}
+          updateSize={this.updateSize}
         />
         <Router
           {...this.state}
@@ -231,6 +245,13 @@ class App extends Component {
           login={this.authenticate}
           logout={this.logout}
         />
+        {this.state.isMobile ? (
+          <Footer
+            uid={this.state.uid}
+            login={this.authenticate}
+            logout={this.logout}
+          />
+        ) : null}
       </Wrapper>
     );
   }

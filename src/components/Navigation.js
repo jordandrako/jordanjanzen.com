@@ -20,7 +20,7 @@ const NavList = styled.ul`
       display: inline-block;
     `};
 
-    ${mediaMin.desktop`
+    ${mediaMin.tablet`
       background: ${colors.black};
       border-top: 1px solid rgba(255, 255, 255, 0.1);
       border-bottom: 1px solid rgba(0, 0, 0, 0.3);
@@ -34,16 +34,21 @@ const Link = styled(NavLink)`
   font-family: Roboto, ${typography.monospace};
   text-decoration: none;
   transition: all 0.3s ease-in-out;
-  padding: 0.6em 1em;
+  padding: 1em 0.5em;
   border-top: 4px solid ${darken(0.05, colors.black)};
   text-transform: uppercase;
-  font-size: 1rem;
+  font-size: 0.8rem;
 
   &.active {
     border-color: ${colors.lightblue};
   }
 
-  ${mediaMin.desktop`
+  i.fa {
+    padding-right: 0.5em;
+    font-size: 1.15em;
+  }
+
+  ${mediaMin.tablet`
     text-transform: lowercase;
     text-align: center;
     padding: 10px 15px;
@@ -51,6 +56,10 @@ const Link = styled(NavLink)`
     border: none;
     font-size: 1.15em;
     font-family: ${typography.monospace};
+
+    i.fa {
+      display: none;
+    }
 
     span {
       position: relative;
@@ -95,22 +104,26 @@ const Navigation = (props) => (
     <NavList className={props.navType}>
       <li>
         <Link exact to="/">
+          <i className="fa fa-usd" aria-hidden="true" />
           <span>Home</span>
         </Link>
       </li>
       <li>
         <Link to="/about">
+          <i className="fa fa-info" aria-hidden="true" />
           <span>About</span>
         </Link>
       </li>
       <li>
         <Link to="/portfolio">
+          <i className="fa fa-code" aria-hidden="true" />
           <span>Portfolio</span>
         </Link>
       </li>
       {props.uid ? (
         <li>
           <Link to="/todo">
+            <i className="fa fa-check-square-o" aria-hidden="true" />
             <span>Todo</span>
           </Link>
         </li>

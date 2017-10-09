@@ -5,6 +5,7 @@ import { darken } from 'polished';
 
 import { colors, typography } from '../theme/variables';
 import { sizes, mediaMax } from '../theme/style-utils';
+import Footer from './Footer';
 import Navigation from './Navigation';
 import Button from './Button';
 
@@ -36,28 +37,28 @@ const Top = styled.section`
   `};
 `;
 
-const Bottom = styled.section`
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  overflow-y: auto;
-  background: ${darken(0.05, colors.black)};
-  justify-content: space-between;
-  transition: all 0.3s ease-in-out;
+// const Bottom = styled.section`
+//   display: flex;
+//   flex-direction: column;
+//   flex-grow: 1;
+//   overflow-y: auto;
+//   background: ${darken(0.05, colors.black)};
+//   justify-content: space-between;
+//   transition: all 0.3s ease-in-out;
 
-  .end {
-    align-self: center;
-    margin: 1em;
-  }
+//   .end {
+//     align-self: center;
+//     margin: 1em;
+//   }
 
-  ${mediaMax.tablet`
-    box-shadow: 0 -4px ${darken(0.05, colors.black)};
-    position: fixed;
-    bottom: 0;
-    z-index: 10;
-    width: 100%;
-  `};
-`;
+//   ${mediaMax.tablet`
+//     box-shadow: 0 -4px ${darken(0.05, colors.black)};
+//     position: fixed;
+//     bottom: 0;
+//     z-index: 10;
+//     width: 100%;
+//   `};
+// `;
 
 const Logo = styled.h2`
   text-transform: uppercase;
@@ -89,8 +90,8 @@ const Logo = styled.h2`
     justify-content: center;
 
     img {
-      top: 1px;
-      left: 2px;
+      top: 2px;
+      left: 16px;
       max-width: 2em;
       max-height: 1em;
       margin: 0;
@@ -134,7 +135,6 @@ class Sidebar extends Component {
     this.renderLogout = this.renderLogout.bind(this);
 
     this.state = {
-      open: window.innerWidth > sizes.tablet,
       activePage: null,
     };
   }
@@ -176,7 +176,14 @@ class Sidebar extends Component {
           </Logo>
           <Tagline>Never Stop Learning</Tagline>
         </Top>
-        <Bottom className={this.state.open ? 'open' : null}>
+        {!this.props.isMobile ? (
+          <Footer
+            uid={this.props.uid}
+            login={this.props.login}
+            logout={this.props.logout}
+          />
+        ) : null}
+        {/* <Bottom className={this.state.open ? 'open' : null}>
           <Navigation
             navType="main-nav"
             uid={this.props.uid}
@@ -185,7 +192,7 @@ class Sidebar extends Component {
           <div className="end">
             {!this.props.uid ? this.renderLogin() : this.renderLogout()}
           </div>
-        </Bottom>
+        </Bottom> */}
       </LeftColumn>
     );
   }
@@ -193,6 +200,8 @@ class Sidebar extends Component {
 
 Sidebar.propTypes = {
   uid: PropTypes.string,
+  login: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired,
 };
 
 Sidebar.defaultProps = {
