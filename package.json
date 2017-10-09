@@ -20,7 +20,8 @@
     "react-passthrough": "^0.1.0",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.14",
-    "styled-components": "^2.2.0"
+    "styled-components": "^2.2.0",
+    "styled-normalize": "^2.2.1"
   },
   "scripts": {
     "start": "PORT=3006 react-scripts start",

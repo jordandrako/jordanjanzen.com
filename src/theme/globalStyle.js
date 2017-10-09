@@ -1,10 +1,14 @@
 import { injectGlobal } from 'styled-components';
+import styledNormalize from 'styled-normalize';
 
 import { theme, typography } from './variables';
+import { mediaMax } from './style-utils';
 import FiraCode from './fonts/FiraCode-Regular.ttf';
 
 /* eslint-disable */
 injectGlobal`
+  ${styledNormalize}
+
   @font-face {
     font-family: "FiraCode";
     src: url(${FiraCode});
@@ -31,6 +35,8 @@ injectGlobal`
     color: ${theme.textColor};
     background: ${theme.siteBackground};
     font-size: 18px;
+    line-height: 1.6;
+    ${mediaMax.tablet`font-size: 16px`};
     margin: 0;
     padding: 0;
 
@@ -48,8 +54,12 @@ injectGlobal`
     }
   }
 
-  .large {
-    display: hidden;
+  img {
+    max-width: 100%;
+  }
+
+  p {
+    max-width: 40em;
   }
 
   @media only screen and (min-width: 800px) {

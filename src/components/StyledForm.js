@@ -19,12 +19,14 @@ const StyledForm = styled.div`
   select,
   textarea {
     font-family: ${typography.monospace};
+    font-size: 0.8rem;
     line-height: 1.6;
     border: 2px solid ${colors.black};
     padding: 0.5em 1em;
     margin-bottom: 1em;
     background: transparent;
     outline: none;
+
     :focus {
       outline: none;
       border-color: ${colors.blue};
