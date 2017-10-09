@@ -6,11 +6,11 @@ import Sidebar from './Sidebar';
 import Router from './Router';
 
 import { colors } from '../theme/variables';
-import { media } from '../theme/style-utils';
+import { mediaMax } from '../theme/style-utils';
 
 const Wrapper = styled.div`
   display: flex;
-  ${media.tablet`flex-direction: column`};
+  ${mediaMax.tablet`flex-direction: column`};
   height: 100%;
   border-top: 2px solid ${colors.darkblack};
 `;
