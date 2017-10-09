@@ -64,5 +64,7 @@ export function getFileExtension() {
 }
 
 export function truncate(string, length = 20) {
-  return string.substring(0, length);
+  return string.length > length + 3
+    ? `${string.substring(0, length - 3)}...`
+    : string;
 }
