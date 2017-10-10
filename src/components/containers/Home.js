@@ -3,7 +3,7 @@ import DocumentTitle from 'react-document-title';
 
 import { MainContainer, Main, Row } from '../Grid';
 import PageTitle from '../PageTitle';
-import CodeLoader from '../../theme/images/codeLoader.svg';
+import CodeLoader from '../../images/codeLoader.svg';
 
 const Home = () => (
   <DocumentTitle title="Jordan Janzen">

@@ -8,7 +8,7 @@ import { mediaMax } from '../theme/style-utils';
 import Footer from './Footer';
 import Button from './Button';
 
-import JJMark from '../theme/images/JJMark.svg';
+import JJMark from '../images/JJMark.svg';
 
 const LeftColumn = styled.aside`
   background: ${colors.black};
