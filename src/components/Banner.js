@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 // import { goBack } from 'react-router-dom';
 import styled from 'styled-components';
+import { Transition } from 'react-transition-group';
 
 import { colors, typography } from '../theme/variables';
 import { toTitleCase } from '../helpers';
@@ -25,15 +26,30 @@ const Alert = styled.div`
   font-family: ${typography.monospace};
   position: relative;
   height: auto;
+  overflow: hidden;
+  max-height: 400px;
 
-  transition: all 0.5s ease-in-out;
+  transition: all 0.2s ease-in-out;
+
+  &.entering {
+    max-height: 400px;
+  }
+
+  &.entered {
+    max-height: 3.5em;
+    .showHide {
+      .vertical {
+        transform: rotate(90deg);
+      }
+    }
+  }
 
   .showHide {
     position: absolute;
     top: 1em;
     right: 1em;
-    width: 2em;
-    height: 2em;
+    width: 1.5em;
+    height: 1.5em;
     padding: 0;
     border: 2px solid ${colors.black};
     border-radius: 50%;
@@ -79,11 +95,9 @@ class Banner extends Component {
   constructor() {
     super();
     this.showHide = this.showHide.bind(this);
-    this.doAction = this.handleAction.bind(this);
 
     this.state = {
       closed: false,
-      action: null,
     };
   }
 
@@ -93,61 +107,32 @@ class Banner extends Component {
     });
   }
 
-  handleAction() {
-    const action = this.props.action;
-    if (typeof action === 'function') {
-      this.props.action();
-    }
-    if (action === 'hide') {
-      console.log('hide');
-      this.showHide();
-    }
-    if (action === 'reload') {
-      console.log('forceUpdate');
-      return this.forceUpdate();
-    }
-    if (action === 'back') {
-      // TODO: make router go back
-      console.log('Going back');
-      return this.context.router.goBack();
-    }
-    this.setState.action = 'Unknown action';
-    return null;
-  }
-
   render() {
-    const action = this.props.action;
-    const closed = this.state.closed ? 'closed' : null;
+    const closed = this.state.closed;
     const showHideButton = (
       <button className="showHide" onClick={this.showHide}>
         <span className="horizontal" />
         <span className="vertical" />
       </button>
     );
-    const actionButton = !this.state.closed ? (
-      <button
-        className="actionButton"
-        onClick={action === 'hide' ? this.showHide : this.handleAction}
-      >
-        {toTitleCase(this.props.actionText)}
-      </button>
-    ) : null;
 
-    const bannerContent = !this.state.closed ? (
-      <p>{this.props.children}</p>
-    ) : null;
+    const bannerContent = <p>{this.props.children}</p>;
+    // const bannerContent = !closed ? <p>{this.props.children}</p> : null;
 
     return (
-      <Alert type={this.props.type} className={closed}>
-        <h4>
-          {this.props.title
-            ? this.props.title
-            : `${toTitleCase(this.props.type)} Message`}
-        </h4>
-        {showHideButton}
-        {bannerContent}
-        {actionButton}
-      </Alert>
+      <Transition timeout={200} in={closed}>
+        {(status) => (
+          <Alert type={this.props.type} className={status}>
+            <h4>
+              {this.props.title
+                ? this.props.title
+                : `${toTitleCase(this.props.type)} Message`}
+            </h4>
+            {showHideButton}
+            {bannerContent}
+          </Alert>
+        )}
+      </Transition>
     );
   }
 }
@@ -155,16 +140,14 @@ class Banner extends Component {
 Banner.propTypes = {
   children: PropTypes.node.isRequired,
   type: PropTypes.string,
-  action: PropTypes.oneOfType([
-    PropTypes.oneOf(['hide', 'reload', 'back']),
-    PropTypes.func,
-  ]).isRequired,
   actionText: PropTypes.string,
+  title: PropTypes.string,
 };
 
 Banner.defaultProps = {
   type: 'info',
   actionText: 'Hide',
+  title: null,
 };
 
 export default Banner;
