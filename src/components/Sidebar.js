@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 import { colors, typography } from '../theme/variables';
 import { mediaMax } from '../theme/style-utils';
@@ -35,35 +36,13 @@ const Top = styled.section`
   `};
 `;
 
-// const Bottom = styled.section`
-//   display: flex;
-//   flex-direction: column;
-//   flex-grow: 1;
-//   overflow-y: auto;
-//   background: ${darken(0.05, colors.black)};
-//   justify-content: space-between;
-//   transition: all 0.3s ease-in-out;
-
-//   .end {
-//     align-self: center;
-//     margin: 1em;
-//   }
-
-//   ${mediaMax.tablet`
-//     box-shadow: 0 -4px ${darken(0.05, colors.black)};
-//     position: fixed;
-//     bottom: 0;
-//     z-index: 10;
-//     width: 100%;
-//   `};
-// `;
-
 const Logo = styled.h2`
   text-transform: uppercase;
   font-weight: 400;
   color: ${colors.brightwhite};
   text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
-  margin: 1em 0;
+  padding: 1em 0;
+  margin: 0;
   text-align: center;
   line-height: 1.2;
   font-size: 2.5rem;
@@ -71,28 +50,31 @@ const Logo = styled.h2`
   flex-direction: column;
   position: relative;
 
-  img {
+  &:after {
+    content: '';
+    display: block;
+    background: url(${JJMark}) no-repeat;
+    background-position: center;
+    background-size: 4em;
+    opacity: 0.5;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
     position: absolute;
-    max-width: 6em;
-    max-height: 3.5em;
-    margin: -0.5em 1em;
     z-index: 0;
-    opacity: 0.25;
   }
 
   ${mediaMax.tablet`
     width: 100%;
-    margin: .2em 0;
+    padding: .2em 0;
     font-size: 1.5rem;
     flex-direction: row;
     justify-content: center;
 
-    img {
-      top: 2px;
-      left: 16px;
-      max-width: 2em;
-      max-height: 1em;
-      margin: 0;
+    &:after {
+      background-position: 1rem;
+      background-size: 1.5em;
       opacity: 1;
     }
   `};
@@ -124,6 +106,13 @@ const Tagline = styled.h3`
   margin: 0;
   white-space: nowrap;
   ${mediaMax.tablet`display: none`};
+`;
+
+const LogoLink = styled(Link)`
+  display: block;
+  width: 100%;
+  text-decoration: none;
+  color: inherit;
 `;
 
 class Sidebar extends Component {
@@ -167,11 +156,12 @@ class Sidebar extends Component {
     return (
       <LeftColumn>
         <Top>
-          <Logo>
-            <img src={JJMark} alt="Jordan Janzen Logo mark" />
-            <div>JORDAN</div>
-            <div>JANZEN</div>
-          </Logo>
+          <LogoLink to="/">
+            <Logo>
+              <div>JORDAN</div>
+              <div>JANZEN</div>
+            </Logo>
+          </LogoLink>
           <Tagline>Never Stop Learning</Tagline>
         </Top>
         {!this.props.isMobile ? (
@@ -181,16 +171,6 @@ class Sidebar extends Component {
             logout={this.props.logout}
           />
         ) : null}
-        {/* <Bottom className={this.state.open ? 'open' : null}>
-          <Navigation
-            navType="main-nav"
-            uid={this.props.uid}
-            onClick={() => this.setState({ open: false })}
-          />
-          <div className="end">
-            {!this.props.uid ? this.renderLogin() : this.renderLogout()}
-          </div>
-        </Bottom> */}
       </LeftColumn>
     );
   }
