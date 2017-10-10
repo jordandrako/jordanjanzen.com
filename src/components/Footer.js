@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { darken } from 'polished';
+import { Transition } from 'react-transition-group';
 
 import { colors } from '../theme/variables';
-import { mediaMax } from '../theme/style-utils';
+import { mediaMin, mediaMax } from '../theme/style-utils';
 import Navigation from './Navigation';
 import Button from './Button';
 import SocialButton from './SocialButton';
@@ -11,87 +13,116 @@ import SocialButton from './SocialButton';
 const Bottom = styled.footer`
   display: flex;
   flex-direction: column;
-  order: 2;
   flex-grow: 1;
   overflow-y: auto;
   background: ${darken(0.05, colors.black)};
   justify-content: space-between;
-  transition: all 0.3s ease-in-out;
-
-  .end {
-    align-self: center;
-    margin: 1em;
-
-    ul {
-      list-style-type: none;
-      padding: 0;
-      margin: 0;
-
-      li {
-        padding: 0.5em 1.5em;
-      }
-    }
-  }
 
   ${mediaMax.tablet`
     box-shadow: 0 -4px ${darken(0.05, colors.black)};
-    order: 3;
-    z-index: 10;
     max-height: 60px;
     padding-right: 40px;
     overflow: hidden;
+    z-index: 10;
+  `};
+`;
 
-    .end {
-      background: ${colors.black};
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      margin: 0;
-      width: 2em;
-      height: 60px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+const OverflowButton = styled.button`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 10px;
+  height: 60px;
+  padding: 1em;
+  display: flex;
+  background: transparent;
+  border: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  outline: none;
 
-      &.open {
-        flex-direction: column;
-        align-items: flex-end;
-        width: auto;
-        height: auto;
-        padding-top: 1em;
-      }
+  span {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: ${colors.lightwhite};
+  }
+`;
 
-      .overflow-menu {
-        width: 10px;
-        height: 60px;
-        padding: 1em;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-around;
+const OverflowOverlay = styled.div`
+  display: none;
+  ${mediaMax.tablet`
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    width: 100%;
+  `};
+`;
 
-        span {
-          width: 5px;
-          height: 5px;
-          border-radius: 50%;
-          background: ${colors.lightwhite};
-        }
-      }
+const OverflowMenu = styled.div`
+  background: ${colors.black};
+  position: absolute;
+  bottom: 64px;
+  right: -60px;
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    padding: 1em;
+
+    li {
+      margin-bottom: 0.5em;
     }
+  }
+
+  &.entering,
+  &.exited {
+    right: -60px;
+    opacity: 0;
+  }
+
+  &.entered,
+  &.exiting {
+    right: 0;
+    opacity: 1;
+  }
+
+  ${mediaMin.tablet`
+    position: relative;
+    bottom: auto;
+    padding: 0;
+    background: transparent;
+
+
   `};
 `;
 
 class Footer extends Component {
   constructor(props) {
     super(props);
+    this.toggleOverflow = this.toggleOverflow.bind(this);
     this.renderLogin = this.renderLogin.bind(this);
     this.renderLogout = this.renderLogout.bind(this);
 
     this.state = {
-      open: false,
+      overflowOpen: !this.props.isMobile,
       activePage: null,
     };
+  }
+
+  toggleOverflow() {
+    this.setState({ overflowOpen: !this.state.overflowOpen });
   }
 
   renderLogin() {
@@ -121,45 +152,58 @@ class Footer extends Component {
       </Button>
     );
   }
+
   render() {
     const loginButton = !this.props.uid
       ? this.renderLogin()
       : this.renderLogout();
+    const { overflowOpen } = this.state;
+
     return (
       <Bottom>
-        <Navigation
-          navType="main-nav"
-          uid={this.props.uid}
-          onClick={() => this.setState({ open: false })}
-        />
-        <div className={this.state.open ? 'open end' : 'end'}>
-          {this.state.open ? (
-            <ul>
-              <li>
-                <SocialButton social="github" wide />
-              </li>
-              <li>
-                <SocialButton social="twitter" wide />
-              </li>
-              <li>
-                <SocialButton social="linkedin" wide />
-              </li>
-              <li>{loginButton}</li>
-            </ul>
-          ) : null}
-
-          <div
-            className="overflow-menu"
-            onClick={() => this.setState({ open: !this.state.open })}
-          >
+        <Navigation navType="main-nav" uid={this.props.uid} />
+        {overflowOpen ? (
+          <OverflowOverlay onClick={() => this.toggleOverflow()} />
+        ) : null}
+        <Transition timeout={200} in={overflowOpen} mountOnEnter unmountOnExit>
+          {(status) => (
+            <OverflowMenu className={status}>
+              <ul>
+                <li>
+                  <SocialButton social="github" wide />
+                </li>
+                <li>
+                  <SocialButton social="twitter" wide />
+                </li>
+                <li>
+                  <SocialButton social="linkedin" wide />
+                </li>
+                <li>{loginButton}</li>
+              </ul>
+            </OverflowMenu>
+          )}
+        </Transition>
+        {this.props.isMobile ? (
+          <OverflowButton onClick={() => this.toggleOverflow()}>
             <span />
             <span />
             <span />
-          </div>
-        </div>
+          </OverflowButton>
+        ) : null}
       </Bottom>
     );
   }
 }
+
+Footer.propTypes = {
+  uid: PropTypes.string,
+  isMobile: PropTypes.bool.isRequired,
+  login: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired,
+};
+
+Footer.defaultProps = {
+  uid: null,
+};
 
 export default Footer;

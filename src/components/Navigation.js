@@ -14,7 +14,7 @@ const NavList = styled.ul`
 
   ${mediaMax.tablet`
     display: flex;
-    justify-content: space-evenly
+    justify-content: space-around;
   `} li {
     ${mediaMax.tablet`
       display: inline-block;
@@ -38,14 +38,22 @@ const Link = styled(NavLink)`
   border-top: 4px solid ${darken(0.05, colors.black)};
   text-transform: uppercase;
   font-size: 0.8rem;
-
-  &.active {
-    border-color: ${colors.lightblue};
-  }
+  opacity: 0.8;
 
   i.fa {
     padding-right: 0.5em;
     font-size: 1.15em;
+    color: ${colors.blue};
+  }
+
+  &.active {
+    color: ${colors.lightwhite};
+    border-color: ${colors.lightblue};
+    opacity: 1;
+
+    i.fa {
+      color: ${colors.lightblue};
+    }
   }
 
   ${mediaMin.tablet`
@@ -56,6 +64,7 @@ const Link = styled(NavLink)`
     border: none;
     font-size: 1.15em;
     font-family: ${typography.monospace};
+    opacity: 1;
 
     i.fa {
       display: none;

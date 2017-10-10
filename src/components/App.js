@@ -248,6 +248,7 @@ class App extends Component {
         {this.state.isMobile ? (
           <Footer
             uid={this.state.uid}
+            isMobile={this.state.isMobile}
             login={this.authenticate}
             logout={this.logout}
           />

@@ -167,6 +167,7 @@ class Sidebar extends Component {
         {!this.props.isMobile ? (
           <Footer
             uid={this.props.uid}
+            isMobile={this.props.isMobile}
             login={this.props.login}
             logout={this.props.logout}
           />
