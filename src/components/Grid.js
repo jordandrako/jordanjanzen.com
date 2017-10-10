@@ -14,16 +14,18 @@ export const MainContainer = styled.main`
 `;
 
 export const Main = styled.div`
-  padding: 1em;
+  padding: 2em;
   flex-grow: 1;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
   ${mediaMax.tablet`
     overflow-y: initial
+    padding: 1.5em 1em;
   `};
 `;
 
 export const Row = styled.section`
   max-width: 1000px;
+  margin-bottom: 2.5em;
 `;

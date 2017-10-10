@@ -23,11 +23,16 @@ const Background = (props) => {
 const Btn = styled.button`
   border: none;
   padding: ${(props) =>
-    props.arrows ? '0.25em 0.8em 0.25em 1.5em' : '.25em .7em'};
+    props.arrows ? '0.25em 0.8em 0.25em 1.5em' : '.5em .8em'};
   position: relative;
   color: ${BtnColor};
   font-family: ${typography.monospace};
   background: ${Background};
+  display: flex;
+  justify-content: space-around;
+
+  opacity: ${(props) => (props.type === 'secondary' ? 0.75 : 1)};
+  transform: translateY(0);
 
   width: ${(props) => (props.wide ? '100%' : 'auto')};
   font-size: ${(props) => {
@@ -38,10 +43,23 @@ const Btn = styled.button`
     }
     return '1.1rem';
   }};
-  index: 10;
+
+  transition: all 0.25s ease-in-out;
+
+  &:hover {
+    opacity: 1;
+    transform: translateY(-1px);
+  }
+
   &.disabled {
     background: ${colors.grey};
     color: ${colors.black};
+  }
+
+  i.fa {
+    padding-right: 0.75em;
+    margin-right: auto;
+    align-self: flex-start;
   }
 
   :before,
@@ -60,6 +78,7 @@ const Btn = styled.button`
     background: ${(props) => props.arrows || BtnColor};
     left: -0.6em;
   }
+
   :after {
     transform: translateY(-50%) scaleX(0.75) rotate(45deg);
     background: ${Background};
