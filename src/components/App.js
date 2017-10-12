@@ -66,6 +66,7 @@ class App extends Component {
       projects: localStorage.getItem('projects'),
       skills: localStorage.getItem('skills'),
     };
+
     if (localStorageRef) {
       this.setState({
         todos: JSON.parse(localStorageRef.todos),

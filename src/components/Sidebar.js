@@ -14,6 +14,7 @@ const LeftColumn = styled.aside`
   background: ${colors.black};
   color: ${colors.white};
   height: 100%;
+  min-width: 280px;
   display: flex;
   flex: 1;
   flex-direction: column;

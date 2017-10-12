@@ -27,8 +27,6 @@ const Title = styled.header`
       align-items: center;
       color: ${colors.white};
 
-      ${mediaMax.tablet`display: none`};
-
       h1,
       h4 {
         display: inline-block;
@@ -71,7 +69,6 @@ const Title = styled.header`
 
       ${mediaMax.tablet`
         display: inline-flex;
-        display: none;
         background: transparent;
         border: none;
         width: 100%;

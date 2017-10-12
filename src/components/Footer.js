@@ -20,7 +20,7 @@ const Bottom = styled.footer`
 
   ${mediaMax.tablet`
     box-shadow: 0 -4px ${darken(0.05, colors.black)};
-    max-height: 60px;
+    max-height: 50px;
     padding-right: 40px;
     overflow: hidden;
     z-index: 10;
@@ -32,8 +32,8 @@ const OverflowButton = styled.button`
   bottom: 0;
   right: 0;
   width: 10px;
-  height: 60px;
-  padding: 1em;
+  height: 50px;
+  padding: 0.75em 1em;
   display: flex;
   background: transparent;
   border: none;
@@ -67,7 +67,7 @@ const OverflowOverlay = styled.div`
 const OverflowMenu = styled.div`
   background: ${colors.black};
   position: absolute;
-  bottom: 64px;
+  bottom: 54px;
   right: -60px;
   opacity: 0;
   display: flex;
@@ -103,8 +103,6 @@ const OverflowMenu = styled.div`
     bottom: auto;
     padding: 0;
     background: transparent;
-
-
   `};
 `;
 
