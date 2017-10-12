@@ -1,21 +1,14 @@
 import React from 'react';
-import DocumentTitle from 'react-document-title';
 
-import { MainContainer, Main, Row } from '../Grid';
-import PageTitle from '../PageTitle';
+import { Page, Row } from '../Grid';
 import CodeLoader from '../../images/codeLoader.svg';
 
 const Home = () => (
-  <DocumentTitle title="Jordan Janzen">
-    <MainContainer>
-      <PageTitle title="Home" />
-      <Main>
-        <Row>
-          <img src={CodeLoader} className="CodeLoader" alt="loading..." />
-        </Row>
-      </Main>
-    </MainContainer>
-  </DocumentTitle>
+  <Page title="Home">
+    <Row>
+      <img src={CodeLoader} className="CodeLoader" alt="loading..." />
+    </Row>
+  </Page>
 );
 
 export default Home;
