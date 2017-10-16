@@ -43,6 +43,7 @@ const Router = (props) => (
       render={() => (
         <AsyncPortfolio
           uid={props.uid}
+          skills={props.skills}
           projects={props.projects}
           addProject={props.addProject}
           updateProject={props.updateProject}
