@@ -1,51 +1,52 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link, Route } from 'react-router-dom';
+import styled from 'styled-components';
 
 import { Page, Row } from '../Grid';
 import AddProjectForm from '../AddProjectForm';
+import Project from '../Project';
+
+// import { colors } from '../../theme/variables';
+
+const ListOfProjects = styled.ul`
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+`;
 
 const Portfolio = (props) => (
   <Page title="Portfolio">
+    <Row>
+      <h2>This is my portfolio</h2>
+      <ListOfProjects>
+        {Object.keys(props.projects).map((key) => (
+          <Project
+            key={key}
+            index={key}
+            details={props.projects[key]}
+            uid={props.uid}
+            updateProject={props.updateProject}
+          />
+        ))}
+      </ListOfProjects>
+    </Row>
     {props.uid ? (
       <Row>
-        <AddProjectForm addProject={props.addProject} />
+        <AddProjectForm addProject={props.addProject} skills={props.skills} />
       </Row>
     ) : null}
-    <Row>
-      <ul>
-        <li>
-          <Link to="/portfolio/a">Project</Link>
-        </li>
-        <li>
-          <Link to="/portfolio/b">Project</Link>
-        </li>
-        <li>
-          <Link to="/portfolio/c">Project</Link>
-        </li>
-        <li>
-          <Link to="/portfolio/d">Project</Link>
-        </li>
-        <li>
-          <Link to="/portfolio/e">Project</Link>
-        </li>
-        <li>
-          <Link to="/portfolio/f">Project</Link>
-        </li>
-      </ul>
-    </Row>
-    <Row>
-      <Route
-        match="portfolio/:projectId"
-        render={(state) => <p>This is Project {state.match.params.projectId}</p>}
-      />
-    </Row>
   </Page>
 );
 
 Portfolio.propTypes = {
   uid: PropTypes.string,
   addProject: PropTypes.func.isRequired,
+  updateProject: PropTypes.func.isRequired,
+  projects: PropTypes.object.isRequired,
+  skills: PropTypes.object.isRequired,
 };
 
 Portfolio.defaultProps = {

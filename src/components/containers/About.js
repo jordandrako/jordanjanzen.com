@@ -1,23 +1,71 @@
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import { Page, Row } from '../Grid';
+import AddSkillForm from '../AddSkillForm';
 
-const About = () => (
-  <Page title="About">
-    <Row>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam quis
-        vitae sequi sit dicta, ipsam nobis aliquid! Inventore dolore modi
-        mollitia, maxime dolor illo! Quibusdam laboriosam quidem asperiores vero
-        rerum quisquam ratione error soluta ipsa qui porro quasi quis, quos
-        nostrum assumenda exercitationem, cum facilis saepe ipsum voluptate?
-        Laboriosam temporibus dicta minima, dolorem a aperiam unde doloribus
-        natus assumenda provident commodi officia mollitia hic exercitationem
-        animi recusandae necessitatibus, deserunt accusamus id excepturi maiores
-        velit explicabo? Vitae incidunt quidem esse libero.
-      </p>
-    </Row>
-  </Page>
-);
+class About extends Component {
+  constructor(props) {
+    super(props);
+    this.removeSkill = this.removeSkill.bind(this);
+  }
+
+  removeSkill(e, key) {
+    this.props.removeSkill(key);
+  }
+
+  render() {
+    const { skills } = this.props;
+
+    return (
+      <Page title="About">
+        <Row>
+          <h2>My Skills</h2>
+          <ul>
+            {Object.keys(skills).map((key) => (
+              <li key={key}>
+                <img
+                  src={skills[key].icon}
+                  alt={`${skills[key].name.replace(' ', '-')}-icon`}
+                  width={40}
+                  height={40}
+                  align="left"
+                />
+                <p>
+                  <strong>{skills[key].name}</strong>
+                </p>
+                <p>Confidence:</p>
+                <progress value={skills[key].confidence} max="1">
+                  {skills[key].confidence * 100} %
+                </progress>
+                {this.props.uid ? (
+                  <button onClick={(e) => this.removeSkill(e, key)}>
+                    &times;
+                  </button>
+                ) : null}
+              </li>
+            ))}
+          </ul>
+        </Row>
+        {this.props.uid ? (
+          <Row>
+            <AddSkillForm addSkill={this.props.addSkill} />
+          </Row>
+        ) : null}
+      </Page>
+    );
+  }
+}
+
+About.propTypes = {
+  uid: PropTypes.string,
+  skills: PropTypes.object.isRequired,
+  addSkill: PropTypes.func.isRequired,
+  removeSkill: PropTypes.func.isRequired,
+};
+
+About.defaultProps = {
+  uid: null,
+};
 
 export default About;
