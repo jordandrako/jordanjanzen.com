@@ -7,7 +7,9 @@ import AddTodoForm from '../AddTodoForm';
 import Todo from '../Todo';
 
 const ListOfTodos = styled.ul`
+  list-style-type: none;
   padding: 0;
+  margin: 0;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
