@@ -15,10 +15,17 @@ class AddProjectForm extends Component {
     e.preventDefault();
     const project = {
       name: this.name.value,
+      short_desc: this.short_desc.value,
+      long_desc: this.long_desc.value,
       category: this.category.value,
-      desc: this.desc.value,
+      skills: this.skills.value,
+      image: this.image.value,
       link: encodeURI(this.link.value),
-      complete: false,
+      client: {
+        name: this.client_name.value,
+        logo: this.client_logo.value,
+        industry: this.client_industry.value,
+      },
     };
     this.props.addProject(project);
     this.projectForm.reset();
@@ -42,7 +49,7 @@ class AddProjectForm extends Component {
               }}
               type="text"
               name="name"
-              placeholder="Project"
+              placeholder="Project Name"
               required
             />
             <select
@@ -56,18 +63,50 @@ class AddProjectForm extends Component {
             >
               <option>Select Category</option>
               <option value="design">Design</option>
-              <option value="component">Component</option>
-              <option value="quality">Quality</option>
-              <option value="backend">Backend</option>
+              <option value="development">Development</option>
+              <option value="landing-page">Landing Page</option>
+            </select>
+            <select
+              ref={(input) => {
+                this.skills = input;
+              }}
+              multiple="multiple"
+              name="skills"
+              placeholder="Project Skills"
+              required
+            >
+              <option>Select Skills (Ctrl + Click)</option>
+              {Object.keys(this.props.skills).map((key) => (
+                <option key={key} value={this.props.skills[key].name}>
+                  {this.props.skills[key].name}
+                </option>
+              ))}
             </select>
             <textarea
               ref={(input) => {
-                this.desc = input;
+                this.short_desc = input;
               }}
               type="text"
-              name="desc"
-              placeholder="Project Description"
+              name="short_desc"
+              placeholder="Project Short Description"
               required
+            />
+            <textarea
+              ref={(input) => {
+                this.long_desc = input;
+              }}
+              type="text"
+              name="long_desc"
+              placeholder="Project Long Description"
+              required
+            />
+            <input
+              ref={(input) => {
+                this.image = input;
+              }}
+              type="text"
+              name="image"
+              placeholder="Project image"
             />
             <input
               ref={(input) => {
@@ -76,6 +115,31 @@ class AddProjectForm extends Component {
               type="text"
               name="link"
               placeholder="Project link"
+            />
+            <p>Client info:</p>
+            <input
+              ref={(input) => {
+                this.client_name = input;
+              }}
+              type="text"
+              name="client_name"
+              placeholder="Client Name"
+            />
+            <input
+              ref={(input) => {
+                this.client_industry = input;
+              }}
+              type="text"
+              name="client_industry"
+              placeholder="Industry"
+            />
+            <input
+              ref={(input) => {
+                this.client_logo = input;
+              }}
+              type="text"
+              name="client_logo"
+              placeholder="Logo"
             />
             <Button type="success" arrows={colors.lightwhite}>
               + Add Project
@@ -89,6 +153,7 @@ class AddProjectForm extends Component {
 
 AddProjectForm.propTypes = {
   addProject: PropTypes.func.isRequired,
+  skills: PropTypes.object.isRequired,
 };
 
 export default AddProjectForm;
