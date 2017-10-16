@@ -63,8 +63,23 @@ export function getFileExtension() {
   return rando(fileExtensions);
 }
 
-export function truncate(string, length = 20) {
+export function truncate(string, length = 20, endsIn = '...') {
   return string.length > length + 3
-    ? `${string.substring(0, length - 3)}...`
+    ? `${string.substring(0, length - 3)}${endsIn}`
     : string;
+}
+
+export function getSelectValues(select) {
+  const result = [];
+  const options = select && select.options;
+  let opt;
+
+  for (let i = 0, iLen = options.length; i < iLen; i++) {
+    opt = options[i];
+
+    if (opt.selected) {
+      result.push(opt.value || opt.text);
+    }
+  }
+  return result;
 }
