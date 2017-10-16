@@ -1,8 +1,8 @@
 module.exports = {
   project1: {
     name: 'This app',
-    desc: 'My simple portfolilo.',
-    category: 'dev',
+    short_desc: 'My simple portfolilo.',
+    category: 'development',
     client: {
       name: 'Me',
       industry: 'Media',
@@ -13,8 +13,8 @@ module.exports = {
   },
   project2: {
     name: 'Google home project',
-    desc: 'Made my own cardboard google home',
-    category: 'dev',
+    short_desc: 'Made my own cardboard google home',
+    category: 'development',
     client: {
       name: 'Me',
       industry: 'Media',
@@ -25,7 +25,7 @@ module.exports = {
   },
   project3: {
     name: 'Branded some client',
-    desc: 'Arrows going in and out on click',
+    short_desc: 'Arrows going in and out on click',
     category: 'design',
     client: {
       name: 'Some Client',
