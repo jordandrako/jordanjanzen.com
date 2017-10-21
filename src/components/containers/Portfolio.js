@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { Page, Row } from '../Grid';
 import AddProjectForm from '../AddProjectForm';
 import Project from '../Project';
 
+import { Page, Row } from '../../theme/grid';
 // import { colors } from '../../theme/variables';
 
 const ListOfProjects = styled.ul`

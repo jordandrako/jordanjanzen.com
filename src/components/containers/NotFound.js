@@ -1,18 +1,24 @@
 import React from 'react';
-import DocumentTitle from 'react-document-title';
+import { Link } from 'react-router-dom';
 
-import { MainContainer, Main, Row } from '../Grid';
-import PageTitle from '../PageTitle';
+import Banner from '../Banner';
+
+import { Page, Row } from '../../theme/grid';
 
 const NotFound = () => (
-  <DocumentTitle title="Jordan Janzen | Not Found">
-    <MainContainer>
-      <PageTitle title="404 Not Found" />
-      <Main>
-        <Row />
-      </Main>
-    </MainContainer>
-  </DocumentTitle>
+  <Page title="404">
+    <Row>
+      <Banner type="error">Sorry, I couldn't find that page.</Banner>
+      <p>
+        Think something should be here or maybe you clicked on a bugged{' '}
+        <span role="img" aria-label="bug">
+          🐛
+        </span>{' '}
+        link?<br />
+        <Link to="/">Contact me.</Link>
+      </p>
+    </Row>
+  </Page>
 );
 
 export default NotFound;
