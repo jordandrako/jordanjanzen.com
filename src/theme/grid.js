@@ -29,13 +29,12 @@ export const Main = styled.div`
 `;
 
 export const Row = styled.section`
-  padding: ${(props) => (props.full ? '2em  0 2.5em' : '2em 2em 2.5em')};
+  margin: ${(props) => (props.full ? '2em  0 2.5em' : '2em 2em 2.5em')};
   ${(props) =>
     props.child
       ? `
-  padding: 0;
-  margin-bottom: 2em;`
-      : null} max-width: 1200px;
+  margin: 0 0 2em;`
+      : null} max-width: 1000px;
   ${mediaMax.tablet`
     padding: ${(props) => (props.full ? `1.5em 0 2em` : '1.5em 1em 2em')};
     ${(props) => (props.child ? 'padding: 0; margin-bottom: 2em' : null)};
@@ -51,6 +50,10 @@ Row.defaultProps = {
   full: false,
   child: false,
 };
+
+export const Hero = styled(Row)`
+  margin: 0;
+`;
 
 export const Page = (props) => (
   <DocumentTitle

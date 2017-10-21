@@ -55,13 +55,6 @@ const Client = styled.div`
   font-size: 0.8em;
 `;
 
-const ClientLogo = styled.img`
-  width: 80px;
-  height: 80px;
-  border: 5px double ${colors.black};
-  margin-right: 1em;
-`;
-
 class Project extends Component {
   constructor() {
     super();
@@ -83,11 +76,7 @@ class Project extends Component {
 
   render() {
     const { details, index } = this.props;
-    const {
-      name: clientName,
-      industry: clientIndustry,
-      logo: clientLogo,
-    } = details.client;
+    const { name: clientName, industry: clientIndustry } = details.client;
 
     return (
       <Item key={index} onClick={() => this.showSingle(index)}>
@@ -95,7 +84,6 @@ class Project extends Component {
           <ProjectTitle>{details.name}</ProjectTitle>
         </Thumbnail>
         <Client>
-          <ClientLogo src={clientLogo} />
           <p>
             For: {toTitleCase(clientName)}
             <br />

@@ -11,7 +11,7 @@ const Alert = styled.div`
   background: ${(props) => {
     const type = props.type;
     if (type === 'alert') {
-      return colors.yellow;
+      return colors.lightyellow;
     } else if (type === 'success') {
       return colors.green;
     } else if (type === 'error') {

@@ -9,8 +9,9 @@ export const colors = {
   magenta: '#c678dd',
   green: '#98c379',
   yellow: '#d19a66',
-  white: '#abb2bf',
-  lightwhite: '#e7e7e7',
+  lightyellow: '#F2C249',
+  white: '#D3DAE0',
+  lightwhite: '#E1E9F0',
 };
 
 export const typography = {
@@ -20,7 +21,7 @@ export const typography = {
 
 export const theme = {
   siteBackground: colors.lightwhite,
-  primaryColor: colors.blue,
+  primaryColor: colors.lightblue,
   secondaryColor: colors.red,
   textColor: colors.black,
   linkColor: colors.cyan,
