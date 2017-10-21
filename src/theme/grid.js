@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import DocumentTitle from 'react-document-title';
 
-import PageTitle from './PageTitle';
+import PageTitle from '../components/PageTitle';
 
-import { mediaMax } from '../theme/style-utils';
+import { mediaMax } from './style-utils';
 
 export const MainContainer = styled.main`
   flex: 4;
@@ -19,24 +19,47 @@ export const MainContainer = styled.main`
 `;
 
 export const Main = styled.div`
-  padding: 2em;
   flex-grow: 1;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
   ${mediaMax.tablet`
     overflow-y: initial
-    padding: 1.5em 1em;
   `};
 `;
 
 export const Row = styled.section`
-  max-width: 1000px;
-  margin-bottom: 2.5em;
+  padding: ${(props) => (props.full ? '2em  0 2.5em' : '2em 2em 2.5em')};
+  ${(props) =>
+    props.child
+      ? `
+  padding: 0;
+  margin-bottom: 2em;`
+      : null} max-width: 1200px;
+  ${mediaMax.tablet`
+    padding: ${(props) => (props.full ? `1.5em 0 2em` : '1.5em 1em 2em')};
+    ${(props) => (props.child ? 'padding: 0; margin-bottom: 2em' : null)};
+  `};
 `;
 
+Row.propTypes = {
+  full: PropTypes.bool,
+  child: PropTypes.bool,
+};
+
+Row.defaultProps = {
+  full: false,
+  child: false,
+};
+
 export const Page = (props) => (
-  <DocumentTitle title={`Jordan Janzen | ${props.title}`}>
+  <DocumentTitle
+    title={
+      props.title !== 'Home'
+        ? `${props.title} | Jordan Janzen`
+        : 'Jordan Janzen'
+    }
+  >
     <MainContainer>
       <PageTitle title={props.title} ext={props.ext} />
       <Main>{props.children}</Main>
