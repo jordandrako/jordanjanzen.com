@@ -39,7 +39,8 @@ const Top = styled.section`
 
 const Logo = styled.h2`
   text-transform: uppercase;
-  font-weight: 400;
+  font-family: ${typography.monospace};
+  font-weight: 700;
   color: ${colors.brightwhite};
   text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
   padding: 1em 0;
@@ -80,18 +81,11 @@ const Logo = styled.h2`
     }
   `};
 
-  div {
+  span {
+    letter-spacing: 0.1em;
     padding: 0 1em;
     z-index: 1;
     ${mediaMax.tablet`padding: 0 .2em`};
-  }
-
-  div:first-child {
-    letter-spacing: 1px;
-  }
-
-  div:last-child {
-    letter-spacing: 1.6px;
   }
 `;
 
@@ -159,8 +153,8 @@ class Sidebar extends Component {
         <Top>
           <LogoLink to="/">
             <Logo>
-              <div>JORDAN</div>
-              <div>JANZEN</div>
+              <span>JORDAN</span>
+              <span>JANZEN</span>
             </Logo>
           </LogoLink>
           <Tagline>Never Stop Learning</Tagline>
@@ -179,6 +173,7 @@ class Sidebar extends Component {
 }
 
 Sidebar.propTypes = {
+  isMobile: PropTypes.bool.isRequired,
   uid: PropTypes.string,
   login: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired,
