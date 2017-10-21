@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { Page, Row } from '../Grid';
 import AddTodoForm from '../AddTodoForm';
 import Todo from '../Todo';
+
+import { Page, Row } from '../../theme/grid';
 
 const ListOfTodos = styled.ul`
   list-style-type: none;
@@ -15,66 +16,122 @@ const ListOfTodos = styled.ul`
   justify-content: space-between;
 `;
 
-const TodoList = (props) => (
-  <Page title="Todo">
-    <Row>
-      <AddTodoForm addTodo={props.addTodo} />
-    </Row>
+const ShowComplete = styled.input`
+  display: inline;
+  margin: 0.5em;
+`;
 
-    <Row>
-      <h3>Checklist</h3>
-      <ListOfTodos className="todo-list">
-        {Object.keys(props.todos).map((key) => (
+class TodoList extends Component {
+  constructor(props) {
+    super(props);
+    this.toggleShowComplete = this.toggleShowComplete.bind(this);
+    this.renderTodo = this.renderTodo.bind(this);
+
+    this.state = {
+      showComplete: false,
+    };
+  }
+
+  toggleShowComplete() {
+    this.setState({ showComplete: !this.state.showComplete });
+  }
+
+  renderTodo(showComplete) {
+    return Object.keys(this.props.todos).map((key) => {
+      if (showComplete) {
+        return (
           <Todo
             key={key}
             index={key}
-            details={props.todos[key]}
-            updateTodo={props.updateTodo}
-            removeTodo={props.removeTodo}
+            details={this.props.todos[key]}
+            updateTodo={this.props.updateTodo}
+            removeTodo={this.props.removeTodo}
           />
-        ))}
-      </ListOfTodos>
-    </Row>
+        );
+      } else if (!this.props.todos[key].complete) {
+        return (
+          <Todo
+            key={key}
+            index={key}
+            details={this.props.todos[key]}
+            updateTodo={this.props.updateTodo}
+            removeTodo={this.props.removeTodo}
+          />
+        );
+      }
+      return null;
+    });
+  }
 
-    <Row>
-      <h3>Inspiration</h3>
-      <ul>
-        <li>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="http://sambedingfield.com/"
-          >
-            Sam Bedingfield
-          </a>
-        </li>
-        <li>
-          <a target="_blank" rel="noopener noreferrer" href="http://wesbos.com">
-            Wes Bos
-          </a>
-        </li>
-        <li>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="http://ivesvh.com/"
-          >
-            Ives van Hoorne
-          </a>
-        </li>
-        <li>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://line25.com/inspiration/designer-portfolio-websites"
-          >
-            Line 25 list of 30 portfolios
-          </a>
-        </li>
-      </ul>
-    </Row>
-  </Page>
-);
+  render() {
+    return (
+      <Page title="Todo List">
+        <Row>
+          <AddTodoForm addTodo={this.props.addTodo} />
+        </Row>
+
+        <Row>
+          <h2>My Todos</h2>
+          <form>
+            <ShowComplete
+              ref={(input) => {
+                this.todoForm = input;
+              }}
+              type="checkbox"
+              name="show-complete"
+              checked={this.state.showComplete}
+              onChange={() => this.toggleShowComplete()}
+            />
+            <label htmlFor="show-complete">Show completed todos?</label>
+          </form>
+          <ListOfTodos>{this.renderTodo(this.state.showComplete)}</ListOfTodos>
+        </Row>
+
+        <Row>
+          <h3>Inspiration</h3>
+          <ul>
+            <li>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="http://sambedingfield.com/"
+              >
+                Sam Bedingfield
+              </a>
+            </li>
+            <li>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="http://wesbos.com"
+              >
+                Wes Bos
+              </a>
+            </li>
+            <li>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="http://ivesvh.com/"
+              >
+                Ives van Hoorne
+              </a>
+            </li>
+            <li>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://line25.com/inspiration/designer-portfolio-websites"
+              >
+                Line 25 list of 30 portfolios
+              </a>
+            </li>
+          </ul>
+        </Row>
+      </Page>
+    );
+  }
+}
 
 TodoList.propTypes = {
   todos: PropTypes.object.isRequired,
