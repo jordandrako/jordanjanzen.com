@@ -30,20 +30,16 @@ export function getFileExtension() {
     '.html',
     '.md',
     '.php',
-    '.cf',
-    '.lol',
     '.csv',
     '.jsx',
     '.db',
     '.ini',
-    '.java',
     '.css',
     '.sh',
     '.txt',
-    '.asp',
     '.xml',
     '.scss',
-    '.coffee',
+    '.styl',
     '.sql',
     '.bat',
     '.rss',
@@ -52,12 +48,14 @@ export function getFileExtension() {
     '.json',
     '.lua',
     '.py',
-    '.vb',
-    '.java',
+    // Some fun ones
+    '.coffee',
+    '.lol',
     // Some bonus emojis for fun
     ' ⚛',
     ' ☕',
     ' 🔥',
+    ' 🕸',
   ];
 
   return rando(fileExtensions);
