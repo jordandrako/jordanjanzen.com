@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import DocumentTitle from 'react-document-title';
 import styled from 'styled-components';
 
-import { MainContainer, Main, Row } from '../Grid';
 import PageTitle from '../PageTitle';
 import Banner from '../Banner';
+import StyledLoader from '../StyledLoader';
 
-import CodeLoader from '../../images/codeLoader.svg';
+import { MainContainer, Main, Row } from '../../theme/grid';
 
 const Load = styled(Main)`
   align-items: center;
@@ -22,7 +22,7 @@ const Loading = ({ isLoading }) => {
         <MainContainer>
           <PageTitle title="Loading..." ext={false} />
           <Load>
-            <img src={CodeLoader} className="CodeLoader" alt="loading..." />
+            <StyledLoader />
           </Load>
         </MainContainer>
       </DocumentTitle>

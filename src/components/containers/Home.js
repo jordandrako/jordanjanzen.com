@@ -1,12 +1,14 @@
 import React from 'react';
+import styled from 'styled-components';
 
-import { Page, Row } from '../Grid';
-import CodeLoader from '../../images/codeLoader.svg';
+import { Page, Row, Hero } from '../../theme/grid';
+import StyledLoader from '../StyledLoader';
 
 const Home = () => (
   <Page title="Home">
+    <Hero />
     <Row>
-      <img src={CodeLoader} className="CodeLoader" alt="loading..." />
+      <StyledLoader />
     </Row>
   </Page>
 );
