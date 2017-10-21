@@ -23,7 +23,6 @@ class AddProjectForm extends Component {
       link: encodeURI(this.link.value),
       client: {
         name: this.client_name.value,
-        logo: this.client_logo.value,
         industry: this.client_industry.value,
       },
     };
@@ -132,14 +131,6 @@ class AddProjectForm extends Component {
               type="text"
               name="client_industry"
               placeholder="Industry"
-            />
-            <input
-              ref={(input) => {
-                this.client_logo = input;
-              }}
-              type="text"
-              name="client_logo"
-              placeholder="Logo"
             />
             <Button type="success" arrows={colors.lightwhite}>
               + Add Project
