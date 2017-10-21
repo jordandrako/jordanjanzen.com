@@ -84,6 +84,25 @@ const Title = styled.header`
   }
 `;
 
+const CloseLink = styled(Link)`
+  border-bottom: none;
+
+  .close {
+    opacity: 0.7;
+    color: ${colors.red};
+    background: transparent;
+    transition: all 0.15s ease-in;
+    border: none;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+`;
+
 const fileExtention = getFileExtension();
 const PageTitle = (props) => {
   const ext = props.ext === true && fileExtention;
@@ -95,9 +114,9 @@ const PageTitle = (props) => {
         <li>
           <i className="fa fa-file-code-o file" aria-hidden="true" />
           <h1>{title}</h1>
-          <Link to="/">
+          <CloseLink to="/">
             <button className="fa fa-times-circle close" aria-hidden="true" />
-          </Link>
+          </CloseLink>
         </li>
       </ul>
     </Title>

@@ -91,6 +91,16 @@ class About extends Component {
             ) : null}
           </Row>
         </Row>
+        <Row>
+          <h3>A bit about me</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat
+            consequatur labore voluptate ut voluptatum porro ex doloribus ad,
+            molestias sed! Ducimus molestias cum incidunt eaque cupiditate,
+            mollitia delectus asperiores voluptatum ipsum quibusdam, similique
+            beatae ea facere praesentium libero provident placeat.
+          </p>
+        </Row>
       </Page>
     );
   }

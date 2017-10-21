@@ -88,7 +88,7 @@ class TodoList extends Component {
         </Row>
 
         <Row>
-          <h3>Inspiration</h3>
+          <h2>Inspiration</h2>
           <ul>
             <li>
               <a

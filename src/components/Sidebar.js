@@ -108,6 +108,7 @@ const LogoLink = styled(Link)`
   width: 100%;
   text-decoration: none;
   color: inherit;
+  border-bottom: none;
 `;
 
 class Sidebar extends Component {

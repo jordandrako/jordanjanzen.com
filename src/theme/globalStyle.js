@@ -39,19 +39,6 @@ injectGlobal`
     ${mediaMax.tablet`font-size: 16px`};
     margin: 0;
     padding: 0;
-
-    &::-webkit-scrollbar {
-      width: 1em;
-    }
-
-    &::-webkit-scrollbar-track {
-      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background-color: darkgrey;
-      outline: 1px solid slategrey;
-    }
   }
 
   img {
@@ -69,8 +56,7 @@ injectGlobal`
   a {
     color: ${theme.textColor};
     text-decoration: none;
-    border-bottom: 1px solid ${theme.primaryColor};
-  }
+    border-bottom: 2px solid ${theme.secondaryColor};
 
   @media only screen and (min-width: 800px) {
     .mobile {

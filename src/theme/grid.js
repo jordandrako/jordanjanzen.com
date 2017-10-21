@@ -6,6 +6,7 @@ import DocumentTitle from 'react-document-title';
 import PageTitle from '../components/PageTitle';
 
 import { mediaMax } from './style-utils';
+import { theme } from './variables';
 
 export const MainContainer = styled.main`
   flex: 4;
@@ -26,18 +27,33 @@ export const Main = styled.div`
   ${mediaMax.tablet`
     overflow-y: initial
   `};
+
+  a {
+    line-height: 0.85em;
+    display: inline-block;
+    text-shadow:
+      2px 2px ${theme.siteBackground},
+      2px -2px ${theme.siteBackground},
+      -2px 2px ${theme.siteBackground},
+      -2px -2px ${theme.siteBackground};
+    }
+  }
 `;
 
 export const Row = styled.section`
-  margin: ${(props) => (props.full ? '2em  0 2.5em' : '2em 2em 2.5em')};
-  ${(props) =>
-    props.child
-      ? `
-  margin: 0 0 2em;`
-      : null} max-width: 1000px;
+  max-width: 1000px;
+  margin: ${(props) => (props.full ? '0  0 2.5em' : '0 2em 2.5em')};
+  ${(props) => (props.child ? 'margin: 0 0 2em' : null)};
+
+  &:first-child {
+    ${(props) => (props.child ? 'margin-top: 0' : 'margin-top: 2em')};
+  }
+
   ${mediaMax.tablet`
-    padding: ${(props) => (props.full ? `1.5em 0 2em` : '1.5em 1em 2em')};
-    ${(props) => (props.child ? 'padding: 0; margin-bottom: 2em' : null)};
+    margin: ${(props) => (props.full ? `0 0 2em` : '0 1em 2em')};
+    &:first-child {
+      ${(props) => (props.child ? 'margin-top: 0' : 'margin-top: 1.5em')};
+    }
   `};
 `;
 
