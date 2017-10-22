@@ -49,13 +49,13 @@ const SkillsColumn = styled.ul`
 class About extends Component {
   constructor(props) {
     super(props);
-    this.removeSkill = this.removeSkill.bind(this);
     this.renderList = this.renderList.bind(this);
+    // this.removeSkill = this.removeSkill.bind(this);
   }
 
-  removeSkill(key) {
-    this.props.removeSkill(key);
-  }
+  // removeSkill(key) {
+  //   this.props.removeSkill(key);
+  // }
 
   renderList(category) {
     return Object.keys(this.props.skills).map((key) => {
@@ -110,7 +110,7 @@ About.propTypes = {
   uid: PropTypes.string,
   skills: PropTypes.object.isRequired,
   addSkill: PropTypes.func.isRequired,
-  removeSkill: PropTypes.func.isRequired,
+  // removeSkill: PropTypes.func.isRequired,
 };
 
 About.defaultProps = {

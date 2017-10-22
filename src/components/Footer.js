@@ -52,6 +52,7 @@ const OverflowButton = styled.button`
 
 const OverflowOverlay = styled.div`
   display: none;
+
   ${mediaMax.tablet`
     display: block;
     position: fixed;
@@ -75,6 +76,7 @@ const OverflowMenu = styled.div`
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease;
+
   ul {
     margin: 0;
     padding: 0;
@@ -159,7 +161,7 @@ class Footer extends Component {
 
     return (
       <Bottom>
-        <Navigation navType="main-nav" uid={this.props.uid} />
+        <Navigation uid={this.props.uid} />
         {overflowOpen ? (
           <OverflowOverlay onClick={() => this.toggleOverflow()} />
         ) : null}

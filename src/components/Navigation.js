@@ -28,7 +28,7 @@ const NavList = styled.ul`
   }
 `;
 
-const Link = styled(NavLink)`
+const Link = styled(NavLink) `
   display: block;
   color: ${colors.white};
   font-family: Roboto, ${typography.monospace};
@@ -107,10 +107,10 @@ const Link = styled(NavLink)`
     }
   `};
 `;
-// TODO: Hide todo page unless logged in
+
 const Navigation = (props) => (
   <nav>
-    <NavList className={props.navType}>
+    <NavList>
       <li>
         <Link exact to="/">
           <i className="fa fa-usd" aria-hidden="true" />
@@ -142,7 +142,6 @@ const Navigation = (props) => (
 );
 
 Navigation.propTypes = {
-  navType: PropTypes.string.isRequired,
   uid: PropTypes.string,
 };
 

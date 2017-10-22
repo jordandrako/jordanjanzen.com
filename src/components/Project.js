@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-// import { transparentize } from 'polished';
 
 import { toTitleCase } from '../helpers';
 import { typography, colors } from '../theme/variables';
@@ -70,6 +69,7 @@ class Project extends Component {
     this.props.updateProject(key, updatedProp);
   }
 
+  // TODO: Show ProjectSingle component handler
   showSingle(key) {
     alert(`Showing ${key}`);
   }

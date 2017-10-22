@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// import { goBack } from 'react-router-dom';
 import styled from 'styled-components';
 import { Transition } from 'react-transition-group';
 
@@ -117,7 +116,6 @@ class Banner extends Component {
     );
 
     const bannerContent = <p>{this.props.children}</p>;
-    // const bannerContent = !closed ? <p>{this.props.children}</p> : null;
 
     return (
       <Transition timeout={200} in={closed}>
@@ -140,13 +138,11 @@ class Banner extends Component {
 Banner.propTypes = {
   children: PropTypes.node.isRequired,
   type: PropTypes.string,
-  actionText: PropTypes.string,
   title: PropTypes.string,
 };
 
 Banner.defaultProps = {
   type: 'info',
-  actionText: 'Hide',
   title: null,
 };
 
