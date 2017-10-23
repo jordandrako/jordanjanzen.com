@@ -36,6 +36,7 @@ const Link = styled(NavLink) `
   transition: all 0.3s ease-in-out;
   padding: 1em 0.5em;
   border-top: 4px solid ${darken(0.05, colors.black)};
+  border-bottom: none;
   text-transform: uppercase;
   font-size: 0.8rem;
   opacity: 0.8;

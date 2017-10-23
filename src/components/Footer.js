@@ -134,7 +134,7 @@ class Footer extends Component {
         wide
         onClick={() => this.props.login()}
       >
-        Log In
+        Log In with Google
       </Button>
     );
   }
