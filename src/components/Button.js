@@ -22,6 +22,7 @@ const Background = (props) => {
 
 const Btn = styled.button`
   border: none;
+  border-radius: ${(props) => props.round ? '5em' : null};
   padding: ${(props) =>
     props.arrows ? '0.25em 0.8em 0.25em 1.5em' : '.5em .8em'};
   position: relative;
@@ -94,6 +95,7 @@ const Button = (props) => (
     large={props.large}
     color={props.color}
     arrows={props.arrows}
+    round={props.round}
     bg={props.bg}
     onClick={props.onClick}
   >
@@ -120,6 +122,7 @@ Button.propTypes = {
   large: PropTypes.bool,
   wide: PropTypes.bool,
   arrows: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  round: PropTypes.bool,
   bg: PropTypes.string,
   onClick: PropTypes.func,
 };
@@ -134,6 +137,7 @@ Button.defaultProps = {
   large: false,
   wide: false,
   arrows: false,
+  round: false,
   onClick: null,
 };
 
