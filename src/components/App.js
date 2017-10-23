@@ -21,19 +21,23 @@ class App extends Component {
   constructor() {
     super();
     this.updateSize = this.updateSize.bind(this);
+
     // Authentication
     this.authenticate = this.authenticate.bind(this);
     this.authHandler = this.authHandler.bind(this);
     this.logout = this.logout.bind(this);
+
     // Database management
     this.addTodo = this.addTodo.bind(this);
     this.updateTodo = this.updateTodo.bind(this);
     this.removeTodo = this.removeTodo.bind(this);
+
     this.addProject = this.addProject.bind(this);
     this.updateProject = this.updateProject.bind(this);
-    this.removeProject = this.removeProject.bind(this);
+    // this.removeProject = this.removeProject.bind(this);
+
     this.addSkill = this.addSkill.bind(this);
-    this.removeSkill = this.removeSkill.bind(this);
+    // this.removeSkill = this.removeSkill.bind(this);
 
     this.state = {
       todos: {},
@@ -122,23 +126,19 @@ class App extends Component {
       if (!data.owner) {
         rootRef.set({
           ...data,
-          owner: {
-            uid,
-            provider: 'google',
-          },
+          owner: uid,
         });
         this.setState({
           uid,
           owner: data.owner || uid,
         });
-      }
-      if (data.owner.uid === uid) {
+      } else if (data.owner === uid) {
         this.setState({
           uid,
-          owner: data.owner.uid || uid,
+          owner: data.owner || uid,
         });
       } else {
-        console.warn('You are not the owner of this site.');
+        console.error('You are not the owner of this site.');
       }
     });
   }
