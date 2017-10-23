@@ -30,8 +30,10 @@
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.14",
     "react-transition-group": "^2.2.1",
+    "sha1": "^1.1.1",
     "styled-components": "^2.2.1",
-    "styled-normalize": "^2.2.1"
+    "styled-normalize": "^2.2.1",
+    "superagent": "^3.7.0"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
