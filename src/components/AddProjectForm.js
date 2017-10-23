@@ -1,14 +1,64 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 import StyledForm from './StyledForm';
 import Button from './Button';
+import Dropzone from './Dropzone';
+
 import { colors } from '../theme/variables';
+
+const UploadedImageList = styled.ul`
+list-style: none;
+margin: 0;
+padding: 0;
+display: flex;
+flex-wrap: wrap;
+align-items: center;
+`;
+
+const UploadedImage = styled.li`
+margin: 0 1em 1em 0;
+max-width: calc(33.3% - 1em);
+padding: 1em;
+border: 2px solid ${colors.black};
+background: ${colors.lightblack};
+position: relative;
+
+button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 25px;
+  margin: 0;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  opacity: 0.7;
+  color: ${colors.red};
+  background: ${colors.black};
+  transition: all 0.15s ease-in;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+`
 
 class AddProjectForm extends Component {
   constructor() {
     super();
     this.createProject = this.createProject.bind(this);
+    this.addImage = this.addImage.bind(this);
+    this.removeImage = this.removeImage.bind(this);
+
+    this.state = {
+      images: {},
+    }
   }
 
   createProject(e) {
@@ -19,7 +69,7 @@ class AddProjectForm extends Component {
       long_desc: this.long_desc.value,
       category: this.category.value,
       skills: this.skills.value,
-      image: this.image.value,
+      images: { ...this.state.images },
       link: encodeURI(this.link.value),
       client: {
         name: this.client_name.value,
@@ -28,9 +78,40 @@ class AddProjectForm extends Component {
     };
     this.props.addProject(project);
     this.projectForm.reset();
+    const state = { ...this.state }
+    this.setState({
+      ...state,
+      images: {},
+    })
+  }
+
+  addImage(image) {
+    const images = { ...this.state.images };
+    const key = image.id;
+    images[key] = image;
+    this.setState({ images });
+  }
+
+  removeImage(key) {
+    const images = { ...this.state.images };
+    delete images[key];
+    this.setState({ images });
   }
 
   render() {
+    const list = Object.keys(this.state.images).map((key) => (
+      <UploadedImage key={key} >
+        <img
+          src={this.state.images[key].url}
+          alt={this.state.images[key].name}
+        />
+        <button
+          onClick={() => this.removeImage(key)}
+          className="fa fa-times-circle close"
+        />
+      </UploadedImage>
+    ))
+
     return (
       <div>
         <h3>Add a new project</h3>
@@ -101,14 +182,6 @@ class AddProjectForm extends Component {
             />
             <input
               ref={(input) => {
-                this.image = input;
-              }}
-              type="text"
-              name="image"
-              placeholder="Project image"
-            />
-            <input
-              ref={(input) => {
                 this.link = input;
               }}
               type="text"
@@ -137,6 +210,11 @@ class AddProjectForm extends Component {
             </Button>
           </form>
         </StyledForm>
+        <Dropzone addImage={this.addImage} accept="image/jpeg, image/png" />
+
+        <UploadedImageList>
+          {list}
+        </UploadedImageList>
       </div>
     );
   }

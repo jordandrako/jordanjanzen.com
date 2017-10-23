@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import CloudImage from './CloudImage';
+
 import { toTitleCase } from '../helpers';
 import { typography, colors } from '../theme/variables';
 
@@ -14,7 +16,7 @@ const Item = styled.li`
   flex-grow: 1;
 `;
 
-const Thumbnail = styled.div`
+const Thumbnail = styled(CloudImage) `
   width: 100%;
   padding: 2em 1em;
   background: ${colors.black};
@@ -23,18 +25,6 @@ const Thumbnail = styled.div`
   justify-content: center;
   z-index: 1;
   position: relative;
-
-  &:after {
-    content: '';
-    display: block;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    background: url(${(props) => props.src}) no-repeat;
-    background-size: cover;
-    background-position: center;
-    opacity: 0.25;
-  }
 
   * {
     z-index: 1;
@@ -64,7 +54,7 @@ class Project extends Component {
   handleChange(e, key) {
     const updatedProp = {
       [e.target.name]:
-        e.target.type === 'checkbox' ? e.target.checked : e.target.value,
+      e.target.type === 'checkbox' ? e.target.checked : e.target.value,
     };
     this.props.updateProject(key, updatedProp);
   }
@@ -76,11 +66,14 @@ class Project extends Component {
 
   render() {
     const { details, index } = this.props;
+    const firstImage = Object.keys(details.images)[0];
+    const { id: imageId, format: imageFormat, name: imageName } = details.images[firstImage];
     const { name: clientName, industry: clientIndustry } = details.client;
 
+    // TODO: fix inline styles breaking styled component.
     return (
       <Item key={index} onClick={() => this.showSingle(index)}>
-        <Thumbnail src={details.image}>
+        <Thumbnail bg id={imageId} format={imageFormat} name={imageName} crop='limit' width="400" background="rgb:000">
           <ProjectTitle>{details.name}</ProjectTitle>
         </Thumbnail>
         <Client>
@@ -92,7 +85,7 @@ class Project extends Component {
           </p>
         </Client>
         <p>{details.short_desc}</p>
-      </Item>
+      </Item >
     );
   }
 }
