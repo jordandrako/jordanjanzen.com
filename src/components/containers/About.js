@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import AddSkillForm from '../AddSkillForm';
+import Button from '../Button';
 
 import { Page, Row } from '../../theme/grid';
 import { colors, typography } from '../../theme/variables';
@@ -50,17 +51,28 @@ class About extends Component {
   constructor(props) {
     super(props);
     this.renderList = this.renderList.bind(this);
-    // this.removeSkill = this.removeSkill.bind(this);
+    this.removeSkill = this.removeSkill.bind(this);
   }
 
-  // removeSkill(key) {
-  //   this.props.removeSkill(key);
-  // }
+  removeSkill(key) {
+    this.props.removeSkill(key);
+  }
 
   renderList(category) {
     return Object.keys(this.props.skills).map((key) => {
       if (this.props.skills[key].category === category) {
-        return <li key={key}>{this.props.skills[key].name}</li>;
+        return (
+          <li key={key}>
+            {this.props.skills[key].name}
+            <Button
+              small
+              type="secondary"
+              onClick={() => this.removeSkill(key)}
+            >
+              &times;
+            </Button>
+          </li>
+        );
       }
       return null;
     });
@@ -110,7 +122,7 @@ About.propTypes = {
   uid: PropTypes.string,
   skills: PropTypes.object.isRequired,
   addSkill: PropTypes.func.isRequired,
-  // removeSkill: PropTypes.func.isRequired,
+  removeSkill: PropTypes.func.isRequired,
 };
 
 About.defaultProps = {

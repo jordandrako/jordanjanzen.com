@@ -166,20 +166,16 @@ class App extends Component {
 
   removeTodo(key) {
     const todos = { ...this.state.todos };
-    // delete todos[key];
     todos[key] = null;
     this.setState({ todos });
   }
 
   addProject(project) {
-    // update our state
-    // copy our state
     const projects = { ...this.state.projects };
-    // add in our new project
     const timestamp = Date.now();
     projects[`project-${timestamp}`] = project;
     // set state
-    this.setState({ projects }); // same as this.setState({ projects: projects })
+    this.setState({ projects });
   }
 
   updateProject(key, updatedProject) {
@@ -197,14 +193,9 @@ class App extends Component {
   }
 
   addSkill(skill) {
-    // update our state
-    // copy our state
     const skills = { ...this.state.skills };
-    // add in our new skill
-    const timestamp = Date.now();
-    skills[`skill-${timestamp}`] = skill;
-    // set state
-    this.setState({ skills }); // same as this.setState({ skills: skills })
+    skills[`skill-${skill.name}`] = skill;
+    this.setState({ skills });
   }
 
   updateSkill(key, updatedSkill) {

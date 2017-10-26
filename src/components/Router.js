@@ -33,6 +33,7 @@ const Router = (props) => (
           uid={props.uid}
           skills={props.skills}
           addSkill={props.addSkill}
+          removeSkill={props.removeSkill}
         />
       )}
     />
@@ -79,8 +80,8 @@ Router.propTypes = {
   // removeProject: PropTypes.func.isRequired,
 
   addSkill: PropTypes.func.isRequired,
+  removeSkill: PropTypes.func.isRequired,
   // updateSkill: PropTypes.func.isRequired,
-  // removeSkill: PropTypes.func.isRequired,
 
   addTodo: PropTypes.func.isRequired,
   updateTodo: PropTypes.func.isRequired,
