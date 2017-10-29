@@ -8,6 +8,7 @@ const StyledForm = styled.div`
   flex-grow: 1;
   padding: 1em;
   border: 5px double ${colors.black};
+  margin: 0.25em 0 1.25em;
 
   form {
     display: flex;
