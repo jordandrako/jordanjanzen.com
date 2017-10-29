@@ -95,7 +95,7 @@ class Todo extends Component {
     this.renderTodo = this.renderTodo.bind(this);
   }
 
-  removeTodo(e, key) {
+  removeTodo(key) {
     this.props.removeTodo(key);
   }
 
@@ -134,7 +134,7 @@ class Todo extends Component {
             <div className="checkbox" />
             <p className="label">COMPLETE</p>
           </button>
-          <button className="remove" onClick={(e) => this.removeTodo(e, index)}>
+          <button className="remove" onClick={() => this.removeTodo(index)}>
             <div />
           </button>
         </div>
