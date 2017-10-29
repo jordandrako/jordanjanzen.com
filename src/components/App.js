@@ -8,6 +8,7 @@ import Footer from './Footer';
 
 import { colors } from '../theme/variables';
 import { sizes, mediaMax } from '../theme/style-utils';
+import { slugify } from '../helpers';
 
 const Wrapper = styled.div`
   display: flex;
@@ -37,7 +38,7 @@ class App extends Component {
     // this.removeProject = this.removeProject.bind(this);
 
     this.addSkill = this.addSkill.bind(this);
-    // this.removeSkill = this.removeSkill.bind(this);
+    this.removeSkill = this.removeSkill.bind(this);
 
     this.state = {
       todos: {},
@@ -194,7 +195,8 @@ class App extends Component {
 
   addSkill(skill) {
     const skills = { ...this.state.skills };
-    skills[`skill-${skill.name}`] = skill;
+    const name = slugify(skill.name);
+    skills[`skill-${name}`] = skill;
     this.setState({ skills });
   }
 
