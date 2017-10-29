@@ -47,6 +47,7 @@ injectGlobal`
 
   h1, h2, h3, h4, h5, p {
     margin-top: .1em;
+    margin-bottom: .8em;
   }
 
   p {
