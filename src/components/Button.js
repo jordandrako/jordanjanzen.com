@@ -20,9 +20,18 @@ const Background = (props) => {
   return theme.buttonColor;
 };
 
+const Round = (props) => {
+  if (props.circle || props.type === 'delete' || props.delete) {
+    return '100%';
+  } else if (props.pill) {
+    return '5em';
+  }
+  return 0;
+};
+
 const Btn = styled.button`
   border: none;
-  border-radius: ${(props) => props.round ? '5em' : null};
+  border-radius: ${Round};
   padding: ${(props) =>
     props.arrows ? '0.25em 0.8em 0.25em 1.5em' : '.5em .8em'};
   position: relative;
@@ -63,45 +72,58 @@ const Btn = styled.button`
     align-self: flex-start;
   }
 
-  :before,
-  :after {
+  &:before,
+  &:after {
     content: '';
     display: ${(props) => (props.arrows ? 'block' : 'none')};
     position: absolute;
     top: 50%;
     width: 1.2em;
     height: 1.2em;
-    transition: 0.2s ease-in;
+    transition: all 0.25s ease-in;
   }
 
-  :before {
+  &:before {
     transform: translateY(-50%) scaleX(0.75) rotate(45deg);
     background: ${(props) => props.arrows || BtnColor};
     left: -0.6em;
   }
 
-  :after {
+  &:after {
     transform: translateY(-50%) scaleX(0.75) rotate(45deg);
     background: ${Background};
     right: -0.6em;
   }
 `;
 
-const Button = (props) => (
-  <Btn
-    type={props.type}
-    wide={props.wide}
-    small={props.small}
-    large={props.large}
-    color={props.color}
-    arrows={props.arrows}
-    round={props.round}
-    bg={props.bg}
-    onClick={props.onClick}
-  >
-    {props.text || props.children}
-  </Btn>
-);
+const DelBtn = styled.button`
+  position: relative;
+  top: 3px;
+  font-size: 26px;
+  margin: 0 0.5em;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  opacity: 0.85;
+  color: ${colors.red};
+  background: ${colors.black};
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.25s ease;
+
+  &:hover {
+    opacity: 1;
+  }
+`;
+
+const Button = (props) => {
+  if (props.type === 'delete') {
+    return <DelBtn {...props} className="fa fa-times-circle close" />;
+  }
+  return <Btn {...props}>{props.text || props.children || 'Button'}</Btn>;
+};
 
 Button.propTypes = {
   type: PropTypes.oneOf([
@@ -110,6 +132,8 @@ Button.propTypes = {
     'login',
     'success',
     'warn',
+    'danger',
+    'delete',
     'submit',
   ]).isRequired,
   children: PropTypes.oneOfType([
@@ -122,9 +146,12 @@ Button.propTypes = {
   large: PropTypes.bool,
   wide: PropTypes.bool,
   arrows: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-  round: PropTypes.bool,
+  pill: PropTypes.bool,
+  circle: PropTypes.bool,
+  delete: PropTypes.bool,
   bg: PropTypes.string,
   onClick: PropTypes.func,
+  style: PropTypes.object,
 };
 
 Button.defaultProps = {
@@ -137,8 +164,11 @@ Button.defaultProps = {
   large: false,
   wide: false,
   arrows: false,
-  round: false,
+  pill: false,
+  circle: false,
+  delete: false,
   onClick: null,
+  style: null,
 };
 
 export default Button;

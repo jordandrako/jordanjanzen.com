@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { darken, lighten } from 'polished';
 
+import Button from './Button';
+
 import { toTitleCase, getFileExtension } from '../helpers';
 import { colors, typography } from '../theme/variables';
 import { mediaMax } from '../theme/style-utils';
@@ -40,21 +42,8 @@ const Title = styled.header`
       .file {
         color: ${colors.yellow};
       }
-
-      .close {
-        opacity: 0.7;
-        color: ${colors.red};
-        background: transparent;
-        transition: all 0.15s ease-in;
-        border: none;
-        margin: 0;
-        padding: 0;
-        cursor: pointer;
-        &:hover {
-          opacity: 1;
-        }
-      }
     }
+
     li:last-child {
       background: ${lighten(0.05, colors.black)};
       color: ${colors.lightwhite};
@@ -88,18 +77,8 @@ const CloseLink = styled(Link)`
   border-bottom: none;
 
   .close {
-    opacity: 0.7;
-    color: ${colors.red};
-    background: transparent;
-    transition: all 0.15s ease-in;
-    border: none;
     margin: 0;
-    padding: 0;
-    cursor: pointer;
-
-    &:hover {
-      opacity: 1;
-    }
+    transform: scale(0.8);
   }
 `;
 
@@ -115,7 +94,7 @@ const PageTitle = (props) => {
           <i className="fa fa-file-code-o file" aria-hidden="true" />
           <h1>{title}</h1>
           <CloseLink to="/">
-            <button className="fa fa-times-circle close" aria-hidden="true" />
+            <Button type="delete" aria-hidden="true" />
           </CloseLink>
         </li>
       </ul>

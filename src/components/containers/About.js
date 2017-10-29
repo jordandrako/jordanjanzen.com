@@ -64,13 +64,9 @@ class About extends Component {
         return (
           <li key={key}>
             {this.props.skills[key].name}
-            <Button
-              small
-              type="secondary"
-              onClick={() => this.removeSkill(key)}
-            >
-              &times;
-            </Button>
+            {this.props.uid ? (
+              <Button type="delete" onClick={() => this.removeSkill(key)} />
+            ) : null}
           </li>
         );
       }

@@ -11,6 +11,7 @@ import Button from './Button';
 import Dropzone from './Dropzone';
 
 import { colors } from '../theme/variables';
+import { Row } from '../theme/grid';
 
 const UploadedImageList = styled.ul`
   list-style: none;
@@ -29,27 +30,11 @@ const UploadedImage = styled.li`
   background: ${colors.lightblack};
   position: relative;
 
-  button {
+  .close {
     position: absolute;
     top: 5px;
     right: 5px;
-    font-size: 25px;
     margin: 0;
-    padding: 0;
-    width: 20px;
-    height: 20px;
-    line-height: 20px;
-    opacity: 0.7;
-    color: ${colors.red};
-    background: ${colors.black};
-    transition: all 0.15s ease-in;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-
-    &:hover {
-      opacity: 1;
-    }
   }
 `;
 
@@ -133,7 +118,8 @@ class AddProjectForm extends Component {
           src={this.state.images[key].url}
           alt={this.state.images[key].name}
         />
-        <button
+        <Button
+          type="delete"
           onClick={() => this.removeImage(key)}
           className="fa fa-times-circle close"
         />
@@ -244,7 +230,9 @@ class AddProjectForm extends Component {
             </Button>
           </form>
         </StyledForm>
-        <Dropzone addImage={this.addImage} accept="image/jpeg, image/png" />
+        <Row child>
+          <Dropzone addImage={this.addImage} accept="image/jpeg, image/png" />
+        </Row>
 
         <UploadedImageList>{list}</UploadedImageList>
       </div>

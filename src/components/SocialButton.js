@@ -9,10 +9,9 @@ const A = styled.a`
   color: inherit;
 `;
 
-const IconButton = styled(Button) `
+const IconButton = styled(Button)`
   display: flex;
   justify-content: space-between;
-  border: 3px solid;
 `;
 
 const SocialButton = (props) => {
@@ -56,7 +55,7 @@ const SocialButton = (props) => {
 
   return (
     <A href={link} target="_blank">
-      <IconButton type="secondary" bg={bg} color={color} wide={props.wide}>
+      <IconButton type="secondary" bg={bg} color={color} {...props}>
         <i className={`fa fa-${social}`} aria-hidden="true" /> {text}
       </IconButton>
     </A>
