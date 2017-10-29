@@ -4,7 +4,7 @@ import Dropzone from 'react-dropzone';
 import sha1 from 'sha1';
 import superagent from 'superagent';
 
-import cloudinaryApi from '../cloudinary';
+import cloudinaryApi from '../cloudinaryAPI';
 
 class ImageDropzone extends Component {
   constructor(props) {
@@ -13,7 +13,7 @@ class ImageDropzone extends Component {
   }
 
   uploadFile(files) {
-    console.log(files)
+    console.log(files);
     const file = files[0];
 
     const cloudName = 'jordan-janzen';
@@ -26,18 +26,18 @@ class ImageDropzone extends Component {
     const signature = sha1(paramsStr);
 
     const params = {
-      'api_key': cloudinaryApi.key,
-      'upload_preset': uploadPreset,
-      'signature': signature,
-      'timestamp': timestamp,
-    }
+      api_key: cloudinaryApi.key,
+      upload_preset: uploadPreset,
+      signature,
+      timestamp,
+    };
 
     const uploadRequest = superagent.post(url);
     uploadRequest.attach('file', file);
 
     Object.keys(params).forEach((key) => {
-      uploadRequest.field(key, params[key])
-    })
+      uploadRequest.field(key, params[key]);
+    });
 
     uploadRequest.end((err, resp) => {
       if (err) {
@@ -54,7 +54,7 @@ class ImageDropzone extends Component {
       };
 
       this.props.addImage(image);
-    })
+    });
   }
 
   render() {
@@ -71,6 +71,6 @@ class ImageDropzone extends Component {
 ImageDropzone.propTypes = {
   addImage: PropTypes.func.isRequired,
   accept: PropTypes.string.isRequired,
-}
+};
 
 export default ImageDropzone;
