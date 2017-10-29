@@ -1,14 +1,19 @@
 import styled from 'styled-components';
 
 import { colors, typography } from '../theme/variables';
+import { Row } from '../theme/grid';
 
-const StyledForm = styled.div`
+const StyledForm = styled(Row)`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   padding: 1em;
+  margin: 0 0 2em;
   border: 5px double ${colors.black};
-  margin: 0.25em 0 1.25em;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 
   form {
     display: flex;

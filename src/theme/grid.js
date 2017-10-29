@@ -43,13 +43,26 @@ export const Main = styled.div`
 export const Row = styled.section`
   max-width: 1000px;
   margin: ${(props) => (props.full ? '0  0 2.5em' : '0 2em 2.5em')};
-  ${(props) => (props.child ? 'margin: 0 0 2em' : null)};
 
   &:first-child {
-    ${(props) => (props.child ? 'margin-top: 0' : 'margin-top: 2em')};
+    margin-top: 2em;
   }
 
-  ${mediaMax.tablet`
+  ${(props) => {
+    if (props.child) {
+      return `
+        margin: 0 0 2em;
+
+        &:first-child {
+          margin-top: 0;
+        }
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      `;
+    }
+  }} ${mediaMax.tablet`
     margin: ${(props) => (props.full ? `0 0 2em` : '0 1em 2em')};
     &:first-child {
       ${(props) => (props.child ? 'margin-top: 0' : 'margin-top: 1.5em')};
