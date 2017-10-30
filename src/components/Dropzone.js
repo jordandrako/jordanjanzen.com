@@ -3,8 +3,29 @@ import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
 import sha1 from 'sha1';
 import superagent from 'superagent';
+import styled from 'styled-components';
+
+import { theme, typography } from '../theme/variables';
 
 import cloudinaryApi from '../cloudinaryAPI';
+
+const Zone = styled(Dropzone)`
+  height: 100px;
+  border: 3px dashed ${theme.textColor};
+  margin-bottom: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  &:before {
+    content: 'Upload Files Here';
+    font-family: ${typography.monospace};
+    font-weight: 700;
+    color: ${theme.textColor};
+    opacity: 0.7;
+  }
+`;
 
 class ImageDropzone extends Component {
   constructor(props) {
@@ -46,6 +67,7 @@ class ImageDropzone extends Component {
       }
 
       const uploaded = resp.body;
+      console.log(resp.body);
       const image = {
         id: uploaded.public_id,
         name: uploaded.original_filename,
@@ -61,7 +83,7 @@ class ImageDropzone extends Component {
     return (
       <div>
         <h4>Upload Images</h4>
-        <Dropzone onDrop={this.uploadFile} accept={this.props.accept} />
+        <Zone onDrop={this.uploadFile} accept={this.props.accept} />
         <h4>Uploaded Images</h4>
       </div>
     );
