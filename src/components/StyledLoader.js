@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import Button from './Button';
+
 import codeLoader from '../images/codeLoader.svg';
 import { colors } from '../theme/variables';
 
@@ -23,15 +25,13 @@ const Frame = styled.div`
   top: 0;
   z-index: 2;
 
-  &:after {
-    content: '\00d7';
-    color: ${colors.red};
-    display: block;
+  .close {
     position: absolute;
-    right: 5px;
-    top: 2px;
-    font-size: 24px;
-    line-height: 1;
+    right: 2px;
+    top: 4px;
+    margin: 0;
+    transform: scale(0.67);
+    cursor: progress;
   }
 `;
 
@@ -58,7 +58,9 @@ const Scrollbar = styled.div`
 
 const StyledLoader = () => (
   <Loader>
-    <Frame />
+    <Frame>
+      <Button type="delete" />
+    </Frame>
     <object type="image/svg+xml" data={codeLoader}>
       loading...
     </object>
