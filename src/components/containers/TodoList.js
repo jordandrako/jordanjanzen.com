@@ -80,9 +80,11 @@ class TodoList extends Component {
               type="checkbox"
               name="show-complete"
               checked={this.state.showComplete}
-              onChange={() => this.toggleShowComplete()}
+              onChange={this.toggleShowComplete}
             />
-            <label htmlFor="show-complete">Show completed todos?</label>
+            <label htmlFor="show-complete" onClick={this.toggleShowComplete}>
+              Show completed todos?
+            </label>
           </form>
           <ListOfTodos>{this.renderTodo(this.state.showComplete)}</ListOfTodos>
         </Row>
