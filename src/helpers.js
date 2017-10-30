@@ -72,7 +72,7 @@ export function getSelectValues(select) {
   const options = select && select.options;
   let opt;
 
-  for (let i = 0, iLen = options.length; i < iLen; i++) {
+  for (let i = 0, iLen = options.length; i < iLen; i += 1) {
     opt = options[i];
 
     if (opt.selected) {
