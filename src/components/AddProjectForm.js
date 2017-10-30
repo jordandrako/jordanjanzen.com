@@ -13,6 +13,8 @@ import Dropzone from './Dropzone';
 import { colors } from '../theme/variables';
 import { Row } from '../theme/grid';
 
+import { truncate } from '../helpers';
+
 const UploadedImageList = styled.ul`
   list-style: none;
   margin: 0;
@@ -49,26 +51,33 @@ class AddProjectForm extends Component {
 
     this.state = {
       images: {},
-      startDate: moment(),
       skillValues: [],
+      startDate: moment(),
     };
   }
 
   createProject(e) {
     e.preventDefault();
+    if (
+      Object.keys(this.state.images).length === 0 &&
+      this.state.images.constructor === Object
+    ) {
+      return alert('At least one image is required.');
+    }
     const project = {
       name: this.name.value,
-      short_desc: this.short_desc.value,
       long_desc: this.long_desc.value,
+      short_desc: this.short_desc.value || truncate(this.long_desc.value, 145),
       category: this.category.value,
-      date: this.state.startDate,
       skills: this.state.skillValues,
       images: this.state.images,
       link: encodeURI(this.link.value),
+      repo: encodeURI(this.repo.value),
       client: {
         name: this.client_name.value,
         industry: this.client_industry.value,
       },
+      date: this.state.startDate,
     };
     this.props.addProject(project);
     this.projectForm.reset();
@@ -76,6 +85,8 @@ class AddProjectForm extends Component {
     this.setState({
       ...state,
       images: {},
+      skillValues: [],
+      startDate: moment().day,
     });
   }
 
@@ -94,15 +105,15 @@ class AddProjectForm extends Component {
 
   handleChange(date) {
     const startDate = { ...this.state, startDate: date };
-    this.setState({ startDate });
+    this.setState({ ...startDate });
   }
 
-  handleValues(select) {
+  handleValues(e) {
     const result = [];
-    const options = select && select.options;
+    const options = e.target && e.target.options;
     let opt;
 
-    for (let i = 0; i < options.length; i++) {
+    for (let i = 0; i < options.length; i += 1) {
       opt = options[i];
       if (opt.selected) {
         result.push(opt.value || opt.text);
@@ -129,6 +140,7 @@ class AddProjectForm extends Component {
     return (
       <div>
         <h3>Add a new project</h3>
+
         <StyledForm>
           <form
             ref={(input) => {
@@ -155,16 +167,32 @@ class AddProjectForm extends Component {
               placeholder="Project Category"
               required
             >
-              <option>Select Category</option>
-              <option value="design">Design</option>
-              <option value="development">Development</option>
-              <option value="landing-page">Landing Page</option>
+              <optgroup label="Select Category">
+                <option value="design">Design</option>
+                <option value="development">Development</option>
+                <option value="landing-page">Landing Page</option>
+              </optgroup>
             </select>
             <DatePicker
+              fixedHeight
+              todayButton={'Today'}
               selected={this.state.startDate}
-              onChange={this.handleChange}
+              onChange={(e) => this.handleChange(e)}
+              showMonthDropdown
+              showYearDropdown
+              dropdownMode="select"
               required
             />
+            {/* <DatePicker
+              fixedHeight
+              todayButton={'Today'}
+              selected={this.state.startDate}
+              onChange={this.handleChange}
+              showMonthDropdown
+              showYearDropdown
+              dropdownMode="select"
+              required
+            /> */}
             <select
               ref={(input) => {
                 this.skills = input;
@@ -172,15 +200,41 @@ class AddProjectForm extends Component {
               multiple="multiple"
               name="skills"
               placeholder="Project Skills"
-              onChange={this.handleValues}
+              onChange={(e) => this.handleValues(e)}
+              size={Object.keys(this.props.skills).length + 4}
               required
             >
-              <option>Select Skills (Ctrl + Click)</option>
-              {Object.keys(this.props.skills).map((key) => (
-                <option key={key} value={this.props.skills[key].name}>
-                  {this.props.skills[key].name}
-                </option>
-              ))}
+              <option>Select skills (ctrl + click)</option>
+              <optgroup label="Core Skills">
+                {Object.keys(this.props.skills).map(
+                  (key) =>
+                    this.props.skills[key].category === 'core' && (
+                      <option key={key} value={this.props.skills[key].name}>
+                        {this.props.skills[key].name}
+                      </option>
+                    ),
+                )}
+              </optgroup>
+              <optgroup label="Library Skills">
+                {Object.keys(this.props.skills).map(
+                  (key) =>
+                    this.props.skills[key].category === 'library' && (
+                      <option key={key} value={this.props.skills[key].name}>
+                        {this.props.skills[key].name}
+                      </option>
+                    ),
+                )}
+              </optgroup>
+              <optgroup label="Design Skills">
+                {Object.keys(this.props.skills).map(
+                  (key) =>
+                    this.props.skills[key].category === 'design' && (
+                      <option key={key} value={this.props.skills[key].name}>
+                        {this.props.skills[key].name}
+                      </option>
+                    ),
+                )}
+              </optgroup>
             </select>
             <textarea
               ref={(input) => {
@@ -188,8 +242,7 @@ class AddProjectForm extends Component {
               }}
               type="text"
               name="short_desc"
-              placeholder="Project Short Description"
-              required
+              placeholder="Project Short Description (will default to truncated long description)"
             />
             <textarea
               ref={(input) => {
@@ -208,6 +261,14 @@ class AddProjectForm extends Component {
               name="link"
               placeholder="Project link"
             />
+            <input
+              ref={(input) => {
+                this.repo = input;
+              }}
+              type="text"
+              name="repo"
+              placeholder="Project repository"
+            />
             <p>Client info:</p>
             <input
               ref={(input) => {
@@ -225,16 +286,18 @@ class AddProjectForm extends Component {
               name="client_industry"
               placeholder="Industry"
             />
+            <Row child>
+              <Dropzone
+                addImage={this.addImage}
+                accept="image/jpeg, image/png"
+              />
+              <UploadedImageList>{list}</UploadedImageList>
+            </Row>
             <Button type="success" arrows={colors.lightwhite}>
               + Add Project
             </Button>
           </form>
         </StyledForm>
-        <Row child>
-          <Dropzone addImage={this.addImage} accept="image/jpeg, image/png" />
-        </Row>
-
-        <UploadedImageList>{list}</UploadedImageList>
       </div>
     );
   }
