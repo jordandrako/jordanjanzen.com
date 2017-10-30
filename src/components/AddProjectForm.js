@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import DatePicker from 'react-datepicker';
-import moment from 'moment';
+// import DatePicker from 'react-datepicker';
+// import moment from 'moment';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -46,13 +46,13 @@ class AddProjectForm extends Component {
     this.createProject = this.createProject.bind(this);
     this.addImage = this.addImage.bind(this);
     this.removeImage = this.removeImage.bind(this);
-    this.handleChange = this.handleChange.bind(this);
     this.handleValues = this.handleValues.bind(this);
+    // this.handleChange = this.handleChange.bind(this);
 
     this.state = {
       images: {},
       skillValues: [],
-      startDate: moment(),
+      // startDate: moment(),
     };
   }
 
@@ -77,7 +77,7 @@ class AddProjectForm extends Component {
         name: this.client_name.value,
         industry: this.client_industry.value,
       },
-      date: this.state.startDate,
+      // date: this.state.startDate,
     };
     this.props.addProject(project);
     this.projectForm.reset();
@@ -86,7 +86,7 @@ class AddProjectForm extends Component {
       ...state,
       images: {},
       skillValues: [],
-      startDate: moment().day,
+      // startDate: moment().day,
     });
   }
 
@@ -173,16 +173,6 @@ class AddProjectForm extends Component {
                 <option value="landing-page">Landing Page</option>
               </optgroup>
             </select>
-            <DatePicker
-              fixedHeight
-              todayButton={'Today'}
-              selected={this.state.startDate}
-              onChange={(e) => this.handleChange(e)}
-              showMonthDropdown
-              showYearDropdown
-              dropdownMode="select"
-              required
-            />
             {/* <DatePicker
               fixedHeight
               todayButton={'Today'}
