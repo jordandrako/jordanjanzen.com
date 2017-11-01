@@ -4,14 +4,14 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { adjustHue, transparentize } from 'polished';
 
-import { theme } from '../theme/variables';
+import { colors } from '../theme/variables';
 
 const Image = styled.div`
   background: ${(props) =>
       props.dim
         ? `linear-gradient(135deg,
-          ${transparentize(0.5, `${adjustHue(-30, theme.primaryColor)}`)} 0%,
-          ${transparentize(0.5, `${theme.primaryColor}`)}
+          ${transparentize(0.5, `${adjustHue(-30, colors.blue)}`)} 0%,
+          ${transparentize(0.5, `${colors.blue}`)}
           100%),`
         : null}
     url(${(props) => props.background}) no-repeat;
