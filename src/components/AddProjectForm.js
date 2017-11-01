@@ -267,6 +267,7 @@ class AddProjectForm extends Component {
               type="text"
               name="client_name"
               placeholder="Client Name"
+              required
             />
             <input
               ref={(input) => {
@@ -275,6 +276,7 @@ class AddProjectForm extends Component {
               type="text"
               name="client_industry"
               placeholder="Industry"
+              required
             />
             <Row child>
               <Dropzone

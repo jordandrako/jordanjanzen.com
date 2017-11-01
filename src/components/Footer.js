@@ -50,7 +50,7 @@ const OverflowButton = styled.button`
   }
 `;
 
-const OverflowOverlay = styled.div`
+const ClickOutside = styled.div`
   display: none;
 
   ${mediaMax.tablet`
@@ -163,7 +163,7 @@ class Footer extends Component {
       <Bottom>
         <Navigation uid={this.props.uid} />
         {overflowOpen ? (
-          <OverflowOverlay onClick={() => this.toggleOverflow()} />
+          <ClickOutside onClick={() => this.toggleOverflow()} />
         ) : null}
         <Transition timeout={200} in={overflowOpen} mountOnEnter unmountOnExit>
           {(status) => (

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Route } from 'react-router-dom';
 
 import AddProjectForm from '../AddProjectForm';
 import Project from '../Project';
@@ -20,51 +21,24 @@ const ListOfProjects = styled.ul`
 class Portfolio extends Component {
   constructor(props) {
     super(props);
-    this.showSingle = this.showSingle.bind(this);
-    this.closeSingle = this.closeSingle.bind(this);
-    this.renderSingle = this.renderSingle.bind(this);
 
     this.state = {
       category: 'all',
-      single: null,
     };
-  }
-
-  showSingle(key) {
-    this.setState({
-      ...this.state,
-      single: key,
-    });
-  }
-
-  closeSingle() {
-    this.setState({
-      ...this.state,
-      single: null,
-    });
-  }
-
-  renderSingle() {
-    const key = this.state.single;
-    const { details } = this.props.projects[key];
-
-    return <ProjectSingle details={details} />;
   }
 
   render() {
     return (
       <Page title="Portfolio">
         <Row>
-          <h2>This is my portfolio</h2>
           <ListOfProjects>
-            {Object.keys(this.props.projects).map((key) => (
+            {Object.keys(this.props.projects).reverse().map((key) => (
               <Project
                 key={key}
                 index={key}
                 details={this.props.projects[key]}
                 uid={this.props.uid}
                 updateProject={this.props.updateProject}
-                showSingle={this.showSingle}
               />
             ))}
           </ListOfProjects>
@@ -77,7 +51,17 @@ class Portfolio extends Component {
             />
           </Row>
         ) : null}
-        {this.state.single ? this.renderSingle : null}
+        <Route
+          exact
+          path="/portfolio/:projectId"
+          render={(props) => (
+            <ProjectSingle
+              uid={this.props.uid}
+              details={this.props.projects[props.match.params.projectId]}
+              index={props.match.params.projectId}
+              updateProject={this.props.updateProject}
+            />)}
+        />
       </Page>
     );
   }
