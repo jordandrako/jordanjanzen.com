@@ -8,8 +8,6 @@ const BtnColor = (props) => props.color || theme.buttonText;
 const Background = (props) => {
   if (props.bg) {
     return props.bg;
-  } else if (props.type === 'secondary') {
-    return colors.cyan;
   } else if (props.type === 'success' || props.type === 'submit') {
     return colors.green;
   } else if (props.type === 'warn') {
