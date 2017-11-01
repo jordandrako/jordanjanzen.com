@@ -23,6 +23,7 @@ injectGlobal`
 
   html {
     box-sizing: border-box;
+    font-size: 17px;
   }
 
   html, body, #root {
@@ -34,7 +35,6 @@ injectGlobal`
     font-family: ${typography.fontFamily};
     color: ${theme.textColor};
     background: ${theme.siteBackground};
-    font-size: 18px;
     line-height: 1.6;
     ${mediaMax.tablet`font-size: 16px`};
     margin: 0;

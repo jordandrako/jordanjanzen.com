@@ -9,7 +9,7 @@ import { Page, Row } from '../../theme/grid';
 import { colors, typography } from '../../theme/variables';
 import { mediaMin } from '../../theme/style-utils';
 
-const SkillsRow = styled(Row)`
+const SkillsRow = styled(Row) `
   display: flex;
   flex-wrap: wrap;
   margin-right: -2px;
@@ -39,10 +39,10 @@ const SkillsColumn = styled.ul`
     line-height: 1.5;
     padding: 0 1em;
     margin: 1em 0;
-    font-size: 0.85em;
+    font-size: 0.85rem;
 
     ${mediaMin.phone`
-      font-size: 0.75em;
+      font-size: 0.75rem;
     `};
   }
 `;

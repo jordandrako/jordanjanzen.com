@@ -43,7 +43,7 @@ const Link = styled(NavLink) `
 
   i.fa {
     padding-right: 0.5em;
-    font-size: 1.15em;
+    font-size: 1.15rem;
     color: ${colors.blue};
   }
 
@@ -63,7 +63,7 @@ const Link = styled(NavLink) `
     padding: 10px 15px;
     width: 100%;
     border: none;
-    font-size: 1.15em;
+    font-size: 1.15rem;
     font-family: ${typography.monospace};
     opacity: 1;
 

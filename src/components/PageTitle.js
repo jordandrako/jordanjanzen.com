@@ -65,7 +65,7 @@ const Title = styled.header`
         justify-content: space-between;
 
         h1 {
-          font-size: 1em;
+          font-size: 1rem;
         }
 
       `};
@@ -73,7 +73,7 @@ const Title = styled.header`
   }
 `;
 
-const CloseLink = styled(Link)`
+const CloseLink = styled(Link) `
   border-bottom: none;
 
   .close {
