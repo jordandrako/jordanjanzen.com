@@ -45,6 +45,10 @@ injectGlobal`
     max-width: 100%;
   }
 
+  h1, h2, h3, h4, h5 {
+    letter-spacing: .067em;
+  }
+
   h1, h2, h3, h4, h5, p {
     margin-top: .1em;
     margin-bottom: .8em;
