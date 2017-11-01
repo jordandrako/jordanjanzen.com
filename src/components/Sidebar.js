@@ -93,10 +93,11 @@ const Tagline = styled.h3`
   font-family: ${typography.monospace};
   color: ${colors.black};
   background: ${colors.lightblue};
-  padding: 4px 2em;
+  padding: 4px 1em;
   text-align: center;
   width: 100%;
   font-size: 1.1rem;
+  letter-spacing: 0;
   text-transform: lowercase;
   margin: 0;
   white-space: nowrap;
