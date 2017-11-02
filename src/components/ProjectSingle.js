@@ -6,9 +6,10 @@ import { Link } from 'react-router-dom';
 import CloudImage from './CloudImage';
 import Button from './Button';
 
-import { theme } from '../theme/variables';
+import { Row } from '../theme/grid';
+import { colors, theme, typography } from '../theme/variables';
 
-const ClickOutside = styled(Link)`
+const ClickOutside = styled(Link) `
   background: rgba(0,0,0,.5);
   position: fixed;
   top: 0;
@@ -23,13 +24,54 @@ const ClickOutside = styled(Link)`
 
 const Single = styled.div`
   position: fixed;
-  top: 5vh;
-  left: 5vw;
-  width: 90vw;
-  height: 90vh;
+  top: 8vh;
+  left: 8vw;
+  width: 84vw;
+  height: 84vh;
   background: ${theme.siteBackground};
-  border: 5px solid red;
+  border: 5px solid ${colors.black};
+  box-shadow: 0 0 9px #000;
   z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+const Frame = styled.div`
+  width: 100%;
+  padding: .5em;
+  background: ${colors.black};
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1em;
+
+  &:last-child {
+    margin-top: auto;
+    margin-bottom: 0;
+  }
+`;
+
+const Title = styled.h2`
+  font-family: ${typography.monospace};
+  color: ${colors.lightwhite};
+  font-size: 1.15rem;
+  margin: 0;
+  line-height: 1;
+`
+
+const Close = styled(Link) `
+  position: absolute;
+  top: 5px;
+  right: 8px;
+  border-bottom: 0;
+  margin: 0;
+  padding: 0;
+
+  button {
+    margin: 0;
+    padding: 0;
+  }
 `;
 
 class ProjectSingle extends Component {
@@ -42,7 +84,8 @@ class ProjectSingle extends Component {
   }
 
   render() {
-    const { index } = this.props;
+    const { details, index } = this.props;
+
     // this.setState({
     //   ...this.state,
     //   activeImage: id,
@@ -52,16 +95,23 @@ class ProjectSingle extends Component {
       <div key={index}>
         <ClickOutside to="/portfolio/" />
         <Single>
-          {/* <CloudImage
-            publicId={id}
-            format={format}
-            crop="crop"
-            width="800"
-            height="450"
-            gravity="center"
-            background="rgb:000"
-          /> */}
-          <Link to="/portfolio"><Button type="delete" /></Link>
+          <Frame>
+            <Title>{'Name'}</Title>
+            <Close to="/portfolio"><Button type="delete" /></Close>
+          </Frame>
+          <Row>
+            <p>hi</p>
+            {/* <CloudImage
+              publicId={id}
+              format={format}
+              crop="crop"
+              width="800"
+              height="450"
+              gravity="center"
+              background="rgb:000"
+            /> */}
+          </Row>
+          <Frame><Button small type="secondary">Previous</Button><Button small type="secondary">Next</Button></Frame>
         </Single>
       </div>
     );
@@ -69,8 +119,8 @@ class ProjectSingle extends Component {
 }
 
 ProjectSingle.propTypes = {
-  details: PropTypes.object.isRequired,
   index: PropTypes.string.isRequired,
+  projects: PropTypes.object.isRequired,
 };
 
 export default ProjectSingle;

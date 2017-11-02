@@ -58,6 +58,7 @@ class Portfolio extends Component {
             <ProjectSingle
               uid={this.props.uid}
               details={this.props.projects[props.match.params.projectId]}
+              projects={this.props.projects}
               index={props.match.params.projectId}
               updateProject={this.props.updateProject}
             />)}
