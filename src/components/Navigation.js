@@ -38,7 +38,7 @@ const Link = styled(NavLink) `
   border-top: 4px solid ${darken(0.05, colors.black)};
   border-bottom: none;
   text-transform: uppercase;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   opacity: 0.8;
 
   i.fa {
