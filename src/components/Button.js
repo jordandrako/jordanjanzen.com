@@ -95,9 +95,7 @@ const Btn = styled.button`
 `;
 
 const DelBtn = styled.button`
-  position: relative;
-  top: 3px;
-  font-size: 26px;
+  font-size: 20px;
   margin: 0 0.5em;
   padding: 0;
   width: 20px;
@@ -105,7 +103,7 @@ const DelBtn = styled.button`
   line-height: 20px;
   opacity: 0.85;
   color: ${colors.red};
-  background: ${colors.black};
+  background: transparent;
   border: none;
   border-radius: 50%;
   cursor: pointer;

@@ -78,7 +78,6 @@ const CloseLink = styled(Link) `
 
   .close {
     margin: 0;
-    transform: scale(0.67);
   }
 `;
 
