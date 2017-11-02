@@ -20,7 +20,7 @@ const Bottom = styled.footer`
 
   ${mediaMax.tablet`
     box-shadow: 0 -4px ${darken(0.05, colors.black)};
-    max-height: 50px;
+    flex-grow: 0;
     padding-right: 40px;
     overflow: hidden;
     z-index: 10;
