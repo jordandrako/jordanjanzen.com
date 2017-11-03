@@ -32,15 +32,17 @@ class Portfolio extends Component {
       <Page title="Portfolio">
         <Row>
           <ListOfProjects>
-            {Object.keys(this.props.projects).reverse().map((key) => (
-              <Project
-                key={key}
-                index={key}
-                details={this.props.projects[key]}
-                uid={this.props.uid}
-                updateProject={this.props.updateProject}
-              />
-            ))}
+            {Object.keys(this.props.projects)
+              .reverse()
+              .map((key) => (
+                <Project
+                  key={key}
+                  index={key}
+                  details={this.props.projects[key]}
+                  uid={this.props.uid}
+                  updateProject={this.props.updateProject}
+                />
+              ))}
           </ListOfProjects>
         </Row>
         {this.props.uid ? (
@@ -57,11 +59,13 @@ class Portfolio extends Component {
           render={(props) => (
             <ProjectSingle
               uid={this.props.uid}
-              details={this.props.projects[props.match.params.projectId]}
               projects={this.props.projects}
               index={props.match.params.projectId}
+              details={this.props.projects[props.match.params.projectId]}
               updateProject={this.props.updateProject}
-            />)}
+              {...props}
+            />
+          )}
         />
       </Page>
     );

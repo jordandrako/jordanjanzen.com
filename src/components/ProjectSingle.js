@@ -9,8 +9,8 @@ import Button from './Button';
 import { Row } from '../theme/grid';
 import { colors, theme, typography } from '../theme/variables';
 
-const ClickOutside = styled(Link) `
-  background: rgba(0,0,0,.5);
+const ClickOutside = styled(Link)`
+  background: rgba(0, 0, 0, 0.5);
   position: fixed;
   top: 0;
   left: 0;
@@ -30,7 +30,7 @@ const Single = styled.div`
   height: 84vh;
   background: ${theme.siteBackground};
   border: 5px solid ${colors.black};
-  box-shadow: 0 0 9px #000;
+  box-shadow: 0 -3px 0 ${theme.primaryColor}, 0 0 9px #000;
   z-index: 1000;
   display: flex;
   flex-direction: column;
@@ -39,7 +39,7 @@ const Single = styled.div`
 
 const Frame = styled.div`
   width: 100%;
-  padding: .5em;
+  padding: 0.5em;
   background: ${colors.black};
   display: flex;
   align-items: center;
@@ -58,9 +58,9 @@ const Title = styled.h2`
   font-size: 1.15rem;
   margin: 0;
   line-height: 1;
-`
+`;
 
-const Close = styled(Link) `
+const Close = styled(Link)`
   position: absolute;
   top: 5px;
   right: 8px;
@@ -85,42 +85,56 @@ class ProjectSingle extends Component {
 
   render() {
     const { details, index } = this.props;
+    // const { id, format } = details.images[this.state.activeImageIndex];
+    // const image = details.images;
 
+    // console.log(image);
     // this.setState({
     //   ...this.state,
     //   activeImage: id,
     // });
 
-    return (
-      <div key={index}>
-        <ClickOutside to="/portfolio/" />
-        <Single>
-          <Frame>
-            <Title>{'Name'}</Title>
-            <Close to="/portfolio"><Button type="delete" /></Close>
-          </Frame>
-          <Row>
-            <p>hi</p>
-            {/* <CloudImage
-              publicId={id}
-              format={format}
-              crop="crop"
-              width="800"
-              height="450"
-              gravity="center"
-              background="rgb:000"
-            /> */}
-          </Row>
-          <Frame><Button small type="secondary">Previous</Button><Button small type="secondary">Next</Button></Frame>
-        </Single>
-      </div>
-    );
+    if (details && index) {
+      return (
+        <div key={index}>
+          <ClickOutside to="/portfolio/" />
+          <Single>
+            <Frame>
+              <Title>{details.name || 'Name'}</Title>
+              <Close to="/portfolio">
+                <Button type="delete" />
+              </Close>
+            </Frame>
+            <Row>
+              {Object.keys(details.images).map((image) => (
+                <CloudImage
+                  publicId={details.images[image].id}
+                  format={details.images[image].format}
+                  width="800"
+                  height="450"
+                  crop="limit"
+                />
+              ))}
+            </Row>
+            <Frame>
+              <Button small type="secondary">
+                Previous
+              </Button>
+              <Button small type="secondary">
+                Next
+              </Button>
+            </Frame>
+          </Single>
+        </div>
+      );
+    }
+    return null;
   }
 }
 
 ProjectSingle.propTypes = {
   index: PropTypes.string.isRequired,
-  projects: PropTypes.object.isRequired,
+  details: PropTypes.object.isRequired,
 };
 
 export default ProjectSingle;
