@@ -56,7 +56,7 @@ const Btn = styled.button`
 
   &:hover {
     opacity: 1;
-    transform: translateY(-1px);
+    transform: translateY(-2px);
   }
 
   &.disabled {
@@ -68,6 +68,11 @@ const Btn = styled.button`
     padding-right: 0.75em;
     margin-right: auto;
     align-self: flex-start;
+  }
+
+  i.fa.right {
+    padding-right: 0;
+    padding-left: 0.75em;
   }
 
   &:before,
