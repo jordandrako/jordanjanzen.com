@@ -37,6 +37,7 @@ const Thumbnail = styled.section`
 const ProjectTitle = styled.h2`
   font-family: ${typography.monospace};
   font-size: 1.5rem;
+  text-align: center;
   text-transform: uppercase;
   margin: 0;
   background: ${colors.lightblue};

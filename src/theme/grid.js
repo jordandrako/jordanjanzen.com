@@ -82,6 +82,7 @@ Row.defaultProps = {
 
 export const Hero = styled(Row)`
   margin: 0;
+  margin-top: 0 !important;
 `;
 
 export const Page = (props) => (
