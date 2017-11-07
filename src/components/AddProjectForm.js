@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-// import DatePicker from 'react-datepicker';
-// import moment from 'moment';
-
-import 'react-datepicker/dist/react-datepicker.css';
 
 import StyledForm from './StyledForm';
 import Button from './Button';

@@ -16,13 +16,11 @@
   },
   "dependencies": {
     "firebase": "^4.6.0",
-    "moment": "^2.19.1",
     "polished": "^1.8.1",
     "prop-types": "^15.6.0",
     "re-base": "^3.0.5",
     "react": "^16.0.0",
     "react-autosize-textarea": "^0.4.9",
-    "react-datepicker": "^0.57.0",
     "react-document-title": "^2.0.3",
     "react-dom": "^16.0.0",
     "react-dropzone": "^4.2.1",
