@@ -1,5 +1,6 @@
 import { injectGlobal } from 'styled-components';
 import styledNormalize from 'styled-normalize';
+import { adjustHue, darken, saturate } from 'polished';
 
 import { theme, typography } from './variables';
 import { mediaMax } from './style-utils';
@@ -35,6 +36,9 @@ injectGlobal`
     font-family: ${typography.fontFamily};
     color: ${theme.textColor};
     background: ${theme.siteBackground};
+    background: linear-gradient(135deg, ${theme.siteBackground} 0%,
+      ${theme.siteBackground} 50%,
+      ${darken(0.05, saturate(0.2, adjustHue(10, theme.siteBackground)))} 100%);
     line-height: 1.6;
     ${mediaMax.tablet`font-size: 16px`};
     margin: 0;
