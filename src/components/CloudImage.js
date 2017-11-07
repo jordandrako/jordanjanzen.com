@@ -19,6 +19,12 @@ const Image = styled.div`
   background-position: center center;
   width: 100%;
   height: 100%;
+  border: ${(props) => (props.border ? `2px solid ${colors.black}` : 'none')};
+`;
+
+const Img = styled.img`
+  border: ${(props) => (props.border ? `2px solid ${colors.black}` : 'none')};
+  cursor: ${(props) => (props.link ? 'pointer' : null)};
 `;
 
 const CloudImage = (props) => {
@@ -44,12 +50,30 @@ const CloudImage = (props) => {
 
   if (children) {
     return (
-      <Image background={url} dim={props.dim} className="cloud-image">
+      <Image
+        background={url}
+        dim={props.dim}
+        border={props.border}
+        className="cloud-image"
+      >
         {children}
       </Image>
     );
   }
-  return <img src={url} alt={name} />;
+
+  return (
+    <Img
+      src={url}
+      alt={name}
+      {...props}
+      onClick={() =>
+        props.link
+          ? window.open(
+              `https://res.cloudinary.com/jordan-janzen/image/upload/${publicId}.${format}`,
+            )
+          : null}
+    />
+  );
 };
 
 CloudImage.propTypes = {
@@ -96,6 +120,8 @@ CloudImage.propTypes = {
   effects: PropTypes.string,
   children: PropTypes.node,
   dim: PropTypes.bool,
+  link: PropTypes.bool,
+  border: PropTypes.bool,
 };
 
 CloudImage.defaultProps = {
@@ -110,6 +136,8 @@ CloudImage.defaultProps = {
   background: null,
   children: null,
   dim: false,
+  link: false,
+  border: true,
 };
 
 export default CloudImage;
