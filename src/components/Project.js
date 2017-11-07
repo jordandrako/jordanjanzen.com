@@ -14,8 +14,7 @@ const Item = styled.li`
   width: calc(50% - 1em);
   ${mediaMax.tablet`
     width: 100%;
-  `}
-  min-width: 280px;
+  `} min-width: 280px;
   border: 5px double ${colors.black};
   padding: 1em;
   position: relative;
@@ -32,7 +31,6 @@ const Thumbnail = styled.section`
     align-items: center;
     justify-content: center;
     padding: 4em 2em;
-    border: 2px solid ${colors.black};
   }
 `;
 
@@ -42,23 +40,23 @@ const ProjectTitle = styled.h2`
   text-transform: uppercase;
   margin: 0;
   background: ${colors.lightblue};
-  padding: .33em .5em;
-  box-shadow: 2px 2px 7px rgba(0,0,0,.33);
+  padding: 0.33em 0.5em;
+  box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.33);
 `;
 
 const Description = styled.p`
   margin-bottom: auto;
-`
+`;
 
 const Details = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: start;
   justify-content: space-between;
-`
+`;
 
 const Subheading = styled.h4`
-  margin-bottom: .15em
+  margin-bottom: 0.15em;
 `;
 
 const Client = styled.div`
@@ -73,7 +71,7 @@ const Skills = styled.div`
     margin: 0;
     padding: 0;
     list-style: none;
-    font-size: .75rem;
+    font-size: 0.75rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-end;
@@ -82,7 +80,7 @@ const Skills = styled.div`
       display: inline-block;
       background: ${colors.lightblack};
       color: ${colors.lightwhite};
-      padding: .15em .5em;
+      padding: 0.15em 0.5em;
       margin: 0 0 3px 3px;
     }
   }
@@ -114,7 +112,7 @@ class Project extends Component {
   handleChange(e, key) {
     const updatedProp = {
       [e.target.name]:
-      e.target.type === 'checkbox' ? e.target.checked : e.target.value,
+        e.target.type === 'checkbox' ? e.target.checked : e.target.value,
     };
     this.props.updateProject(key, updatedProp);
   }
@@ -162,26 +160,46 @@ class Project extends Component {
             <Skills>
               <Subheading>Category: {toTitleCase(details.category)}</Subheading>
               <ul>
-                {details.skills.map((skill) => (
-                  <li key={skill}>{skill}</li>
-                ))}
+                {details.skills.map((skill) => <li key={skill}>{skill}</li>)}
               </ul>
             </Skills>
           </Details>
           <Buttons>
             <li>
               <Link to={`/portfolio/${index}`}>
-                <Button small type="primary"><i className="fa fa-search" aria-hidden="true" /> More Details</Button>
+                <Button small type="primary">
+                  <i className="fa fa-search" aria-hidden="true" /> More Details
+                </Button>
               </Link>
             </li>
             {details.link !== '' ? (
               <li>
-                <a href={details.link} target="_blank" rel="noopener noreferrer"><Button small type="secondary"><i className="fa fa-external-link" aria-hidden="true" /> Visit Site</Button></a>
+                <a
+                  href={details.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button small type="secondary">
+                    <i
+                      className="fa fa-external-link"
+                      aria-hidden="true"
+                    />{' '}
+                    Visit Site
+                  </Button>
+                </a>
               </li>
             ) : null}
             {details.repo !== '' ? (
               <li>
-                <a href={details.repo} target="_blank" rel="noopener noreferrer"><Button small type="secondary"><i className="fa fa-github" aria-hidden="true" /> View Repo</Button></a>
+                <a
+                  href={details.repo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button small type="secondary">
+                    <i className="fa fa-github" aria-hidden="true" /> View Repo
+                  </Button>
+                </a>
               </li>
             ) : null}
           </Buttons>

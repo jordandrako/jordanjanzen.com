@@ -59,10 +59,12 @@ class Portfolio extends Component {
           render={(props) => (
             <ProjectSingle
               uid={this.props.uid}
+              isMobile={this.props.isMobile}
               projects={this.props.projects}
               index={props.match.params.projectId}
               details={this.props.projects[props.match.params.projectId]}
               updateProject={this.props.updateProject}
+              removeProject={this.props.removeProject}
               {...props}
             />
           )}
@@ -74,8 +76,10 @@ class Portfolio extends Component {
 
 Portfolio.propTypes = {
   uid: PropTypes.string,
+  isMobile: PropTypes.bool.isRequired,
   addProject: PropTypes.func.isRequired,
   updateProject: PropTypes.func.isRequired,
+  removeProject: PropTypes.func.isRequired,
   projects: PropTypes.object.isRequired,
   skills: PropTypes.object.isRequired,
 };

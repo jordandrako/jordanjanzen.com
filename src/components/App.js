@@ -35,7 +35,7 @@ class App extends Component {
 
     this.addProject = this.addProject.bind(this);
     this.updateProject = this.updateProject.bind(this);
-    // this.removeProject = this.removeProject.bind(this);
+    this.removeProject = this.removeProject.bind(this);
 
     this.addSkill = this.addSkill.bind(this);
     this.removeSkill = this.removeSkill.bind(this);
@@ -236,6 +236,7 @@ class App extends Component {
           addSkill={this.addSkill}
           updateSkill={this.updateSkill}
           removeSkill={this.removeSkill}
+          isMobile={this.state.isMobile}
           login={this.authenticate}
           logout={this.logout}
         />

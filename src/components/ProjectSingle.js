@@ -8,6 +8,7 @@ import Button from './Button';
 
 import { Row } from '../theme/grid';
 import { colors, theme, typography } from '../theme/variables';
+import { mediaMax } from '../theme/style-utils';
 
 const ClickOutside = styled(Link)`
   background: rgba(0, 0, 0, 0.5);
@@ -22,19 +23,44 @@ const ClickOutside = styled(Link)`
   border-bottom: 0;
 `;
 
-const Single = styled.div`
+const Container = styled.div`
   position: fixed;
-  top: 8vh;
-  left: 8vw;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  pointer-events: none;
+`;
+
+const Single = styled.div`
   width: 84vw;
+  max-width: 760px;
   height: 84vh;
   background: ${theme.siteBackground};
-  border: 5px solid ${colors.black};
   box-shadow: 0 -3px 0 ${theme.primaryColor}, 0 0 9px #000;
   z-index: 1000;
+  pointer-events: all;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  img {
+    margin-bottom: 1em;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  ${mediaMax.tablet`
+    width: 95vw;
+    max-width: 420px;
+    height: 95vh;
+  `};
 `;
 
 const Frame = styled.div`
@@ -42,13 +68,18 @@ const Frame = styled.div`
   padding: 0.5em;
   background: ${colors.black};
   display: flex;
+  flex-shrink: 0;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1em;
+  z-index: 2;
+
+  &:first-child {
+    box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.3);
+  }
 
   &:last-child {
+    box-shadow: 0 -1px 3px 1px rgba(0, 0, 0, 0.3);
     margin-top: auto;
-    margin-bottom: 0;
   }
 `;
 
@@ -61,9 +92,6 @@ const Title = styled.h2`
 `;
 
 const Close = styled(Link)`
-  position: absolute;
-  top: 5px;
-  right: 8px;
   border-bottom: 0;
   margin: 0;
   padding: 0;
@@ -74,57 +102,112 @@ const Close = styled(Link)`
   }
 `;
 
+const ButtonLink = styled(Link)`
+  border-bottom: none;
+`;
+
+const Content = styled(Row)`
+  overflow-y: scroll;
+  margin: 0;
+  padding: 1em;
+  flex-grow: 1;
+  max-width: none;
+`;
+
 class ProjectSingle extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeImageIndex: 0,
-      acticeImage: null,
+      delete: false,
     };
+
+    this.removeProject = this.removeProject.bind(this);
+    this.nextProject = this.nextProject.bind(this);
+    this.prevProject = this.prevProject.bind(this);
+  }
+
+  removeProject(key) {
+    const state = { ...this.state };
+    this.setState({ ...state, delete: false });
+    this.props.removeProject(key);
+  }
+
+  nextProject() {
+    //
+  }
+
+  prevProject() {
+    //
   }
 
   render() {
-    const { details, index } = this.props;
-    // const { id, format } = details.images[this.state.activeImageIndex];
-    // const image = details.images;
+    const { projects, details, index, isMobile } = this.props;
 
-    // console.log(image);
-    // this.setState({
-    //   ...this.state,
-    //   activeImage: id,
-    // });
+    const total = Object.keys(projects).length - 1;
+
+    const current = Object.keys(projects).indexOf(index);
+
+    const nextIndex = current === total ? 0 : current + 1;
+
+    const prevIndex = current === 0 ? total : current - 1;
+
+    const nextId = Object.keys(projects)[nextIndex];
+
+    const prevId = Object.keys(projects)[prevIndex];
 
     if (details && index) {
       return (
         <div key={index}>
           <ClickOutside to="/portfolio/" />
-          <Single>
-            <Frame>
-              <Title>{details.name || 'Name'}</Title>
-              <Close to="/portfolio">
-                <Button type="delete" />
-              </Close>
-            </Frame>
-            <Row>
-              {Object.keys(details.images).map((image) => (
-                <CloudImage
-                  publicId={details.images[image].id}
-                  format={details.images[image].format}
-                  width="800"
-                  height="450"
-                  crop="limit"
-                />
-              ))}
-            </Row>
-            <Frame>
-              <Button small type="secondary">
-                Previous
-              </Button>
-              <Button small type="secondary">
-                Next
-              </Button>
-            </Frame>
-          </Single>
+          <Container>
+            <Single>
+              <Frame>
+                <Title>{details.name || 'Name'}</Title>
+                <Close to="/portfolio">
+                  <Button type="delete" />
+                </Close>
+              </Frame>
+              <Content>
+                <p>{details.long_desc}</p>
+                {Object.keys(details.images).map((image) => (
+                  <CloudImage
+                    publicId={details.images[image].id}
+                    format={details.images[image].format}
+                    width={isMobile ? '400' : '800'}
+                    crop="limit"
+                    link
+                  />
+                ))}
+              </Content>
+              <Frame>
+                <ButtonLink to={`/portfolio/${prevId}`}>
+                  <Button small type="secondary">
+                    <i className="fa fa-arrow-left" aria-hidden="true" /> prev
+                  </Button>
+                </ButtonLink>
+                {this.props.uid ? (
+                  <Button
+                    small
+                    type="secondary"
+                    bg={colors.red}
+                    onClick={() => {
+                      !this.state.delete
+                        ? this.setState({ delete: true })
+                        : this.removeProject(index);
+                    }}
+                  >
+                    {this.state.delete ? 'Confirm?' : 'Delete'}
+                  </Button>
+                ) : null}
+                <ButtonLink to={`/portfolio/${nextId}`}>
+                  <Button small type="secondary">
+                    next{' '}
+                    <i className="fa right fa-arrow-right" aria-hidden="true" />
+                  </Button>
+                </ButtonLink>
+              </Frame>
+            </Single>
+          </Container>
         </div>
       );
     }
@@ -133,8 +216,16 @@ class ProjectSingle extends Component {
 }
 
 ProjectSingle.propTypes = {
+  uid: PropTypes.string,
   index: PropTypes.string.isRequired,
   details: PropTypes.object.isRequired,
+  projects: PropTypes.object.isRequired,
+  isMobile: PropTypes.bool.isRequired,
+  removeProject: PropTypes.func.isRequired,
+};
+
+ProjectSingle.defaultProps = {
+  uid: null,
 };
 
 export default ProjectSingle;
