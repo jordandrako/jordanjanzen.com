@@ -120,6 +120,7 @@ CloudImage.propTypes = {
   opacity: PropTypes.string,
   angle: PropTypes.string,
   radius: PropTypes.string,
+  bo: PropTypes.string,
   effects: PropTypes.string,
   children: PropTypes.node,
   dim: PropTypes.bool,
