@@ -44,15 +44,14 @@ const ProjectTitle = styled.h2`
   box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.33);
 `;
 
-const Description = styled.p`
-  margin-bottom: auto;
-`;
+const Description = styled.p``;
 
 const Details = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: start;
   justify-content: space-between;
+  margin-top: auto;
 `;
 
 const Subheading = styled.h4`
@@ -140,6 +139,7 @@ class Project extends Component {
               crop="limit"
               width="400"
               background="rgb:000"
+              effects="e_blur:80"
               dim
             >
               <ProjectTitle>{details.name}</ProjectTitle>
