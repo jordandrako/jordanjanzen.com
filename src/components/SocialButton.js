@@ -55,8 +55,8 @@ const SocialButton = (props) => {
 
   return (
     <A href={link} target="_blank">
-      <IconButton type="secondary" bg={bg} color={color} {...props}>
-        <i className={`fa fa-${social}`} aria-hidden="true" /> {text}
+      <IconButton small bg={bg} color={color} {...props}>
+        <i className={`fa social fa-${social}`} aria-hidden="true" /> {text}
       </IconButton>
     </A>
   );
