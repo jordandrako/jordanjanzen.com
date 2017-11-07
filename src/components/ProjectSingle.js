@@ -81,6 +81,10 @@ const Frame = styled.div`
     box-shadow: 0 -1px 3px 1px rgba(0, 0, 0, 0.3);
     margin-top: auto;
   }
+
+  a {
+    border-bottom: none;
+  }
 `;
 
 const Title = styled.h2`
@@ -122,22 +126,12 @@ class ProjectSingle extends Component {
     };
 
     this.removeProject = this.removeProject.bind(this);
-    this.nextProject = this.nextProject.bind(this);
-    this.prevProject = this.prevProject.bind(this);
   }
 
   removeProject(key) {
     const state = { ...this.state };
     this.setState({ ...state, delete: false });
     this.props.removeProject(key);
-  }
-
-  nextProject() {
-    //
-  }
-
-  prevProject() {
-    //
   }
 
   render() {
@@ -185,6 +179,33 @@ class ProjectSingle extends Component {
                     <i className="fa fa-arrow-left" aria-hidden="true" /> prev
                   </Button>
                 </ButtonLink>
+                {details.link !== '' ? (
+                  <a
+                    href={details.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button small type="secondary">
+                      <i
+                        className="fa fa-external-link"
+                        aria-hidden="true"
+                      />{' '}
+                      Visit Site
+                    </Button>
+                  </a>
+                ) : null}
+                {details.repo !== '' ? (
+                  <a
+                    href={details.repo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button small type="secondary">
+                      <i className="fa fa-github" aria-hidden="true" /> View
+                      Repo
+                    </Button>
+                  </a>
+                ) : null}
                 {this.props.uid ? (
                   <Button
                     small
