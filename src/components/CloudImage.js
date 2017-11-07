@@ -40,13 +40,16 @@ const CloudImage = (props) => {
     opacity,
     angle,
     radius,
+    bo,
     effects,
     children,
   } = props;
 
-  const url = `https://res.cloudinary.com/jordan-janzen/image/upload/w_${width},h_${height},c_${crop},g_${gravity},o_${opacity},a_${angle},r_${radius}${background
-    ? `,b_${background}`
-    : ''}/${effects ? `${effects}/` : ''}${publicId}.${format}`;
+  const url = `https://res.cloudinary.com/jordan-janzen/image/upload/w_${width},h_${height},c_${crop},g_${gravity},o_${opacity},a_${angle},r_${radius}${bo
+    ? `,bo_${bo}`
+    : ''}${background ? `,b_${background}` : ''}/${effects
+    ? `${effects}/`
+    : ''}${publicId}.${format}`;
 
   if (children) {
     return (
@@ -79,7 +82,7 @@ const CloudImage = (props) => {
 CloudImage.propTypes = {
   name: PropTypes.string.isRequired,
   publicId: PropTypes.string.isRequired,
-  format: PropTypes.string.isRequired,
+  format: PropTypes.string,
   width: PropTypes.string,
   height: PropTypes.string,
   crop: PropTypes.oneOf([
@@ -125,6 +128,7 @@ CloudImage.propTypes = {
 };
 
 CloudImage.defaultProps = {
+  format: 'jpg',
   width: 'iw',
   height: 'ih',
   crop: 'scale',
@@ -132,6 +136,7 @@ CloudImage.defaultProps = {
   opacity: '100',
   angle: '0',
   radius: '0',
+  bo: null,
   effects: null,
   background: null,
   children: null,
