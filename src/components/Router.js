@@ -25,7 +25,11 @@ const AsyncUnauthenticated = MyLoadable({
 
 const Router = (props) => (
   <Switch>
-    <Route exact path="/" component={AsyncHome} />
+    <Route
+      exact
+      path="/"
+      render={() => <AsyncHome isMobile={props.isMobile} />}
+    />
     <Route
       path="/about"
       render={() => (
