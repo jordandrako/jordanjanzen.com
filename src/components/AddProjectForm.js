@@ -58,7 +58,7 @@ class AddProjectForm extends Component {
       Object.keys(this.state.images).length === 0 &&
       this.state.images.constructor === Object
     ) {
-      return alert('At least one image is required.');
+      return alert('At least one image is required.'); // eslint-disable-line
     }
     const project = {
       name: this.name.value,
