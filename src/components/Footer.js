@@ -134,7 +134,7 @@ class Footer extends Component {
         wide
         onClick={() => this.props.login()}
       >
-        Log In with Google
+        <i className="fa fa-google" aria-hidden="true" /> Log In
       </Button>
     );
   }
@@ -148,7 +148,7 @@ class Footer extends Component {
         wide
         onClick={() => this.props.logout()}
       >
-        Log Out
+        <i className="fa fa-google" aria-hidden="true" /> Log Out
       </Button>
     );
   }
