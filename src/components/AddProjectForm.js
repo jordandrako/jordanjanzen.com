@@ -164,9 +164,9 @@ class AddProjectForm extends Component {
               required
             >
               <optgroup label="Select Category">
-                <option value="design">Design</option>
-                <option value="development">Development</option>
-                <option value="landing-page">Landing Page</option>
+                <option value="Design">Design</option>
+                <option value="Development">Development</option>
+                <option value="Landing Page">Landing Page</option>
               </optgroup>
             </select>
             {/* <DatePicker
