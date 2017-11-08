@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "firebase": "^4.6.0",
+    "moment": "^2.19.1",
     "polished": "^1.8.1",
     "prop-types": "^15.6.0",
     "re-base": "^3.0.5",
