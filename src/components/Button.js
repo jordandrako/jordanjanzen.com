@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 import { colors, theme, typography } from '../theme/variables';
 
@@ -14,6 +15,8 @@ const Background = (props) => {
     return colors.red;
   } else if (props.type === 'login') {
     return colors.lightblack;
+  } else if (props.type === 'cta') {
+    return colors.blue;
   }
   return theme.buttonColor;
 };
@@ -33,7 +36,14 @@ const Btn = styled.button`
   padding: ${(props) =>
     props.arrows ? '0.25em 0.8em 0.25em 1.5em' : '.5em .8em'};
   position: relative;
-  color: ${BtnColor};
+  color: ${(props) => {
+    if (props.type === 'cta') {
+      return colors.lightwhite;
+    } else if (props.color) {
+      return props.color;
+    }
+    return theme.buttonText;
+  }};
   font-family: ${typography.monospace};
   background: ${Background};
   display: flex;
@@ -119,10 +129,49 @@ const DelBtn = styled.button`
   }
 `;
 
+const A = styled.a`
+  border-bottom: 0;
+  line-height: 1;
+  text-shadow: none;
+`;
+
+const BtnLink = styled(Link)`
+  border-bottom: 0;
+  line-height: 1;
+  text-shadow: none;
+`;
+
 const Button = (props) => {
   if (props.type === 'delete') {
-    return <DelBtn {...props} className="fa fa-times-circle close" />;
+    if (props.to) {
+      return (
+        <BtnLink to={props.to}>
+          <DelBtn {...props} className="fa fa-times-circle close" />
+        </BtnLink>
+      );
+    }
   }
+
+  if (props.href) {
+    return (
+      <A
+        href={props.href}
+        target={props.target}
+        rel={props.target === '_blank' ? 'noopener noreferrer' : ''}
+      >
+        <Btn {...props}>{props.text || props.children || 'Button'}</Btn>
+      </A>
+    );
+  }
+
+  if (props.to) {
+    return (
+      <BtnLink to={props.to}>
+        <Btn {...props}>{props.text || props.children || 'Button'}</Btn>
+      </BtnLink>
+    );
+  }
+
   return <Btn {...props}>{props.text || props.children || 'Button'}</Btn>;
 };
 
@@ -130,6 +179,7 @@ Button.propTypes = {
   type: PropTypes.oneOf([
     'primary',
     'secondary',
+    'cta',
     'login',
     'success',
     'warn',
@@ -153,6 +203,9 @@ Button.propTypes = {
   bg: PropTypes.string,
   onClick: PropTypes.func,
   style: PropTypes.object,
+  href: PropTypes.string,
+  target: PropTypes.string,
+  to: PropTypes.string,
 };
 
 Button.defaultProps = {
@@ -170,6 +223,9 @@ Button.defaultProps = {
   delete: false,
   onClick: null,
   style: null,
+  href: null,
+  target: '_self',
+  to: null,
 };
 
 export default Button;
