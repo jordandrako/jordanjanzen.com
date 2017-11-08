@@ -2,38 +2,49 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { adjustHue } from 'polished';
+import moment from 'moment';
 
+import Button from '../Button';
 import CloudImage from '../CloudImage';
+import Project from '../Project';
 
 import { Page, Row, Hero } from '../../theme/grid';
-import { colors, theme, typography } from '../../theme/variables';
+import { theme, typography } from '../../theme/variables';
 import { mediaMin } from '../../theme/style-utils';
 
 const OuterHero = styled.div`
   width: 100%;
   height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 33%,
+    ${theme.siteBackground} 100%
+  );
   display: flex;
   justify-content: flex-end;
 `;
 
 const InnerHero = styled.div`
-  padding: 0.75em;
+  padding: 2em;
   width: 100%;
-  background: linear-gradient(135deg, ${theme.primaryColor} 0%, ${adjustHue(
-  -20,
-  theme.primaryColor,
-)} 100%);
+  background: linear-gradient(
+    135deg,
+    ${adjustHue(-20, theme.primaryColor)} 0,
+    ${theme.primaryColor} 100%
+  );
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
 
   ${mediaMin.tablet`
-    font-size: 1.3rem;
     width: 50%;
     padding: 6em 2em;
     background: transparent;
-  `}
-  }
+
+    p {
+      font-size: 1.2rem;
+    }
+  `};
 
   img {
     margin: 0 0.5em 0.5em 0;
@@ -45,38 +56,80 @@ const Intro = styled.h2`
   margin-bottom: 0.5em;
   font-family: ${typography.monospace};
   letter-spacing: 0;
-  font-size: 1.1rem;
+  font-size: 1.25rem;
+
+  ${mediaMin.tablet`
+    font-size: 1.75rem;
+  `};
+`;
+
+const Cta = styled.div`
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  ${mediaMin.tablet`
+    align-self: flex-start;
+  `};
+`;
+
+const Entice = styled.p`
+  font-size: 0.7rem !important;
+  opacity: 0.7;
+  margin: 0.5em 0 0;
 `;
 
 class Home extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
   render() {
     const HeroContent = (
       <OuterHero>
         <InnerHero>
           {this.props.isMobile ? (
             <CloudImage
-              publicId="Jordan_Headshot_fade"
-              format="png"
+              publicId="Jordan_Headshot"
+              format="jpg"
               name="Jordan's Headshot."
-              width="90"
-              height="90"
+              width="140"
+              height="140"
               crop="fill"
               gravity="face"
               radius="max"
-              bo={`2px_solid_rgb:${colors.black.replace('#', '')}`}
-              border={false}
             />
           ) : null}
           <Intro>
-            Hi! I'm a Developer<br />& UX Designer.
+            Hey there!<br />I'm a Developer<br />& UX Designer.
           </Intro>
           <p>
-            I like to build sites and web apps that look great and function even
-            better.
+            My name is <strong>Jordan Janzen</strong>.<br />I'm{' '}
+            <strong>
+              {moment('19911109', 'YYYYMMDD').fromNow(true)} old
+            </strong>{' '}
+            and living in <strong>Seattle, WA</strong>. I love building sites
+            and web apps that look great and function even better.
           </p>
+          <Cta>
+            <Button
+              href="http://res.cloudinary.com/jordan-janzen/image/upload/v1510106401/Jordan_Janzen_CV.pdf"
+              target="_blank"
+              type="cta"
+            >
+              <i className="fa fa-file-text" aria-hidden="true" /> Download My
+              CV
+            </Button>
+            <Entice>See what I can do for your company!</Entice>
+          </Cta>
         </InnerHero>
       </OuterHero>
     );
+
+    const projectIndex = Object.keys(this.props.projects).length - 1;
+    const projectKey = Object.keys(this.props.projects)[projectIndex];
 
     return (
       <Page title="Home">
@@ -89,6 +142,7 @@ class Home extends Component {
               border={false}
               width="1000"
               crop="limit"
+              style={{ backgroundPosition: 'left' }}
             >
               {HeroContent}
             </CloudImage>
@@ -96,7 +150,19 @@ class Home extends Component {
             HeroContent
           )}
         </Hero>
-        <Row />
+        <Row>
+          <h2>My latest project</h2>
+          {projectKey ? (
+            <Project
+              index={projectKey}
+              details={this.props.projects[projectKey]}
+              style={{ margin: '0 0 1em', width: '100%' }}
+            />
+          ) : null}
+          <Button to="/portfolio/" type="cta">
+            View My Portfolio
+          </Button>
+        </Row>
       </Page>
     );
   }
@@ -104,6 +170,7 @@ class Home extends Component {
 
 Home.propTypes = {
   isMobile: PropTypes.bool.isRequired,
+  projects: PropTypes.object.isRequired,
 };
 
 export default Home;

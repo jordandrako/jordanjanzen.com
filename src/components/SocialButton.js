@@ -4,11 +4,6 @@ import styled from 'styled-components';
 
 import Button from './Button';
 
-const A = styled.a`
-  text-decoration: none;
-  color: inherit;
-`;
-
 const IconButton = styled(Button)`
   display: flex;
   justify-content: space-between;
@@ -54,11 +49,16 @@ const SocialButton = (props) => {
   }
 
   return (
-    <A href={link} target="_blank">
-      <IconButton small bg={bg} color={color} {...props}>
-        <i className={`fa social fa-${social}`} aria-hidden="true" /> {text}
-      </IconButton>
-    </A>
+    <IconButton
+      href={link}
+      target="_blank"
+      small
+      bg={bg}
+      color={color}
+      {...props}
+    >
+      <i className={`fa social fa-${social}`} aria-hidden="true" /> {text}
+    </IconButton>
   );
 };
 

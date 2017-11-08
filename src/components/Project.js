@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { adjustHue } from 'polished';
 
 import CloudImage from './CloudImage';
 import Button from './Button';
 
 import { toTitleCase } from '../helpers';
-import { typography, colors } from '../theme/variables';
+import { colors, theme, typography } from '../theme/variables';
 import { mediaMax } from '../theme/style-utils';
 
 const Item = styled.li`
   width: calc(50% - 1em);
   ${mediaMax.tablet`
     width: 100%;
-  `} min-width: 280px;
+  `};
+  min-width: 300px;
   border: 5px double ${colors.black};
   padding: 1em;
   position: relative;
@@ -25,12 +26,13 @@ const Item = styled.li`
 `;
 
 const Thumbnail = styled.section`
-  margin-bottom: 1em;
+  margin-bottom: 0;
   > .cloud-image {
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 4em 2em;
+    border-width: 5px;
   }
 `;
 
@@ -41,17 +43,27 @@ const ProjectTitle = styled.h2`
   text-transform: uppercase;
   margin: 0;
   background: ${colors.lightblue};
+  background: linear-gradient(
+    135deg,
+    ${adjustHue(-20, theme.primaryColor)} 0,
+    ${theme.primaryColor} 100%
+  );
   padding: 0.33em 0.5em;
   box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.33);
 `;
-
-const Description = styled.p``;
 
 const Details = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: start;
   justify-content: space-between;
+  padding: 1em;
+  margin-bottom: 1em;
+  background: ${colors.black};
+  color: ${colors.lightwhite};
+`;
+
+const Description = styled.p`
   margin-top: auto;
 `;
 
@@ -66,6 +78,7 @@ const Client = styled.div`
 const Skills = styled.div`
   font-size: 0.8rem;
   text-align: right;
+  max-width: 50%;
 
   ul {
     margin: 0;
@@ -130,15 +143,17 @@ class Project extends Component {
       const { name: clientName, industry: clientIndustry } = details.client;
 
       return (
-        <Item key={index}>
+        <Item key={index} {...this.props}>
           <Thumbnail>
             <CloudImage
               bg
               publicId={imageId}
               format={imageFormat}
               name={imageName}
-              crop="limit"
-              width="400"
+              width="600"
+              height="600"
+              crop="fill"
+              gravity="north"
               background="rgb:000"
               effects="e_blur:80"
               dim
@@ -146,7 +161,6 @@ class Project extends Component {
               <ProjectTitle>{details.name}</ProjectTitle>
             </CloudImage>
           </Thumbnail>
-          <Description>{details.short_desc}</Description>
           <Details>
             <Client>
               <Subheading>Client:</Subheading>
@@ -165,42 +179,36 @@ class Project extends Component {
               </ul>
             </Skills>
           </Details>
+          <Description>{details.short_desc}</Description>
           <Buttons>
             <li>
-              <Link to={`/portfolio/${index}`}>
-                <Button small type="primary">
-                  <i className="fa fa-search" aria-hidden="true" /> More Details
-                </Button>
-              </Link>
+              <Button to={`/portfolio/${index}`} small type="primary">
+                <i className="fa fa-search" aria-hidden="true" /> More Details
+              </Button>
             </li>
             {details.link !== '' ? (
               <li>
-                <a
+                <Button
                   href={details.link}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  small
+                  type="secondary"
                 >
-                  <Button small type="secondary">
-                    <i
-                      className="fa fa-external-link"
-                      aria-hidden="true"
-                    />{' '}
-                    Visit Site
-                  </Button>
-                </a>
+                  <i className="fa fa-external-link" aria-hidden="true" /> Visit
+                  Site
+                </Button>
               </li>
             ) : null}
             {details.repo !== '' ? (
               <li>
-                <a
+                <Button
                   href={details.repo}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  small
+                  type="secondary"
                 >
-                  <Button small type="secondary">
-                    <i className="fa fa-github" aria-hidden="true" /> View Repo
-                  </Button>
-                </a>
+                  <i className="fa fa-github" aria-hidden="true" /> View Repo
+                </Button>
               </li>
             ) : null}
           </Buttons>
@@ -212,7 +220,6 @@ class Project extends Component {
 }
 
 Project.propTypes = {
-  updateProject: PropTypes.func.isRequired,
   details: PropTypes.object.isRequired,
   index: PropTypes.string.isRequired,
 };

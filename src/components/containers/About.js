@@ -9,15 +9,14 @@ import { Page, Row } from '../../theme/grid';
 import { colors, typography } from '../../theme/variables';
 import { mediaMin } from '../../theme/style-utils';
 
-const SkillsRow = styled(Row) `
+const SkillsRow = styled(Row)`
   display: flex;
   flex-wrap: wrap;
-  margin-right: -2px;
 `;
 
 const SkillsColumn = styled.ul`
   flex: 1;
-  padding: 0 0 1em;
+  padding: 0;
   margin: 0 0 1em;
   list-style: none;
   min-width: 200px;
@@ -44,6 +43,10 @@ const SkillsColumn = styled.ul`
     ${mediaMin.phone`
       font-size: 0.75rem;
     `};
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 `;
 
@@ -65,7 +68,11 @@ class About extends Component {
           <li key={key}>
             {this.props.skills[key].name}
             {this.props.uid ? (
-              <Button type="delete" onClick={() => this.removeSkill(key)} />
+              <Button
+                to="#"
+                type="delete"
+                onClick={() => this.removeSkill(key)}
+              />
             ) : null}
           </li>
         );
@@ -93,11 +100,11 @@ class About extends Component {
               {this.renderList('design')}
             </SkillsColumn>
           </SkillsRow>
-          <Row child>
-            {this.props.uid ? (
+          {this.props.uid ? (
+            <Row child>
               <AddSkillForm addSkill={this.props.addSkill} />
-            ) : null}
-          </Row>
+            </Row>
+          ) : null}
         </Row>
         <Row>
           <h3>A bit about me</h3>

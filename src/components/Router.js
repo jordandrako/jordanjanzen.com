@@ -28,7 +28,9 @@ const Router = (props) => (
     <Route
       exact
       path="/"
-      render={() => <AsyncHome isMobile={props.isMobile} />}
+      render={() => (
+        <AsyncHome isMobile={props.isMobile} projects={props.projects} />
+      )}
     />
     <Route
       path="/about"

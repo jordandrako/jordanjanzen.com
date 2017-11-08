@@ -95,21 +95,6 @@ const Title = styled.h2`
   line-height: 1;
 `;
 
-const Close = styled(Link)`
-  border-bottom: 0;
-  margin: 0;
-  padding: 0;
-
-  button {
-    margin: 0;
-    padding: 0;
-  }
-`;
-
-const ButtonLink = styled(Link)`
-  border-bottom: none;
-`;
-
 const Content = styled(Row)`
   overflow-y: scroll;
   margin: 0;
@@ -157,9 +142,7 @@ class ProjectSingle extends Component {
             <Single>
               <Frame>
                 <Title>{details.name || 'Name'}</Title>
-                <Close to="/portfolio">
-                  <Button type="delete" />
-                </Close>
+                <Button to="/portfolio" type="delete" style={{ margin: 0 }} />
               </Frame>
               <Content>
                 <p>{details.long_desc}</p>
@@ -174,37 +157,34 @@ class ProjectSingle extends Component {
                 ))}
               </Content>
               <Frame>
-                <ButtonLink to={`/portfolio/${prevId}`}>
-                  <Button small type="secondary">
-                    <i className="fa fa-arrow-left" aria-hidden="true" /> prev
-                  </Button>
-                </ButtonLink>
+                <Button to={`/portfolio/${prevId}`} small type="secondary">
+                  <i className="fa fa-arrow-left" aria-hidden="true" />
+                  {this.props.isMobile ? '' : ' prev'}
+                </Button>
                 {details.link !== '' ? (
-                  <a
+                  <Button
                     href={details.link}
                     target="_blank"
-                    rel="noopener noreferrer"
+                    small
+                    type="secondary"
                   >
-                    <Button small type="secondary">
-                      <i
-                        className="fa fa-external-link"
-                        aria-hidden="true"
-                      />{' '}
-                      Visit Site
-                    </Button>
-                  </a>
+                    {this.props.isMobile ? (
+                      ''
+                    ) : (
+                      <i className="fa fa-external-link" aria-hidden="true" />
+                    )}{' '}
+                    Visit Site
+                  </Button>
                 ) : null}
                 {details.repo !== '' ? (
-                  <a
+                  <Button
                     href={details.repo}
                     target="_blank"
-                    rel="noopener noreferrer"
+                    small
+                    type="secondary"
                   >
-                    <Button small type="secondary">
-                      <i className="fa fa-github" aria-hidden="true" /> View
-                      Repo
-                    </Button>
-                  </a>
+                    <i className="fa fa-github" aria-hidden="true" /> View Repo
+                  </Button>
                 ) : null}
                 {this.props.uid ? (
                   <Button
@@ -220,12 +200,10 @@ class ProjectSingle extends Component {
                     {this.state.delete ? 'Confirm?' : 'Delete'}
                   </Button>
                 ) : null}
-                <ButtonLink to={`/portfolio/${nextId}`}>
-                  <Button small type="secondary">
-                    next{' '}
-                    <i className="fa right fa-arrow-right" aria-hidden="true" />
-                  </Button>
-                </ButtonLink>
+                <Button to={`/portfolio/${nextId}`} small type="secondary">
+                  {this.props.isMobile ? '' : 'next '}
+                  <i className="fa right fa-arrow-right" aria-hidden="true" />
+                </Button>
               </Frame>
             </Single>
           </Container>

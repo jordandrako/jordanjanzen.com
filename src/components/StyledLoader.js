@@ -59,7 +59,7 @@ const Scrollbar = styled.div`
 const StyledLoader = () => (
   <Loader>
     <Frame>
-      <Button type="delete" />
+      <Button to="#" type="delete" />
     </Frame>
     <object type="image/svg+xml" data={codeLoader}>
       loading...

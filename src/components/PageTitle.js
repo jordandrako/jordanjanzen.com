@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import { darken, lighten } from 'polished';
 
 import Button from './Button';
@@ -73,14 +72,6 @@ const Title = styled.header`
   }
 `;
 
-const CloseLink = styled(Link) `
-  border-bottom: none;
-
-  .close {
-    margin: 0;
-  }
-`;
-
 const fileExtention = getFileExtension();
 const PageTitle = (props) => {
   const ext = props.ext === true && fileExtention;
@@ -92,9 +83,12 @@ const PageTitle = (props) => {
         <li>
           <i className="fa fa-file-code-o file" aria-hidden="true" />
           <h1>{title}</h1>
-          <CloseLink to="/">
-            <Button type="delete" aria-hidden="true" />
-          </CloseLink>
+          <Button
+            to="/"
+            type="delete"
+            aria-hidden="true"
+            style={{ margin: 0 }}
+          />
         </li>
       </ul>
     </Title>

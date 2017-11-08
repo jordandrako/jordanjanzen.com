@@ -62,10 +62,22 @@ export const Row = styled.section`
         }
       `;
     }
-  }} ${mediaMax.tablet`
-    margin: ${(props) => (props.full ? `0 0 2em` : '0 1em 2em')};
+  }};
+
+  ${mediaMax.tablet`
+    margin: ${(props) => {
+      if (props.full || props.child) {
+        return '0 0 2em';
+      }
+      return '0 1em 2em';
+    }};
+
     &:first-child {
-      ${(props) => (props.child ? 'margin-top: 0' : 'margin-top: 1.5em')};
+      margin-top: ${(props) => (props.child ? '0' : '1.5em')};
+    }
+
+    &:last-child {
+      margin-bottom: ${(props) => (props.child ? '0' : '2em')};
     }
   `};
 `;
@@ -81,8 +93,13 @@ Row.defaultProps = {
 };
 
 export const Hero = styled(Row)`
-  margin: 0;
+  margin: 0 0 2.5em;
   margin-top: 0 !important;
+  max-width: calc(1000px + 4em);
+
+  ${mediaMax.tablet`
+    margin: 0 0 1.5em;
+  `};
 `;
 
 export const Page = (props) => (
