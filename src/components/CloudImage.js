@@ -16,14 +16,26 @@ const Image = styled.div`
         : null}
     url(${(props) => props.background}) no-repeat;
   background-size: cover;
-  background-position: center center;
+  background-position: center top;
   width: 100%;
   height: 100%;
-  border: ${(props) => (props.border ? `2px solid ${colors.black}` : 'none')};
+  border: ${(props) => (props.border ? `3px solid ${colors.black}` : 'none')};
+  border-radius: ${(props) => {
+    if (props.radius === 'max') {
+      return '50%';
+    }
+    return '0';
+  }};
 `;
 
 const Img = styled.img`
-  border: ${(props) => (props.border ? `2px solid ${colors.black}` : 'none')};
+  border: ${(props) => (props.border ? `3px solid ${colors.black}` : 'none')};
+  border-radius: ${(props) => {
+    if (props.radius === 'max') {
+      return '50%';
+    }
+    return '0';
+  }};
   cursor: ${(props) => (props.link ? 'pointer' : null)};
 `;
 
@@ -58,6 +70,7 @@ const CloudImage = (props) => {
         dim={props.dim}
         border={props.border}
         className="cloud-image"
+        style={props.style}
       >
         {children}
       </Image>
