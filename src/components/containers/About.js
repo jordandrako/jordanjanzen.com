@@ -7,7 +7,7 @@ import AddSkillForm from '../AddSkillForm';
 import Button from '../Button';
 import CloudImage from '../CloudImage';
 
-import { Page, Row } from '../../theme/grid';
+import { Page, Row, Flex } from '../../theme/grid';
 import { colors, typography } from '../../theme/variables';
 import { mediaMin } from '../../theme/style-utils';
 
@@ -50,6 +50,19 @@ const SkillsColumn = styled.ul`
       margin-bottom: 0;
     }
   }
+`;
+
+const DateColumn = styled.div`
+  flex: 1;
+  padding: 1em;
+  border-top: 2px solid ${colors.blue};
+  border-right: 2px solid ${colors.blue};
+`;
+
+const HistoryColumn = styled.div`
+  flex: 4;
+  padding: 1em;
+  border-top: 2px solid ${colors.blue};
 `;
 
 class About extends Component {
@@ -188,6 +201,138 @@ class About extends Component {
         </Row>
         <Row>
           <h2>Work History</h2>
+          <Flex>
+            <DateColumn>
+              <p>Nov 2015 - Nov 2017</p>
+            </DateColumn>
+            <HistoryColumn>
+              <h3>Front-End UX Engineer</h3>
+              <h4>
+                <em>
+                  <a
+                    href="https://outreachmediagroup.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Outreach Inc.
+                  </a>
+                </em>
+              </h4>
+              <p>
+                Work with the Outreach Media Group's Cost Per Lead team to
+                create and manage landing pages and creative graphics targeted
+                at church leaders and faith-based consumers. Employ adaptive web
+                designs and creative development techniques to generate leads
+                for corporate clients' programs and advertising campaigns. A/B
+                test and optimize conversion rates to find the perfect design
+                and fit for each individual clients' needs.
+              </p>
+              <ul>
+                <li>
+                  Integrated landing pages with back-end software to deliver
+                  filtered, targeted, quality leads to many clients' CRMs
+                </li>
+                <li>
+                  Improved company margins by finding creative, strong
+                  alternatives to expensive services.
+                </li>
+                <li>
+                  Adapted to many managerial and life changes through the length
+                  of employment.
+                </li>
+              </ul>
+            </HistoryColumn>
+          </Flex>
+          <Flex>
+            <DateColumn>
+              <p>Aug 2014 - Nov 2015</p>
+            </DateColumn>
+            <HistoryColumn>
+              <h3>Lead WordPress Developer and Graphic Designer</h3>
+              <h4>
+                <em>
+                  <a
+                    href="https://uzu-media.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    UZU Media
+                  </a>
+                </em>
+              </h4>
+              <p>
+                Design, develop and maintained websites built primarily with
+                content management systems, primarily Wordpress. Lead the design
+                process, from exploration to print, of client branding.
+              </p>
+              <ul>
+                <li>Worked in a small, close team environment.</li>
+                <li>
+                  Used best practices to deliver strong and secure websites
+                </li>
+                <li>
+                  Researched individual needs and explored many solutions with
+                  each client.
+                </li>
+              </ul>
+            </HistoryColumn>
+          </Flex>
+          <Flex>
+            <DateColumn>
+              <p>Jan 2014 - Aug 2014</p>
+            </DateColumn>
+            <HistoryColumn>
+              <h3>Internships - Graphic Design and Junior Developer</h3>
+              <h4>
+                <em>Diversified Machine Systems & Helium, Inc</em>
+              </h4>
+            </HistoryColumn>
+          </Flex>
+        </Row>
+        <Row>
+          <h2>Education</h2>
+          <Flex>
+            <DateColumn>
+              <p>May 2012 - Aug 2014</p>
+            </DateColumn>
+            <HistoryColumn>
+              <h3>
+                Associates in Multimedia Graphic Design with a focus on Web
+                Development
+              </h3>
+              <h4>
+                <em>Pikes Peak Community College</em>
+              </h4>
+              <p>
+                Learned the process of designing for print and web, along with
+                other college things. Most of my knowledge is self taught.
+              </p>
+              <ul>
+                <li>
+                  Integrated landing pages with back-end software to deliver
+                  filtered, targeted, quality leads to many clients' CRMs
+                </li>
+                <li>
+                  Improved company margins by finding creative, strong
+                  alternatives to expensive services.
+                </li>
+                <li>
+                  Adapted to many managerial and life changes through the length
+                  of employment.
+                </li>
+              </ul>
+            </HistoryColumn>
+          </Flex>
+        </Row>
+        <Row>
+          <p>Want this to go?</p>
+          <Button
+            href="http://res.cloudinary.com/jordan-janzen/image/upload/v1510106401/Jordan_Janzen_CV.pdf"
+            target="_blank"
+            type="cta"
+          >
+            <i className="fa fa-file-text" aria-hidden="true" /> Download My CV
+          </Button>
         </Row>
       </Page>
     );
