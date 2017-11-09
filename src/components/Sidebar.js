@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { adjustHue } from 'polished';
 
-import { colors, typography } from '../theme/variables';
-import { mediaMax } from '../theme/style-utils';
-import Footer from './Footer';
 import Button from './Button';
+import Footer from './Footer';
+
+import { colors, theme, typography } from '../theme/variables';
+import { mediaMax } from '../theme/style-utils';
 
 import JJMark from '../images/JJMark.svg';
 
@@ -93,6 +95,11 @@ const Tagline = styled.h3`
   font-family: ${typography.monospace};
   color: ${colors.black};
   background: ${colors.lightblue};
+  background: linear-gradient(
+    135deg,
+    ${adjustHue(-20, theme.primaryColor)} 0,
+    ${theme.primaryColor} 100%
+  );
   padding: 4px 1em;
   text-align: center;
   width: 100%;
