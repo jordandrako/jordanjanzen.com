@@ -54,23 +54,10 @@ injectGlobal`
     margin-bottom: .8em;
   }
 
-  p {
-    max-width: 40em;
-  }
-
   a {
     color: ${theme.textColor};
     text-decoration: none;
     border-bottom: 2px solid ${theme.secondaryColor};
-
-  @media only screen and (min-width: 800px) {
-    .mobile {
-      display: none;
-    }
-
-    .large {
-      display: block;
-    }
   }
 `;
 
