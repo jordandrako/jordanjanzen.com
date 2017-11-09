@@ -37,6 +37,19 @@ const Img = styled.img`
     return '0';
   }};
   cursor: ${(props) => (props.link ? 'pointer' : null)};
+  ${(props) => {
+    if (props.align) {
+      return `float: ${props.align}; margin-bottom: 1em;`;
+    }
+  }};
+  ${(props) => {
+    if (props.align === 'left') {
+      return `margin-right: 1em;`;
+    }
+    if (props.align === 'right') {
+      return `margin-left: 1em;`;
+    }
+  }};
 `;
 
 const CloudImage = (props) => {
@@ -54,6 +67,8 @@ const CloudImage = (props) => {
     radius,
     bo,
     effects,
+    border,
+    align,
     children,
   } = props;
 
@@ -81,7 +96,8 @@ const CloudImage = (props) => {
     <Img
       src={url}
       alt={name}
-      {...props}
+      border={border}
+      align={align}
       onClick={() =>
         props.link
           ? window.open(
@@ -139,13 +155,15 @@ CloudImage.propTypes = {
   dim: PropTypes.bool,
   link: PropTypes.bool,
   border: PropTypes.bool,
+  align: PropTypes.string,
+  style: PropTypes.object,
 };
 
 CloudImage.defaultProps = {
   format: 'jpg',
   width: 'iw',
   height: 'ih',
-  crop: 'scale',
+  crop: 'limit',
   gravity: 'center',
   opacity: '100',
   angle: '0',
@@ -157,6 +175,8 @@ CloudImage.defaultProps = {
   dim: false,
   link: false,
   border: true,
+  align: null,
+  style: null,
 };
 
 export default CloudImage;
