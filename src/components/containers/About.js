@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import moment from 'moment';
 
 import AddSkillForm from '../AddSkillForm';
 import Button from '../Button';
+import CloudImage from '../CloudImage';
 
 import { Page, Row } from '../../theme/grid';
 import { colors, typography } from '../../theme/variables';
@@ -107,14 +109,85 @@ class About extends Component {
           ) : null}
         </Row>
         <Row>
-          <h3>A bit about me</h3>
+          <h3>A bit about me...</h3>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat
-            consequatur labore voluptate ut voluptatum porro ex doloribus ad,
-            molestias sed! Ducimus molestias cum incidunt eaque cupiditate,
-            mollitia delectus asperiores voluptatum ipsum quibusdam, similique
-            beatae ea facere praesentium libero provident placeat.
+            <CloudImage
+              publicId="Xander_with_finger_paint"
+              name="My son Xander finger painting with our dog Gizmo in the background."
+              align="right"
+              width="200"
+              link
+            />
+            I'm really passionate about design and making everything I touch on
+            the web better. I'm never satisfied with my skillset and am
+            constantly striving to be better and learn as much as I can when the
+            time allows. There isn't time to learn everything though. My wife
+            Lee and I had our son Xander{' '}
+            {moment(20160216, 'YYYYMMDD').fromNow()} and watching him grow and
+            play with our shiba inu Gizmo has been my greatest joy in life.
           </p>
+          <p>
+            Recently I've dived head first into learning React.js and am loving
+            it. So much so I decided to build this portfolio with it to
+            challenge myself. Do you need React to build a <em>simple</em>{' '}
+            portfolio site? <strong>Of course not.</strong> Is actually building
+            something in production the best way to learn something?{' '}
+            <strong>¯\_(ツ)_/¯</strong>
+            <br />You can find more of what I'm learning by{' '}
+            <a
+              href="https://github.com/jordandrako/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              inspecting my GitHub profile
+            </a>.
+          </p>
+          <p>
+            <strong>My worklow: </strong>
+            I have used many systems, programs and workflows over the years,
+            jumping back forth between Windows and Linux. Currently, I'm most
+            comfortable using{' '}
+            <a
+              href="https://code.visualstudio.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              VS Code
+            </a>, complimented by{' '}
+            <a
+              href="https://hyper.is"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Hyperterm
+            </a>{' '}
+            with zsh.
+          </p>
+          <p>
+            <strong>In my spare time</strong> I enjoy being the biggest nerd
+            possible. I build PCs, build home automation systems, manage linux
+            and media servers. Mostly, though, I play PC games. If you'd like to
+            add me on{' '}
+            <a
+              href="https://steamcommunity.com/id/jordandrako/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Steam, here's my community page
+            </a>. I'm also obsessed with making the best coffee possible; my
+            favorite brewing methods are the Chemex, Kalita Wave and my{' '}
+            <a
+              href="https://sca.coffee/certified-home-brewer/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              SCA
+            </a>{' '}
+            certified Behmor Brazen Plus drip machine (like I said, obsessed).
+          </p>
+        </Row>
+        <Row>
+          <h2>Work History</h2>
         </Row>
       </Page>
     );
