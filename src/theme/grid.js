@@ -29,7 +29,7 @@ export const Main = styled.div`
   `};
 
   a {
-    line-height: 0.85em;
+    line-height: 0.9em;
     display: inline-block;
     text-shadow:
       2px 2px ${theme.siteBackground},
@@ -101,6 +101,28 @@ export const Hero = styled(Row)`
     margin: 0 0 1.5em;
   `};
 `;
+
+export const Flex = styled.div`
+  display: flex;
+  flex-direction: ${(props) => (props.column ? 'column' : 'row')};
+  flex-wrap: ${(props) => (props.wrap ? 'wrap' : 'nowrap')};
+  align-items: ${(props) => (props.align ? props.align : null)};
+  justify-content: ${(props) => (props.justify ? props.justify : null)};
+`;
+
+Flex.propTypes = {
+  column: PropTypes.string,
+  wrap: PropTypes.string,
+  align: PropTypes.string,
+  justify: PropTypes.string,
+};
+
+Flex.defaultProps = {
+  column: null,
+  wrap: null,
+  align: null,
+  justify: null,
+};
 
 export const Page = (props) => (
   <DocumentTitle
