@@ -98,6 +98,7 @@ const CloudImage = (props) => {
       alt={name}
       border={border}
       align={align}
+      {...props}
       onClick={() =>
         props.link
           ? window.open(
