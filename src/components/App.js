@@ -119,6 +119,7 @@ class App extends Component {
   }
 
   authHandler(authData) {
+    console.log(authData);
     const uid = authData.user.uid || authData.uid;
     const rootRef = database.ref();
     rootRef.once('value').then((snapshot) => {
