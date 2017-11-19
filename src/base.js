@@ -15,7 +15,6 @@ const staging = {
   databaseURL: 'https://jordan-janzen-staging.firebaseio.com',
 };
 
-
 const app = firebase.initializeApp(staging);
 
 export const database = firebase.database(app);
