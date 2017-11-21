@@ -115,7 +115,7 @@ class Home extends Component {
           </p>
           <Cta>
             <Button
-              href="http://res.cloudinary.com/jordan-janzen/image/upload/v1510106401/Jordan_Janzen_CV.pdf"
+              href="https://res.cloudinary.com/jordan-janzen/image/upload/v1511291826/Jordan_Janzen_CV.pdf"
               target="_blank"
               type="cta"
             >
