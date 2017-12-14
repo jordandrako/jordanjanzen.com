@@ -150,6 +150,7 @@ const Button = (props) => {
         </BtnLink>
       );
     }
+    return <DelBtn {...props} className="fa fa-times-circle close" />;
   }
 
   if (props.href) {
