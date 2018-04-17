@@ -51,9 +51,13 @@ class Observer extends Component {
 
 Observer.propTypes = {
   children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ]).isRequired
+    PropTypes.arrayOf(PropTypes.any),
+    PropTypes.any
+  ])
+}
+
+Observer.defaultProps = {
+  children: null
 }
 
 export default Observer;

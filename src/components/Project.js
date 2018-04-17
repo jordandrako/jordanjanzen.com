@@ -11,6 +11,8 @@ import { toTitleCase } from '../helpers';
 import { colors, theme, typography } from '../theme/variables';
 import { mediaMax } from '../theme/style-utils';
 
+const imageHeight = 250;
+
 const Item = styled.li`
   width: calc(50% - 1em);
   ${mediaMax.tablet`
@@ -26,8 +28,13 @@ const Item = styled.li`
   flex-grow: 1;
 `;
 
+const ThumbnailArea = styled.div`
+  height: ${imageHeight}px;
+`
+
 const Thumbnail = styled.section`
   margin-bottom: 0;
+  height: ${imageHeight}px;
   > .cloud-image {
     display: flex;
     align-items: center;
@@ -144,27 +151,29 @@ class Project extends Component {
       const { name: clientName, industry: clientIndustry } = details.client;
       return (
         <Item key={index} {...this.props}>
-          <Observer>
-            {(isVisible, hasBeenVisible) => hasBeenVisible ? (
-              <Thumbnail>
-                <CloudImage
-                  bg
-                  publicId={imageId}
-                  format={imageFormat}
-                  name={imageName}
-                  width="600"
-                  height="600"
-                  crop="fill"
-                  gravity="north"
-                  background="rgb:000"
-                  effects="e_blur:80"
-                  dim
-                >
-                  <ProjectTitle>{details.name}</ProjectTitle>
-                </CloudImage>
-              </Thumbnail>
-            ) : null}
-          </Observer>
+          <ThumbnailArea>
+            <Observer>
+              {(isVisible, hasBeenVisible) => hasBeenVisible ? (
+                <Thumbnail>
+                  <CloudImage
+                    bg
+                    publicId={imageId}
+                    format={imageFormat}
+                    name={imageName}
+                    width="600"
+                    height={imageHeight}
+                    crop="fill"
+                    gravity="north"
+                    background="rgb:000"
+                    effects="e_blur:80"
+                    dim
+                  >
+                    <ProjectTitle>{details.name}</ProjectTitle>
+                  </CloudImage>
+                </Thumbnail>
+              ) : null}
+            </Observer>
+          </ThumbnailArea>
           <Details>
             <Client>
               <Subheading>Client:</Subheading>
@@ -227,11 +236,12 @@ Project.propTypes = {
   details: PropTypes.object.isRequired,
   index: PropTypes.string.isRequired,
   hasBeenVisible: PropTypes.bool,
-  updateProject: PropTypes.func.isRequired,
+  updateProject: PropTypes.func,
 };
 
 Project.defaultProps = {
-  hasBeenVisible: false
+  hasBeenVisible: false,
+  updateProject: undefined,
 }
 
 export default Project;
