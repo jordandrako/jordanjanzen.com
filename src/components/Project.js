@@ -5,6 +5,7 @@ import { adjustHue } from 'polished';
 
 import CloudImage from './CloudImage';
 import Button from './Button';
+import Observer from './Observer';
 
 import { toTitleCase } from '../helpers';
 import { colors, theme, typography } from '../theme/variables';
@@ -141,26 +142,29 @@ class Project extends Component {
       } = details.images[firstImage];
 
       const { name: clientName, industry: clientIndustry } = details.client;
-
       return (
         <Item key={index} {...this.props}>
-          <Thumbnail>
-            <CloudImage
-              bg
-              publicId={imageId}
-              format={imageFormat}
-              name={imageName}
-              width="600"
-              height="600"
-              crop="fill"
-              gravity="north"
-              background="rgb:000"
-              effects="e_blur:80"
-              dim
-            >
-              <ProjectTitle>{details.name}</ProjectTitle>
-            </CloudImage>
-          </Thumbnail>
+          <Observer>
+            {(isVisible, hasBeenVisible) => hasBeenVisible ? (
+              <Thumbnail>
+                <CloudImage
+                  bg
+                  publicId={imageId}
+                  format={imageFormat}
+                  name={imageName}
+                  width="600"
+                  height="600"
+                  crop="fill"
+                  gravity="north"
+                  background="rgb:000"
+                  effects="e_blur:80"
+                  dim
+                >
+                  <ProjectTitle>{details.name}</ProjectTitle>
+                </CloudImage>
+              </Thumbnail>
+            ) : null}
+          </Observer>
           <Details>
             <Client>
               <Subheading>Client:</Subheading>
@@ -184,7 +188,7 @@ class Project extends Component {
             <li>
               <Button to={`/portfolio/${index}`} small type="primary">
                 <i className="fa fa-search" aria-hidden="true" /> More Details
-              </Button>
+                  </Button>
             </li>
             {details.link !== '' ? (
               <li>
@@ -196,7 +200,7 @@ class Project extends Component {
                 >
                   <i className="fa fa-external-link" aria-hidden="true" /> Visit
                   Site
-                </Button>
+                    </Button>
               </li>
             ) : null}
             {details.repo !== '' ? (
@@ -208,7 +212,7 @@ class Project extends Component {
                   type="secondary"
                 >
                   <i className="fa fa-github" aria-hidden="true" /> View Repo
-                </Button>
+                    </Button>
               </li>
             ) : null}
           </Buttons>
@@ -222,6 +226,12 @@ class Project extends Component {
 Project.propTypes = {
   details: PropTypes.object.isRequired,
   index: PropTypes.string.isRequired,
+  hasBeenVisible: PropTypes.bool,
+  updateProject: PropTypes.func.isRequired,
 };
+
+Project.defaultProps = {
+  hasBeenVisible: false
+}
 
 export default Project;
