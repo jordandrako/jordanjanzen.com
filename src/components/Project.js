@@ -11,7 +11,7 @@ import { toTitleCase } from '../helpers';
 import { colors, theme, typography } from '../theme/variables';
 import { mediaMax } from '../theme/style-utils';
 
-const imageHeight = 250;
+const imageHeight = '250';
 
 const Item = styled.li`
   width: calc(50% - 1em);
