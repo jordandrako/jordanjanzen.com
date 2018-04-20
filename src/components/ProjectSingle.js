@@ -10,7 +10,7 @@ import { Row } from '../theme/grid';
 import { colors, theme, typography } from '../theme/variables';
 import { mediaMax } from '../theme/style-utils';
 
-const ClickOutside = styled(Link)`
+const ClickOutside = styled(Link) `
   background: rgba(0, 0, 0, 0.5);
   position: fixed;
   top: 0;
@@ -95,7 +95,7 @@ const Title = styled.h2`
   line-height: 1;
 `;
 
-const Content = styled(Row)`
+const Content = styled(Row) `
   overflow-y: scroll;
   margin: 0;
   padding: 1em;
@@ -111,12 +111,27 @@ class ProjectSingle extends Component {
     };
 
     this.removeProject = this.removeProject.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+  }
+
+  componentWillReceiveProps(newProps) {
+    if (newProps.index !== this.props.index) {
+      this.setState({ delete: false })
+    }
   }
 
   removeProject(key) {
     const state = { ...this.state };
     this.setState({ ...state, delete: false });
     this.props.removeProject(key);
+    return this.props.history.push('/portfolio');
+  }
+
+  handleDelete(index) {
+    if (this.state.delete === false) {
+      return this.setState({ delete: true });
+    }
+    return this.removeProject(index);
   }
 
   render() {
@@ -165,14 +180,15 @@ class ProjectSingle extends Component {
                   <Button
                     href={details.link}
                     target="_blank"
+                    rel="noopener noreferrer"
                     small
                     type="secondary"
                   >
                     {this.props.isMobile ? (
                       ''
                     ) : (
-                      <i className="fa fa-external-link" aria-hidden="true" />
-                    )}{' '}
+                        <i className="fa fa-external-link" aria-hidden="true" />
+                      )}{' '}
                     Visit Site
                   </Button>
                 ) : null}
@@ -180,6 +196,7 @@ class ProjectSingle extends Component {
                   <Button
                     href={details.repo}
                     target="_blank"
+                    rel="noopener noreferrer"
                     small
                     type="secondary"
                   >
@@ -191,11 +208,7 @@ class ProjectSingle extends Component {
                     small
                     type="secondary"
                     bg={colors.red}
-                    onClick={() => {
-                      !this.state.delete
-                        ? this.setState({ delete: true })
-                        : this.removeProject(index);
-                    }}
+                    onClick={() => this.handleDelete(index)}
                   >
                     {this.state.delete ? 'Confirm?' : 'Delete'}
                   </Button>
@@ -221,10 +234,12 @@ ProjectSingle.propTypes = {
   projects: PropTypes.object.isRequired,
   isMobile: PropTypes.bool.isRequired,
   removeProject: PropTypes.func.isRequired,
+  history: PropTypes.func,
 };
 
 ProjectSingle.defaultProps = {
   uid: null,
+  history: undefined
 };
 
 export default ProjectSingle;
