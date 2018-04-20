@@ -132,6 +132,7 @@ class ProjectSingle extends Component {
       return this.setState({ delete: true });
     }
     return this.removeProject(index);
+
   }
 
   render() {
@@ -145,9 +146,9 @@ class ProjectSingle extends Component {
 
     const prevIndex = current === 0 ? total : current - 1;
 
-    const nextId = Object.keys(projects)[nextIndex];
+    const prevId = Object.keys(projects)[nextIndex];
 
-    const prevId = Object.keys(projects)[prevIndex];
+    const nextId = Object.keys(projects)[prevIndex];
 
     if (details && index) {
       return (
