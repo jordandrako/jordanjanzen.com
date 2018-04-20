@@ -11,58 +11,60 @@ import { Page, Row, Flex } from '../../theme/grid';
 import { colors, typography } from '../../theme/variables';
 import { mediaMin } from '../../theme/style-utils';
 
-const SkillsRow = styled(Row)`
-  display: flex;
-  flex-wrap: wrap;
+const SkillsRow = styled(Row) `
+display: flex;
+flex-wrap: wrap;
 `;
 
 const SkillsColumn = styled.ul`
-  flex: 1;
-  padding: 0;
-  margin: 0 0 1em;
-  list-style: none;
-  min-width: 200px;
+flex: 1;
+padding: 0;
+margin: 0 0 1em;
+list-style: none;
+min-width: 200px;
 
-  h3,
-  li {
-    text-align: center;
+h3,
+li {
+  text-align: center;
+}
+
+h3 {
+  color: ${colors.blue};
+  padding: 0.5em 0;
+  margin: 0 0 0.75em 0;
+  border-bottom: 2px solid ${colors.blue};
+}
+
+li {
+  font-family: ${typography.monospace};
+  line-height: 1.5;
+  padding: 0 1em;
+  margin: 1em 0;
+  font-size: 0.85rem;
+
+  ${mediaMin.phone`
+  font-size: 0.75rem;
+  `};
+
+  &:last-child {
+    margin-bottom: 0;
   }
-
-  h3 {
-    color: ${colors.blue};
-    padding: 0.5em 0;
-    margin: 0 0 0.75em 0;
-    border-bottom: 2px solid ${colors.blue};
-  }
-
-  li {
-    font-family: ${typography.monospace};
-    line-height: 1.5;
-    padding: 0 1em;
-    margin: 1em 0;
-    font-size: 0.85rem;
-
-    ${mediaMin.phone`
-      font-size: 0.75rem;
-    `};
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
+}
 `;
 
 const DateColumn = styled.div`
-  flex: 1;
-  padding: 1em;
-  border-top: 2px solid ${colors.blue};
-  border-right: 2px solid ${colors.blue};
+flex: 1;
+padding: 1em;
+border-top: 2px solid ${colors.blue};
+border-right: 2px solid ${colors.blue};
 `;
 
+const HistoryRow = styled(Flex) ``;
+
 const HistoryColumn = styled.div`
-  flex: 4;
-  padding: 1em;
-  border-top: 2px solid ${colors.blue};
+flex: 4;
+padding: 1em;
+border-top: 2px solid ${colors.blue};
 `;
 
 class About extends Component {
@@ -172,9 +174,16 @@ class About extends Component {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Hyperterm
+              Hyper
             </a>{' '}
-            with zsh.
+            with zsh or{' '}
+            <a
+              href="http://cmder.net"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Cmder
+            </a>.
           </p>
           <p>
             <strong>In my spare time</strong> I enjoy being the biggest nerd
@@ -201,7 +210,50 @@ class About extends Component {
         </Row>
         <Row>
           <h2>Work History</h2>
-          <Flex>
+          <HistoryRow>
+            <DateColumn>
+              <p>Jan 2018 - Now</p>
+            </DateColumn>
+            <HistoryColumn>
+              <h3>UX Engineer</h3>
+              <h4>
+                <em>
+                  <a
+                    href="https://microsoft.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Microsoft
+                  </a> through <a
+                    href="https://aquent.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Aquent
+                  </a>
+                </em>
+              </h4>
+              <p>
+                Member the OneDrive and SharePoint Design (ODSP) team using TypeScript, React, and cutting edge techniques to create open source software and Microsoft experiences. The primary responsibility is developing <a
+                  href="https://github.com/OfficeDev/office-ui-fabric-react"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >Office UI Fabric React</a>, the official front-end framework for building experiences that fit seamlessly into Office and Office 365.
+              </p>
+              <ul>
+                <li>
+                  Adhere to strict design language guidelines.
+                </li>
+                <li>
+                  Develop within a large codebase that is integrated into dozens of official Microsoft and 3rd-party products.
+                </li>
+                <li>
+                  Work with a large team of people with a wider range of skills and backgrounds.
+                </li>
+              </ul>
+            </HistoryColumn>
+          </HistoryRow>
+          <HistoryRow>
             <DateColumn>
               <p>Nov 2015 - Nov 2017</p>
             </DateColumn>
@@ -230,7 +282,7 @@ class About extends Component {
               <ul>
                 <li>
                   Integrated landing pages with back-end software to deliver
-                  filtered, targeted, quality leads to many clients' CRMs
+                  filtered, targeted, quality leads to many clients' CRMs.
                 </li>
                 <li>
                   Improved company margins by finding creative, strong
@@ -242,8 +294,8 @@ class About extends Component {
                 </li>
               </ul>
             </HistoryColumn>
-          </Flex>
-          <Flex>
+          </HistoryRow>
+          <HistoryRow>
             <DateColumn>
               <p>Aug 2014 - Nov 2015</p>
             </DateColumn>
@@ -276,8 +328,8 @@ class About extends Component {
                 </li>
               </ul>
             </HistoryColumn>
-          </Flex>
-          <Flex>
+          </HistoryRow>
+          <HistoryRow>
             <DateColumn>
               <p>Jan 2014 - Aug 2014</p>
             </DateColumn>
@@ -287,7 +339,7 @@ class About extends Component {
                 <em>Diversified Machine Systems & Helium, Inc</em>
               </h4>
             </HistoryColumn>
-          </Flex>
+          </HistoryRow>
         </Row>
         <Row>
           <h2>Education</h2>
