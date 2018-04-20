@@ -7,11 +7,11 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "predeploy": "npm run build",
+    "predeploy": "cross-env REACT_APP_DATABASE=production npm run build",
+    "prestaging": "npm run build",
     "deploy": "aws s3 sync build/ s3://www.jordanjanzen.com --cache-control max-age=172800",
-    "postdeploy": "aws cloudfront create-invalidation --distribution-id E1SASUQHSLUTW3 --paths /index.html",
-    "prestaging": "npm run predeploy",
     "staging": "aws s3 sync build/ s3://staging.jordanjanzen.com --cache-control max-age=180",
+    "postdeploy": "aws cloudfront create-invalidation --distribution-id E1SASUQHSLUTW3 --paths /index.html",
     "poststaging": "aws cloudfront create-invalidation --distribution-id E2R8NA2ILW4G96 --paths /index.html"
   },
   "dependencies": {
@@ -39,6 +39,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
+    "cross-env": "^5.1.4",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-config-prettier": "^2.6.0",
