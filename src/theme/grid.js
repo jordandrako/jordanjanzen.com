@@ -92,7 +92,7 @@ Row.defaultProps = {
   child: false,
 };
 
-export const Hero = styled(Row)`
+export const Hero = styled(Row) `
   margin: 0 0 2.5em;
   margin-top: 0 !important;
   max-width: calc(1000px + 4em);
@@ -106,8 +106,8 @@ export const Flex = styled.div`
   display: flex;
   flex-direction: ${(props) => (props.column ? 'column' : 'row')};
   flex-wrap: ${(props) => (props.wrap ? 'wrap' : 'nowrap')};
-  align-items: ${(props) => (props.align ? props.align : null)};
-  justify-content: ${(props) => (props.justify ? props.justify : null)};
+  align-items: ${(props) => (props.align ? props.align : undefined)};
+  justify-content: ${(props) => (props.justify ? props.justify : undefined)};
 `;
 
 Flex.propTypes = {
@@ -118,10 +118,10 @@ Flex.propTypes = {
 };
 
 Flex.defaultProps = {
-  column: null,
-  wrap: null,
-  align: null,
-  justify: null,
+  column: undefined,
+  wrap: undefined,
+  align: undefined,
+  justify: undefined,
 };
 
 export const Page = (props) => (
