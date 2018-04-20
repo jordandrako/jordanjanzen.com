@@ -27,6 +27,7 @@ class App extends Component {
     this.authenticate = this.authenticate.bind(this);
     this.authHandler = this.authHandler.bind(this);
     this.logout = this.logout.bind(this);
+    this.changeRef = this.setRef.bind(this);
 
     // Database management
     this.addTodo = this.addTodo.bind(this);
@@ -45,26 +46,14 @@ class App extends Component {
       projects: {},
       skills: {},
       uid: null,
-      owner: null,
       isMobile: window.innerWidth <= sizes.tablet,
     };
+
+    this.ref = undefined;
   }
 
   componentWillMount() {
-    this.ref = [
-      base.syncState('todos', {
-        context: this,
-        state: 'todos',
-      }),
-      base.syncState('projects', {
-        context: this,
-        state: 'projects',
-      }),
-      base.syncState('skills', {
-        context: this,
-        state: 'skills',
-      }),
-    ];
+    this.setRef('pullRef')
 
     const localStorageRef = {
       todos: localStorage.getItem('todos'),
@@ -99,6 +88,51 @@ class App extends Component {
     base.removeBinding(this.ref);
   }
 
+  setRef(ref) {
+    if (ref !== 'pullRef' && ref !== 'syncRef') {
+      throw Error(`Ref is not correctly defined. Must be either 'pullRef' or 'syncRef'. Was: ${ref}`);
+    }
+
+    if (this.ref) {
+      base.removeBinding(this.ref);
+      this.ref = undefined;
+    }
+
+    if (ref === 'pullRef') {
+      this.ref = [
+        base.bindToState('todos', {
+          context: this,
+          state: 'todos',
+        }),
+        base.bindToState('projects', {
+          context: this,
+          state: 'projects',
+        }),
+        base.bindToState('skills', {
+          context: this,
+          state: 'skills',
+        }),
+      ];
+    }
+
+    if (ref === 'syncRef') {
+      this.ref = [
+        base.syncState('todos', {
+          context: this,
+          state: 'todos',
+        }),
+        base.syncState('projects', {
+          context: this,
+          state: 'projects',
+        }),
+        base.syncState('skills', {
+          context: this,
+          state: 'skills',
+        }),
+      ]
+    }
+  }
+
   updateSize() {
     if (window.innerWidth <= sizes.tablet) {
       this.setState({ isMobile: true });
@@ -112,16 +146,19 @@ class App extends Component {
   }
 
   logout() {
+    this.setRef('pullRef');
     auth.signOut().then(() => {
       this.setState({ uid: null });
-      console.log('Logout');
     });
   }
 
   authHandler(authData) {
-    console.log(authData);
     const uid = authData.user.uid || authData.uid;
     const rootRef = database.ref();
+    const successfulLogin = () => {
+      this.setRef('syncRef');
+      this.setState({ uid });
+    }
     rootRef.once('value').then((snapshot) => {
       const data = snapshot.val() || {};
 
@@ -129,16 +166,11 @@ class App extends Component {
         rootRef.set({
           ...data,
           owner: uid,
-        });
-        this.setState({
-          uid,
-          owner: data.owner || uid,
-        });
+        })
+          .then(() => { successfulLogin() })
+          .catch((error) => console.error(error));
       } else if (data.owner === uid) {
-        this.setState({
-          uid,
-          owner: data.owner || uid,
-        });
+        successfulLogin()
       } else {
         console.error('You are not the owner of this site.');
       }
