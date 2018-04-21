@@ -37,25 +37,30 @@ class TodoList extends Component {
   }
 
   renderTodo(showComplete) {
-    return Object.keys(this.props.todos).map((key) => {
+    const {
+      removeTodo,
+      todos,
+      updateTodo,
+    } = this.props;
+    return Object.keys(todos).map((key) => {
       if (showComplete) {
         return (
           <Todo
             key={key}
             index={key}
-            details={this.props.todos[key]}
-            updateTodo={this.props.updateTodo}
-            removeTodo={this.props.removeTodo}
+            details={todos[key]}
+            updateTodo={updateTodo}
+            removeTodo={removeTodo}
           />
         );
-      } else if (!this.props.todos[key].complete) {
+      } else if (!todos[key].complete) {
         return (
           <Todo
             key={key}
             index={key}
-            details={this.props.todos[key]}
-            updateTodo={this.props.updateTodo}
-            removeTodo={this.props.removeTodo}
+            details={todos[key]}
+            updateTodo={updateTodo}
+            removeTodo={removeTodo}
           />
         );
       }
@@ -64,10 +69,15 @@ class TodoList extends Component {
   }
 
   render() {
+    const {
+      addTodo,
+      todos,
+    } = this.props;
+
     return (
       <Page title="Todo List">
         <Row>
-          <AddTodoForm addTodo={this.props.addTodo} />
+          <AddTodoForm addTodo={addTodo} />
         </Row>
 
         <Row>
@@ -86,7 +96,7 @@ class TodoList extends Component {
               Show completed todos?
             </label>
           </form>
-          <ListOfTodos>{this.renderTodo(this.state.showComplete)}</ListOfTodos>
+          <ListOfTodos>{todos && this.renderTodo(this.state.showComplete)}</ListOfTodos>
         </Row>
 
         <Row>

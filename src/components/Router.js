@@ -69,8 +69,8 @@ const Router = (props) => (
             removeTodo={props.removeTodo}
           />
         ) : (
-          <AsyncUnauthenticated />
-        )}
+            <AsyncUnauthenticated />
+          )}
     />
     {/* Unmatched URLs */}
     <Route component={AsyncNotFound} />
@@ -90,7 +90,6 @@ Router.propTypes = {
 
   addSkill: PropTypes.func.isRequired,
   removeSkill: PropTypes.func.isRequired,
-  // updateSkill: PropTypes.func.isRequired,
 
   addTodo: PropTypes.func.isRequired,
   updateTodo: PropTypes.func.isRequired,

@@ -53,21 +53,21 @@ class App extends Component {
   }
 
   componentWillMount() {
-    this.setRef('pullRef')
+    this.setRef('syncRef').catch((err) => console.error(err))
 
-    const localStorageRef = {
-      todos: localStorage.getItem('todos'),
-      projects: localStorage.getItem('projects'),
-      skills: localStorage.getItem('skills'),
-    };
+    // const localStorageRef = {
+    //   todos: localStorage.getItem('todos'),
+    //   projects: localStorage.getItem('projects'),
+    //   skills: localStorage.getItem('skills'),
+    // };
 
-    if (localStorageRef) {
-      this.setState({
-        todos: JSON.parse(localStorageRef.todos),
-        projects: JSON.parse(localStorageRef.projects),
-        skills: JSON.parse(localStorageRef.skills),
-      });
-    }
+    // if (localStorageRef) {
+    //   this.setState({
+    //     todos: JSON.parse(localStorageRef.todos),
+    //     projects: JSON.parse(localStorageRef.projects),
+    //     skills: JSON.parse(localStorageRef.skills),
+    //   });
+    // }
   }
 
   componentDidMount() {
@@ -89,48 +89,49 @@ class App extends Component {
   }
 
   setRef(ref) {
-    if (ref !== 'pullRef' && ref !== 'syncRef') {
-      throw Error(`Ref is not correctly defined. Must be either 'pullRef' or 'syncRef'. Was: ${ref}`);
-    }
+    return new Promise((resolve, reject) => {
+      if (ref !== 'pullRef' && ref !== 'syncRef') {
+        reject(`Ref is not correctly defined. Must be either 'pullRef' or 'syncRef'. Was: ${ref}`);
+      }
+      if (this.ref) {
+        base.removeBinding(this.ref);
+        this.ref = undefined;
+      }
+      if (ref === 'pullRef') {
+        this.ref = [
+          base.bindToState('todos', {
+            context: this,
+            state: 'todos',
+          }),
+          base.bindToState('projects', {
+            context: this,
+            state: 'projects',
+          }),
+          base.bindToState('skills', {
+            context: this,
+            state: 'skills',
+          }),
+        ];
+      }
 
-    if (this.ref) {
-      base.removeBinding(this.ref);
-      this.ref = undefined;
-    }
-
-    if (ref === 'pullRef') {
-      this.ref = [
-        base.bindToState('todos', {
-          context: this,
-          state: 'todos',
-        }),
-        base.bindToState('projects', {
-          context: this,
-          state: 'projects',
-        }),
-        base.bindToState('skills', {
-          context: this,
-          state: 'skills',
-        }),
-      ];
-    }
-
-    if (ref === 'syncRef') {
-      this.ref = [
-        base.syncState('todos', {
-          context: this,
-          state: 'todos',
-        }),
-        base.syncState('projects', {
-          context: this,
-          state: 'projects',
-        }),
-        base.syncState('skills', {
-          context: this,
-          state: 'skills',
-        }),
-      ]
-    }
+      if (ref === 'syncRef') {
+        this.ref = [
+          base.syncState('todos', {
+            context: this,
+            state: 'todos',
+          }),
+          base.syncState('projects', {
+            context: this,
+            state: 'projects',
+          }),
+          base.syncState('skills', {
+            context: this,
+            state: 'skills',
+          }),
+        ]
+      }
+      resolve('Ref (re)set');
+    })
   }
 
   updateSize() {
@@ -142,14 +143,17 @@ class App extends Component {
   }
 
   authenticate() {
-    auth.signInWithPopup(provider).then((result) => this.authHandler(result));
+    auth.signInWithPopup(provider)
+      .then((result) => this.authHandler(result))
+      .catch((error) => console.error(error));
   }
 
-  logout() {
-    this.setRef('pullRef');
-    auth.signOut().then(() => {
-      this.setState({ uid: null });
-    });
+  async logout() {
+    await this.setRef('pullRef').then(
+      await auth.signOut().then(() => {
+        this.setState({ uid: null });
+      })
+    ).catch((error) => console.error(error))
   }
 
   authHandler(authData) {
@@ -270,8 +274,6 @@ class App extends Component {
           updateSkill={this.updateSkill}
           removeSkill={this.removeSkill}
           isMobile={this.state.isMobile}
-          login={this.authenticate}
-          logout={this.logout}
         />
         {this.state.isMobile ? (
           <Footer

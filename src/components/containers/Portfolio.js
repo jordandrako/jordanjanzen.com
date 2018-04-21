@@ -28,28 +28,38 @@ class Portfolio extends Component {
   }
 
   render() {
-    return (
+    const {
+      addProject,
+      isMobile,
+      projects,
+      removeProject,
+      skills,
+      uid,
+      updateProject,
+    } = this.props;
+
+    return projects ? (
       <Page title="Portfolio">
         <Row>
           <ListOfProjects>
-            {Object.keys(this.props.projects)
+            {Object.keys(projects)
               .reverse()
               .map((key) => (
                 <Project
                   key={key}
                   index={key}
-                  details={this.props.projects[key]}
-                  uid={this.props.uid}
-                  updateProject={this.props.updateProject}
+                  details={projects[key]}
+                  uid={uid}
+                  updateProject={updateProject}
                 />
               ))}
           </ListOfProjects>
         </Row>
-        {this.props.uid ? (
+        {(uid && skills) ? (
           <Row>
             <AddProjectForm
-              addProject={this.props.addProject}
-              skills={this.props.skills}
+              addProject={addProject}
+              skills={skills}
             />
           </Row>
         ) : null}
@@ -58,19 +68,19 @@ class Portfolio extends Component {
           path="/portfolio/:projectId"
           render={(props) => (
             <ProjectSingle
-              uid={this.props.uid}
-              isMobile={this.props.isMobile}
-              projects={this.props.projects}
+              uid={uid}
+              isMobile={isMobile}
+              projects={projects}
               index={props.match.params.projectId}
-              details={this.props.projects[props.match.params.projectId]}
-              updateProject={this.props.updateProject}
-              removeProject={this.props.removeProject}
+              details={projects[props.match.params.projectId]}
+              updateProject={updateProject}
+              removeProject={removeProject}
               {...props}
             />
           )}
         />
       </Page>
-    );
+    ) : undefined;
   }
 }
 

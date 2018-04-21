@@ -87,10 +87,12 @@ class Home extends Component {
   }
 
   render() {
+    const { projects, isMobile } = this.props;
+
     const HeroContent = (
       <OuterHero>
         <InnerHero>
-          {this.props.isMobile ? (
+          {isMobile ? (
             <CloudImage
               publicId="Jordan_Headshot"
               format="jpg"
@@ -128,13 +130,13 @@ class Home extends Component {
       </OuterHero>
     );
 
-    const projectIndex = Object.keys(this.props.projects).length - 1;
-    const projectKey = Object.keys(this.props.projects)[projectIndex];
+    const projectIndex = projects && Object.keys(projects).length - 1;
+    const projectKey = projects && Object.keys(projects)[projectIndex];
 
     return (
       <Page title="Home">
         <Hero>
-          {!this.props.isMobile ? (
+          {!isMobile ? (
             <CloudImage
               publicId="Jordan_Headshot_fade"
               format="png"
@@ -147,15 +149,15 @@ class Home extends Component {
               {HeroContent}
             </CloudImage>
           ) : (
-            HeroContent
-          )}
+              HeroContent
+            )}
         </Hero>
         <Row>
           <h2>My latest project</h2>
           {projectKey ? (
             <Project
               index={projectKey}
-              details={this.props.projects[projectKey]}
+              details={projects[projectKey]}
               style={{ margin: '0 0 1em', width: '100%' }}
             />
           ) : null}

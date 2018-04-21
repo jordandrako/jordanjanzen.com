@@ -99,6 +99,8 @@ class About extends Component {
   }
 
   render() {
+    const { skills, uid, addSkill } = this.props;
+
     return (
       <Page title="About">
         <Row>
@@ -106,20 +108,20 @@ class About extends Component {
           <SkillsRow child>
             <SkillsColumn>
               <h3>Core</h3>
-              {this.renderList('core')}
+              {skills && this.renderList('core')}
             </SkillsColumn>
             <SkillsColumn>
               <h3>Libraries</h3>
-              {this.renderList('library')}
+              {skills && this.renderList('library')}
             </SkillsColumn>
             <SkillsColumn>
               <h3>Design</h3>
-              {this.renderList('design')}
+              {skills && this.renderList('design')}
             </SkillsColumn>
           </SkillsRow>
-          {this.props.uid ? (
+          {uid ? (
             <Row child>
-              <AddSkillForm addSkill={this.props.addSkill} />
+              <AddSkillForm addSkill={addSkill} />
             </Row>
           ) : null}
         </Row>
