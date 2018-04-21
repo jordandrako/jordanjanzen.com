@@ -53,21 +53,21 @@ class App extends Component {
   }
 
   componentWillMount() {
-    this.setRef('syncRef').catch((err) => console.error(err))
+    this.setRef('pullRef').catch((err) => console.error(err))
 
-    // const localStorageRef = {
-    //   todos: localStorage.getItem('todos'),
-    //   projects: localStorage.getItem('projects'),
-    //   skills: localStorage.getItem('skills'),
-    // };
+    const localStorageRef = {
+      todos: localStorage.getItem('todos'),
+      projects: localStorage.getItem('projects'),
+      skills: localStorage.getItem('skills'),
+    };
 
-    // if (localStorageRef) {
-    //   this.setState({
-    //     todos: JSON.parse(localStorageRef.todos),
-    //     projects: JSON.parse(localStorageRef.projects),
-    //     skills: JSON.parse(localStorageRef.skills),
-    //   });
-    // }
+    if (localStorageRef) {
+      this.setState({
+        todos: JSON.parse(localStorageRef.todos),
+        projects: JSON.parse(localStorageRef.projects),
+        skills: JSON.parse(localStorageRef.skills),
+      });
+    }
   }
 
   componentDidMount() {
