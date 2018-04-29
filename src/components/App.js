@@ -69,6 +69,8 @@ class App extends Component {
         skills: JSON.parse(localStorageRef.skills)
       });
     }
+
+    window.addEventListener('resize', this.updateSize);
   }
 
   componentDidMount() {
@@ -87,6 +89,7 @@ class App extends Component {
 
   componentWillUnmount() {
     base.removeBinding(this.ref);
+    window.removeEventListener('resize');
   }
 
   setRef(ref) {
@@ -135,10 +138,10 @@ class App extends Component {
             context: this,
             then(data) {
               this.setState({ secrets: data });
-      }
-    })
+            }
+          })
         ];
-  }
+      }
       resolve('Ref (re)set');
     });
   }
@@ -161,12 +164,12 @@ class App extends Component {
   async logout() {
     await this.setRef('unauthRef')
       .then(
-      await auth.signOut().then(() => {
+        await auth.signOut().then(() => {
           this.setState({
             uid: null,
             secrets: {}
           });
-      })
+        })
       )
       .catch((error) => console.error(error));
   }
@@ -184,12 +187,12 @@ class App extends Component {
       if (!data.owner) {
         rootRef
           .set({
-          ...data,
+            ...data,
             owner: uid
           })
           .then(() => {
             successfulLogin();
-        })
+          })
           .catch((error) => console.error(error));
       } else if (data.owner === uid) {
         successfulLogin();
@@ -270,7 +273,6 @@ class App extends Component {
   }
 
   render() {
-    window.addEventListener('resize', this.updateSize);
     return (
       <Wrapper className="App wrapper">
         <Sidebar
