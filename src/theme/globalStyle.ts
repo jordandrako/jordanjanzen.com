@@ -1,17 +1,18 @@
 import { injectGlobal } from 'styled-components';
 import styledNormalize from 'styled-normalize';
 
-import { theme, typography } from './variables';
 import { mediaMax } from './style-utils';
-import FiraCode from './fonts/FiraCode-Regular.ttf';
+import { theme, typography } from './variables';
+
+// import FiraCodeRegularTtf from './fonts/FiraCode-Regular.ttf';
 
 /* eslint-disable */
-injectGlobal`
+export const globalStyle = injectGlobal`
   ${styledNormalize}
 
   @font-face {
     font-family: "FiraCode";
-    src: url(${FiraCode});
+    src: url('./fonts/FiraCode-Regular.ttf);
     font-weight: normal;
     font-style: normal;
     font-feature-settings: "calt" 1;
@@ -60,5 +61,3 @@ injectGlobal`
     border-bottom: 2px solid ${theme.secondaryColor};
   }
 `;
-
-export default injectGlobal;
