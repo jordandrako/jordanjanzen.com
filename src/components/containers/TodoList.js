@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import AddTodoForm from '../AddTodoForm';
+import AddTodoForm from '../Forms/AddTodoForm';
 import Todo from '../Todo';
 
 import { Page, Row } from '../../theme/grid';
@@ -28,7 +28,7 @@ class TodoList extends Component {
     this.renderTodo = this.renderTodo.bind(this);
 
     this.state = {
-      showComplete: false,
+      showComplete: false
     };
   }
 
@@ -37,11 +37,7 @@ class TodoList extends Component {
   }
 
   renderTodo(showComplete) {
-    const {
-      removeTodo,
-      todos,
-      updateTodo,
-    } = this.props;
+    const { removeTodo, todos, updateTodo } = this.props;
     return Object.keys(todos).map((key) => {
       if (showComplete) {
         return (
@@ -69,10 +65,7 @@ class TodoList extends Component {
   }
 
   render() {
-    const {
-      addTodo,
-      todos,
-    } = this.props;
+    const { addTodo, todos } = this.props;
 
     return (
       <Page title="Todo List">
@@ -96,7 +89,9 @@ class TodoList extends Component {
               Show completed todos?
             </label>
           </form>
-          <ListOfTodos>{todos && this.renderTodo(this.state.showComplete)}</ListOfTodos>
+          <ListOfTodos>
+            {todos && this.renderTodo(this.state.showComplete)}
+          </ListOfTodos>
         </Row>
 
         <Row>
@@ -149,7 +144,7 @@ TodoList.propTypes = {
   todos: PropTypes.object.isRequired,
   addTodo: PropTypes.func.isRequired,
   updateTodo: PropTypes.func.isRequired,
-  removeTodo: PropTypes.func.isRequired,
+  removeTodo: PropTypes.func.isRequired
 };
 
 export default TodoList;
