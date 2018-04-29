@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { adjustHue } from 'polished';
 
@@ -28,9 +29,12 @@ const Item = styled.li`
   flex-grow: 1;
 `;
 
-const ThumbnailArea = styled.div`
-  height: ${imageHeight}px;
-`
+const ThumbnailLink = styled(Link)`
+  line-height: unset !important;
+  text-shadow: none !important;
+  color: unset !important;
+  border: none !important;
+`;
 
 // const ThumbnailArea = styled.div`
 //   height: ${imageHeight}px;
@@ -137,7 +141,7 @@ class Project extends Component {
   handleChange(e, key) {
     const updatedProp = {
       [e.target.name]:
-        e.target.type === 'checkbox' ? e.target.checked : e.target.value,
+        e.target.type === 'checkbox' ? e.target.checked : e.target.value
     };
     this.props.updateProject(key, updatedProp);
   }
@@ -149,36 +153,38 @@ class Project extends Component {
       const {
         id: imageId,
         format: imageFormat,
-        name: imageName,
+        name: imageName
       } = details.images[firstImage];
 
       const { name: clientName, industry: clientIndustry } = details.client;
       return (
         <Item key={index} {...this.props}>
+          <ThumbnailLink to={`/portfolio/${index}`}>
             {/* <ThumbnailArea>
-            <Observer>
+              <Observer>
                 {(isVisible, hasBeenVisible) =>
                   hasBeenVisible ? ( */}
-                <Thumbnail>
-                  <CloudImage
-                    bg
-                    publicId={imageId}
-                    format={imageFormat}
-                    name={imageName}
-                    width="600"
-                    height={imageHeight}
-                    crop="fill"
-                    gravity="north"
-                    background="rgb:000"
-                    effects="e_blur:80"
-                    dim
-                  >
-                    <ProjectTitle>{details.name}</ProjectTitle>
-                  </CloudImage>
-                </Thumbnail>
+            <Thumbnail>
+              <CloudImage
+                bg
+                publicId={imageId}
+                format={imageFormat}
+                name={imageName}
+                width="600"
+                height={imageHeight}
+                crop="fill"
+                gravity="north"
+                background="rgb:000"
+                effects="e_blur:80"
+                dim
+              >
+                <ProjectTitle>{details.name}</ProjectTitle>
+              </CloudImage>
+            </Thumbnail>
             {/* ) : null}
-            </Observer>
+              </Observer>
             </ThumbnailArea> */}
+          </ThumbnailLink>
           <Details>
             <Client>
               <Subheading>Client:</Subheading>
@@ -202,7 +208,7 @@ class Project extends Component {
             <li>
               <Button to={`/portfolio/${index}`} small type="primary">
                 <i className="fa fa-search" aria-hidden="true" /> More Details
-                  </Button>
+              </Button>
             </li>
             {details.link !== '' ? (
               <li>
@@ -214,7 +220,7 @@ class Project extends Component {
                 >
                   <i className="fa fa-external-link" aria-hidden="true" /> Visit
                   Site
-                    </Button>
+                </Button>
               </li>
             ) : null}
             {details.repo !== '' ? (
@@ -226,7 +232,7 @@ class Project extends Component {
                   type="secondary"
                 >
                   <i className="fa fa-github" aria-hidden="true" /> View Repo
-                    </Button>
+                </Button>
               </li>
             ) : null}
           </Buttons>
@@ -241,12 +247,12 @@ Project.propTypes = {
   details: PropTypes.object.isRequired,
   index: PropTypes.string.isRequired,
   hasBeenVisible: PropTypes.bool,
-  updateProject: PropTypes.func,
+  updateProject: PropTypes.func
 };
 
 Project.defaultProps = {
   hasBeenVisible: false,
-  updateProject: undefined,
-}
+  updateProject: undefined
+};
 
 export default Project;
