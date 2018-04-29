@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { HashRouter as Router } from 'react-router-dom';
 import ReactGA from 'react-ga';
+import { HashRouter as Router } from 'react-router-dom';
 
 import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
@@ -15,6 +15,6 @@ render(
   <Router>
     <App />
   </Router>,
-  document.getElementById('root'),
+  document.getElementById('root') as HTMLElement
 );
 registerServiceWorker();
