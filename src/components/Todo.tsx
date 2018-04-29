@@ -89,8 +89,8 @@ const Item = styled.li`
 `;
 
 class Todo extends Component {
-  constructor() {
-    super();
+  public constructor(props: any) {
+    super(props);
     this.handleChange = this.handleChange.bind(this);
     this.renderTodo = this.renderTodo.bind(this);
   }
@@ -182,7 +182,7 @@ class Todo extends Component {
     );
   }
 
-  render() {
+  public render(): JSX.Element {
     return this.renderTodo();
   }
 }

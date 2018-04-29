@@ -64,7 +64,7 @@ class TodoList extends Component {
     });
   }
 
-  render() {
+  public render(): JSX.Element {
     const { addTodo, todos } = this.props;
 
     return (

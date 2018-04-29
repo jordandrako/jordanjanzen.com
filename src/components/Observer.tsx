@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class Observer extends Component {
-  constructor() {
-    super();
+  public constructor(props: any) {
+    super(props);
     this.state = {
       isVisible: false,
       hasBeenVisible: false,
@@ -11,7 +11,8 @@ class Observer extends Component {
     this.io = null;
     this.container = null;
   }
-  componentDidMount() {
+
+  public componentDidMount():void {
     this.io = new IntersectionObserver(([entry]) => {
       this.setState({ isVisible: entry.isIntersecting });
       if (this.state.isVisible) {
@@ -20,18 +21,18 @@ class Observer extends Component {
     }, {});
     this.io.observe(this.container);
   }
-  componentWillUnmount() {
+  public componentWillUnmount(): void {
     if (this.io) {
       this.io.disconnect();
     }
   }
 
-  componentWillReceiveNewProps(newProps) {
+  public componentWillReceiveNewProps(newProps): void {
     if (!this.state.hasBeenVisible && newProps.isVisible) {
       this.setState({ hasBeenVisible: true })
     }
   }
-  render() {
+  public render(): JSX.Element {
     return (
       // we create a div to get a reference.
       // It's possible to use findDOMNode() to avoid

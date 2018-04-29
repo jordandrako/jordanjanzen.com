@@ -156,7 +156,7 @@ class Sidebar extends Component {
     );
   }
 
-  render() {
+  public render(): JSX.Element {
     return (
       <LeftColumn>
         <Top>

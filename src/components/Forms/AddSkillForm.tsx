@@ -6,8 +6,8 @@ import Button from '../Button';
 import { colors } from '../../theme/variables';
 
 class AddSkillForm extends Component {
-  constructor() {
-    super();
+  public constructor(props: any) {
+    super(props);
     this.createSkill = this.createSkill.bind(this);
   }
 
@@ -21,7 +21,7 @@ class AddSkillForm extends Component {
     this.skillForm.reset();
   }
 
-  render() {
+  public render(): JSX.Element {
     return (
       <div>
         <h3>Add a new skill</h3>

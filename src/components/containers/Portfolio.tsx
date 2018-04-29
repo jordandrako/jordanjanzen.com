@@ -27,7 +27,7 @@ class Portfolio extends Component {
     };
   }
 
-  render() {
+  public render(): JSX.Element {
     const {
       addProject,
       cloudinary,

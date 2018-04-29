@@ -37,8 +37,8 @@ const UploadedImage = styled.li`
 `;
 
 class AddProjectForm extends Component {
-  constructor() {
-    super();
+  public constructor(props: any) {
+    super(props);
     this.createProject = this.createProject.bind(this);
     this.addImage = this.addImage.bind(this);
     this.removeImage = this.removeImage.bind(this);
@@ -119,7 +119,7 @@ class AddProjectForm extends Component {
     this.setState({ skillValues: result });
   }
 
-  render() {
+  public render(): JSX.Element {
     const { skills, cloudinary } = this.props;
 
     const list = Object.keys(this.state.images).map((key) => (

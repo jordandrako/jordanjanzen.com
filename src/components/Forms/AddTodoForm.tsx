@@ -6,8 +6,8 @@ import Button from '../Button';
 import { colors } from '../../theme/variables';
 
 class AddTodoForm extends Component {
-  constructor() {
-    super();
+  public constructor(props: any) {
+    super(props);
     this.createTodo = this.createTodo.bind(this);
   }
 
@@ -25,7 +25,7 @@ class AddTodoForm extends Component {
     this.todoForm.reset();
   }
 
-  render() {
+  public render(): JSX.Element {
     return (
       <div>
         <h3>Add a new todo item</h3>

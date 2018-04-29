@@ -91,8 +91,8 @@ const Alert = styled.div`
 `;
 
 class Banner extends Component {
-  constructor() {
-    super();
+  public constructor(props: any) {
+    super(props);
     this.showHide = this.showHide.bind(this);
 
     this.state = {
@@ -106,7 +106,7 @@ class Banner extends Component {
     });
   }
 
-  render() {
+  public render(): JSX.Element {
     const closed = this.state.closed;
     const showHideButton = (
       <button className="showHide" onClick={this.showHide}>

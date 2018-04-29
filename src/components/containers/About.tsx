@@ -98,7 +98,7 @@ class About extends Component {
     });
   }
 
-  render() {
+  public render(): JSX.Element {
     const { skills, uid, addSkill } = this.props;
 
     return (

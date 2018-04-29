@@ -86,7 +86,7 @@ class Home extends Component {
     this.state = {};
   }
 
-  render() {
+  public render(): JSX.Element {
     const { projects, isMobile } = this.props;
 
     const HeroContent = (

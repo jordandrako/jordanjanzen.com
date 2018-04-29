@@ -80,7 +80,7 @@ class ImageDropzone extends Component {
     });
   }
 
-  render() {
+  public render(): JSX.Element {
     return (
       <div>
         <h4>Upload Images</h4>

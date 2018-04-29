@@ -153,7 +153,7 @@ class Footer extends Component {
     );
   }
 
-  render() {
+  public render(): JSX.Element {
     const loginButton = !this.props.uid
       ? this.renderLogin()
       : this.renderLogout();

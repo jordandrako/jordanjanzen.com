@@ -134,8 +134,8 @@ const Buttons = styled.ul`
 `;
 
 class Project extends Component {
-  constructor() {
-    super();
+  public constructor(props: any) {
+    super(props);
     this.handleChange = this.handleChange.bind(this);
   }
 
@@ -147,7 +147,7 @@ class Project extends Component {
     this.props.updateProject(key, updatedProp);
   }
 
-  render() {
+  public render(): JSX.Element {
     const { details, index } = this.props;
     if (details.images) {
       const firstImage = Object.keys(details.images)[0];

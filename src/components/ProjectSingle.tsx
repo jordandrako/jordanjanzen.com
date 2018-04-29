@@ -135,7 +135,7 @@ class ProjectSingle extends Component {
     return this.removeProject(index);
   }
 
-  render() {
+  public render(): JSX.Element {
     const { projects, details, index, isMobile } = this.props;
 
     const total = Object.keys(projects).length - 1;
