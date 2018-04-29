@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import styled from 'styled-components';
 
-import { database, base, auth, provider } from '../base';
-import Sidebar from './Sidebar';
-import Router from './Router';
+import { auth, base, database, provider } from '../base';
 import Footer from './Footer';
+import Router from './Router';
+import Sidebar from './Sidebar';
 
-import { colors } from '../theme/variables';
-import { sizes, mediaMax } from '../theme/style-utils';
 import { slugify } from '../helpers';
+import { mediaMax, sizes } from '../theme/style-utils';
+import { colors } from '../theme/variables';
 
 const Wrapper = styled.div`
   display: flex;
@@ -19,134 +19,172 @@ const Wrapper = styled.div`
 `;
 
 class App extends Component {
-  constructor() {
-    super();
-    this.updateSize = this.updateSize.bind(this);
+  private _ref;
+
+  public constructor(props: any) {
+    super(props);
+    this._updateSize = this._updateSize.bind(this);
 
     // Authentication
-    this.authenticate = this.authenticate.bind(this);
-    this.authHandler = this.authHandler.bind(this);
-    this.logout = this.logout.bind(this);
-    this.changeRef = this.setRef.bind(this);
+    this._authenticate = this._authenticate.bind(this);
+    this._authHandler = this._authHandler.bind(this);
+    this._logout = this._logout.bind(this);
+    this._setRef = this._setRef.bind(this);
 
     // Database management
-    this.addTodo = this.addTodo.bind(this);
-    this.updateTodo = this.updateTodo.bind(this);
-    this.removeTodo = this.removeTodo.bind(this);
+    this._addTodo = this._addTodo.bind(this);
+    this._updateTodo = this._updateTodo.bind(this);
+    this._removeTodo = this._removeTodo.bind(this);
 
-    this.addProject = this.addProject.bind(this);
-    this.updateProject = this.updateProject.bind(this);
-    this.removeProject = this.removeProject.bind(this);
+    this._addProject = this._addProject.bind(this);
+    this._updateProject = this._updateProject.bind(this);
+    this._removeProject = this._removeProject.bind(this);
 
-    this.addSkill = this.addSkill.bind(this);
-    this.removeSkill = this.removeSkill.bind(this);
+    this._addSkill = this._addSkill.bind(this);
+    this._removeSkill = this._removeSkill.bind(this);
 
     this.state = {
-      todos: {},
+      isMobile: window.innerWidth <= sizes.tablet,
       projects: {},
-      skills: {},
       secrets: {},
+      skills: {},
+      todos: {},
       uid: null,
-      isMobile: window.innerWidth <= sizes.tablet
     };
 
-    this.ref = undefined;
+    this._ref = undefined;
   }
 
-  componentWillMount() {
-    this.setRef('unauthRef').catch((err) => console.error(err));
+  public componentWillMount(): void {
+    this._setRef('unauthRef').catch(err => console.error(err));
 
     const localStorageRef = {
-      todos: localStorage.getItem('todos'),
       projects: localStorage.getItem('projects'),
-      skills: localStorage.getItem('skills')
+      skills: localStorage.getItem('skills'),
+      todos: localStorage.getItem('todos'),
     };
 
     if (localStorageRef) {
       this.setState({
-        todos: JSON.parse(localStorageRef.todos),
         projects: JSON.parse(localStorageRef.projects),
-        skills: JSON.parse(localStorageRef.skills)
+        skills: JSON.parse(localStorageRef.skills),
+        todos: JSON.parse(localStorageRef.todos),
       });
     }
 
-    window.addEventListener('resize', this.updateSize);
+    window.addEventListener('resize', this._updateSize);
   }
 
-  componentDidMount() {
+  public componentDidMount(): void {
     auth.onAuthStateChanged((user) => {
       if (user) {
-        this.authHandler({ user });
+        this._authHandler({ user });
       }
     });
   }
 
-  componentWillUpdate(nextProps, nextState) {
+  public componentWillUpdate(nextProps, nextState): void {
     localStorage.setItem('todos', JSON.stringify(nextState.todos));
     localStorage.setItem('projects', JSON.stringify(nextState.projects));
     localStorage.setItem('skills', JSON.stringify(nextState.skills));
   }
 
-  componentWillUnmount() {
-    base.removeBinding(this.ref);
-    window.removeEventListener('resize');
+  public componentWillUnmount(): void {
+    base.removeBinding(this._ref);
+    window.removeEventListener('resize', this._updateSize);
   }
 
-  setRef(ref) {
+  public render(): JSX.Element {
+    return (
+      <Wrapper className="App wrapper">
+        <Sidebar
+          uid={this.state.uid}
+          isMobile={this.state.isMobile}
+          login={this._authenticate}
+          logout={this._logout}
+          updateSize={this._updateSize}
+        />
+        <Router
+          {...this.state}
+          addTodo={this._addTodo}
+          updateTodo={this._updateTodo}
+          removeTodo={this._removeTodo}
+          addProject={this._addProject}
+          updateProject={this._updateProject}
+          removeProject={this._removeProject}
+          addSkill={this._addSkill}
+          updateSkill={this._updateSkill}
+          removeSkill={this._removeSkill}
+          isMobile={this.state.isMobile}
+          cloudinary={this.state.secrets.cloudinary}
+        />
+        {this.state.isMobile ? (
+          <Footer
+            uid={this.state.uid}
+            isMobile={this.state.isMobile}
+            login={this._authenticate}
+            logout={this._logout}
+          />
+        ) : null}
+      </Wrapper>
+    );
+  }
+
+  private _setRef(ref) {
     return new Promise((resolve, reject) => {
       if (ref !== 'unauthRef' && ref !== 'authRef') {
         reject(
-          `Ref is not correctly defined. Must be either 'unauthRef' or 'authRef'. Was: ${ref}`
+          `Ref is not correctly defined. Must be either 'unauthRef' or 'authRef'. Was: ${ref}`,
         );
       }
-      if (this.ref) {
-        base.removeBinding(this.ref);
-        this.ref = undefined;
+      if (this._ref) {
+        base.removeBinding(this._ref);
+        this._ref = undefined;
       }
       if (ref === 'unauthRef') {
-        this.ref = [
+        this._ref = [
           base.bindToState('todos', {
             context: this,
-            state: 'todos'
+            state: 'todos',
           }),
           base.bindToState('projects', {
             context: this,
-            state: 'projects'
+            state: 'projects',
           }),
           base.bindToState('skills', {
             context: this,
-            state: 'skills'
-          })
+            state: 'skills',
+          }),
         ];
       }
 
       if (ref === 'authRef') {
-        this.ref = [
+        this._ref = [
           base.syncState('todos', {
             context: this,
-            state: 'todos'
+            state: 'todos',
           }),
           base.syncState('projects', {
             context: this,
-            state: 'projects'
+            state: 'projects',
           }),
           base.syncState('skills', {
             context: this,
-            state: 'skills'
+            state: 'skills',
           }),
           base.fetch('secrets', {
             context: this,
             then(data) {
               this.setState({ secrets: data });
-            }
-          })
+            },
+          }),
         ];
       }
       resolve('Ref (re)set');
     });
   }
 
-  updateSize() {
+  private _updateSize() {
     if (window.innerWidth <= sizes.tablet) {
       this.setState({ isMobile: true });
     } else {
@@ -154,31 +192,31 @@ class App extends Component {
     }
   }
 
-  authenticate() {
+  private _authenticate() {
     auth
       .signInWithPopup(provider)
-      .then((result) => this.authHandler(result))
-      .catch((error) => console.error(error));
+      .then(result => this._authHandler(result))
+      .catch(error => console.error(error));
   }
 
-  async logout() {
-    await this.setRef('unauthRef')
+  private async _logout(): Promise<any> {
+    await this._setRef('unauthRef')
       .then(
         await auth.signOut().then(() => {
           this.setState({
             uid: null,
             secrets: {}
           });
-        })
+        }),
       )
-      .catch((error) => console.error(error));
+      .catch(error => console.error(error));
   }
 
-  authHandler(authData) {
+  private _authHandler(authData) {
     const uid = authData.user.uid || authData.uid;
     const rootRef = database.ref();
     const successfulLogin = () => {
-      this.setRef('authRef');
+      this._setRef('authRef');
       this.setState({ uid });
     };
     rootRef.once('value').then((snapshot) => {
@@ -188,12 +226,12 @@ class App extends Component {
         rootRef
           .set({
             ...data,
-            owner: uid
+            owner: uid,
           })
           .then(() => {
             successfulLogin();
           })
-          .catch((error) => console.error(error));
+          .catch(error => console.error(error));
       } else if (data.owner === uid) {
         successfulLogin();
       } else {
@@ -203,33 +241,33 @@ class App extends Component {
   }
 
   // update our state
-  addTodo(todo) {
+  private _addTodo(todo) {
     const todos = { ...this.state.todos };
     const timestamp = Date.now();
     todos[`todo-${timestamp}`] = { ...todo };
     this.setState({ todos }); // same as this.setState({ todos: todos })
   }
 
-  updateTodo(key, updatedProp) {
+  private _updateTodo(key, updatedProp) {
     const todos = { ...this.state.todos };
     const todo = todos[key];
     const updatedTodo = {
       ...todo,
-      ...updatedProp
+      ...updatedProp,
     };
     todos[key] = updatedTodo;
     this.setState({
-      todos
+      todos,
     });
   }
 
-  removeTodo(key) {
+  private _removeTodo(key) {
     const todos = { ...this.state.todos };
     todos[key] = null;
     this.setState({ todos });
   }
 
-  addProject(project) {
+  private _addProject(project) {
     const projects = { ...this.state.projects };
     const timestamp = Date.now();
     projects[`project-${timestamp}`] = project;
@@ -237,75 +275,39 @@ class App extends Component {
     this.setState({ projects });
   }
 
-  updateProject(key, updatedProject) {
+  private _updateProject(key, updatedProject) {
     const projects = { ...this.state.projects };
     projects[key] = updatedProject;
     this.setState({
-      projects
+      projects,
     });
   }
 
-  removeProject(key) {
+  private _removeProject(key) {
     const projects = { ...this.state.projects };
     projects[key] = null;
     this.setState({ projects });
   }
 
-  addSkill(skill) {
+  private _addSkill(skill) {
     const skills = { ...this.state.skills };
     const name = slugify(skill.name);
     skills[`skill-${name}`] = skill;
     this.setState({ skills });
   }
 
-  updateSkill(key, updatedSkill) {
+  private _updateSkill(key, updatedSkill) {
     const skills = { ...this.state.skills };
     skills[key] = updatedSkill;
     this.setState({
-      skills
+      skills,
     });
   }
 
-  removeSkill(key) {
+  private _removeSkill(key) {
     const skills = { ...this.state.skills };
     skills[key] = null;
     this.setState({ skills });
-  }
-
-  render() {
-    return (
-      <Wrapper className="App wrapper">
-        <Sidebar
-          uid={this.state.uid}
-          isMobile={this.state.isMobile}
-          login={this.authenticate}
-          logout={this.logout}
-          updateSize={this.updateSize}
-        />
-        <Router
-          {...this.state}
-          addTodo={this.addTodo}
-          updateTodo={this.updateTodo}
-          removeTodo={this.removeTodo}
-          addProject={this.addProject}
-          updateProject={this.updateProject}
-          removeProject={this.removeProject}
-          addSkill={this.addSkill}
-          updateSkill={this.updateSkill}
-          removeSkill={this.removeSkill}
-          isMobile={this.state.isMobile}
-          cloudinary={this.state.secrets.cloudinary}
-        />
-        {this.state.isMobile ? (
-          <Footer
-            uid={this.state.uid}
-            isMobile={this.state.isMobile}
-            login={this.authenticate}
-            logout={this.logout}
-          />
-        ) : null}
-      </Wrapper>
-    );
   }
 }
 
