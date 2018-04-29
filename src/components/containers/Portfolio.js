@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Route } from 'react-router-dom';
 
-import AddProjectForm from '../AddProjectForm';
+import AddProjectForm from '../Forms/AddProjectForm';
 import Project from '../Project';
 import ProjectSingle from '../ProjectSingle';
 
@@ -23,19 +23,20 @@ class Portfolio extends Component {
     super(props);
 
     this.state = {
-      category: 'all',
+      category: 'all'
     };
   }
 
   render() {
     const {
       addProject,
+      cloudinary,
       isMobile,
       projects,
       removeProject,
       skills,
       uid,
-      updateProject,
+      updateProject
     } = this.props;
 
     return projects ? (
@@ -55,10 +56,11 @@ class Portfolio extends Component {
               ))}
           </ListOfProjects>
         </Row>
-        {(uid && skills) ? (
+        {uid && skills ? (
           <Row>
             <AddProjectForm
               addProject={addProject}
+              cloudinary={cloudinary}
               skills={skills}
             />
           </Row>
@@ -80,7 +82,9 @@ class Portfolio extends Component {
           )}
         />
       </Page>
-    ) : undefined;
+    ) : (
+      undefined
+    );
   }
 }
 
@@ -92,10 +96,18 @@ Portfolio.propTypes = {
   removeProject: PropTypes.func.isRequired,
   projects: PropTypes.object.isRequired,
   skills: PropTypes.object.isRequired,
+  cloudinary: PropTypes.shape({
+    key: PropTypes.string,
+    secret: PropTypes.string
+  })
 };
 
 Portfolio.defaultProps = {
   uid: null,
+  cloudinary: {
+    key: undefined,
+    secrect: undefined
+  }
 };
 
 export default Portfolio;

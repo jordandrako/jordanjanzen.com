@@ -5,22 +5,22 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 import MyLoadable from './MyLoadable';
 
 const AsyncHome = MyLoadable({
-  loader: () => import('./containers/Home'),
+  loader: () => import('./containers/Home')
 });
 const AsyncAbout = MyLoadable({
-  loader: () => import('./containers/About'),
+  loader: () => import('./containers/About')
 });
 const AsyncPortfolio = MyLoadable({
-  loader: () => import('./containers/Portfolio'),
+  loader: () => import('./containers/Portfolio')
 });
 const AsyncTodoList = MyLoadable({
-  loader: () => import('./containers/TodoList'),
+  loader: () => import('./containers/TodoList')
 });
 const AsyncNotFound = MyLoadable({
-  loader: () => import('./containers/NotFound'),
+  loader: () => import('./containers/NotFound')
 });
 const AsyncUnauthenticated = MyLoadable({
-  loader: () => import('./containers/Unauthenticated'),
+  loader: () => import('./containers/Unauthenticated')
 });
 
 const Router = (props) => (
@@ -54,6 +54,7 @@ const Router = (props) => (
           updateProject={props.updateProject}
           removeProject={props.removeProject}
           isMobile={props.isMobile}
+          cloudinary={props.cloudinary}
         />
       )}
     />
@@ -69,8 +70,8 @@ const Router = (props) => (
             removeTodo={props.removeTodo}
           />
         ) : (
-            <AsyncUnauthenticated />
-          )}
+          <AsyncUnauthenticated />
+        )}
     />
     {/* Unmatched URLs */}
     <Route component={AsyncNotFound} />
@@ -94,10 +95,18 @@ Router.propTypes = {
   addTodo: PropTypes.func.isRequired,
   updateTodo: PropTypes.func.isRequired,
   removeTodo: PropTypes.func.isRequired,
+  cloudinary: PropTypes.shape({
+    key: PropTypes.string,
+    secret: PropTypes.string
+  })
 };
 
 Router.defaultProps = {
   uid: null,
+  cloudinary: {
+    key: undefined,
+    secrect: undefined
+  }
 };
 
 export default withRouter(Router);
