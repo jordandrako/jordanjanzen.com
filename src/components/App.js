@@ -45,27 +45,28 @@ class App extends Component {
       todos: {},
       projects: {},
       skills: {},
+      secrets: {},
       uid: null,
-      isMobile: window.innerWidth <= sizes.tablet,
+      isMobile: window.innerWidth <= sizes.tablet
     };
 
     this.ref = undefined;
   }
 
   componentWillMount() {
-    this.setRef('pullRef').catch((err) => console.error(err))
+    this.setRef('unauthRef').catch((err) => console.error(err));
 
     const localStorageRef = {
       todos: localStorage.getItem('todos'),
       projects: localStorage.getItem('projects'),
-      skills: localStorage.getItem('skills'),
+      skills: localStorage.getItem('skills')
     };
 
     if (localStorageRef) {
       this.setState({
         todos: JSON.parse(localStorageRef.todos),
         projects: JSON.parse(localStorageRef.projects),
-        skills: JSON.parse(localStorageRef.skills),
+        skills: JSON.parse(localStorageRef.skills)
       });
     }
   }
@@ -90,48 +91,56 @@ class App extends Component {
 
   setRef(ref) {
     return new Promise((resolve, reject) => {
-      if (ref !== 'pullRef' && ref !== 'syncRef') {
-        reject(`Ref is not correctly defined. Must be either 'pullRef' or 'syncRef'. Was: ${ref}`);
+      if (ref !== 'unauthRef' && ref !== 'authRef') {
+        reject(
+          `Ref is not correctly defined. Must be either 'unauthRef' or 'authRef'. Was: ${ref}`
+        );
       }
       if (this.ref) {
         base.removeBinding(this.ref);
         this.ref = undefined;
       }
-      if (ref === 'pullRef') {
+      if (ref === 'unauthRef') {
         this.ref = [
           base.bindToState('todos', {
             context: this,
-            state: 'todos',
+            state: 'todos'
           }),
           base.bindToState('projects', {
             context: this,
-            state: 'projects',
+            state: 'projects'
           }),
           base.bindToState('skills', {
             context: this,
-            state: 'skills',
-          }),
+            state: 'skills'
+          })
         ];
       }
 
-      if (ref === 'syncRef') {
+      if (ref === 'authRef') {
         this.ref = [
           base.syncState('todos', {
             context: this,
-            state: 'todos',
+            state: 'todos'
           }),
           base.syncState('projects', {
             context: this,
-            state: 'projects',
+            state: 'projects'
           }),
           base.syncState('skills', {
             context: this,
-            state: 'skills',
+            state: 'skills'
           }),
-        ]
+          base.fetch('secrets', {
+            context: this,
+            then(data) {
+              this.setState({ secrets: data });
       }
-      resolve('Ref (re)set');
     })
+        ];
+  }
+      resolve('Ref (re)set');
+    });
   }
 
   updateSize() {
@@ -143,38 +152,47 @@ class App extends Component {
   }
 
   authenticate() {
-    auth.signInWithPopup(provider)
+    auth
+      .signInWithPopup(provider)
       .then((result) => this.authHandler(result))
       .catch((error) => console.error(error));
   }
 
   async logout() {
-    await this.setRef('pullRef').then(
+    await this.setRef('unauthRef')
+      .then(
       await auth.signOut().then(() => {
-        this.setState({ uid: null });
+          this.setState({
+            uid: null,
+            secrets: {}
+          });
       })
-    ).catch((error) => console.error(error))
+      )
+      .catch((error) => console.error(error));
   }
 
   authHandler(authData) {
     const uid = authData.user.uid || authData.uid;
     const rootRef = database.ref();
     const successfulLogin = () => {
-      this.setRef('syncRef');
+      this.setRef('authRef');
       this.setState({ uid });
-    }
+    };
     rootRef.once('value').then((snapshot) => {
       const data = snapshot.val() || {};
 
       if (!data.owner) {
-        rootRef.set({
+        rootRef
+          .set({
           ...data,
-          owner: uid,
+            owner: uid
+          })
+          .then(() => {
+            successfulLogin();
         })
-          .then(() => { successfulLogin() })
           .catch((error) => console.error(error));
       } else if (data.owner === uid) {
-        successfulLogin()
+        successfulLogin();
       } else {
         console.error('You are not the owner of this site.');
       }
@@ -194,11 +212,11 @@ class App extends Component {
     const todo = todos[key];
     const updatedTodo = {
       ...todo,
-      ...updatedProp,
+      ...updatedProp
     };
     todos[key] = updatedTodo;
     this.setState({
-      todos,
+      todos
     });
   }
 
@@ -220,7 +238,7 @@ class App extends Component {
     const projects = { ...this.state.projects };
     projects[key] = updatedProject;
     this.setState({
-      projects,
+      projects
     });
   }
 
@@ -241,7 +259,7 @@ class App extends Component {
     const skills = { ...this.state.skills };
     skills[key] = updatedSkill;
     this.setState({
-      skills,
+      skills
     });
   }
 
@@ -274,6 +292,7 @@ class App extends Component {
           updateSkill={this.updateSkill}
           removeSkill={this.removeSkill}
           isMobile={this.state.isMobile}
+          cloudinary={this.state.secrets.cloudinary}
         />
         {this.state.isMobile ? (
           <Footer
