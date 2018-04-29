@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import StyledForm from './StyledForm';
-import Button from './Button';
-import { colors } from '../theme/variables';
+import StyledForm from '../StyledForm';
+import Button from '../Button';
+import { colors } from '../../theme/variables';
 
 class AddTodoForm extends Component {
   constructor() {
@@ -16,9 +16,10 @@ class AddTodoForm extends Component {
     const todo = {
       name: this.name.value,
       category: this.category.value,
+      priority: this.priority.value,
       desc: this.desc.value,
       link: encodeURI(this.link.value),
-      complete: false,
+      complete: false
     };
     this.props.addTodo(todo);
     this.todoForm.reset();
@@ -49,16 +50,27 @@ class AddTodoForm extends Component {
               ref={(input) => {
                 this.category = input;
               }}
-              type="text"
               name="category"
               placeholder="Todo Category"
               required
             >
-              <option>Select Category</option>
+              <option value="">Select Category</option>
               <option value="design">Design</option>
+              <option value="content">Content</option>
               <option value="component">Component</option>
               <option value="quality">Quality</option>
               <option value="backend">Backend</option>
+              <option value="other">Other</option>
+            </select>
+            <select
+              ref={(input) => {
+                this.priority = input;
+              }}
+              name="priority"
+            >
+              <option value="2">Priority 2</option>
+              <option value="1">Priority 1</option>
+              <option value="0">Priority 0</option>
             </select>
             <textarea
               ref={(input) => {
@@ -67,7 +79,6 @@ class AddTodoForm extends Component {
               type="text"
               name="desc"
               placeholder="Todo Description"
-              required
             />
             <input
               ref={(input) => {
@@ -88,7 +99,7 @@ class AddTodoForm extends Component {
 }
 
 AddTodoForm.propTypes = {
-  addTodo: PropTypes.func.isRequired,
+  addTodo: PropTypes.func.isRequired
 };
 
 export default AddTodoForm;

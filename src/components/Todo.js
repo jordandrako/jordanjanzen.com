@@ -102,14 +102,14 @@ class Todo extends Component {
   handleChange(e, key) {
     const updatedProp = {
       [e.target.name]:
-        e.target.type === 'checkbox' ? e.target.checked : e.target.value,
+        e.target.type === 'checkbox' ? e.target.checked : e.target.value
     };
     this.props.updateTodo(key, updatedProp);
   }
 
   toggleComplete(e, key) {
     const updatedProp = {
-      complete: !this.props.details.complete,
+      complete: !this.props.details.complete
     };
     this.props.updateTodo(key, updatedProp);
   }
@@ -147,16 +147,27 @@ class Todo extends Component {
             onChange={(e) => this.handleChange(e, index)}
           />
           <select
-            type="text"
             name="category"
             defaultValue={details.category}
             onChange={(e) => this.handleChange(e, index)}
           >
             <option>Category</option>
             <option value="design">Design</option>
+            <option value="content">Content</option>
             <option value="component">Component</option>
             <option value="quality">Quality</option>
             <option value="backend">Backend</option>
+            <option value="other">Other</option>
+          </select>
+          <label htmlFor="priority">Priority</label>
+          <select
+            name="priority"
+            defaultValue={details.priority || '2'}
+            onChange={(e) => this.handleChange(e, index)}
+          >
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
           </select>
           <TextareaAutosize
             type="text"
@@ -180,7 +191,7 @@ Todo.propTypes = {
   removeTodo: PropTypes.func.isRequired,
   updateTodo: PropTypes.func.isRequired,
   details: PropTypes.object.isRequired,
-  index: PropTypes.string.isRequired,
+  index: PropTypes.string.isRequired
 };
 
 export default Todo;

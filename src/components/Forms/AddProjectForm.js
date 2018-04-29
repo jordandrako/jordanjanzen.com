@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import StyledForm from './StyledForm';
-import Button from './Button';
-import Dropzone from './Dropzone';
+import StyledForm from '../StyledForm';
+import Button from '../Button';
+import Dropzone from './FormUtilities/Dropzone';
 
-import { colors } from '../theme/variables';
-import { Row } from '../theme/grid';
+import { colors } from '../../theme/variables';
+import { Row } from '../../theme/grid';
 
-import { truncate } from '../helpers';
+import { truncate } from '../../helpers';
 
 const UploadedImageList = styled.ul`
   list-style: none;
@@ -47,7 +47,7 @@ class AddProjectForm extends Component {
 
     this.state = {
       images: {},
-      skillValues: [],
+      skillValues: []
       // startDate: moment(),
     };
   }
@@ -71,8 +71,8 @@ class AddProjectForm extends Component {
       repo: encodeURI(this.repo.value),
       client: {
         name: this.client_name.value,
-        industry: this.client_industry.value,
-      },
+        industry: this.client_industry.value
+      }
       // date: this.state.startDate,
     };
     this.props.addProject(project);
@@ -81,7 +81,7 @@ class AddProjectForm extends Component {
     this.setState({
       ...state,
       images: {},
-      skillValues: [],
+      skillValues: []
       // startDate: moment().day,
     });
   }
@@ -97,6 +97,7 @@ class AddProjectForm extends Component {
     const images = { ...this.state.images };
     delete images[key];
     this.setState({ images });
+    // TODO: use api to delete image from cloudinary
   }
 
   handleChange(date) {
@@ -119,6 +120,8 @@ class AddProjectForm extends Component {
   }
 
   render() {
+    const { skills, cloudinary } = this.props;
+
     const list = Object.keys(this.state.images).map((key) => (
       <UploadedImage key={key}>
         <img
@@ -187,38 +190,38 @@ class AddProjectForm extends Component {
               name="skills"
               placeholder="Project Skills"
               onChange={(e) => this.handleValues(e)}
-              size={Object.keys(this.props.skills).length + 4}
+              size={Object.keys(skills).length + 4}
               required
             >
               <option>Select skills (ctrl + click)</option>
               <optgroup label="Core Skills">
-                {Object.keys(this.props.skills).map(
+                {Object.keys(skills).map(
                   (key) =>
-                    this.props.skills[key].category === 'core' && (
-                      <option key={key} value={this.props.skills[key].name}>
-                        {this.props.skills[key].name}
+                    skills[key].category === 'core' && (
+                      <option key={key} value={skills[key].name}>
+                        {skills[key].name}
                       </option>
-                    ),
+                    )
                 )}
               </optgroup>
               <optgroup label="Library Skills">
-                {Object.keys(this.props.skills).map(
+                {Object.keys(skills).map(
                   (key) =>
-                    this.props.skills[key].category === 'library' && (
-                      <option key={key} value={this.props.skills[key].name}>
-                        {this.props.skills[key].name}
+                    skills[key].category === 'library' && (
+                      <option key={key} value={skills[key].name}>
+                        {skills[key].name}
                       </option>
-                    ),
+                    )
                 )}
               </optgroup>
               <optgroup label="Design Skills">
-                {Object.keys(this.props.skills).map(
+                {Object.keys(skills).map(
                   (key) =>
-                    this.props.skills[key].category === 'design' && (
-                      <option key={key} value={this.props.skills[key].name}>
-                        {this.props.skills[key].name}
+                    skills[key].category === 'design' && (
+                      <option key={key} value={skills[key].name}>
+                        {skills[key].name}
                       </option>
-                    ),
+                    )
                 )}
               </optgroup>
             </select>
@@ -278,6 +281,7 @@ class AddProjectForm extends Component {
               <Dropzone
                 addImage={this.addImage}
                 accept="image/jpeg, image/png"
+                cloudinary={cloudinary}
               />
               <UploadedImageList>{list}</UploadedImageList>
             </Row>
@@ -294,6 +298,17 @@ class AddProjectForm extends Component {
 AddProjectForm.propTypes = {
   addProject: PropTypes.func.isRequired,
   skills: PropTypes.object.isRequired,
+  cloudinary: PropTypes.shape({
+    key: PropTypes.string,
+    secret: PropTypes.string
+  })
+};
+
+AddProjectForm.defaultProps = {
+  cloudinary: {
+    key: undefined,
+    secrect: undefined
+  }
 };
 
 export default AddProjectForm;

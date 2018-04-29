@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import StyledForm from './StyledForm';
-import Button from './Button';
-import { colors } from '../theme/variables';
+import StyledForm from '../StyledForm';
+import Button from '../Button';
+import { colors } from '../../theme/variables';
 
 class AddSkillForm extends Component {
   constructor() {
@@ -15,7 +15,7 @@ class AddSkillForm extends Component {
     e.preventDefault();
     const skill = {
       name: this.name.value,
-      category: this.category.value,
+      category: this.category.value
     };
     this.props.addSkill(skill);
     this.skillForm.reset();
@@ -68,7 +68,7 @@ class AddSkillForm extends Component {
 }
 
 AddSkillForm.propTypes = {
-  addSkill: PropTypes.func.isRequired,
+  addSkill: PropTypes.func.isRequired
 };
 
 export default AddSkillForm;
