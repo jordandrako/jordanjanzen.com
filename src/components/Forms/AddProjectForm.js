@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import StyledForm from '../StyledForm';
 import Button from '../Button';
 import Dropzone from './FormUtilities/Dropzone';
+import destroyImage from './FormUtilities/destroyImage';
 
 import { colors } from '../../theme/variables';
 import { Row } from '../../theme/grid';
@@ -95,9 +96,11 @@ class AddProjectForm extends Component {
 
   removeImage(key) {
     const images = { ...this.state.images };
+    const image = images[key];
     delete images[key];
     this.setState({ images });
     // TODO: use api to delete image from cloudinary
+    destroyImage(key, this.props.cloudinary);
   }
 
   handleChange(date) {

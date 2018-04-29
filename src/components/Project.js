@@ -6,7 +6,6 @@ import { adjustHue } from 'polished';
 
 import CloudImage from './CloudImage';
 import Button from './Button';
-// import Observer from './Observer';
 
 import { toTitleCase } from '../helpers';
 import { colors, theme, typography } from '../theme/variables';
@@ -35,10 +34,6 @@ const ThumbnailLink = styled(Link)`
   color: unset !important;
   border: none !important;
 `;
-
-// const ThumbnailArea = styled.div`
-//   height: ${imageHeight}px;
-// `;
 
 const Thumbnail = styled.section`
   margin-bottom: 0;
@@ -161,10 +156,6 @@ class Project extends Component {
       return (
         <Item key={index} {...this.props}>
           <ThumbnailLink to={`/portfolio/${index}`}>
-            {/* <ThumbnailArea>
-              <Observer>
-                {(isVisible, hasBeenVisible) =>
-                  hasBeenVisible ? ( */}
             <Thumbnail>
               <CloudImage
                 bg
@@ -182,9 +173,6 @@ class Project extends Component {
                 <ProjectTitle>{details.name}</ProjectTitle>
               </CloudImage>
             </Thumbnail>
-            {/* ) : null}
-              </Observer>
-            </ThumbnailArea> */}
           </ThumbnailLink>
           <Details>
             <Client>
