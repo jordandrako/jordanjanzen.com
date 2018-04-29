@@ -1,77 +1,119 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Switch, Route, withRouter } from 'react-router-dom';
+import * as PropTypes from 'prop-types';
+import * as React from 'react';
+import { Route, Switch, withRouter } from 'react-router-dom';
 
-import MyLoadable from './MyLoadable';
+import myLoadable from './myLoadable';
 
-const AsyncHome = MyLoadable({
+const AsyncHome = myLoadable({
   loader: () => import('./containers/Home')
 });
-const AsyncAbout = MyLoadable({
+const AsyncAbout = myLoadable({
   loader: () => import('./containers/About')
 });
-const AsyncPortfolio = MyLoadable({
+const AsyncPortfolio = myLoadable({
   loader: () => import('./containers/Portfolio')
 });
-const AsyncTodoList = MyLoadable({
+const AsyncTodoList = myLoadable({
   loader: () => import('./containers/TodoList')
 });
-const AsyncNotFound = MyLoadable({
+const AsyncNotFound = myLoadable({
   loader: () => import('./containers/NotFound')
 });
-const AsyncUnauthenticated = MyLoadable({
+const AsyncUnauthenticated = myLoadable({
   loader: () => import('./containers/Unauthenticated')
 });
 
-const Router = (props) => (
+const Home = props => (
+  <AsyncHome isMobile={props.isMobile} projects={props.projects} />
+);
+
+const About = props => (
+  <AsyncAbout
+    uid={props.uid}
+    skills={props.skills}
+    addSkill={props.addSkill}
+    removeSkill={props.removeSkill}
+  />
+);
+
+const Portfolio = props => (
+  <AsyncPortfolio
+    uid={props.uid}
+    skills={props.skills}
+    projects={props.projects}
+    addProject={props.addProject}
+    updateProject={props.updateProject}
+    removeProject={props.removeProject}
+    isMobile={props.isMobile}
+    cloudinary={props.cloudinary}
+  />
+);
+
+const Todo = props =>
+  props.uid ? (
+    <AsyncTodoList
+      todos={props.todos}
+      addTodo={props.addTodo}
+      updateTodo={props.updateTodo}
+      removeTodo={props.removeTodo}
+    />
+  ) : (
+    <AsyncUnauthenticated />
+  );
+
+const Router = props => (
   <Switch>
     <Route
-      exact
+      exact={true}
       path="/"
-      render={() => (
-        <AsyncHome isMobile={props.isMobile} projects={props.projects} />
-      )}
+      component={Home}
+      // render={() => (
+      //   <AsyncHome isMobile={props.isMobile} projects={props.projects} />
+      // )}
     />
     <Route
       path="/about"
-      render={() => (
-        <AsyncAbout
-          uid={props.uid}
-          skills={props.skills}
-          addSkill={props.addSkill}
-          removeSkill={props.removeSkill}
-        />
-      )}
+      component={About}
+      // render={() => (
+      //   <AsyncAbout
+      //     uid={props.uid}
+      //     skills={props.skills}
+      //     addSkill={props.addSkill}
+      //     removeSkill={props.removeSkill}
+      //   />
+      // )}
     />
     <Route
       path="/portfolio"
-      render={() => (
-        <AsyncPortfolio
-          uid={props.uid}
-          skills={props.skills}
-          projects={props.projects}
-          addProject={props.addProject}
-          updateProject={props.updateProject}
-          removeProject={props.removeProject}
-          isMobile={props.isMobile}
-          cloudinary={props.cloudinary}
-        />
-      )}
+      component={Portfolio}
+      //   render={() => (
+      //   <AsyncPortfolio
+      //     uid={props.uid}
+      //     skills={props.skills}
+      //     projects={props.projects}
+      //     addProject={props.addProject}
+      //     updateProject={props.updateProject}
+      //     removeProject={props.removeProject}
+      //     isMobile={props.isMobile}
+      //     cloudinary={props.cloudinary}
+      //   />
+      // )}
     />
     <Route
-      exact
+      exact={true}
       path="/todo"
-      render={() =>
-        props.uid ? (
-          <AsyncTodoList
-            todos={props.todos}
-            addTodo={props.addTodo}
-            updateTodo={props.updateTodo}
-            removeTodo={props.removeTodo}
-          />
-        ) : (
-          <AsyncUnauthenticated />
-        )}
+      component={Todo}
+      // render={() =>
+      //   props.uid ? (
+      //     <AsyncTodoList
+      //       todos={props.todos}
+      //       addTodo={props.addTodo}
+      //       updateTodo={props.updateTodo}
+      //       removeTodo={props.removeTodo}
+      //     />
+      //   ) : (
+      //     <AsyncUnauthenticated />
+      //   )}
     />
     {/* Unmatched URLs */}
     <Route component={AsyncNotFound} />
