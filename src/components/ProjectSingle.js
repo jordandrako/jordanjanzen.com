@@ -10,7 +10,7 @@ import { Row } from '../theme/grid';
 import { colors, theme, typography } from '../theme/variables';
 import { mediaMax } from '../theme/style-utils';
 
-const ClickOutside = styled(Link) `
+const ClickOutside = styled(Link)`
   background: rgba(0, 0, 0, 0.5);
   position: fixed;
   top: 0;
@@ -40,6 +40,7 @@ const Single = styled.div`
   width: 84vw;
   max-width: 760px;
   height: 84vh;
+  margin: 30px;
   background: ${theme.siteBackground};
   box-shadow: 0 -3px 0 ${theme.primaryColor}, 0 0 9px #000;
   z-index: 1000;
@@ -57,9 +58,9 @@ const Single = styled.div`
   }
 
   ${mediaMax.tablet`
-    width: 95vw;
+    width: 90vw;
     max-width: 420px;
-    height: 95vh;
+    height: 90vh;
   `};
 `;
 
@@ -95,7 +96,7 @@ const Title = styled.h2`
   line-height: 1;
 `;
 
-const Content = styled(Row) `
+const Content = styled(Row)`
   overflow-y: scroll;
   margin: 0;
   padding: 1em;
@@ -107,7 +108,7 @@ class ProjectSingle extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      delete: false,
+      delete: false
     };
 
     this.removeProject = this.removeProject.bind(this);
@@ -116,7 +117,7 @@ class ProjectSingle extends Component {
 
   componentWillReceiveProps(newProps) {
     if (newProps.index !== this.props.index) {
-      this.setState({ delete: false })
+      this.setState({ delete: false });
     }
   }
 
@@ -132,7 +133,6 @@ class ProjectSingle extends Component {
       return this.setState({ delete: true });
     }
     return this.removeProject(index);
-
   }
 
   render() {
@@ -188,8 +188,8 @@ class ProjectSingle extends Component {
                     {this.props.isMobile ? (
                       ''
                     ) : (
-                        <i className="fa fa-external-link" aria-hidden="true" />
-                      )}{' '}
+                      <i className="fa fa-external-link" aria-hidden="true" />
+                    )}{' '}
                     Visit Site
                   </Button>
                 ) : null}
@@ -235,7 +235,7 @@ ProjectSingle.propTypes = {
   projects: PropTypes.object.isRequired,
   isMobile: PropTypes.bool.isRequired,
   removeProject: PropTypes.func.isRequired,
-  history: PropTypes.func,
+  history: PropTypes.func
 };
 
 ProjectSingle.defaultProps = {

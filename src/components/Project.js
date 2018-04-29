@@ -89,6 +89,7 @@ const Subheading = styled.h4`
 
 const Client = styled.div`
   font-size: 0.8rem;
+  max-width: 50%;
 `;
 
 const Skills = styled.div`
