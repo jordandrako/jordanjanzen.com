@@ -5,7 +5,7 @@ import { adjustHue } from 'polished';
 
 import CloudImage from './CloudImage';
 import Button from './Button';
-import Observer from './Observer';
+// import Observer from './Observer';
 
 import { toTitleCase } from '../helpers';
 import { colors, theme, typography } from '../theme/variables';
@@ -31,6 +31,10 @@ const Item = styled.li`
 const ThumbnailArea = styled.div`
   height: ${imageHeight}px;
 `
+
+// const ThumbnailArea = styled.div`
+//   height: ${imageHeight}px;
+// `;
 
 const Thumbnail = styled.section`
   margin-bottom: 0;
@@ -151,9 +155,10 @@ class Project extends Component {
       const { name: clientName, industry: clientIndustry } = details.client;
       return (
         <Item key={index} {...this.props}>
-          <ThumbnailArea>
+            {/* <ThumbnailArea>
             <Observer>
-              {(isVisible, hasBeenVisible) => hasBeenVisible ? (
+                {(isVisible, hasBeenVisible) =>
+                  hasBeenVisible ? ( */}
                 <Thumbnail>
                   <CloudImage
                     bg
@@ -171,9 +176,9 @@ class Project extends Component {
                     <ProjectTitle>{details.name}</ProjectTitle>
                   </CloudImage>
                 </Thumbnail>
-              ) : null}
+            {/* ) : null}
             </Observer>
-          </ThumbnailArea>
+            </ThumbnailArea> */}
           <Details>
             <Client>
               <Subheading>Client:</Subheading>
