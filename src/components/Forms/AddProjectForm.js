@@ -96,7 +96,6 @@ class AddProjectForm extends Component {
 
   removeImage(key) {
     const images = { ...this.state.images };
-    const image = images[key];
     delete images[key];
     this.setState({ images });
     // TODO: use api to delete image from cloudinary
