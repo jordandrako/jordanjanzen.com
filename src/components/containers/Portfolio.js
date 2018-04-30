@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Route } from 'react-router-dom';
 
+import { AppContext } from '../App/App';
 import AddProjectForm from '../Forms/AddProjectForm';
 import Project from '../Project';
 import ProjectSingle from '../ProjectSingle';
@@ -28,68 +29,74 @@ class Portfolio extends Component {
   }
 
   render() {
-    const {
-      addProject,
-      cloudinary,
-      isMobile,
-      projects,
-      removeProject,
-      skills,
-      uid,
-      updateProject
-    } = this.props;
+    return (
+      <AppContext.Consumer>
+        {(context) => {
+          const {
+            addProject,
+            cloudinary,
+            isMobile,
+            projects,
+            removeProject,
+            skills,
+            isLoggedIn,
+            updateProject
+          } = context;
 
-    return projects ? (
-      <Page title="Portfolio">
-        <Row>
-          <ListOfProjects>
-            {Object.keys(projects)
-              .reverse()
-              .map((key) => (
-                <Project
-                  key={key}
-                  index={key}
-                  details={projects[key]}
-                  uid={uid}
-                  updateProject={updateProject}
-                />
-              ))}
-          </ListOfProjects>
-        </Row>
-        {uid && skills ? (
-          <Row>
-            <AddProjectForm
-              addProject={addProject}
-              cloudinary={cloudinary}
-              skills={skills}
-            />
-          </Row>
-        ) : null}
-        <Route
-          exact
-          path="/portfolio/:projectId"
-          render={(props) => (
-            <ProjectSingle
-              uid={uid}
-              isMobile={isMobile}
-              projects={projects}
-              index={props.match.params.projectId}
-              details={projects[props.match.params.projectId]}
-              updateProject={updateProject}
-              removeProject={removeProject}
-              {...props}
-            />
-          )}
-        />
-      </Page>
-    ) : (
-      undefined
+          return projects ? (
+            <Page title="Portfolio">
+              <Row>
+                <ListOfProjects>
+                  {Object.keys(projects)
+                    .reverse()
+                    .map((key) => (
+                      <Project
+                        key={key}
+                        index={key}
+                        details={projects[key]}
+                        isLoggedIn={isLoggedIn}
+                        updateProject={updateProject}
+                      />
+                    ))}
+                </ListOfProjects>
+              </Row>
+              {isLoggedIn && skills ? (
+                <Row>
+                  <AddProjectForm
+                    addProject={addProject}
+                    cloudinary={cloudinary}
+                    skills={skills}
+                  />
+                </Row>
+              ) : null}
+              <Route
+                exact
+                path="/portfolio/:projectId"
+                render={(props) => (
+                  <ProjectSingle
+                    isLoggedIn={isLoggedIn}
+                    isMobile={isMobile}
+                    projects={projects}
+                    index={props.match.params.projectId}
+                    details={projects[props.match.params.projectId]}
+                    updateProject={updateProject}
+                    removeProject={removeProject}
+                    {...props}
+                  />
+                )}
+              />
+            </Page>
+          ) : (
+            undefined
+          );
+        }}
+      </AppContext.Consumer>
     );
   }
 }
 
 Portfolio.propTypes = {
-  uid: PropTypes.string,
+  isLoggedIn: PropTypes.bool,
   isMobile: PropTypes.bool.isRequired,
   addProject: PropTypes.func.isRequired,
   updateProject: PropTypes.func.isRequired,
@@ -103,7 +110,7 @@ Portfolio.propTypes = {
 };
 
 Portfolio.defaultProps = {
-  uid: null,
+  isLoggedIn: false,
   cloudinary: {
     key: undefined,
     secrect: undefined

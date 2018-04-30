@@ -162,9 +162,11 @@ class ProjectSingle extends Component {
               </Frame>
               <Content>
                 <p>{details.long_desc}</p>
-                {Object.keys(details.images).map((image) => (
+                {Object.keys(details.images).map((image, imageIndex) => (
                   <CloudImage
+                    key={details.images[image].id}
                     publicId={details.images[image].id}
+                    name={`${details.name} feature ${imageIndex + 1}`}
                     format={details.images[image].format}
                     width={isMobile ? '400' : '800'}
                     crop="limit"
@@ -204,7 +206,7 @@ class ProjectSingle extends Component {
                     <i className="fa fa-github" aria-hidden="true" /> View Repo
                   </Button>
                 ) : null}
-                {this.props.uid ? (
+                {this.props.isLoggedIn ? (
                   <Button
                     small
                     type="secondary"
@@ -229,17 +231,17 @@ class ProjectSingle extends Component {
 }
 
 ProjectSingle.propTypes = {
-  uid: PropTypes.string,
+  isLoggedIn: PropTypes.bool,
   index: PropTypes.string.isRequired,
   details: PropTypes.object.isRequired,
   projects: PropTypes.object.isRequired,
   isMobile: PropTypes.bool.isRequired,
   removeProject: PropTypes.func.isRequired,
-  history: PropTypes.func
+  history: PropTypes.object
 };
 
 ProjectSingle.defaultProps = {
-  uid: null,
+  isLoggedIn: null,
   history: undefined
 };
 

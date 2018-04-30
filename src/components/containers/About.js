@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
+// import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import moment from 'moment';
 
+import { AppContext } from '../App/App';
 import AddSkillForm from '../Forms/AddSkillForm';
 import Button from '../Button';
 import CloudImage from '../CloudImage';
@@ -67,350 +68,345 @@ const HistoryColumn = styled.div`
   border-top: 2px solid ${colors.blue};
 `;
 
-class About extends Component {
-  constructor(props) {
-    super(props);
-    this.renderList = this.renderList.bind(this);
-    this.removeSkill = this.removeSkill.bind(this);
-  }
-
-  removeSkill(key) {
-    this.props.removeSkill(key);
-  }
-
-  renderList(category) {
-    return Object.keys(this.props.skills).map((key) => {
-      if (this.props.skills[key].category === category) {
-        return (
-          <li key={key}>
-            {this.props.skills[key].name}
-            {this.props.uid ? (
-              <Button
-                to="#"
-                type="delete"
-                onClick={() => this.removeSkill(key)}
-              />
-            ) : null}
-          </li>
-        );
-      }
-      return null;
-    });
-  }
-
-  render() {
-    const { skills, uid, addSkill } = this.props;
-
-    return (
-      <Page title="About">
-        <Row>
-          <h2>About, Skills and Interests</h2>
-          <SkillsRow child>
-            <SkillsColumn>
-              <h3>Core</h3>
-              {skills && this.renderList('core')}
-            </SkillsColumn>
-            <SkillsColumn>
-              <h3>Libraries</h3>
-              {skills && this.renderList('library')}
-            </SkillsColumn>
-            <SkillsColumn>
-              <h3>Design</h3>
-              {skills && this.renderList('design')}
-            </SkillsColumn>
-          </SkillsRow>
-          {uid ? (
-            <Row child>
-              <AddSkillForm addSkill={addSkill} />
-            </Row>
-          ) : null}
-        </Row>
-        <Row>
-          <h3>A bit about me...</h3>
-          <p>
-            <CloudImage
-              publicId="Xander_with_finger_paint"
-              name="My son Xander finger painting with our dog Gizmo in the background."
-              align="right"
-              width="200"
-              link
+const renderList = (context, category) =>
+  Object.keys(context.skills).map((key) => {
+    if (context.skills[key].category === category) {
+      return (
+        <li key={key}>
+          {context.skills[key].name}
+          {context.isLoggedIn ? (
+            <Button
+              to="#"
+              type="delete"
+              onClick={() => context.removeSkill(key)}
             />
-            I'm really passionate about design and making everything I touch on
-            the web better. I'm never satisfied with my skillset and am
-            constantly striving to be better and learn as much as I can when the
-            time allows. There isn't time to learn everything though. My wife
-            Lee and I had our son Xander{' '}
-            {moment(20160216, 'YYYYMMDD').fromNow()} and watching him grow and
-            play with our shiba inu Gizmo has been my greatest joy in life.
-          </p>
-          <p>
-            Recently I've dived head first into learning React.js and am loving
-            it. So much so I decided to build this portfolio with it to
-            challenge myself. Do you need React to build a <em>simple</em>{' '}
-            portfolio site? <strong>Of course not.</strong> Is actually building
-            something in production the best way to learn something?{' '}
-            <strong>¯\_(ツ)_/¯</strong>
-            <br />You can find more of what I'm learning by{' '}
-            <a
-              href="https://github.com/jordandrako/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              inspecting my GitHub profile
-            </a>.
-          </p>
-          <p>
-            <strong>My worklow: </strong>
-            I have used many systems, programs and workflows over the years,
-            jumping back forth between Windows and Linux. Currently, I'm most
-            comfortable using{' '}
-            <a
-              href="https://code.visualstudio.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              VS Code
-            </a>, complimented by{' '}
-            <a
-              href="https://hyper.is"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Hyper
-            </a>{' '}
-            with zsh or{' '}
-            <a
-              href="http://cmder.net"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Cmder
-            </a>.
-          </p>
-          <p>
-            <strong>In my spare time</strong> I enjoy being the biggest nerd
-            possible. I build PCs, build home automation systems, manage linux
-            and media servers. Mostly, though, I play PC games. If you'd like to
-            add me on{' '}
-            <a
-              href="https://steamcommunity.com/id/jordandrako/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Steam, here's my community page
-            </a>. I'm also obsessed with making the best coffee possible; my
-            favorite brewing methods are the Chemex, Kalita Wave and my{' '}
-            <a
-              href="https://sca.coffee/certified-home-brewer/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              SCA
-            </a>{' '}
-            certified Behmor Brazen Plus drip machine (like I said, obsessed).
-          </p>
-        </Row>
-        <Row>
-          <h2>Work History</h2>
-          <HistoryRow>
-            <DateColumn>
-              <p>Jan 2018 - Now</p>
-            </DateColumn>
-            <HistoryColumn>
-              <h3>UX Engineer</h3>
-              <h4>
-                <em>
-                  <a
-                    href="https://microsoft.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Microsoft
-                  </a>{' '}
-                  through{' '}
-                  <a
-                    href="https://aquent.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Aquent
-                  </a>
-                </em>
-              </h4>
-              <p>
-                Member the OneDrive and SharePoint Design (ODSP) team using
-                TypeScript, React, and cutting edge techniques to create open
-                source software and Microsoft experiences. The primary
-                responsibility is developing{' '}
-                <a
-                  href="https://github.com/OfficeDev/office-ui-fabric-react"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Office UI Fabric React
-                </a>, the official front-end framework for building experiences
-                that fit seamlessly into Office and Office 365.
-              </p>
-              <ul>
-                <li>Adhere to strict design language guidelines.</li>
-                <li>
-                  Develop within a large codebase that is integrated into dozens
-                  of official Microsoft and 3rd-party products.
-                </li>
-                <li>
-                  Work with a large team of people with a wider range of skills
-                  and backgrounds.
-                </li>
-              </ul>
-            </HistoryColumn>
-          </HistoryRow>
-          <HistoryRow>
-            <DateColumn>
-              <p>Nov 2015 - Nov 2017</p>
-            </DateColumn>
-            <HistoryColumn>
-              <h3>Front-End UX Engineer</h3>
-              <h4>
-                <em>
-                  <a
-                    href="https://outreachmediagroup.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Outreach Inc.
-                  </a>
-                </em>
-              </h4>
-              <p>
-                Work with the Outreach Media Group's Cost Per Lead team to
-                create and manage landing pages and creative graphics targeted
-                at church leaders and faith-based consumers. Employ adaptive web
-                designs and creative development techniques to generate leads
-                for corporate clients' programs and advertising campaigns. A/B
-                test and optimize conversion rates to find the perfect design
-                and fit for each individual clients' needs.
-              </p>
-              <ul>
-                <li>
-                  Integrated landing pages with back-end software to deliver
-                  filtered, targeted, quality leads to many clients' CRMs.
-                </li>
-                <li>
-                  Improved company margins by finding creative, strong
-                  alternatives to expensive services.
-                </li>
-                <li>
-                  Adapted to many managerial and life changes through the length
-                  of employment.
-                </li>
-              </ul>
-            </HistoryColumn>
-          </HistoryRow>
-          <HistoryRow>
-            <DateColumn>
-              <p>Aug 2014 - Nov 2015</p>
-            </DateColumn>
-            <HistoryColumn>
-              <h3>Lead WordPress Developer and Graphic Designer</h3>
-              <h4>
-                <em>
-                  <a
-                    href="https://uzu-media.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    UZU Media
-                  </a>
-                </em>
-              </h4>
-              <p>
-                Design, develop and maintained websites built primarily with
-                content management systems, primarily Wordpress. Lead the design
-                process, from exploration to print, of client branding.
-              </p>
-              <ul>
-                <li>Worked in a small, close team environment.</li>
-                <li>
-                  Used best practices to deliver strong and secure websites
-                </li>
-                <li>
-                  Researched individual needs and explored many solutions with
-                  each client.
-                </li>
-              </ul>
-            </HistoryColumn>
-          </HistoryRow>
-          <HistoryRow>
-            <DateColumn>
-              <p>Jan 2014 - Aug 2014</p>
-            </DateColumn>
-            <HistoryColumn>
-              <h3>Internships - Graphic Design and Junior Developer</h3>
-              <h4>
-                <em>Diversified Machine Systems & Helium, Inc</em>
-              </h4>
-            </HistoryColumn>
-          </HistoryRow>
-        </Row>
-        <Row>
-          <h2>Education</h2>
-          <Flex>
-            <DateColumn>
-              <p>May 2012 - Aug 2014</p>
-            </DateColumn>
-            <HistoryColumn>
-              <h3>
-                Associates in Multimedia Graphic Design with a focus on Web
-                Development
-              </h3>
-              <h4>
-                <em>Pikes Peak Community College</em>
-              </h4>
-              <p>
-                Learned the process of designing for print and web, along with
-                other college things. Most of my knowledge is self taught.
-              </p>
-              <ul>
-                <li>
-                  Integrated landing pages with back-end software to deliver
-                  filtered, targeted, quality leads to many clients' CRMs
-                </li>
-                <li>
-                  Improved company margins by finding creative, strong
-                  alternatives to expensive services.
-                </li>
-                <li>
-                  Adapted to many managerial and life changes through the length
-                  of employment.
-                </li>
-              </ul>
-            </HistoryColumn>
-          </Flex>
-        </Row>
-        <Row>
-          <p>Want this to go?</p>
-          <Button
-            href="https://res.cloudinary.com/jordan-janzen/image/upload/v1511291826/Jordan_Janzen_CV.pdf"
-            target="_blank"
-            type="cta"
-          >
-            <i className="fa fa-file-text" aria-hidden="true" /> Download My CV
-          </Button>
-        </Row>
-      </Page>
-    );
-  }
-}
+          ) : null}
+        </li>
+      );
+    }
+    return null;
+  });
 
-About.propTypes = {
-  uid: PropTypes.string,
-  skills: PropTypes.object.isRequired,
-  addSkill: PropTypes.func.isRequired,
-  removeSkill: PropTypes.func.isRequired
-};
+const About = () => (
+  <AppContext.Consumer>
+    {(context) => {
+      const { skills, isLoggedIn, addSkill } = context;
+      return (
+        <Page title="About">
+          <Row>
+            <h2>About, Skills and Interests</h2>
+            <SkillsRow child>
+              <SkillsColumn>
+                <h3>Core</h3>
+                {skills && renderList(context, 'core')}
+              </SkillsColumn>
+              <SkillsColumn>
+                <h3>Libraries</h3>
+                {skills && renderList(context, 'library')}
+              </SkillsColumn>
+              <SkillsColumn>
+                <h3>Design</h3>
+                {skills && renderList(context, 'design')}
+              </SkillsColumn>
+            </SkillsRow>
+            {isLoggedIn ? (
+              <Row child>
+                <AddSkillForm addSkill={addSkill} />
+              </Row>
+            ) : null}
+          </Row>
+          <Row>
+            <h3>A bit about me...</h3>
+            <p>
+              <CloudImage
+                publicId="Xander_with_finger_paint"
+                name="My son Xander finger painting with our dog Gizmo in the background."
+                align="right"
+                width="200"
+                link
+              />
+              I'm really passionate about design and making everything I touch
+              on the web better. I'm never satisfied with my skillset and am
+              constantly striving to be better and learn as much as I can when
+              the time allows. There isn't time to learn everything though. My
+              wife Lee and I had our son Xander{' '}
+              {moment(20160216, 'YYYYMMDD').fromNow()} and watching him grow and
+              play with our shiba inu Gizmo has been my greatest joy in life.
+            </p>
+            <p>
+              Recently I've dived head first into learning React.js and am
+              loving it. So much so I decided to build this portfolio with it to
+              challenge myself. Do you need React to build a <em>simple</em>{' '}
+              portfolio site? <strong>Of course not.</strong> Is actually
+              building something in production the best way to learn something?{' '}
+              <strong>¯\_(ツ)_/¯</strong>
+              <br />You can find more of what I'm learning by{' '}
+              <a
+                href="https://github.com/jordandrako/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                inspecting my GitHub profile
+              </a>.
+            </p>
+            <p>
+              <strong>My worklow: </strong>
+              I have used many systems, programs and workflows over the years,
+              jumping back forth between Windows and Linux. Currently, I'm most
+              comfortable using{' '}
+              <a
+                href="https://code.visualstudio.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                VS Code
+              </a>, complimented by{' '}
+              <a
+                href="https://hyper.is"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Hyper
+              </a>{' '}
+              with zsh or{' '}
+              <a
+                href="http://cmder.net"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Cmder
+              </a>.
+            </p>
+            <p>
+              <strong>In my spare time</strong> I enjoy being the biggest nerd
+              possible. I build PCs, build home automation systems, manage linux
+              and media servers. Mostly, though, I play PC games. If you'd like
+              to add me on{' '}
+              <a
+                href="https://steamcommunity.com/id/jordandrako/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Steam, here's my community page
+              </a>. I'm also obsessed with making the best coffee possible; my
+              favorite brewing methods are the Chemex, Kalita Wave and my{' '}
+              <a
+                href="https://sca.coffee/certified-home-brewer/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                SCA
+              </a>{' '}
+              certified Behmor Brazen Plus drip machine (like I said, obsessed).
+            </p>
+          </Row>
+          <Row>
+            <h2>Work History</h2>
+            <HistoryRow>
+              <DateColumn>
+                <p>Jan 2018 - Now</p>
+              </DateColumn>
+              <HistoryColumn>
+                <h3>UX Engineer</h3>
+                <h4>
+                  <em>
+                    <a
+                      href="https://microsoft.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Microsoft
+                    </a>{' '}
+                    through{' '}
+                    <a
+                      href="https://aquent.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Aquent
+                    </a>
+                  </em>
+                </h4>
+                <p>
+                  Member the OneDrive and SharePoint Design (ODSP) team using
+                  TypeScript, React, and cutting edge techniques to create open
+                  source software and Microsoft experiences. The primary
+                  responsibility is developing{' '}
+                  <a
+                    href="https://github.com/OfficeDev/office-ui-fabric-react"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Office UI Fabric React
+                  </a>, the official front-end framework for building
+                  experiences that fit seamlessly into Office and Office 365.
+                </p>
+                <ul>
+                  <li>Adhere to strict design language guidelines.</li>
+                  <li>
+                    Develop within a large codebase that is integrated into
+                    dozens of official Microsoft and 3rd-party products.
+                  </li>
+                  <li>
+                    Work with a large team of people with a wider range of
+                    skills and backgrounds.
+                  </li>
+                </ul>
+              </HistoryColumn>
+            </HistoryRow>
+            <HistoryRow>
+              <DateColumn>
+                <p>Nov 2015 - Nov 2017</p>
+              </DateColumn>
+              <HistoryColumn>
+                <h3>Front-End UX Engineer</h3>
+                <h4>
+                  <em>
+                    <a
+                      href="https://outreachmediagroup.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Outreach Inc.
+                    </a>
+                  </em>
+                </h4>
+                <p>
+                  Work with the Outreach Media Group's Cost Per Lead team to
+                  create and manage landing pages and creative graphics targeted
+                  at church leaders and faith-based consumers. Employ adaptive
+                  web designs and creative development techniques to generate
+                  leads for corporate clients' programs and advertising
+                  campaigns. A/B test and optimize conversion rates to find the
+                  perfect design and fit for each individual clients' needs.
+                </p>
+                <ul>
+                  <li>
+                    Integrated landing pages with back-end software to deliver
+                    filtered, targeted, quality leads to many clients' CRMs.
+                  </li>
+                  <li>
+                    Improved company margins by finding creative, strong
+                    alternatives to expensive services.
+                  </li>
+                  <li>
+                    Adapted to many managerial and life changes through the
+                    length of employment.
+                  </li>
+                </ul>
+              </HistoryColumn>
+            </HistoryRow>
+            <HistoryRow>
+              <DateColumn>
+                <p>Aug 2014 - Nov 2015</p>
+              </DateColumn>
+              <HistoryColumn>
+                <h3>Lead WordPress Developer and Graphic Designer</h3>
+                <h4>
+                  <em>
+                    <a
+                      href="https://uzu-media.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      UZU Media
+                    </a>
+                  </em>
+                </h4>
+                <p>
+                  Design, develop and maintained websites built primarily with
+                  content management systems, primarily Wordpress. Lead the
+                  design process, from exploration to print, of client branding.
+                </p>
+                <ul>
+                  <li>Worked in a small, close team environment.</li>
+                  <li>
+                    Used best practices to deliver strong and secure websites
+                  </li>
+                  <li>
+                    Researched individual needs and explored many solutions with
+                    each client.
+                  </li>
+                </ul>
+              </HistoryColumn>
+            </HistoryRow>
+            <HistoryRow>
+              <DateColumn>
+                <p>Jan 2014 - Aug 2014</p>
+              </DateColumn>
+              <HistoryColumn>
+                <h3>Internships - Graphic Design and Junior Developer</h3>
+                <h4>
+                  <em>Diversified Machine Systems & Helium, Inc</em>
+                </h4>
+              </HistoryColumn>
+            </HistoryRow>
+          </Row>
+          <Row>
+            <h2>Education</h2>
+            <Flex>
+              <DateColumn>
+                <p>May 2012 - Aug 2014</p>
+              </DateColumn>
+              <HistoryColumn>
+                <h3>
+                  Associates in Multimedia Graphic Design with a focus on Web
+                  Development
+                </h3>
+                <h4>
+                  <em>Pikes Peak Community College</em>
+                </h4>
+                <p>
+                  Learned the process of designing for print and web, along with
+                  other college things. Most of my knowledge is self taught.
+                </p>
+                <ul>
+                  <li>
+                    Integrated landing pages with back-end software to deliver
+                    filtered, targeted, quality leads to many clients' CRMs
+                  </li>
+                  <li>
+                    Improved company margins by finding creative, strong
+                    alternatives to expensive services.
+                  </li>
+                  <li>
+                    Adapted to many managerial and life changes through the
+                    length of employment.
+                  </li>
+                </ul>
+              </HistoryColumn>
+            </Flex>
+          </Row>
+          <Row>
+            <p>Want this to go?</p>
+            <Button
+              href="https://res.cloudinary.com/jordan-janzen/image/upload/v1511291826/Jordan_Janzen_CV.pdf"
+              target="_blank"
+              type="cta"
+            >
+              <i className="fa fa-file-text" aria-hidden="true" /> Download My
+              CV
+            </Button>
+          </Row>
+        </Page>
+      );
+    }}
+  </AppContext.Consumer>
+);
 
-About.defaultProps = {
-  uid: null
-};
+// class About extends Component {
+
+// }
+
+// About.propTypes = {
+//   isLoggedIn: PropTypes.bool,
+//   skills: PropTypes.object.isRequired,
+//   addSkill: PropTypes.func.isRequired,
+//   removeSkill: PropTypes.func.isRequired
+// };
+
+// About.defaultProps = {
+//   isLoggedIn: null
+// };
 
 export default About;

@@ -35,19 +35,14 @@ const Router = (props) => (
     <Route
       path="/about"
       render={() => (
-        <AsyncAbout
-          uid={props.uid}
-          skills={props.skills}
-          addSkill={props.addSkill}
-          removeSkill={props.removeSkill}
-        />
+        <AsyncAbout skills={props.skills} addSkill={props.addSkill} />
       )}
     />
     <Route
       path="/portfolio"
       render={() => (
         <AsyncPortfolio
-          uid={props.uid}
+          isLoggedIn={props.isLoggedIn}
           skills={props.skills}
           projects={props.projects}
           addProject={props.addProject}
@@ -62,7 +57,7 @@ const Router = (props) => (
       exact
       path="/todo"
       render={() =>
-        props.uid ? (
+        props.isLoggedIn ? (
           <AsyncTodoList
             todos={props.todos}
             addTodo={props.addTodo}
@@ -79,7 +74,7 @@ const Router = (props) => (
 );
 
 Router.propTypes = {
-  uid: PropTypes.string,
+  isLoggedIn: PropTypes.bool,
   isMobile: PropTypes.bool.isRequired,
   todos: PropTypes.object.isRequired,
   projects: PropTypes.object.isRequired,
@@ -90,7 +85,7 @@ Router.propTypes = {
   removeProject: PropTypes.func.isRequired,
 
   addSkill: PropTypes.func.isRequired,
-  removeSkill: PropTypes.func.isRequired,
+  // removeSkill: PropTypes.func.isRequired,
 
   addTodo: PropTypes.func.isRequired,
   updateTodo: PropTypes.func.isRequired,
@@ -102,7 +97,7 @@ Router.propTypes = {
 };
 
 Router.defaultProps = {
-  uid: null,
+  isLoggedIn: null,
   cloudinary: {
     key: undefined,
     secrect: undefined

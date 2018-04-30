@@ -28,7 +28,7 @@ const NavList = styled.ul`
   }
 `;
 
-const Link = styled(NavLink) `
+const Link = styled(NavLink)`
   display: block;
   color: ${colors.white};
   font-family: Roboto, ${typography.monospace};
@@ -130,7 +130,7 @@ const Navigation = (props) => (
           <span>Portfolio</span>
         </Link>
       </li>
-      {props.uid ? (
+      {props.isLoggedIn ? (
         <li>
           <Link to="/todo">
             <i className="fa fa-check-square-o" aria-hidden="true" />
@@ -143,11 +143,11 @@ const Navigation = (props) => (
 );
 
 Navigation.propTypes = {
-  uid: PropTypes.string,
+  isLoggedIn: PropTypes.bool
 };
 
 Navigation.defaultProps = {
-  uid: null,
+  isLoggedIn: null
 };
 
 export default Navigation;

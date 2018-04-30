@@ -117,7 +117,7 @@ class Footer extends Component {
 
     this.state = {
       overflowOpen: !this.props.isMobile,
-      activePage: null,
+      activePage: null
     };
   }
 
@@ -154,14 +154,14 @@ class Footer extends Component {
   }
 
   render() {
-    const loginButton = !this.props.uid
+    const loginButton = !this.props.isLoggedIn
       ? this.renderLogin()
       : this.renderLogout();
     const { overflowOpen } = this.state;
 
     return (
       <Bottom>
-        <Navigation uid={this.props.uid} />
+        <Navigation isLoggedIn={this.props.isLoggedIn} />
         {overflowOpen ? (
           <ClickOutside onClick={() => this.toggleOverflow()} />
         ) : null}
@@ -196,14 +196,14 @@ class Footer extends Component {
 }
 
 Footer.propTypes = {
-  uid: PropTypes.string,
+  isLoggedIn: PropTypes.bool,
   isMobile: PropTypes.bool.isRequired,
   login: PropTypes.func.isRequired,
-  logout: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired
 };
 
 Footer.defaultProps = {
-  uid: null,
+  isLoggedIn: null
 };
 
 export default Footer;

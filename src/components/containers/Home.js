@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { adjustHue } from 'polished';
 import moment from 'moment';
+
+import { AppContext } from '../App/App';
 
 import Button from '../Button';
 import CloudImage from '../CloudImage';
@@ -84,12 +86,13 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+
+    // this.renderHeroContent = this.renderHeroContent.bind(this);
   }
 
   render() {
-    const { projects, isMobile } = this.props;
-
-    const HeroContent = (
+    // const { projects, isMobile } = this.props;
+    const HeroContent = (isMobile) => (
       <OuterHero>
         <InnerHero>
           {isMobile ? (
@@ -130,49 +133,56 @@ class Home extends Component {
       </OuterHero>
     );
 
-    const projectIndex = projects && Object.keys(projects).length - 1;
-    const projectKey = projects && Object.keys(projects)[projectIndex];
-
     return (
-      <Page title="Home">
-        <Hero>
-          {!isMobile ? (
-            <CloudImage
-              publicId="Jordan_Headshot_fade"
-              format="png"
-              name="Jordan's Headshot."
-              border={false}
-              width="1000"
-              crop="limit"
-              style={{ backgroundPosition: 'left' }}
-            >
-              {HeroContent}
-            </CloudImage>
-          ) : (
-              HeroContent
-            )}
-        </Hero>
-        <Row>
-          <h2>My latest project</h2>
-          {projectKey ? (
-            <Project
-              index={projectKey}
-              details={projects[projectKey]}
-              style={{ margin: '0 0 1em', width: '100%' }}
-            />
-          ) : null}
-          <Button to="/portfolio/" type="cta">
-            View My Portfolio
-          </Button>
-        </Row>
-      </Page>
+      <AppContext.Consumer>
+        {(context) => {
+          const { isMobile, projects } = context;
+          const projectIndex = projects && Object.keys(projects).length - 1;
+          const projectKey = projects && Object.keys(projects)[projectIndex];
+
+          return (
+            <Page title="Home">
+              <Hero>
+                {!isMobile ? (
+                  <CloudImage
+                    publicId="Jordan_Headshot_fade"
+                    format="png"
+                    name="Jordan's Headshot."
+                    border={false}
+                    width="1000"
+                    crop="limit"
+                    style={{ backgroundPosition: 'left' }}
+                  >
+                    {HeroContent(isMobile)}
+                  </CloudImage>
+                ) : (
+                  HeroContent(isMobile)
+                )}
+              </Hero>
+              <Row>
+                <h2>My latest project</h2>
+                {projectKey ? (
+                  <Project
+                    index={projectKey}
+                    details={projects[projectKey]}
+                    style={{ margin: '0 0 1em', width: '100%' }}
+                  />
+                ) : null}
+                <Button to="/portfolio/" type="cta">
+                  View My Portfolio
+                </Button>
+              </Row>
+            </Page>
+          );
+        }}
+      </AppContext.Consumer>
     );
   }
 }
 
-Home.propTypes = {
-  isMobile: PropTypes.bool.isRequired,
-  projects: PropTypes.object.isRequired,
-};
+// Home.propTypes = {
+//   isMobile: PropTypes.bool.isRequired,
+//   projects: PropTypes.object.isRequired
+// };
 
 export default Home;

@@ -126,7 +126,7 @@ class Sidebar extends Component {
     this.renderLogout = this.renderLogout.bind(this);
 
     this.state = {
-      activePage: null,
+      activePage: null
     };
   }
 
@@ -170,7 +170,7 @@ class Sidebar extends Component {
         </Top>
         {!this.props.isMobile ? (
           <Footer
-            uid={this.props.uid}
+            isLoggedIn={this.props.isLoggedIn}
             isMobile={this.props.isMobile}
             login={this.props.login}
             logout={this.props.logout}
@@ -183,13 +183,13 @@ class Sidebar extends Component {
 
 Sidebar.propTypes = {
   isMobile: PropTypes.bool.isRequired,
-  uid: PropTypes.string,
+  isLoggedIn: PropTypes.bool,
   login: PropTypes.func.isRequired,
-  logout: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired
 };
 
 Sidebar.defaultProps = {
-  uid: null,
+  isLoggedIn: null
 };
 
 export default Sidebar;

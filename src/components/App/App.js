@@ -10,6 +10,8 @@ import { colors } from '../../theme/variables';
 import { sizes, mediaMax } from '../../theme/style-utils';
 import { slugify } from '../../helpers';
 
+export const AppContext = React.createContext();
+
 const Wrapper = styled.div`
   display: flex;
   ${mediaMax.tablet`flex-direction: column`};
@@ -42,12 +44,25 @@ class App extends Component {
     this.removeSkill = this.removeSkill.bind(this);
 
     this.state = {
-      todos: {},
+      isLoggedIn: false,
+      isMobile: window.innerWidth <= sizes.tablet,
       projects: {},
-      skills: {},
       secrets: {},
-      uid: null,
-      isMobile: window.innerWidth <= sizes.tablet
+      skills: {},
+      todos: {},
+
+      authenticate: this.authenticate,
+      authHandler: this.authHandler,
+      logout: this.logout,
+      changeRef: this.changeRef,
+      addTodo: this.addTodo,
+      updateTodo: this.updateTodo,
+      removeTodo: this.removeTodo,
+      addProject: this.addProject,
+      updateProject: this.updateProject,
+      removeProject: this.removeProject,
+      addSkill: this.addSkill,
+      removeSkill: this.removeSkill
     };
 
     this.ref = undefined;
@@ -166,7 +181,7 @@ class App extends Component {
       .then(
         await auth.signOut().then(() => {
           this.setState({
-            uid: null,
+            isLoggedIn: false,
             secrets: {}
           });
         })
@@ -179,7 +194,7 @@ class App extends Component {
     const rootRef = database.ref();
     const successfulLogin = () => {
       this.setRef('authRef');
-      this.setState({ uid });
+      this.setState({ isLoggedIn: true });
     };
     rootRef.once('value').then((snapshot) => {
       const data = snapshot.val() || {};
@@ -274,37 +289,39 @@ class App extends Component {
 
   render() {
     return (
-      <Wrapper className="App wrapper">
-        <Sidebar
-          uid={this.state.uid}
-          isMobile={this.state.isMobile}
-          login={this.authenticate}
-          logout={this.logout}
-          updateSize={this.updateSize}
-        />
-        <Router
-          {...this.state}
-          addTodo={this.addTodo}
-          updateTodo={this.updateTodo}
-          removeTodo={this.removeTodo}
-          addProject={this.addProject}
-          updateProject={this.updateProject}
-          removeProject={this.removeProject}
-          addSkill={this.addSkill}
-          updateSkill={this.updateSkill}
-          removeSkill={this.removeSkill}
-          isMobile={this.state.isMobile}
-          cloudinary={this.state.secrets.cloudinary}
-        />
-        {this.state.isMobile ? (
-          <Footer
-            uid={this.state.uid}
+      <AppContext.Provider value={this.state}>
+        <Wrapper className="App wrapper">
+          <Sidebar
+            isLoggedIn={this.state.isLoggedIn}
             isMobile={this.state.isMobile}
             login={this.authenticate}
             logout={this.logout}
+            updateSize={this.updateSize}
           />
-        ) : null}
-      </Wrapper>
+          <Router
+            {...this.state}
+            addTodo={this.addTodo}
+            updateTodo={this.updateTodo}
+            removeTodo={this.removeTodo}
+            addProject={this.addProject}
+            updateProject={this.updateProject}
+            removeProject={this.removeProject}
+            addSkill={this.addSkill}
+            updateSkill={this.updateSkill}
+            removeSkill={this.removeSkill}
+            isMobile={this.state.isMobile}
+            cloudinary={this.state.secrets.cloudinary}
+          />
+          {this.state.isMobile ? (
+            <Footer
+              isLoggedIn={this.state.isLoggedIn}
+              isMobile={this.state.isMobile}
+              login={this.authenticate}
+              logout={this.logout}
+            />
+          ) : null}
+        </Wrapper>
+      </AppContext.Provider>
     );
   }
 }
