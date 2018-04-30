@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-import { database, base, auth, provider } from '../base';
-import Sidebar from './Sidebar';
-import Router from './Router';
-import Footer from './Footer';
+import { database, base, auth, authProvider } from '../../base';
+import Sidebar from '../Sidebar';
+import Router from '../Router';
+import Footer from '../Footer';
 
-import { colors } from '../theme/variables';
-import { sizes, mediaMax } from '../theme/style-utils';
-import { slugify } from '../helpers';
+import { colors } from '../../theme/variables';
+import { sizes, mediaMax } from '../../theme/style-utils';
+import { slugify } from '../../helpers';
 
 const Wrapper = styled.div`
   display: flex;
@@ -156,7 +156,7 @@ class App extends Component {
 
   authenticate() {
     auth
-      .signInWithPopup(provider)
+      .signInWithPopup(authProvider)
       .then((result) => this.authHandler(result))
       .catch((error) => console.error(error));
   }

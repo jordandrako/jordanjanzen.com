@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import { HashRouter as Router } from 'react-router-dom';
 import ReactGA from 'react-ga';
 
-import App from './components/App';
+import App from './components/App/App';
 import registerServiceWorker from './registerServiceWorker';
 
 import injectGlobal from './theme/globalStyle'; // eslint-disable-line
@@ -15,6 +15,6 @@ render(
   <Router>
     <App />
   </Router>,
-  document.getElementById('root'),
+  document.getElementById('root')
 );
 registerServiceWorker();
