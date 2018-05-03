@@ -7,12 +7,18 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "predeploy": "cross-env REACT_APP_DATABASE=production npm run build",
-    "prestaging": "npm run build",
-    "deploy": "aws s3 sync build/ s3://www.jordanjanzen.com --cache-control max-age=172800",
-    "staging": "aws s3 sync build/ s3://staging.jordanjanzen.com --cache-control max-age=180",
-    "postdeploy": "aws cloudfront create-invalidation --distribution-id E1SASUQHSLUTW3 --paths /index.html",
-    "poststaging": "aws cloudfront create-invalidation --distribution-id E2R8NA2ILW4G96 --paths /index.html"
+    "branchcheck": "git-branch-is master",
+    "predeploy":
+      "yarn branchcheck && cross-env REACT_APP_DATABASE=production yarn build",
+    "prestaging": "yarn build",
+    "deploy":
+      "aws s3 sync build/ s3://www.jordanjanzen.com --cache-control max-age=172800",
+    "staging":
+      "aws s3 sync build/ s3://staging.jordanjanzen.com --cache-control max-age=180",
+    "postdeploy":
+      "aws cloudfront create-invalidation --distribution-id E1SASUQHSLUTW3 --paths /index.html",
+    "poststaging":
+      "aws cloudfront create-invalidation --distribution-id E2R8NA2ILW4G96 --paths /index.html"
   },
   "dependencies": {
     "firebase": "^4.12.1",
@@ -48,14 +54,11 @@
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-prettier": "^2.3.1",
     "eslint-plugin-react": "^7.4.0",
+    "git-branch-is": "^0.1.0",
     "prettier": "^1.7.3"
   },
   "eslintConfig": {
-    "extends": [
-      "airbnb",
-      "prettier",
-      "prettier/react"
-    ],
+    "extends": ["airbnb", "prettier", "prettier/react"],
     "parser": "babel-eslint",
     "parserOptions": {
       "ecmaVersion": 8,
@@ -77,14 +80,8 @@
           "argsIgnorePattern": "res|next|^err"
         }
       ],
-      "arrow-body-style": [
-        2,
-        "as-needed"
-      ],
-      "arrow-parens": [
-        2,
-        "always"
-      ],
+      "arrow-body-style": [2, "as-needed"],
+      "arrow-parens": [2, "always"],
       "no-param-reassign": [
         2,
         {
@@ -108,10 +105,7 @@
       "react/jsx-filename-extension": [
         1,
         {
-          "extensions": [
-            ".js",
-            ".jsx"
-          ]
+          "extensions": [".js", ".jsx"]
         }
       ],
       "radix": 0,
@@ -119,14 +113,7 @@
         2,
         {
           "hoist": "all",
-          "allow": [
-            "resolve",
-            "reject",
-            "done",
-            "next",
-            "err",
-            "error"
-          ]
+          "allow": ["resolve", "reject", "done", "next", "err", "error"]
         }
       ],
       "quotes": [
@@ -141,14 +128,10 @@
       "jsx-a11y/anchor-is-valid": [
         "warn",
         {
-          "aspects": [
-            "invalidHref"
-          ]
+          "aspects": ["invalidHref"]
         }
       ]
     },
-    "plugins": [
-      "html"
-    ]
+    "plugins": ["html"]
   }
 }
