@@ -7,7 +7,7 @@ import CloudImage from './CloudImage';
 import Button from './Button';
 
 import { Row } from '../theme/grid';
-import { colors, theme, typography } from '../theme/variables';
+import { palette, semanticColors, fonts } from '../theme/theme';
 import { mediaMax } from '../theme/style-utils';
 
 const ClickOutside = styled(Link)`
@@ -41,8 +41,8 @@ const Single = styled.div`
   max-width: 760px;
   height: 84vh;
   margin: 30px;
-  background: ${theme.siteBackground};
-  box-shadow: 0 -3px 0 ${theme.primaryColor}, 0 0 9px #000;
+  background: ${semanticColors.siteBackground};
+  box-shadow: 0 -3px 0 ${semanticColors.primaryColor}, 0 0 9px #000;
   z-index: 1000;
   pointer-events: all;
   display: flex;
@@ -67,7 +67,7 @@ const Single = styled.div`
 const Frame = styled.div`
   width: 100%;
   padding: 0.5em;
-  background: ${colors.black};
+  background: ${palette.black};
   display: flex;
   flex-shrink: 0;
   align-items: center;
@@ -89,8 +89,8 @@ const Frame = styled.div`
 `;
 
 const Title = styled.h2`
-  font-family: ${typography.monospace};
-  color: ${colors.lightwhite};
+  font-family: ${fonts.monospace};
+  color: ${palette.lightwhite};
   font-size: 1.15rem;
   margin: 0;
   line-height: 1;
@@ -208,7 +208,7 @@ class ProjectSingle extends Component {
                   <Button
                     small
                     type="secondary"
-                    bg={colors.red}
+                    bg={palette.red}
                     onClick={() => this.handleDelete(index)}
                   >
                     {this.state.delete ? 'Confirm?' : 'Delete'}

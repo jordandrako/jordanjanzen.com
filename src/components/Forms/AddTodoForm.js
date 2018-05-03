@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import StyledForm from '../StyledForm';
 import Button from '../Button';
-import { colors } from '../../theme/variables';
+import { palette } from '../../theme/theme';
 
 class AddTodoForm extends Component {
   constructor() {
@@ -88,7 +88,7 @@ class AddTodoForm extends Component {
               name="link"
               placeholder="Todo link"
             />
-            <Button type="success" arrows={colors.lightwhite}>
+            <Button type="success" arrows={palette.lightwhite}>
               + Add Todo
             </Button>
           </form>

@@ -4,7 +4,7 @@ export const sizes = {
   giant: 1400,
   desktop: 1100,
   tablet: 930,
-  phone: 480,
+  phone: 480
 };
 
 // iterate through the sizes and create a media template
@@ -27,12 +27,3 @@ export const mediaMin = Object.keys(sizes).reduce((accumulator, label) => {
   `;
   return accumulator;
 }, {});
-
-export function truncate(width) {
-  return `
-    width: ${width};
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  `;
-}

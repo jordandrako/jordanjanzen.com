@@ -4,14 +4,14 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { adjustHue, transparentize } from 'polished';
 
-import { colors } from '../theme/variables';
+import { palette } from '../theme/theme';
 
 const Image = styled.div`
   background: ${(props) =>
       props.dim
         ? `linear-gradient(135deg,
-          ${transparentize(0.5, `${adjustHue(-30, colors.blue)}`)} 0%,
-          ${transparentize(0.5, `${colors.blue}`)}
+          ${transparentize(0.5, `${adjustHue(-30, palette.blue)}`)} 0%,
+          ${transparentize(0.5, `${palette.blue}`)}
           100%),`
         : null}
     url(${(props) => props.background}) no-repeat;
@@ -19,7 +19,7 @@ const Image = styled.div`
   background-position: center top;
   width: 100%;
   height: 100%;
-  border: ${(props) => (props.border ? `3px solid ${colors.black}` : 'none')};
+  border: ${(props) => (props.border ? `3px solid ${palette.black}` : 'none')};
   border-radius: ${(props) => {
     if (props.radius === 'max') {
       return '50%';
@@ -29,7 +29,7 @@ const Image = styled.div`
 `;
 
 const Img = styled.img`
-  border: ${(props) => (props.border ? `3px solid ${colors.black}` : 'none')};
+  border: ${(props) => (props.border ? `3px solid ${palette.black}` : 'none')};
   border-radius: ${(props) => {
     if (props.radius === 'max') {
       return '50%';

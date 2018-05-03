@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import StyledForm from '../StyledForm';
 import Button from '../Button';
-import { colors } from '../../theme/variables';
+import { palette } from '../../theme/theme';
 
 class AddSkillForm extends Component {
   constructor() {
@@ -57,7 +57,7 @@ class AddSkillForm extends Component {
               <option value="design">Design</option>
             </select>
 
-            <Button type="success" arrows={colors.lightwhite}>
+            <Button type="success" arrows={palette.lightwhite}>
               + Add Skill
             </Button>
           </form>

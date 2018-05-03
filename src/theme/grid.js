@@ -6,7 +6,7 @@ import DocumentTitle from 'react-document-title';
 import PageTitle from '../components/PageTitle';
 
 import { mediaMax } from './style-utils';
-import { theme } from './variables';
+import { semanticColors } from './theme';
 
 export const MainContainer = styled.main`
   flex: 4;
@@ -32,10 +32,10 @@ export const Main = styled.div`
     line-height: 0.9em;
     display: inline-block;
     text-shadow:
-      2px 2px ${theme.siteBackground},
-      2px -2px ${theme.siteBackground},
-      -2px 2px ${theme.siteBackground},
-      -2px -2px ${theme.siteBackground};
+      2px 2px ${semanticColors.siteBackground},
+      2px -2px ${semanticColors.siteBackground},
+      -2px 2px ${semanticColors.siteBackground},
+      -2px -2px ${semanticColors.siteBackground};
     }
   }
 `;

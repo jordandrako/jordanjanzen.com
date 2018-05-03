@@ -6,15 +6,20 @@ import Sidebar from './Sidebar';
 import Router from './Router';
 import Footer from './Footer';
 
-import { colors } from '../theme/variables';
+import globalStyles from '../theme/globalStyles';
+import { loadTheme } from '../theme/theme';
 import { sizes, mediaMax } from '../theme/style-utils';
 import { slugify } from '../helpers';
+
+const appTheme = loadTheme({});
+const { palette } = appTheme;
+globalStyles(appTheme);
 
 const Wrapper = styled.div`
   display: flex;
   ${mediaMax.tablet`flex-direction: column`};
   height: 100%;
-  border-top: 2px solid ${colors.darkblack};
+  border-top: 2px solid ${palette.darkblack};
   flex-wrap: wrap;
 `;
 
@@ -47,7 +52,8 @@ class App extends Component {
       skills: {},
       secrets: {},
       uid: null,
-      isMobile: window.innerWidth <= sizes.tablet
+      isMobile: window.innerWidth <= sizes.tablet,
+      theme: appTheme
     };
 
     this.ref = undefined;

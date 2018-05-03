@@ -4,20 +4,20 @@ import styled from 'styled-components';
 import Button from './Button';
 
 import codeLoader from '../images/codeLoader.svg';
-import { colors } from '../theme/variables';
+import { palette } from '../theme/theme';
 
 const Loader = styled.div`
-  border: 3px solid ${colors.black};
+  border: 3px solid ${palette.black};
   border-top: 0;
   padding: 0 1.2em;
   position: relative;
   max-width: 420px;
   overflow: hidden;
-  background: ${colors.lightwhite};
+  background: ${palette.lightwhite};
 `;
 
 const Frame = styled.div`
-  background: ${colors.black};
+  background: ${palette.black};
   width: 100%;
   height: 28px;
   position: absolute;
@@ -41,7 +41,7 @@ const Scrollbar = styled.div`
   top: 0;
   width: 24px;
   height: 100%;
-  background: ${colors.white};
+  background: ${palette.white};
 
   &:after {
     content: '';
