@@ -8,7 +8,7 @@ import Button from '../Button';
 import CloudImage from '../CloudImage';
 
 import { Page, Row, Flex } from '../../theme/grid';
-import { colors, typography } from '../../theme/variables';
+import { palette, fonts } from '../../theme/variables';
 import { mediaMin } from '../../theme/style-utils';
 
 const SkillsRow = styled(Row)`
@@ -29,14 +29,14 @@ const SkillsColumn = styled.ul`
   }
 
   h3 {
-    color: ${colors.blue};
+    color: ${palette.blue};
     padding: 0.5em 0;
     margin: 0 0 0.75em 0;
-    border-bottom: 2px solid ${colors.blue};
+    border-bottom: 2px solid ${palette.blue};
   }
 
   li {
-    font-family: ${typography.monospace};
+    font-family: ${fonts.monospace};
     line-height: 1.5;
     padding: 0 1em;
     margin: 1em 0;
@@ -55,8 +55,8 @@ const SkillsColumn = styled.ul`
 const DateColumn = styled.div`
   flex: 1;
   padding: 1em;
-  border-top: 2px solid ${colors.blue};
-  border-right: 2px solid ${colors.blue};
+  border-top: 2px solid ${palette.blue};
+  border-right: 2px solid ${palette.blue};
 `;
 
 const HistoryRow = styled(Flex)``;
@@ -64,7 +64,7 @@ const HistoryRow = styled(Flex)``;
 const HistoryColumn = styled.div`
   flex: 4;
   padding: 1em;
-  border-top: 2px solid ${colors.blue};
+  border-top: 2px solid ${palette.blue};
 `;
 
 class About extends Component {

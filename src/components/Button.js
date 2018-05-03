@@ -3,22 +3,22 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import { colors, theme, typography } from '../theme/variables';
+import { palette, semanticColors, fonts } from '../theme/variables';
 
-const BtnColor = (props) => props.color || theme.buttonText;
+const BtnColor = (props) => props.color || semanticColors.buttonText;
 const Background = (props) => {
   if (props.bg) {
     return props.bg;
   } else if (props.type === 'success' || props.type === 'submit') {
-    return colors.green;
+    return palette.green;
   } else if (props.type === 'warn') {
-    return colors.red;
+    return palette.red;
   } else if (props.type === 'login') {
-    return colors.lightblack;
+    return palette.lightblack;
   } else if (props.type === 'cta') {
-    return colors.blue;
+    return palette.blue;
   }
-  return theme.buttonColor;
+  return semanticColors.buttonColor;
 };
 
 const Round = (props) => {
@@ -38,13 +38,13 @@ const Btn = styled.button`
   position: relative;
   color: ${(props) => {
     if (props.type === 'cta') {
-      return colors.lightwhite;
+      return palette.lightwhite;
     } else if (props.color) {
       return props.color;
     }
-    return theme.buttonText;
+    return semanticColors.buttonText;
   }};
-  font-family: ${typography.monospace};
+  font-family: ${fonts.monospace};
   background: ${Background};
   display: flex;
   justify-content: space-around;
@@ -70,8 +70,8 @@ const Btn = styled.button`
   }
 
   &.disabled {
-    background: ${colors.grey};
-    color: ${colors.black};
+    background: ${palette.grey};
+    color: ${palette.black};
   }
 
   i.fa {
@@ -117,7 +117,7 @@ const DelBtn = styled.button`
   height: 20px;
   line-height: 20px;
   opacity: 0.85;
-  color: ${colors.red};
+  color: ${palette.red};
   background: transparent;
   border: none;
   border-radius: 50%;
@@ -213,7 +213,7 @@ Button.defaultProps = {
   type: 'primary',
   children: null,
   text: null,
-  color: theme.buttonText,
+  color: semanticColors.buttonText,
   bg: null,
   small: false,
   large: false,

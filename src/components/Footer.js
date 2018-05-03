@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { darken } from 'polished';
 import { Transition } from 'react-transition-group';
 
-import { colors } from '../theme/variables';
+import { palette } from '../theme/variables';
 import { mediaMin, mediaMax } from '../theme/style-utils';
 import Navigation from './Navigation';
 import Button from './Button';
@@ -15,11 +15,11 @@ const Bottom = styled.footer`
   flex-direction: column;
   flex-grow: 1;
   overflow-y: auto;
-  background: ${darken(0.05, colors.black)};
+  background: ${darken(0.05, palette.black)};
   justify-content: space-between;
 
   ${mediaMax.tablet`
-    box-shadow: 0 -4px ${darken(0.05, colors.black)};
+    box-shadow: 0 -4px ${darken(0.05, palette.black)};
     flex-grow: 0;
     padding-right: 40px;
     overflow: hidden;
@@ -46,7 +46,7 @@ const OverflowButton = styled.button`
     width: 5px;
     height: 5px;
     border-radius: 50%;
-    background: ${colors.lightwhite};
+    background: ${palette.lightwhite};
   }
 `;
 
@@ -66,7 +66,7 @@ const ClickOutside = styled.div`
 `;
 
 const OverflowMenu = styled.div`
-  background: ${colors.black};
+  background: ${palette.black};
   position: absolute;
   bottom: 54px;
   right: -60px;

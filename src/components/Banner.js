@@ -3,26 +3,26 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Transition } from 'react-transition-group';
 
-import { colors, typography } from '../theme/variables';
+import { palette, fonts } from '../theme/variables';
 import { toTitleCase } from '../helpers';
 
 const Alert = styled.div`
   background: ${(props) => {
     const type = props.type;
     if (type === 'alert') {
-      return colors.lightyellow;
+      return palette.lightyellow;
     } else if (type === 'success') {
-      return colors.green;
+      return palette.green;
     } else if (type === 'error') {
-      return colors.red;
+      return palette.red;
     }
-    return colors.lightblack;
+    return palette.lightblack;
   }};
   padding: 1em 2em 1em 1em;
   margin: 0 0 1.5em;
   border-radius: 0.25em;
   border: inset solid 3px rgba(255, 255, 255, 0.5);
-  font-family: ${typography.monospace};
+  font-family: ${fonts.monospace};
   position: relative;
   height: auto;
   overflow: hidden;
@@ -50,7 +50,7 @@ const Alert = styled.div`
     width: 1.5em;
     height: 1.5em;
     padding: 0;
-    border: 2px solid ${colors.black};
+    border: 2px solid ${palette.black};
     border-radius: 50%;
     background: transparent;
     span {
@@ -58,7 +58,7 @@ const Alert = styled.div`
       position: absolute;
       width: 80%;
       height: 3px;
-      background: ${colors.black};
+      background: ${palette.black};
       transition: all 0.1s ease-in-out;
       transform-origin: 50% 50%;
       left: 10%;
@@ -73,8 +73,8 @@ const Alert = styled.div`
 
   .actionButton {
     background: transparent;
-    border: 2px solid ${colors.black};
-    font-family: ${typography.monospace};
+    border: 2px solid ${palette.black};
+    font-family: ${fonts.monospace};
     padding: 0.4em 1em;
   }
 

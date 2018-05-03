@@ -1,64 +1,72 @@
 import { injectGlobal } from 'styled-components';
 import styledNormalize from 'styled-normalize';
 
-import { theme, typography } from './variables';
+import { getTheme, loadTheme } from './variables';
 import { mediaMax } from './style-utils';
 import FiraCode from './fonts/FiraCode-Regular.ttf';
 
-/* eslint-disable */
-injectGlobal`
-  ${styledNormalize}
-
-  @font-face {
-    font-family: "FiraCode";
-    src: url(${FiraCode});
-    font-weight: normal;
-    font-style: normal;
-    font-feature-settings: "calt" 1;
+// /* eslint-disable */
+const globalStyle = (theme) => {
+  let newTheme = getTheme();
+  if (theme) {
+    newTheme = loadTheme(theme);
   }
+  const { fonts, semanticColors } = newTheme;
 
-  *, *:before, *:after {
-    box-sizing: inherit;
-  }
+  return injectGlobal`
+    ${styledNormalize}
 
-  html {
-    box-sizing: border-box;
-    font-size: 17px;
-  }
+    @font-face {
+      font-family: "FiraCode";
+      src: url(${FiraCode});
+      font-weight: normal;
+      font-style: normal;
+      font-feature-settings: "calt" 1;
+    }
 
-  html, body, #root {
-    height: 100%;
-    overflow: hidden;
-  }
+    *, *:before, *:after {
+      box-sizing: inherit;
+    }
 
-  body {
-    font-family: ${typography.fontFamily};
-    color: ${theme.textColor};
-    background: ${theme.siteBackground};
-    line-height: 1.6;
-    ${mediaMax.tablet`font-size: 16px`};
-    margin: 0;
-    padding: 0;
-  }
+    html {
+      box-sizing: border-box;
+      font-size: 17px;
+    }
 
-  img {
-    max-width: 100%;
-  }
+    html, body, #root {
+      height: 100%;
+      overflow: hidden;
+    }
 
-  h1, h2, h3, h4, h5 {
-    letter-spacing: .067em;
-  }
+    body {
+      font-family: ${fonts.fontFamily};
+      color: ${semanticColors.textColor};
+      background: ${semanticColors.siteBackground};
+      line-height: 1.6;
+      ${mediaMax.tablet`font-size: 16px`};
+      margin: 0;
+      padding: 0;
+    }
 
-  h1, h2, h3, h4, h5, p {
-    margin-top: .1em;
-    margin-bottom: .8em;
-  }
+    img {
+      max-width: 100%;
+    }
 
-  a {
-    color: ${theme.textColor};
-    text-decoration: none;
-    border-bottom: 2px solid ${theme.secondaryColor};
-  }
-`;
+    h1, h2, h3, h4, h5 {
+      letter-spacing: .067em;
+    }
 
-export default injectGlobal;
+    h1, h2, h3, h4, h5, p {
+      margin-top: .1em;
+      margin-bottom: .8em;
+    }
+
+    a {
+      color: ${semanticColors.textColor};
+      text-decoration: none;
+      border-bottom: 2px solid ${semanticColors.secondaryColor};
+    }
+  `;
+};
+
+export default globalStyle;

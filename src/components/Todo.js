@@ -6,7 +6,7 @@ import TextareaAutosize from 'react-autosize-textarea';
 import { truncate } from '../helpers';
 
 import StyledForm from './StyledForm';
-import { colors } from '../theme/variables';
+import { palette } from '../theme/variables';
 
 const Item = styled.li`
   position: relative;
@@ -19,15 +19,15 @@ const Item = styled.li`
   .flag {
     display: flex;
     flex-direction: column;
-    border: 5px double ${colors.black};
+    border: 5px double ${palette.black};
 
     .complete {
       display: flex;
       flex-direction: column;
       align-items: center;
       background: ${(props) =>
-        props.isComplete ? colors.green : colors.lightblack};
-      color: ${colors.black};
+        props.isComplete ? palette.green : palette.lightblack};
+      color: ${palette.black};
       padding: 5px;
       border: none;
       white-space: nowrap;
@@ -38,7 +38,7 @@ const Item = styled.li`
       .checkbox {
         width: 20px;
         height: 20px;
-        border: 2px solid ${colors.black};
+        border: 2px solid ${palette.black};
         border-radius: 50%;
         position: relative;
 
@@ -46,7 +46,7 @@ const Item = styled.li`
           transition: all 0.1s ease-in-out;
           content: '';
           display: block;
-          background: ${colors.black};
+          background: ${palette.black};
           width: 12px;
           height: 12px;
           top: 2px;
@@ -66,8 +66,8 @@ const Item = styled.li`
 
     .remove {
       border: none;
-      border-top: 2px solid ${colors.black};
-      background: ${colors.red};
+      border-top: 2px solid ${palette.black};
+      background: ${palette.red};
       width: 100%;
       height: 30px;
       position: relative;
@@ -81,7 +81,7 @@ const Item = styled.li`
         left: 20%;
         width: 60%;
         height: 4px;
-        background: ${colors.black};
+        background: ${palette.black};
         border-radius: 2px;
       }
     }

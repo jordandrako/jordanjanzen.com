@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { colors, typography } from '../theme/variables';
+import { palette, fonts } from '../theme/variables';
 import { Row } from '../theme/grid';
 
 const StyledForm = styled(Row)`
@@ -9,7 +9,7 @@ const StyledForm = styled(Row)`
   flex-grow: 1;
   padding: 1em;
   margin: 0 0 2em;
-  border: 5px double ${colors.black};
+  border: 5px double ${palette.black};
 
   &:last-child {
     margin-bottom: 0;
@@ -24,10 +24,10 @@ const StyledForm = styled(Row)`
   input:not([type='checkbox']),
   select,
   textarea {
-    font-family: ${typography.monospace};
+    font-family: ${fonts.monospace};
     font-size: 0.8rem;
     line-height: 1.6;
-    border: 2px solid ${colors.black};
+    border: 2px solid ${palette.black};
     padding: 0.5em 1em;
     margin-bottom: 1em;
     background: transparent;
@@ -35,7 +35,7 @@ const StyledForm = styled(Row)`
 
     :focus {
       outline: none;
-      border-color: ${colors.blue};
+      border-color: ${palette.blue};
     }
   }
   textarea {

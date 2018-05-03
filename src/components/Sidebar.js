@@ -7,22 +7,22 @@ import { adjustHue } from 'polished';
 import Button from './Button';
 import Footer from './Footer';
 
-import { colors, theme, typography } from '../theme/variables';
+import { palette, semanticColors, fonts } from '../theme/variables';
 import { mediaMax } from '../theme/style-utils';
 
 import JJMark from '../images/JJMark.svg';
 
 const LeftColumn = styled.aside`
-  background: ${colors.black};
-  color: ${colors.white};
+  background: ${palette.black};
+  color: ${palette.white};
   height: 100%;
   min-width: 280px;
   display: flex;
   flex: 1;
   flex-direction: column;
   position: relative;
-  border-top: 3px solid ${colors.lightblue};
-  box-shadow: 2px 0 0 ${colors.darkblack};
+  border-top: 3px solid ${palette.lightblue};
+  box-shadow: 2px 0 0 ${palette.darkblack};
   ${mediaMax.tablet`
     flex: none;
     height: auto;
@@ -41,9 +41,9 @@ const Top = styled.section`
 
 const Logo = styled.h2`
   text-transform: uppercase;
-  font-family: ${typography.monospace};
+  font-family: ${fonts.monospace};
   font-weight: 700;
-  color: ${colors.brightwhite};
+  color: ${palette.brightwhite};
   text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
   padding: 1em 0;
   margin: 0;
@@ -92,13 +92,13 @@ const Logo = styled.h2`
 `;
 
 const Tagline = styled.h3`
-  font-family: ${typography.monospace};
-  color: ${colors.black};
-  background: ${colors.lightblue};
+  font-family: ${fonts.monospace};
+  color: ${palette.black};
+  background: ${palette.lightblue};
   background: linear-gradient(
     135deg,
-    ${adjustHue(-20, theme.primaryColor)} 0,
-    ${theme.primaryColor} 100%
+    ${adjustHue(-20, semanticColors.primaryColor)} 0,
+    ${semanticColors.primaryColor} 100%
   );
   padding: 4px 1em;
   text-align: center;

@@ -1,30 +1,59 @@
-export const colors = {
-  black: '#282c34',
-  lightblack: '#848d9f',
-  darkblack: '#111215',
-  blue: '#1167ae',
-  lightblue: '#61afef',
-  cyan: '#56b6c2',
-  red: '#e06c75',
-  magenta: '#c678dd',
-  green: '#98c379',
-  yellow: '#d19a66',
-  lightyellow: '#F2C249',
-  white: '#D3DAE0',
-  lightwhite: '#E1E9F0',
+import DefaultPalette from './DefaultPalette';
+import DefaultFonts from './fonts';
+
+function _makeSemanticColorsFromPalette(p, isInverted) {
+  const toReturn = {
+    siteBackground: isInverted ? p.black : p.lightwhite,
+    primaryColor: p.lightblue,
+    secondaryColor: p.red,
+    textColor: isInverted ? p.lightwhite : p.black,
+    linkColor: isInverted ? p.lightwhite : p.black,
+    buttonColor: p.lightblue,
+    buttonText: isInverted ? p.lightwhite : p.black
+  };
+
+  return toReturn;
+}
+
+let _theme = {
+  palette: DefaultPalette,
+  semanticColors: _makeSemanticColorsFromPalette(DefaultPalette, false),
+  fonts: DefaultFonts,
+  isInverted: false
 };
 
-export const typography = {
+export const palette = _theme.palette;
+
+export const semanticColors = _theme.semanticColors;
+
+export const fonts = {
   fontFamily: 'Roboto, sans-serif',
-  monospace: 'FiraCode, monospace',
+  monospace: 'FiraCode, monospace'
 };
 
-export const theme = {
-  siteBackground: colors.lightwhite,
-  primaryColor: colors.lightblue,
-  secondaryColor: colors.red,
-  textColor: colors.black,
-  linkColor: colors.cyan,
-  buttonColor: colors.lightblue,
-  buttonText: colors.black,
-};
+export function createTheme(theme) {
+  const newPalette = { ...DefaultPalette, ...theme.palette };
+  const newSemanticColors = {
+    ..._makeSemanticColorsFromPalette(newPalette, !!theme.isInverted),
+    ...theme.semanticColors
+  };
+
+  return {
+    palette: newPalette,
+    fonts: {
+      ...DefaultFonts,
+      ...theme.fonts
+    },
+    semanticColors: newSemanticColors,
+    isInverted: !!theme.isInverted
+  };
+}
+
+export function getTheme() {
+  return _theme;
+}
+
+export function loadTheme(theme) {
+  _theme = createTheme(theme);
+  return _theme;
+}
