@@ -2,15 +2,15 @@ import Rebase from 're-base';
 import firebase from 'firebase';
 
 const production = {
-  apiKey: 'AIzaSyA7SAPJlv0S3xHWvb-UpUIC9CaVkOMLdFo',
+  apiKey: `${process.env.REACT_APP_PROD_KEY}`,
   authDomain: 'jordan-janzen.firebaseapp.com',
-  databaseURL: 'https://jordan-janzen.firebaseio.com',
+  databaseURL: 'https://jordan-janzen.firebaseio.com'
 };
 
 const staging = {
-  apiKey: 'AIzaSyDwVQkapFHWKYRwXxOt8Sqmm18LiXet628',
+  apiKey: `${process.env.REACT_APP_STAGING_KEY}`,
   authDomain: 'jordan-janzen-staging.firebaseapp.com',
-  databaseURL: 'https://jordan-janzen-staging.firebaseio.com',
+  databaseURL: 'https://jordan-janzen-staging.firebaseio.com'
 };
 
 const env = () => {
@@ -18,7 +18,7 @@ const env = () => {
     return production;
   }
   return staging;
-}
+};
 
 const app = firebase.initializeApp(env());
 
