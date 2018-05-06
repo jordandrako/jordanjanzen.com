@@ -2,13 +2,15 @@
   "extends": [
     "tslint:recommended",
     "tslint-react",
-    "tslint-config-prettier",
-    "tslint-config-airbnb"
+    "tslint-config-prettier"
+    // "tslint-config-airbnb"
   ],
   "linterOptions": {
     "exclude": ["config/**/*.js", "node_modules/**/*.ts"]
   },
   "rules": {
+    "no-empty-interface": false,
+    "no-unused-expression": [true, "allow-fast-null-checks"],
     "variable-name": [
       true,
       "ban-keywords",
