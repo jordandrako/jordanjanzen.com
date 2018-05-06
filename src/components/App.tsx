@@ -7,14 +7,20 @@ import Router from './Router';
 import Sidebar from './Sidebar';
 
 import { slugify } from '../helpers';
+import globalStyles from '../theme/globalStyles';
 import { mediaMax, sizes } from '../theme/style-utils';
+import { loadTheme } from '../theme/theme';
 import { colors } from '../theme/variables';
+
+const appTheme = loadTheme({});
+const { palette } = appTheme;
+globalStyles(appTheme);
 
 const Wrapper = styled.div`
   display: flex;
   ${mediaMax.tablet`flex-direction: column`};
   height: 100%;
-  border-top: 2px solid ${colors.darkblack};
+  border-top: 2px solid ${palette.darkblack};
   flex-wrap: wrap;
 `;
 
@@ -43,39 +49,31 @@ class App extends Component {
     this._addSkill = this._addSkill.bind(this);
     this._removeSkill = this._removeSkill.bind(this);
 
-    this.state = {
-      isMobile: window.innerWidth <= sizes.tablet,
-      projects: {},
-      secrets: {},
-      skills: {},
-      todos: {},
-      uid: null,
-    };
+    this.ref = undefined;
 
-    this._ref = undefined;
-  }
-
-  public componentWillMount(): void {
-    this._setRef('unauthRef').catch(err => console.error(err));
-
-    const localStorageRef = {
+    this.localStorage = {
+      todos: localStorage.getItem('todos'),
       projects: localStorage.getItem('projects'),
       skills: localStorage.getItem('skills'),
       todos: localStorage.getItem('todos'),
     };
 
-    if (localStorageRef) {
-      this.setState({
-        projects: JSON.parse(localStorageRef.projects),
-        skills: JSON.parse(localStorageRef.skills),
-        todos: JSON.parse(localStorageRef.todos),
-      });
-    }
-
-    window.addEventListener('resize', this._updateSize);
+    this.state = {
+      todos: this.localStorage ? JSON.parse(this.localStorage.todos) : {},
+      projects: this.localStorage ? JSON.parse(this.localStorage.projects) : {},
+      skills: this.localStorage ? JSON.parse(this.localStorage.skills) : {},
+      secrets: {},
+      uid: null,
+      isMobile: window.innerWidth <= sizes.tablet,
+      theme: appTheme
+    };
   }
 
-  public componentDidMount(): void {
+  componentDidMount() {
+    this.setRef('unauthRef').catch((err) => console.error(err));
+
+    window.addEventListener('resize', this.updateSize);
+
     auth.onAuthStateChanged((user) => {
       if (user) {
         this._authHandler({ user });
@@ -83,15 +81,15 @@ class App extends Component {
     });
   }
 
-  public componentWillUpdate(nextProps, nextState): void {
-    localStorage.setItem('todos', JSON.stringify(nextState.todos));
-    localStorage.setItem('projects', JSON.stringify(nextState.projects));
-    localStorage.setItem('skills', JSON.stringify(nextState.skills));
+  componentDidUpdate() {
+    localStorage.setItem('todos', JSON.stringify(this.state.todos));
+    localStorage.setItem('projects', JSON.stringify(this.state.projects));
+    localStorage.setItem('skills', JSON.stringify(this.state.skills));
   }
 
-  public componentWillUnmount(): void {
-    base.removeBinding(this._ref);
-    window.removeEventListener('resize', this._updateSize);
+  componentWillUnmount() {
+    base.removeBinding(this.ref);
+    window.removeEventListener('resize', this.updateSize);
   }
 
   public render(): JSX.Element {
@@ -205,7 +203,7 @@ class App extends Component {
         await auth.signOut().then(() => {
           this.setState({
             uid: null,
-            secrets: {}
+            secrets: {},
           });
         }),
       )

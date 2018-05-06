@@ -7,7 +7,7 @@ import CloudImage from './CloudImage';
 import Button from './Button';
 
 import { Row } from '../theme/grid';
-import { colors, theme, typography } from '../theme/variables';
+import { palette, semanticColors, fonts } from '../theme/theme';
 import { mediaMax } from '../theme/style-utils';
 
 const ClickOutside = styled(Link)`
@@ -41,8 +41,8 @@ const Single = styled.div`
   max-width: 760px;
   height: 84vh;
   margin: 30px;
-  background: ${theme.siteBackground};
-  box-shadow: 0 -3px 0 ${theme.primaryColor}, 0 0 9px #000;
+  background: ${semanticColors.siteBackground};
+  box-shadow: 0 -3px 0 ${semanticColors.primaryColor}, 0 0 9px #000;
   z-index: 1000;
   pointer-events: all;
   display: flex;
@@ -67,7 +67,7 @@ const Single = styled.div`
 const Frame = styled.div`
   width: 100%;
   padding: 0.5em;
-  background: ${colors.black};
+  background: ${palette.black};
   display: flex;
   flex-shrink: 0;
   align-items: center;
@@ -89,8 +89,8 @@ const Frame = styled.div`
 `;
 
 const Title = styled.h2`
-  font-family: ${typography.monospace};
-  color: ${colors.lightwhite};
+  font-family: ${fonts.monospace};
+  color: ${palette.lightwhite};
   font-size: 1.15rem;
   margin: 0;
   line-height: 1;
@@ -105,32 +105,33 @@ const Content = styled(Row)`
 `;
 
 class ProjectSingle extends Component {
+  // eslint-disable-next-line react/sort-comp
   constructor(props) {
     super(props);
     this.state = {
-      delete: false
+      delete: undefined
     };
 
     this.removeProject = this.removeProject.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
   }
 
-  componentWillReceiveProps(newProps) {
-    if (newProps.index !== this.props.index) {
-      this.setState({ delete: false });
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.index !== prevState.delete) {
+      return { delete: undefined };
     }
   }
 
   removeProject(key) {
     const state = { ...this.state };
-    this.setState({ ...state, delete: false });
+    this.setState({ ...state, delete: undefined });
     this.props.removeProject(key);
     return this.props.history.push('/portfolio');
   }
 
   handleDelete(index) {
-    if (this.state.delete === false) {
-      return this.setState({ delete: true });
+    if (this.state.delete === undefined) {
+      return this.setState({ delete: index });
     }
     return this.removeProject(index);
   }
@@ -162,8 +163,10 @@ class ProjectSingle extends Component {
               </Frame>
               <Content>
                 <p>{details.long_desc}</p>
-                {Object.keys(details.images).map((image) => (
+                {Object.keys(details.images).map((image, imageIndex) => (
                   <CloudImage
+                    key={details.images[image].id}
+                    name={`Feature ${imageIndex} ${details.images[image].id}`}
                     publicId={details.images[image].id}
                     format={details.images[image].format}
                     width={isMobile ? '400' : '800'}
@@ -208,7 +211,7 @@ class ProjectSingle extends Component {
                   <Button
                     small
                     type="secondary"
-                    bg={colors.red}
+                    bg={palette.red}
                     onClick={() => this.handleDelete(index)}
                   >
                     {this.state.delete ? 'Confirm?' : 'Delete'}
@@ -235,7 +238,7 @@ ProjectSingle.propTypes = {
   projects: PropTypes.object.isRequired,
   isMobile: PropTypes.bool.isRequired,
   removeProject: PropTypes.func.isRequired,
-  history: PropTypes.func
+  history: PropTypes.object
 };
 
 ProjectSingle.defaultProps = {

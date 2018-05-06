@@ -9,7 +9,7 @@ import CloudImage from '../CloudImage';
 import Project from '../Project';
 
 import { Page, Row, Hero } from '../../theme/grid';
-import { theme, typography } from '../../theme/variables';
+import { semanticColors, fonts } from '../../theme/theme';
 import { mediaMin } from '../../theme/style-utils';
 
 const OuterHero = styled.div`
@@ -18,7 +18,7 @@ const OuterHero = styled.div`
   background: linear-gradient(
     to right,
     rgba(255, 255, 255, 0) 33%,
-    ${theme.siteBackground} 100%
+    ${semanticColors.siteBackground} 100%
   );
   display: flex;
   justify-content: flex-end;
@@ -29,8 +29,8 @@ const InnerHero = styled.div`
   width: 100%;
   background: linear-gradient(
     135deg,
-    ${adjustHue(-20, theme.primaryColor)} 0,
-    ${theme.primaryColor} 100%
+    ${adjustHue(-20, semanticColors.primaryColor)} 0,
+    ${semanticColors.primaryColor} 100%
   );
   display: flex;
   flex-direction: column;
@@ -54,7 +54,7 @@ const InnerHero = styled.div`
 const Intro = styled.h2`
   margin-top: 0.5em;
   margin-bottom: 0.5em;
-  font-family: ${typography.monospace};
+  font-family: ${fonts.monospace};
   letter-spacing: 0;
   font-size: 1.25rem;
 

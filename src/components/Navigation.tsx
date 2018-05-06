@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { darken } from 'polished';
 
-import { colors, typography } from '../theme/variables';
+import { palette, fonts } from '../theme/theme';
 import { mediaMax, mediaMin } from '../theme/style-utils';
 
 const NavList = styled.ul`
@@ -21,7 +21,7 @@ const NavList = styled.ul`
     `};
 
     ${mediaMin.tablet`
-      background: ${colors.black};
+      background: ${palette.black};
       border-top: 1px solid rgba(255, 255, 255, 0.1);
       border-bottom: 1px solid rgba(0, 0, 0, 0.3);
     `};
@@ -30,12 +30,12 @@ const NavList = styled.ul`
 
 const Link = styled(NavLink) `
   display: block;
-  color: ${colors.white};
-  font-family: Roboto, ${typography.monospace};
+  color: ${palette.white};
+  font-family: Roboto, ${fonts.monospace};
   text-decoration: none;
   transition: all 0.3s ease-in-out;
   padding: 1em 0.5em;
-  border-top: 4px solid ${darken(0.05, colors.black)};
+  border-top: 4px solid ${darken(0.05, palette.black)};
   border-bottom: none;
   text-transform: uppercase;
   font-size: 0.7rem;
@@ -44,16 +44,16 @@ const Link = styled(NavLink) `
   i.fa {
     padding-right: 0.5em;
     font-size: 1.15rem;
-    color: ${colors.blue};
+    color: ${palette.blue};
   }
 
   &.active {
-    color: ${colors.lightwhite};
-    border-color: ${colors.lightblue};
+    color: ${palette.lightwhite};
+    border-color: ${palette.lightblue};
     opacity: 1;
 
     i.fa {
-      color: ${colors.lightblue};
+      color: ${palette.lightblue};
     }
   }
 
@@ -64,7 +64,7 @@ const Link = styled(NavLink) `
     width: 100%;
     border: none;
     font-size: 1.15rem;
-    font-family: ${typography.monospace};
+    font-family: ${fonts.monospace};
     opacity: 1;
 
     i.fa {
@@ -74,13 +74,13 @@ const Link = styled(NavLink) `
     span {
       position: relative;
       z-index: 2;
-      background: ${colors.black};
+      background: ${palette.black};
     }
 
     &:before,
     &:after {
       display: inline-block;
-      color: ${colors.red};
+      color: ${palette.red};
       opacity: 0;
       transition: all 0.3s ease-in-out;
       z-index: 1;
@@ -98,7 +98,7 @@ const Link = styled(NavLink) `
     }
 
     &.active {
-      color: ${colors.red};
+      color: ${palette.red};
 
       &:before,
       &:after {

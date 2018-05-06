@@ -5,11 +5,11 @@ import sha1 from 'sha1';
 import superagent from 'superagent';
 import styled from 'styled-components';
 
-import { theme, typography } from '../../../theme/variables';
+import { semanticColors, fonts } from '../../../theme/theme';
 
 const Zone = styled(Dropzone)`
   height: 100px;
-  border: 3px dashed ${theme.textColor};
+  border: 3px dashed ${semanticColors.textColor};
   margin-bottom: 1em;
   display: flex;
   justify-content: center;
@@ -18,9 +18,9 @@ const Zone = styled(Dropzone)`
 
   &:before {
     content: 'Upload Files Here';
-    font-family: ${typography.monospace};
+    font-family: ${fonts.monospace};
     font-weight: 700;
-    color: ${theme.textColor};
+    color: ${semanticColors.textColor};
     opacity: 0.7;
   }
 `;

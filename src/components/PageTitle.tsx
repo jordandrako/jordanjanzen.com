@@ -6,12 +6,12 @@ import { darken, lighten } from 'polished';
 import Button from './Button';
 
 import { toTitleCase, getFileExtension } from '../helpers';
-import { colors, typography } from '../theme/variables';
+import { palette, fonts } from '../theme/theme';
 import { mediaMax } from '../theme/style-utils';
 
 const Title = styled.header`
-  background: ${darken(0.05, colors.black)};
-  border-bottom: 2px solid ${colors.darkblack};
+  background: ${darken(0.05, palette.black)};
+  border-bottom: 2px solid ${palette.darkblack};
   width: 100%;
   flex-shrink: 0;
   display: inline-flex;
@@ -26,29 +26,29 @@ const Title = styled.header`
       padding: 15px 0 15px 15px;
       display: inline-flex;
       align-items: center;
-      color: ${colors.white};
+      color: ${palette.white};
 
       h1,
       h4 {
         display: inline-block;
         margin: 0 1em;
-        font-family: ${typography.monospace};
+        font-family: ${fonts.monospace};
         font-size: 1rem;
         font-weight: 300;
         text-shadow: 0 2px 3px rgba(0, 0, 0, 0.45);
       }
 
       .file {
-        color: ${colors.yellow};
+        color: ${palette.yellow};
       }
     }
 
     li:last-child {
-      background: ${lighten(0.05, colors.black)};
-      color: ${colors.lightwhite};
+      background: ${lighten(0.05, palette.black)};
+      color: ${palette.lightwhite};
       padding: 15px;
-      border-top: 3px solid ${colors.lightblue};
-      box-shadow: 2px 0 0 ${colors.darkblack};
+      border-top: 3px solid ${palette.lightblue};
+      box-shadow: 2px 0 0 ${palette.darkblack};
       text-shadow: 0 2px 3px rgba(0, 0, 0, 0.45);
 
       h1 {

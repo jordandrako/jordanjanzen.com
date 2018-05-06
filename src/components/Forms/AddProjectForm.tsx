@@ -6,7 +6,7 @@ import StyledForm from '../StyledForm';
 import Button from '../Button';
 import Dropzone from './FormUtilities/Dropzone';
 
-import { colors } from '../../theme/variables';
+import { palette } from '../../theme/theme';
 import { Row } from '../../theme/grid';
 
 import { truncate } from '../../helpers';
@@ -24,8 +24,8 @@ const UploadedImage = styled.li`
   margin: 0 1em 1em 0;
   max-width: calc(33.3% - 1em);
   padding: 1em;
-  border: 2px solid ${colors.black};
-  background: ${colors.lightblack};
+  border: 2px solid ${palette.black};
+  background: ${palette.lightblack};
   position: relative;
 
   .close {
@@ -285,7 +285,7 @@ class AddProjectForm extends Component {
               />
               <UploadedImageList>{list}</UploadedImageList>
             </Row>
-            <Button type="success" arrows={colors.lightwhite}>
+            <Button type="success" arrows={palette.lightwhite}>
               + Add Project
             </Button>
           </form>
