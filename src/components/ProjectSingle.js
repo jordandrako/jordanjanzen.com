@@ -105,32 +105,33 @@ const Content = styled(Row)`
 `;
 
 class ProjectSingle extends Component {
+  // eslint-disable-next-line react/sort-comp
   constructor(props) {
     super(props);
     this.state = {
-      delete: false
+      delete: undefined
     };
 
     this.removeProject = this.removeProject.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
   }
 
-  componentWillReceiveProps(newProps) {
-    if (newProps.index !== this.props.index) {
-      this.setState({ delete: false });
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.index !== prevState.delete) {
+      return { delete: undefined };
     }
   }
 
   removeProject(key) {
     const state = { ...this.state };
-    this.setState({ ...state, delete: false });
+    this.setState({ ...state, delete: undefined });
     this.props.removeProject(key);
     return this.props.history.push('/portfolio');
   }
 
   handleDelete(index) {
-    if (this.state.delete === false) {
-      return this.setState({ delete: true });
+    if (this.state.delete === undefined) {
+      return this.setState({ delete: index });
     }
     return this.removeProject(index);
   }
@@ -162,8 +163,10 @@ class ProjectSingle extends Component {
               </Frame>
               <Content>
                 <p>{details.long_desc}</p>
-                {Object.keys(details.images).map((image) => (
+                {Object.keys(details.images).map((image, imageIndex) => (
                   <CloudImage
+                    key={details.images[image].id}
+                    name={`Feature ${imageIndex} ${details.images[image].id}`}
                     publicId={details.images[image].id}
                     format={details.images[image].format}
                     width={isMobile ? '400' : '800'}
@@ -235,7 +238,7 @@ ProjectSingle.propTypes = {
   projects: PropTypes.object.isRequired,
   isMobile: PropTypes.bool.isRequired,
   removeProject: PropTypes.func.isRequired,
-  history: PropTypes.func
+  history: PropTypes.object
 };
 
 ProjectSingle.defaultProps = {
