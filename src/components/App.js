@@ -46,40 +46,30 @@ class App extends Component {
     this.addSkill = this.addSkill.bind(this);
     this.removeSkill = this.removeSkill.bind(this);
 
-    this.state = {
-      todos: {},
-      projects: {},
-      skills: {},
-      secrets: {},
-      uid: null,
-      isMobile: window.innerWidth <= sizes.tablet,
-      theme: appTheme
-    };
-
     this.ref = undefined;
-  }
 
-  componentWillMount() {
-    this.setRef('unauthRef').catch((err) => console.error(err));
-
-    const localStorageRef = {
+    this.localStorage = {
       todos: localStorage.getItem('todos'),
       projects: localStorage.getItem('projects'),
       skills: localStorage.getItem('skills')
     };
 
-    if (localStorageRef) {
-      this.setState({
-        todos: JSON.parse(localStorageRef.todos),
-        projects: JSON.parse(localStorageRef.projects),
-        skills: JSON.parse(localStorageRef.skills)
-      });
-    }
-
-    window.addEventListener('resize', this.updateSize);
+    this.state = {
+      todos: this.localStorage ? JSON.parse(this.localStorage.todos) : {},
+      projects: this.localStorage ? JSON.parse(this.localStorage.projects) : {},
+      skills: this.localStorage ? JSON.parse(this.localStorage.skills) : {},
+      secrets: {},
+      uid: null,
+      isMobile: window.innerWidth <= sizes.tablet,
+      theme: appTheme
+    };
   }
 
   componentDidMount() {
+    this.setRef('unauthRef').catch((err) => console.error(err));
+
+    window.addEventListener('resize', this.updateSize);
+
     auth.onAuthStateChanged((user) => {
       if (user) {
         this.authHandler({ user });
@@ -87,15 +77,15 @@ class App extends Component {
     });
   }
 
-  componentWillUpdate(nextProps, nextState) {
-    localStorage.setItem('todos', JSON.stringify(nextState.todos));
-    localStorage.setItem('projects', JSON.stringify(nextState.projects));
-    localStorage.setItem('skills', JSON.stringify(nextState.skills));
+  componentDidUpdate() {
+    localStorage.setItem('todos', JSON.stringify(this.state.todos));
+    localStorage.setItem('projects', JSON.stringify(this.state.projects));
+    localStorage.setItem('skills', JSON.stringify(this.state.skills));
   }
 
   componentWillUnmount() {
     base.removeBinding(this.ref);
-    window.removeEventListener('resize');
+    window.removeEventListener('resize', this.updateSize);
   }
 
   setRef(ref) {
