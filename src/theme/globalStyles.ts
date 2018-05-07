@@ -1,11 +1,12 @@
-import { injectGlobal } from 'styled-components';
-import styledNormalize from 'styled-normalize';
+import { injectGlobal } from "styled-components";
+import styledNormalize from "styled-normalize";
 
-import { getTheme, loadTheme } from './theme';
-import { mediaMax } from './style-utils';
-import FiraCode from './fonts/FiraCode-Regular.ttf';
+import FiraCode from "./fonts/FiraCode-Regular.ttf";
+import { mediaMax } from "./style-utils";
+import { getTheme, loadTheme } from "./theme";
+import { IPartialTheme } from "./theme.types";
 
-const globalStyles = (theme) => {
+const globalStyles = (theme: IPartialTheme) => {
   let globalTheme = getTheme();
   if (theme) {
     globalTheme = loadTheme(theme);
