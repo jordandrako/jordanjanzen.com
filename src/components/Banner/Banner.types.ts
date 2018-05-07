@@ -6,13 +6,9 @@ export interface IBanner {
 
 export interface IBannerProps extends React.HTMLAttributes<HTMLElement> {
   componentRef?: (component: IBanner | null) => void;
-
-  children: React.ReactChildren;
-
+  children: string | JSX.Element;
   type: string;
-
   title?: string;
-
   className?: string;
 }
 

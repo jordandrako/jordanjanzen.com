@@ -1,12 +1,10 @@
-import * as React from "react";
-
 export interface IButton {}
 
 export interface IButtonProps {
   arrows?: boolean | string;
   bg?: string;
   buttonType?: ButtonType;
-  children?: React.ReactChildren;
+  children?: string | JSX.Element;;
   circle?: boolean;
   className?: string;
   color?: string;
