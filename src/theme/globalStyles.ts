@@ -1,12 +1,12 @@
-import { injectGlobal } from "styled-components";
-import styledNormalize from "styled-normalize";
+import { injectGlobal } from 'styled-components';
+import styledNormalize from 'styled-normalize';
 
-import FiraCode from "./fonts/FiraCode-Regular.ttf";
-import { mediaMax } from "./style-utils";
-import { getTheme, loadTheme } from "./theme";
-import { IPartialTheme } from "./theme.types";
+// import FiraCode from "./fonts/FiraCode-Regular.ttf";
+import { mediaMax } from './style-utils';
+import { getTheme, loadTheme } from './theme';
+import { IPartialTheme } from './theme.types';
 
-const globalStyles = (theme: IPartialTheme) => {
+export const globalStyles = (theme: IPartialTheme) => {
   let globalTheme = getTheme();
   if (theme) {
     globalTheme = loadTheme(theme);
@@ -18,7 +18,7 @@ const globalStyles = (theme: IPartialTheme) => {
 
     @font-face {
       font-family: "FiraCode";
-      src: url(${FiraCode});
+      src: url(./fonts/FiraCode-Regular.ttf);
       font-weight: normal;
       font-style: normal;
       font-feature-settings: "calt" 1;
@@ -68,5 +68,3 @@ const globalStyles = (theme: IPartialTheme) => {
     }
   `;
 };
-
-export default globalStyles;

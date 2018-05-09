@@ -1,11 +1,8 @@
 import * as React from "react";
 import { auth, base, database, provider } from "../base";
 import { slugify } from "../helpers";
-import globalStyles from "../theme/globalStyles";
-import { mediaMax, sizes } from "../theme/style-utils";
-import styled from "../theme/styled-components";
-import { loadTheme } from "../theme/theme";
-import { IAppState, ILocalStorage, IObject, IProject, IRebase, ISkill, ITodo } from "./App.types";
+import { globalStyles, loadTheme, mediaMax, sizes, styled } from "../theme/index";
+import { IAppState, ILocalStorage, IObject, IProject, ISkill, ITodo } from "./App.types";
 import Footer from "./Footer/index";
 import Router from "./Router";
 import Sidebar from "./Sidebar";
@@ -23,7 +20,7 @@ const Wrapper = styled.div`
 `;
 
 class App extends React.Component<{}, IAppState> {
-  private _ref?: Array<IRebase["syncState"]> | Array<IRebase["bindToState"]>;
+  private _ref?: any[];
   private _localStorage: ILocalStorage;
 
   public constructor(props: any) {
@@ -57,15 +54,15 @@ class App extends React.Component<{}, IAppState> {
     };
 
     this.state = {
-      isLoggedIn: null,
+      isLoggedIn: false,
       isMobile: window.innerWidth <= sizes.tablet,
       projects: this._localStorage.projects
         ? JSON.parse(this._localStorage.projects)
-        : [],
-      secrets: [],
-      skills: this._localStorage.skills ? JSON.parse(this._localStorage.skills) : [],
+        : {},
+      secrets: {},
+      skills: this._localStorage.skills ? JSON.parse(this._localStorage.skills) : {},
       theme: appTheme,
-      todos: this._localStorage.todos ? JSON.parse(this._localStorage.todos) : [],
+      todos: this._localStorage.todos ? JSON.parse(this._localStorage.todos) : {},
     };
   }
 
@@ -199,20 +196,20 @@ class App extends React.Component<{}, IAppState> {
       .catch((error: any) => {throw error});
   }
 
-  private async _logout(): Promise<any> {
-    await this._setRef("unauthRef")
-      .then(() => await auth.signOut()
+  private _logout(): void {
+    this._setRef("unauthRef")
+      .then(() => auth.signOut()
         .then(() => {
           this.setState({
             isLoggedIn: false,
-            secrets: []
+            secrets: {}
           });
         })
       )
       .catch((error: any) => {throw error});
   }
 
-  private _authHandler(authData: any) {
+  private _authHandler(authData: any): void {
     const uid = authData.user.uid || authData.uid;
     const rootRef = database.ref();
     const successfulLogin = () => {
@@ -241,14 +238,14 @@ class App extends React.Component<{}, IAppState> {
   }
 
   // update our state
-  private _addTodo(todo: ITodo) {
+  private _addTodo(todo: ITodo): void {
     const todos = { ...this.state.todos };
     const timestamp = Date.now();
     todos[`todo-${timestamp}`] = { ...todo };
     this.setState({ todos }); // same as this.setState({ todos: todos })
   }
 
-  private _updateTodo(key: string | number, updatedProp: {}) {
+  private _updateTodo(key: string | number, updatedProp: ITodo ): void {
     const todos = { ...this.state.todos };
     const todo = todos[key];
     const updatedTodo = {
@@ -261,13 +258,14 @@ class App extends React.Component<{}, IAppState> {
     });
   }
 
-  private _removeTodo(key: string | number) {
+  private _removeTodo(key: string | number): void {
     const todos = { ...this.state.todos };
-    todos[key] = null;
+    // TODO: make sure delete works
+    delete todos[key];
     this.setState({ todos });
   }
 
-  private _addProject(project: IProject) {
+  private _addProject(project: IProject): void {
     const projects = { ...this.state.projects };
     const timestamp = Date.now();
     projects[`project-${timestamp}`] = project;
@@ -275,7 +273,7 @@ class App extends React.Component<{}, IAppState> {
     this.setState({ projects });
   }
 
-  private _updateProject(key: string | number, updatedProject: {}) {
+  private _updateProject(key: string | number, updatedProject: IProject): void {
     const projects = { ...this.state.projects };
     projects[key] = updatedProject;
     this.setState({
@@ -283,20 +281,21 @@ class App extends React.Component<{}, IAppState> {
     });
   }
 
-  private _removeProject(key: string | number) {
+  private _removeProject(key: string | number): void {
     const projects = { ...this.state.projects };
-    projects[key] = null;
+    // TODO: make sure delete works
+    delete projects[key];
     this.setState({ projects });
   }
 
-  private _addSkill(skill: ISkill) {
+  private _addSkill(skill: ISkill): void {
     const skills = { ...this.state.skills };
     const name = slugify(skill.name);
     skills[`skill-${name}`] = skill;
     this.setState({ skills });
   }
 
-  private _updateSkill(key: string | number, updatedSkill: {}) {
+  private _updateSkill(key: string | number, updatedSkill: ISkill): void {
     const skills = { ...this.state.skills };
     skills[key] = updatedSkill;
     this.setState({
@@ -304,9 +303,10 @@ class App extends React.Component<{}, IAppState> {
     });
   }
 
-  private _removeSkill(key: string | number) {
+  private _removeSkill(key: string | number): void {
     const skills = { ...this.state.skills };
-    skills[key] = null;
+    // TODO: make sure delete works
+    delete skills[key];
     this.setState({ skills });
   }
 }

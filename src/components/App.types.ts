@@ -1,11 +1,11 @@
-import { ITheme } from "../theme/theme.types";
+import { ITheme } from '../theme/theme.types';
 
 export interface IObject {
   [key: string]:
     | string
     | number
     | boolean
-    | Array<string | number>
+    | (string | number)[]
     | any[]
     | IObject
     | null
@@ -67,37 +67,10 @@ export interface ILocalStorage extends IObject {
 
 export interface IAppState {
   isMobile: boolean;
-  isLoggedIn: boolean | null;
-  projects: IProject[];
-  secrets: ISecret[];
-  skills: ISkill[];
+  isLoggedIn: boolean;
+  projects: { [key: string]: IProject };
+  secrets: { [key: string]: ISecret };
+  skills: { [key: string]: ISkill };
   theme: ITheme;
-  todos: ITodo[];
-}
-
-interface IBindToStateOptions {
-  context: {};
-  state: string;
-  asArray?: boolean;
-  queries?: {};
-  then?: () => void;
-  onFailure?: () => void;
-}
-
-interface ISyncStateOptions {
-  context: {};
-  state: string;
-  asArray?: boolean;
-  isNullable?: boolean;
-  keepKeys?: boolean;
-  queries?: {};
-  then?: () => void;
-  onFailure?: () => void;
-}
-
-interface IRebaseBinding {}
-
-export interface IRebase {
-  syncState(endpoint: string, options: ISyncStateOptions): IRebaseBinding;
-  bindToState(endpoint: string, options: IBindToStateOptions): IRebaseBinding;
+  todos: { [key: string]: ITodo };
 }

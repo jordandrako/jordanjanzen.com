@@ -1,23 +1,15 @@
 {
   "extends": [
-    "tslint:recommended",
+    "tslint:latest",
     "tslint-react",
+    "tslint-config-airbnb",
     "tslint-config-prettier"
-    // "tslint-config-airbnb"
   ],
   "linterOptions": {
     "exclude": ["config/**/*.js", "node_modules/**/*.ts"]
   },
   "rules": {
-    "no-empty-interface": false,
-    "no-unused-expression": [true, "allow-fast-null-checks"],
-    "variable-name": [
-      true,
-      "ban-keywords",
-      "check-format",
-      "allow-leading-underscore",
-      "allow-pascal-case"
-    ],
+    "array-type": [true, "array"],
     "function-name": [
       true,
       {
@@ -27,6 +19,16 @@
         "static-method-regex": "^[a-z][\\w\\d]+$",
         "function-regex": "^[_]?[a-z][\\w\\d]+$"
       }
-    ]
+    ],
+    "import-name": false,
+    "variable-name": [
+      true,
+      "ban-keywords",
+      "check-format",
+      "allow-leading-underscore",
+      "allow-pascal-case"
+    ],
+    "no-empty-interface": false,
+    "no-unused-expression": [true, "allow-fast-null-checks"]
   }
 }
