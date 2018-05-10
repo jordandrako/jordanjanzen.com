@@ -12,6 +12,13 @@ export interface IObject {
     | undefined;
 }
 
+export type TChildren =
+  | string
+  | JSX.Element
+  | (string | JSX.Element)[]
+  | (() => string | JSX.Element)
+  | (() => (string | JSX.Element)[]);
+
 export interface IImage extends IObject {
   format: string;
   id: string;
