@@ -1,47 +1,59 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-
-import Button from './Button';
+import * as React from 'react';
+import { styled } from '../theme';
+import Button, { IButtonProps } from './Button';
 
 const IconButton = styled(Button)`
   display: flex;
   justify-content: space-between;
 `;
 
-const SocialButton = (props) => {
+export enum SocialSites {
+  github,
+  codepen,
+  facebook,
+  twitter,
+  google,
+  linkedin,
+}
+
+export interface ISocialButton extends IButtonProps {
+  social: SocialSites;
+  className?: string;
+}
+
+const SocialButton = (props: ISocialButton) => {
   const social = props.social;
   let link;
   let text;
   let bg;
   let color;
 
-  if (social === 'github') {
+  if (social === SocialSites.github) {
     link = 'https://github.com/jordandrako';
     text = 'GitHub';
     bg = '#4078c0';
     color = '#fff';
-  } else if (social === 'codepen') {
+  } else if (social === SocialSites.codepen) {
     link = 'https://codepen.io/jordandrako/';
     text = 'CodePen';
     bg = '#0ebeff';
     color = '#fff';
-  } else if (social === 'facebook') {
+  } else if (social === SocialSites.facebook) {
     link = 'https://www.facebook.com/jordancjanzen';
     text = 'Facebook';
     bg = '#3b5998';
     color = '#fff';
-  } else if (social === 'google') {
+  } else if (social === SocialSites.google) {
     link = 'https://plus.google.com/u/0/+JordanJanzen1';
     text = 'Google';
     bg = '#dd4b39';
     color = '#fff';
-  } else if (social === 'twitter') {
+  } else if (social === SocialSites.twitter) {
     link = 'https://twitter.com/jordancjanzen';
     text = 'Twitter';
     bg = '#1da1f2';
     color = '#fff';
-  } else if (social === 'linkedin') {
+  } else if (social === SocialSites.linkedin) {
     link = 'https://www.linkedin.com/in/jordancjanzen/';
     text = 'LinkedIn';
     bg = '#0077b5';
@@ -52,30 +64,16 @@ const SocialButton = (props) => {
     <IconButton
       href={link}
       target="_blank"
-      small
+      small={true}
       bg={bg}
       color={color}
       {...props}
     >
-      <i className={`fa social fa-${social}`} aria-hidden="true" /> {text}
+      <span>
+        <i className={`fa social fa-${social}`} aria-hidden="true" /> {text}
+      </span>
     </IconButton>
   );
-};
-
-SocialButton.propTypes = {
-  social: PropTypes.oneOf([
-    'github',
-    'codepen',
-    'facebook',
-    'twitter',
-    'google',
-    'linkedin',
-  ]).isRequired,
-  wide: PropTypes.bool,
-};
-
-SocialButton.defaultProps = {
-  wide: false,
 };
 
 export default SocialButton;
