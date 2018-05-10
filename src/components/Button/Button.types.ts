@@ -1,6 +1,8 @@
 import { TChildren } from '../App.types';
 
-export interface IButton {}
+export interface IButton {
+  focus: () => void;
+}
 
 export interface IButtonProps {
   arrows?: boolean | string;
@@ -51,4 +53,18 @@ export enum ButtonType {
   danger,
   delete,
   submit,
+}
+
+export enum SocialSites {
+  codepen,
+  facebook,
+  github,
+  google,
+  linkedin,
+  twitter,
+}
+
+export interface ISocialButton extends IButtonProps {
+  social: SocialSites;
+  className?: string;
 }

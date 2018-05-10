@@ -1,25 +1,6 @@
 import * as React from 'react';
-import { styled } from '../theme';
-import Button, { IButtonProps } from './Button';
-
-const IconButton = styled(Button)`
-  display: flex;
-  justify-content: space-between;
-`;
-
-export enum SocialSites {
-  github,
-  codepen,
-  facebook,
-  twitter,
-  google,
-  linkedin,
-}
-
-export interface ISocialButton extends IButtonProps {
-  social: SocialSites;
-  className?: string;
-}
+import { ISocialButton, SocialSites } from '../../Button';
+import * as Styled from './SocialButton.styles';
 
 const SocialButton = (props: ISocialButton) => {
   const social = props.social;
@@ -61,7 +42,7 @@ const SocialButton = (props: ISocialButton) => {
   }
 
   return (
-    <IconButton
+    <Styled.root
       href={link}
       target="_blank"
       small={true}
@@ -72,7 +53,7 @@ const SocialButton = (props: ISocialButton) => {
       <span>
         <i className={`fa social fa-${social}`} aria-hidden="true" /> {text}
       </span>
-    </IconButton>
+    </Styled.root>
   );
 };
 

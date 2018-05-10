@@ -7,6 +7,19 @@ import {
 } from './Button.types';
 
 export default class Button extends React.Component<IButtonProps, {}> {
+  private _button: any;
+
+  public constructor(props: IButtonProps) {
+    super(props);
+    this._button = React.createRef();
+  }
+
+  public focus(): void {
+    if (this._button.current) {
+      this._button.current.focus();
+    }
+  }
+
   public render(): JSX.Element {
     const styleProps: IButtonStyleProps = {
       arrows: this.props.arrows,
@@ -24,22 +37,26 @@ export default class Button extends React.Component<IButtonProps, {}> {
     if (this.props.buttonType === bType.delete) {
       if (this.props.to) {
         return (
-          <styled.BtnLink to={this.props.to}>
-            <styled.DelBtn
+          <styled.LinkButton to={this.props.to} innerRef={this._button}>
+            <styled.DeleteButton
               {...styleProps}
               className="fa fa-times-circle close"
             />
-          </styled.BtnLink>
+          </styled.LinkButton>
         );
       }
       return (
-        <styled.DelBtn {...styleProps} className="fa fa-times-circle close" />
+        <styled.DeleteButton
+          {...styleProps}
+          className="fa fa-times-circle close"
+          innerRef={this._button}
+        />
       );
     }
 
     if (this.props.href) {
       return (
-        <styled.A
+        <styled.AnchorButton
           href={this.props.href}
           target={this.props.target}
           rel={
@@ -47,31 +64,32 @@ export default class Button extends React.Component<IButtonProps, {}> {
               ? 'noopener noreferrer'
               : ''
           }
+          innerRef={this._button}
         >
-          <styled.Btn {...styleProps}>
+          <styled.BaseButton {...styleProps}>
             {this.props.text || this.props.children || 'Button'}
-          </styled.Btn>
-        </styled.A>
+          </styled.BaseButton>
+        </styled.AnchorButton>
       );
     }
 
     if (this.props.to) {
       return (
-        <styled.BtnLink to={this.props.to}>
-          <styled.Btn {...styleProps}>
+        <styled.LinkButton to={this.props.to}>
+          <styled.BaseButton {...styleProps}>
             {this.props.text || this.props.children || 'Button'}
-          </styled.Btn>
-        </styled.BtnLink>
+          </styled.BaseButton>
+        </styled.LinkButton>
       );
     }
 
     return (
-      <styled.Btn
+      <styled.BaseButton
         {...styleProps}
         type={this.props.type ? this.props.type : undefined}
       >
         {this.props.text || this.props.children || 'Button'}
-      </styled.Btn>
+      </styled.BaseButton>
     );
   }
 }

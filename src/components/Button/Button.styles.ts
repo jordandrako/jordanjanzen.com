@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import styled from '../../theme/styled-components';
-import { fonts, palette, semanticColors } from '../../theme/theme';
+import styled from '../../styling/styled-components';
+import { fonts, palette, semanticColors } from '../../styling/theme';
 import { ButtonType as type, IButtonStyleProps } from './Button.types';
 
 const buttonTextColor = (props: IButtonStyleProps) =>
@@ -42,7 +42,7 @@ const borderRadius = (props: IButtonStyleProps) => {
   return 0;
 };
 
-export const Btn = styled.button`
+export const BaseButton = styled.button`
   border: none;
   border-radius: ${borderRadius};
   padding: ${(props: IButtonStyleProps) =>
@@ -126,7 +126,7 @@ export const Btn = styled.button`
   }
 `;
 
-export const DelBtn = styled.button`
+export const DeleteButton = styled.button`
   font-size: 20px;
   margin: 0 0.5em;
   padding: 0;
@@ -146,13 +146,13 @@ export const DelBtn = styled.button`
   }
 `;
 
-export const A = styled.a`
+export const AnchorButton = styled.a`
   border-bottom: 0;
   line-height: 1;
   text-shadow: none;
 `;
 
-export const BtnLink = styled(Link)`
+export const LinkButton = styled(Link)`
   border-bottom: 0;
   line-height: 1;
   text-shadow: none;
