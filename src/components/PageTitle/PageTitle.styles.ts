@@ -1,15 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { darken, lighten } from 'polished';
+import { fonts, mediaMax, palette, styled } from '../../theme';
 
-import Button from './Button';
-
-import { toTitleCase, getFileExtension } from '../helpers';
-import { palette, fonts } from '../theme/theme';
-import { mediaMax } from '../theme/style-utils';
-
-const Title = styled.header`
+export const Title = styled.header`
   background: ${darken(0.05, palette.black)};
   border-bottom: 2px solid ${palette.darkblack};
   width: 100%;
@@ -71,37 +63,3 @@ const Title = styled.header`
     }
   }
 `;
-
-const fileExtention = getFileExtension();
-const PageTitle = (props) => {
-  const ext = props.ext === true && fileExtention;
-  const title = [toTitleCase(props.title), ext];
-
-  return (
-    <Title>
-      <ul>
-        <li>
-          <i className="fa fa-file-code-o file" aria-hidden="true" />
-          <h1>{title}</h1>
-          <Button
-            to="/"
-            type="delete"
-            aria-hidden="true"
-            style={{ margin: 0 }}
-          />
-        </li>
-      </ul>
-    </Title>
-  );
-};
-
-PageTitle.propTypes = {
-  title: PropTypes.string.isRequired,
-  ext: PropTypes.bool,
-};
-
-PageTitle.defaultProps = {
-  ext: true,
-};
-
-export default PageTitle;
