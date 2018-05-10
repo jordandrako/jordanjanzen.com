@@ -1,5 +1,5 @@
-import styled from '../../theme/styled-components';
-import { fonts, palette } from '../../theme/theme';
+import styled from '../../styling/styled-components';
+import { fonts, palette } from '../../styling/theme';
 import { IBannerStyleProps } from './Banner.types';
 
 export const Alert = styled.div`

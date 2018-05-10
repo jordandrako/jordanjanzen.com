@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import Banner from '../Banner';
 
-import { Page, Row } from '../../theme/grid';
+import { Page, Row } from '../../styling/grid';
 
 const NotFound = () => (
   <Page title="404">

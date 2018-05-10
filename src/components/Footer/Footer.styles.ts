@@ -1,8 +1,8 @@
 import { darken } from 'polished';
 
-import { mediaMax, mediaMin } from '../../theme/style-utils';
-import styled from '../../theme/styled-components';
-import { palette } from '../../theme/theme';
+import { mediaMax, mediaMin } from '../../styling/style-utils';
+import styled from '../../styling/styled-components';
+import { palette } from '../../styling/theme';
 
 export const Bottom = styled.footer`
   display: flex;

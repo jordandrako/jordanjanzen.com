@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Button from './Button';
 
 import codeLoader from '../images/codeLoader.svg';
-import { palette } from '../theme/theme';
+import { palette } from '../styling/theme';
 
 const Loader = styled.div`
   border: 3px solid ${palette.black};

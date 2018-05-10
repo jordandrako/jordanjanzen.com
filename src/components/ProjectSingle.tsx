@@ -6,9 +6,9 @@ import { Link } from 'react-router-dom';
 import CloudImage from './CloudImage';
 import Button from './Button';
 
-import { Row } from '../theme/grid';
-import { palette, semanticColors, fonts } from '../theme/theme';
-import { mediaMax } from '../theme/style-utils';
+import { Row } from '../styling/grid';
+import { palette, semanticColors, fonts } from '../styling/theme';
+import { mediaMax } from '../styling/style-utils';
 
 const ClickOutside = styled(Link)`
   background: rgba(0, 0, 0, 0.5);

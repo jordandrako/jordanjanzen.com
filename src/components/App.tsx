@@ -1,13 +1,7 @@
 import * as React from 'react';
 import { auth, base, database, provider } from '../base';
-import { slugify } from '../helpers';
-import {
-  globalStyles,
-  loadTheme,
-  mediaMax,
-  sizes,
-  styled,
-} from '../theme/index';
+import { globalStyles, loadTheme, mediaMax, sizes, styled } from '../styling';
+import { slugify } from '../utilities';
 import {
   IAppState,
   ILocalStorage,

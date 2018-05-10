@@ -8,9 +8,9 @@ import Button from '../Button';
 import CloudImage from '../CloudImage';
 import Project from '../Project';
 
-import { Page, Row, Hero } from '../../theme/grid';
-import { semanticColors, fonts } from '../../theme/theme';
-import { mediaMin } from '../../theme/style-utils';
+import { Page, Row, Hero } from '../../styling/grid';
+import { semanticColors, fonts } from '../../styling/theme';
+import { mediaMin } from '../../styling/style-utils';
 
 const OuterHero = styled.div`
   width: 100%;

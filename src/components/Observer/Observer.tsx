@@ -1,9 +1,5 @@
 import * as React from 'react';
-
-interface IObserverProps {
-  isVisible: boolean;
-  children?: any;
-}
+import { IObserverProps } from './Observer.types';
 
 interface IObserverState {
   hasBeenVisible: boolean;

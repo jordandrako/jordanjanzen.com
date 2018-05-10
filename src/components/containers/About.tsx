@@ -1,9 +1,9 @@
 import * as moment from 'moment';
 import * as React from 'react';
 import styled from 'styled-components';
-import { Flex, Page, Row } from '../../theme/grid';
-import { mediaMin } from '../../theme/style-utils';
-import { fonts, palette } from '../../theme/theme';
+import { Flex, Page, Row } from '../../styling/grid';
+import { mediaMin } from '../../styling/style-utils';
+import { fonts, palette } from '../../styling/theme';
 import { IAppState } from '../App.types';
 import Button from '../Button';
 import CloudImage from '../CloudImage';

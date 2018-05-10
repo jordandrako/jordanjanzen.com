@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import AddTodoForm from '../Forms/AddTodoForm';
 import Todo from '../Todo';
 
-import { Page, Row } from '../../theme/grid';
+import { Page, Row } from '../../styling/grid';
 
 const ListOfTodos = styled.ul`
   list-style-type: none;

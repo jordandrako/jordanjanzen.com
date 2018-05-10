@@ -6,7 +6,7 @@ import TextareaAutosize from 'react-autosize-textarea';
 import { truncate } from '../helpers';
 
 import StyledForm from './StyledForm';
-import { palette } from '../theme/theme';
+import { palette } from '../styling/theme';
 
 const Item = styled.li`
   position: relative;

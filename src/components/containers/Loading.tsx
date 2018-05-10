@@ -7,7 +7,7 @@ import PageTitle from '../PageTitle';
 import Banner from '../Banner';
 import StyledLoader from '../StyledLoader';
 
-import { MainContainer, Main, Row } from '../../theme/grid';
+import { MainContainer, Main, Row } from '../../styling/grid';
 
 const Load = styled(Main)`
   align-items: center;

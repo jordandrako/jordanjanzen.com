@@ -1,4 +1,4 @@
-import { ITheme } from '../theme/theme.types';
+import { ITheme } from '../styling';
 
 export interface IObject {
   [key: string]:

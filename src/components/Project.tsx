@@ -9,8 +9,8 @@ import Button from './Button';
 // import Observer from './Observer';
 
 import { toTitleCase } from '../helpers';
-import { palette, semanticColors, fonts } from '../theme/theme';
-import { mediaMax } from '../theme/style-utils';
+import { palette, semanticColors, fonts } from '../styling/theme';
+import { mediaMax } from '../styling/style-utils';
 
 const imageHeight = '250';
 

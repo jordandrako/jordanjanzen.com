@@ -1,6 +1,6 @@
 import { adjustHue, transparentize } from 'polished';
 import styled from 'styled-components';
-import { palette } from '../../theme/theme';
+import { palette } from '../../styling/theme';
 import { ICloudImageStyleProps } from './CloudImage.types';
 
 export const Image = styled.div`

@@ -7,7 +7,7 @@ import AddProjectForm from '../Forms/AddProjectForm';
 import Project from '../Project';
 import ProjectSingle from '../ProjectSingle';
 
-import { Page, Row } from '../../theme/grid';
+import { Page, Row } from '../../styling/grid';
 
 const ListOfProjects = styled.ul`
   list-style-type: none;

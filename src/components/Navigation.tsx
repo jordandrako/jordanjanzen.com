@@ -4,8 +4,8 @@ import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { darken } from 'polished';
 
-import { palette, fonts } from '../theme/theme';
-import { mediaMax, mediaMin } from '../theme/style-utils';
+import { palette, fonts } from '../styling/theme';
+import { mediaMax, mediaMin } from '../styling/style-utils';
 
 const NavList = styled.ul`
   list-style: none;

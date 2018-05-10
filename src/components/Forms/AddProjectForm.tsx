@@ -6,8 +6,8 @@ import StyledForm from '../StyledForm';
 import Button from '../Button';
 import Dropzone from './FormUtilities/Dropzone';
 
-import { palette } from '../../theme/theme';
-import { Row } from '../../theme/grid';
+import { palette } from '../../styling/theme';
+import { Row } from '../../styling/grid';
 
 import { truncate } from '../../helpers';
 
