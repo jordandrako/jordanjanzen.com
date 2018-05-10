@@ -1,14 +1,12 @@
+import { TChildren } from '../App.types';
+
 export interface IButton {}
 
 export interface IButtonProps {
   arrows?: boolean | string;
   bg?: string;
   buttonType?: ButtonType;
-  children?:
-    | string
-    | JSX.Element
-    | (string | JSX.Element)[]
-    | (() => string | JSX.Element);
+  children?: TChildren;
   circle?: boolean;
   className?: string;
   color?: string;
