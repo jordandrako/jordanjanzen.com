@@ -1,10 +1,10 @@
-import * as React from "react";
-import * as styled from "./Button.styles";
+import * as React from 'react';
+import * as styled from './Button.styles';
 import {
   ButtonType as bType,
   IButtonProps,
-  IButtonStyleProps
-} from "./Button.types";
+  IButtonStyleProps,
+} from './Button.types';
 
 export default class Button extends React.Component<IButtonProps, {}> {
   public render(): JSX.Element {
@@ -18,7 +18,7 @@ export default class Button extends React.Component<IButtonProps, {}> {
       large: this.props.large,
       pill: this.props.pill,
       small: this.props.small,
-      wide: this.props.wide
+      wide: this.props.wide,
     };
 
     if (this.props.buttonType === bType.delete) {
@@ -43,13 +43,13 @@ export default class Button extends React.Component<IButtonProps, {}> {
           href={this.props.href}
           target={this.props.target}
           rel={
-            this.props.rel || this.props.target === "_blank"
-              ? "noopener noreferrer"
-              : ""
+            this.props.rel || this.props.target === '_blank'
+              ? 'noopener noreferrer'
+              : ''
           }
         >
           <styled.Btn {...styleProps}>
-            {this.props.text || this.props.children || "Button"}
+            {this.props.text || this.props.children || 'Button'}
           </styled.Btn>
         </styled.A>
       );
@@ -59,7 +59,7 @@ export default class Button extends React.Component<IButtonProps, {}> {
       return (
         <styled.BtnLink to={this.props.to}>
           <styled.Btn {...styleProps}>
-            {this.props.text || this.props.children || "Button"}
+            {this.props.text || this.props.children || 'Button'}
           </styled.Btn>
         </styled.BtnLink>
       );
@@ -70,7 +70,7 @@ export default class Button extends React.Component<IButtonProps, {}> {
         {...styleProps}
         type={this.props.type ? this.props.type : undefined}
       >
-        {this.props.text || this.props.children || "Button"}
+        {this.props.text || this.props.children || 'Button'}
       </styled.Btn>
     );
   }

@@ -1,11 +1,24 @@
-import * as React from "react";
-import { auth, base, database, provider } from "../base";
-import { slugify } from "../helpers";
-import { globalStyles, loadTheme, mediaMax, sizes, styled } from "../theme/index";
-import { IAppState, ILocalStorage, IObject, IProject, ISkill, ITodo } from "./App.types";
-import Footer from "./Footer/index";
-import Router from "./Router";
-import Sidebar from "./Sidebar";
+import * as React from 'react';
+import { auth, base, database, provider } from '../base';
+import { slugify } from '../helpers';
+import {
+  globalStyles,
+  loadTheme,
+  mediaMax,
+  sizes,
+  styled,
+} from '../theme/index';
+import {
+  IAppState,
+  ILocalStorage,
+  IObject,
+  IProject,
+  ISkill,
+  ITodo,
+} from './App.types';
+import AppRouter from './AppRouter';
+import Footer from './Footer';
+import Sidebar from './Sidebar';
 
 const appTheme = loadTheme({});
 const { palette } = appTheme;
@@ -19,7 +32,7 @@ const Wrapper = styled.div`
   flex-wrap: wrap;
 `;
 
-class App extends React.Component<{}, IAppState> {
+export default class App extends React.Component<{}, IAppState> {
   private _ref?: any[];
   private _localStorage: ILocalStorage;
 
@@ -48,30 +61,43 @@ class App extends React.Component<{}, IAppState> {
     this._ref = undefined;
 
     this._localStorage = {
-      projects: localStorage.getItem("projects"),
-      skills: localStorage.getItem("skills"),
-      todos: localStorage.getItem("todos")
+      projects: localStorage.getItem('projects'),
+      skills: localStorage.getItem('skills'),
+      todos: localStorage.getItem('todos'),
     };
 
     this.state = {
+      addProject: this._addProject,
+      addSkill: this._addSkill,
+      addTodo: this._addTodo,
       isLoggedIn: false,
       isMobile: window.innerWidth <= sizes.tablet,
       projects: this._localStorage.projects
         ? JSON.parse(this._localStorage.projects)
         : {},
+      removeProject: this._removeProject,
+      removeSkill: this._removeSkill,
+      removeTodo: this._removeTodo,
       secrets: {},
-      skills: this._localStorage.skills ? JSON.parse(this._localStorage.skills) : {},
+      skills: this._localStorage.skills
+        ? JSON.parse(this._localStorage.skills)
+        : {},
       theme: appTheme,
-      todos: this._localStorage.todos ? JSON.parse(this._localStorage.todos) : {},
+      todos: this._localStorage.todos
+        ? JSON.parse(this._localStorage.todos)
+        : {},
+      updateProject: this._updateProject,
+      updateSkill: this._updateSkill,
+      updateTodo: this._updateTodo,
     };
   }
 
   public componentDidMount(): void {
-    this._setRef("unauthRef").catch((err: any) => {
+    this._setRef('unauthRef').catch((err: any) => {
       throw err;
     });
 
-    window.addEventListener("resize", this._updateSize);
+    window.addEventListener('resize', this._updateSize);
 
     auth.onAuthStateChanged(user => {
       if (user) {
@@ -81,14 +107,14 @@ class App extends React.Component<{}, IAppState> {
   }
 
   public componentDidUpdate(): void {
-    localStorage.setItem("todos", JSON.stringify(this.state.todos));
-    localStorage.setItem("projects", JSON.stringify(this.state.projects));
-    localStorage.setItem("skills", JSON.stringify(this.state.skills));
+    localStorage.setItem('todos', JSON.stringify(this.state.todos));
+    localStorage.setItem('projects', JSON.stringify(this.state.projects));
+    localStorage.setItem('skills', JSON.stringify(this.state.skills));
   }
 
   public componentWillUnmount(): void {
     base.removeBinding(this._ref);
-    window.removeEventListener("resize", this._updateSize);
+    window.removeEventListener('resize', this._updateSize);
   }
 
   public render(): JSX.Element {
@@ -99,22 +125,8 @@ class App extends React.Component<{}, IAppState> {
           isMobile={this.state.isMobile}
           login={this._authenticate}
           logout={this._logout}
-          updateSize={this._updateSize}
         />
-        <Router
-          {...this.state}
-          addTodo={this._addTodo}
-          updateTodo={this._updateTodo}
-          removeTodo={this._removeTodo}
-          addProject={this._addProject}
-          updateProject={this._updateProject}
-          removeProject={this._removeProject}
-          addSkill={this._addSkill}
-          updateSkill={this._updateSkill}
-          removeSkill={this._removeSkill}
-          isMobile={this.state.isMobile}
-          cloudinary={this.state.secrets.cloudinary! ? this.state.secrets.cloudinary!}
-        />
+        <AppRouter {...this.state} />
         {this.state.isMobile ? (
           <Footer
             isLoggedIn={this.state.isLoggedIn}
@@ -127,9 +139,9 @@ class App extends React.Component<{}, IAppState> {
     );
   }
 
-  private _setRef(ref: 'unauthRef' | 'authRef') {
+  private _setRef(ref: 'unauthRef' | 'authRef'): Promise<any[] | string> {
     return new Promise((resolve, reject) => {
-      if (ref !== "unauthRef" && ref !== "authRef") {
+      if (ref !== 'unauthRef' && ref !== 'authRef') {
         reject(
           `Ref is not correctly defined. Must be either 'unauthRef' or 'authRef'. Was: ${ref}`
         );
@@ -138,50 +150,50 @@ class App extends React.Component<{}, IAppState> {
         base.removeBinding(this._ref);
         this._ref = undefined;
       }
-      if (ref === "unauthRef") {
+      if (ref === 'unauthRef') {
         this._ref = [
-          base.bindToState("todos", {
+          base.bindToState('todos', {
             context: this,
-            state: "todos"
+            state: 'todos',
           }),
-          base.bindToState("projects", {
+          base.bindToState('projects', {
             context: this,
-            state: "projects"
+            state: 'projects',
           }),
-          base.bindToState("skills", {
+          base.bindToState('skills', {
             context: this,
-            state: "skills"
-          })
+            state: 'skills',
+          }),
         ];
       }
 
-      if (ref === "authRef") {
+      if (ref === 'authRef') {
         this._ref = [
-          base.syncState("todos", {
+          base.syncState('todos', {
             context: this,
-            state: "todos"
+            state: 'todos',
           }),
-          base.syncState("projects", {
+          base.syncState('projects', {
             context: this,
-            state: "projects"
+            state: 'projects',
           }),
-          base.syncState("skills", {
+          base.syncState('skills', {
             context: this,
-            state: "skills"
+            state: 'skills',
           }),
-          base.fetch("secrets", {
+          base.fetch('secrets', {
             context: this,
             then(data: IObject[]) {
               this.setState({ secrets: data });
-            }
-          })
+            },
+          }),
         ];
       }
-      resolve("Ref (re)set");
+      resolve('Ref (re)set');
     });
   }
 
-  private _updateSize() {
+  private _updateSize(): void {
     if (window.innerWidth <= sizes.tablet) {
       this.setState({ isMobile: true });
     } else {
@@ -189,50 +201,56 @@ class App extends React.Component<{}, IAppState> {
     }
   }
 
-  private _authenticate() {
+  private _authenticate(): void {
     auth
       .signInWithPopup(provider)
       .then(result => this._authHandler(result))
-      .catch((error: any) => {throw error});
+      .catch((error: any) => {
+        throw error;
+      });
   }
 
   private _logout(): void {
-    this._setRef("unauthRef")
-      .then(() => auth.signOut()
-        .then(() => {
+    this._setRef('unauthRef')
+      .then(() =>
+        auth.signOut().then(() => {
           this.setState({
             isLoggedIn: false,
-            secrets: {}
+            secrets: {},
           });
         })
       )
-      .catch((error: any) => {throw error});
+      .catch((error: any) => {
+        throw error;
+      });
   }
 
   private _authHandler(authData: any): void {
     const uid = authData.user.uid || authData.uid;
     const rootRef = database.ref();
     const successfulLogin = () => {
-      this._setRef("authRef");
+      this._setRef('authRef');
       this.setState({ isLoggedIn: true });
     };
-    rootRef.once("value").then(snapshot => {
+    rootRef.once('value').then(snapshot => {
       const data = snapshot.val() || {};
 
       if (!data.owner) {
         rootRef
           .set({
             ...data,
-            owner: uid
+            owner: uid,
           })
           .then(() => {
             successfulLogin();
           })
-          .catch((error: any) => {throw error});
+          .catch((error: any) => {
+            throw error;
+          });
       } else if (data.owner === uid) {
         successfulLogin();
       } else {
-        throw new Error("Log in denied. You are not the owner of this site.");
+        throw new Error('Log in denied. You are not the owner of this site.');
       }
     });
   }
@@ -245,20 +263,20 @@ class App extends React.Component<{}, IAppState> {
     this.setState({ todos }); // same as this.setState({ todos: todos })
   }
 
-  private _updateTodo(key: string | number, updatedProp: ITodo ): void {
+  private _updateTodo(key: string, updatedProp: ITodo): void {
     const todos = { ...this.state.todos };
     const todo = todos[key];
     const updatedTodo = {
       ...todo,
-      ...updatedProp
+      ...updatedProp,
     };
     todos[key] = updatedTodo;
     this.setState({
-      todos
+      todos,
     });
   }
 
-  private _removeTodo(key: string | number): void {
+  private _removeTodo(key: string): void {
     const todos = { ...this.state.todos };
     // TODO: make sure delete works
     delete todos[key];
@@ -273,15 +291,15 @@ class App extends React.Component<{}, IAppState> {
     this.setState({ projects });
   }
 
-  private _updateProject(key: string | number, updatedProject: IProject): void {
+  private _updateProject(key: string, updatedProject: IProject): void {
     const projects = { ...this.state.projects };
     projects[key] = updatedProject;
     this.setState({
-      projects
+      projects,
     });
   }
 
-  private _removeProject(key: string | number): void {
+  private _removeProject(key: string): void {
     const projects = { ...this.state.projects };
     // TODO: make sure delete works
     delete projects[key];
@@ -295,20 +313,18 @@ class App extends React.Component<{}, IAppState> {
     this.setState({ skills });
   }
 
-  private _updateSkill(key: string | number, updatedSkill: ISkill): void {
+  private _updateSkill(key: string, updatedSkill: ISkill): void {
     const skills = { ...this.state.skills };
     skills[key] = updatedSkill;
     this.setState({
-      skills
+      skills,
     });
   }
 
-  private _removeSkill(key: string | number): void {
+  private _removeSkill(key: string): void {
     const skills = { ...this.state.skills };
     // TODO: make sure delete works
     delete skills[key];
     this.setState({ skills });
   }
 }
-
-export default App;

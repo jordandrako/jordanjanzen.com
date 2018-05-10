@@ -65,7 +65,19 @@ export interface ILocalStorage extends IObject {
   todos: string | null;
 }
 
-export interface IAppState {
+export interface IAppActions {
+  addProject: (project: IProject) => void;
+  addSkill: (skill: ISkill) => void;
+  addTodo: (todo: ITodo) => void;
+  updateProject: (key: string, project: IProject) => void;
+  updateSkill: (key: string, skill: ISkill) => void;
+  updateTodo: (key: string, todo: ITodo) => void;
+  removeProject: (key: string) => void;
+  removeSkill: (key: string) => void;
+  removeTodo: (key: string) => void;
+}
+
+export interface IAppState extends IAppActions {
   isMobile: boolean;
   isLoggedIn: boolean;
   projects: { [key: string]: IProject };

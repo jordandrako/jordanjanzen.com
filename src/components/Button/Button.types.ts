@@ -4,7 +4,11 @@ export interface IButtonProps {
   arrows?: boolean | string;
   bg?: string;
   buttonType?: ButtonType;
-  children?: string | JSX.Element;;
+  children?:
+    | string
+    | JSX.Element
+    | (string | JSX.Element)[]
+    | (() => string | JSX.Element);
   circle?: boolean;
   className?: string;
   color?: string;
@@ -21,6 +25,8 @@ export interface IButtonProps {
   to?: string;
   type?: string;
   wide?: boolean;
+  onClick?: () => void;
+  icon?: boolean;
 }
 
 export interface IButtonStyleProps {
@@ -38,13 +44,13 @@ export interface IButtonStyleProps {
 }
 
 export enum ButtonType {
-  "primary",
-  "secondary",
-  "cta",
-  "login",
-  "success",
-  "warn",
-  "danger",
-  "delete",
-  "submit"
+  primary,
+  secondary,
+  cta,
+  login,
+  success,
+  warn,
+  danger,
+  delete,
+  submit,
 }

@@ -9,37 +9,37 @@ export interface ICloudImageProps {
   children?: React.ReactChildren | null;
   className?: string;
   crop?:
-    | "scale"
-    | "fit"
-    | "mfit"
-    | "fill"
-    | "lfill"
-    | "limit"
-    | "pad"
-    | "lpad"
-    | "mpad"
-    | "crop"
-    | "thumb"
-    | "imagga_crop"
-    | "imagga_scale";
+    | 'scale'
+    | 'fit'
+    | 'mfit'
+    | 'fill'
+    | 'lfill'
+    | 'limit'
+    | 'pad'
+    | 'lpad'
+    | 'mpad'
+    | 'crop'
+    | 'thumb'
+    | 'imagga_crop'
+    | 'imagga_scale';
   dim?: boolean;
   effects?: string | null;
   format?: string;
   gravity?:
-    | "center"
-    | "south"
-    | "north"
-    | "east"
-    | "west"
-    | "south_east"
-    | "south_west"
-    | "north_east"
-    | "north_west"
-    | "face"
-    | "face:center"
-    | "faces"
-    | "faces:auto"
-    | "faces:center";
+    | 'center'
+    | 'south'
+    | 'north'
+    | 'east'
+    | 'west'
+    | 'south_east'
+    | 'south_west'
+    | 'north_east'
+    | 'north_west'
+    | 'face'
+    | 'face:center'
+    | 'faces'
+    | 'faces:auto'
+    | 'faces:center';
   height?: string;
   link?: boolean;
   name: string;

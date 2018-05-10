@@ -1,19 +1,19 @@
-import * as React from "react";
-import { Transition } from "react-transition-group";
-import { toTitleCase } from "../../helpers";
+import * as React from 'react';
+import { Transition } from 'react-transition-group';
+import { toTitleCase } from '../../helpers';
 
-import { IBanner, IBannerProps } from "./Banner.types";
+import { IBanner, IBannerProps } from './Banner.types';
 
-import { Alert } from "./Banner.styles";
+import { Alert } from './Banner.styles';
 
 interface IBannerState {
   closed: boolean;
 }
 
-class Banner extends React.Component<IBannerProps, IBannerState>
+export default class Banner extends React.Component<IBannerProps, IBannerState>
   implements IBanner {
   public static defaultProps = {
-    type: "info"
+    type: 'info',
   };
 
   public constructor(props: any) {
@@ -21,13 +21,13 @@ class Banner extends React.Component<IBannerProps, IBannerState>
     this.showHide = this.showHide.bind(this);
 
     this.state = {
-      closed: false
+      closed: false,
     };
   }
 
   public showHide(): void {
     this.setState({
-      closed: !this.state.closed
+      closed: !this.state.closed,
     });
   }
 
@@ -60,5 +60,3 @@ class Banner extends React.Component<IBannerProps, IBannerState>
 
   private _bannerContent = (): JSX.Element => <p>{this.props.children}</p>;
 }
-
-export default Banner;

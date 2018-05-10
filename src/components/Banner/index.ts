@@ -1,3 +1,2 @@
-import Banner from "./Banner";
-export default Banner;
-export * from "./Banner.types";
+export { default } from './Banner';
+export * from './Banner.types';

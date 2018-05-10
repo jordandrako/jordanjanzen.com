@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
-import styled from "../../theme/styled-components";
-import { fonts, palette, semanticColors } from "../../theme/theme";
-import { ButtonType as type, IButtonStyleProps } from "./Button.types";
+import { Link } from 'react-router-dom';
+import styled from '../../theme/styled-components';
+import { fonts, palette, semanticColors } from '../../theme/theme';
+import { ButtonType as type, IButtonStyleProps } from './Button.types';
 
 const buttonTextColor = (props: IButtonStyleProps) =>
   props.color || semanticColors.buttonText;
@@ -34,9 +34,10 @@ const buttonBackground = (props: IButtonStyleProps) => {
 
 const borderRadius = (props: IButtonStyleProps) => {
   if (props.circle || props.buttonType === type.delete || props.del) {
-    return "100%";
-  } else if (props.pill) {
-    return "5em";
+    return '100%';
+  }
+  if (props.pill) {
+    return '5em';
   }
   return 0;
 };
@@ -45,12 +46,13 @@ export const Btn = styled.button`
   border: none;
   border-radius: ${borderRadius};
   padding: ${(props: IButtonStyleProps) =>
-    !!props.arrows ? "0.25em 0.8em 0.25em 1.5em" : ".5em .8em"};
+    !!props.arrows ? '0.25em 0.8em 0.25em 1.5em' : '.5em .8em'};
   position: relative;
   color: ${(props: IButtonStyleProps) => {
     if (props.buttonType === type.cta) {
       return palette.lightwhite;
-    } else if (props.color) {
+    }
+    if (props.color) {
       return props.color;
     }
     return semanticColors.buttonText;
@@ -64,14 +66,15 @@ export const Btn = styled.button`
     props.buttonType === type.secondary ? 0.75 : 1};
   transform: translateY(0);
 
-  width: ${(props: IButtonStyleProps) => (props.wide ? "100%" : "auto")};
+  width: ${(props: IButtonStyleProps) => (props.wide ? '100%' : 'auto')};
   font-size: ${(props: IButtonStyleProps) => {
     if (props.small) {
-      return ".8rem";
-    } else if (props.large) {
-      return "1.7rem";
+      return '.8rem';
     }
-    return "1.1rem";
+    if (props.large) {
+      return '1.7rem';
+    }
+    return '1.1rem';
   }};
 
   transition: all 0.25s ease-in-out;
@@ -99,9 +102,9 @@ export const Btn = styled.button`
 
   &:before,
   &:after {
-    content: "";
+    content: '';
     display: ${(props: IButtonStyleProps) =>
-      !!props.arrows ? "block" : "none"};
+      !!props.arrows ? 'block' : 'none'};
     position: absolute;
     top: 50%;
     width: 1.2em;

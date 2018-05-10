@@ -1,15 +1,15 @@
-import styled from "../../theme/styled-components";
-import { fonts, palette } from "../../theme/theme";
-import { IBannerStyleProps } from "./Banner.types";
+import styled from '../../theme/styled-components';
+import { fonts, palette } from '../../theme/theme';
+import { IBannerStyleProps } from './Banner.types';
 
 export const Alert = styled.div`
   background: ${(props: IBannerStyleProps) => {
     const type = props.type;
-    if (type === "alert") {
+    if (type === 'alert') {
       return palette.lightyellow;
-    } else if (type === "success") {
+    } else if (type === 'success') {
       return palette.green;
-    } else if (type === "error") {
+    } else if (type === 'error') {
       return palette.red;
     }
     return palette.lightblack;
