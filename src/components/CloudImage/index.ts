@@ -1,2 +1,2 @@
-export * from './CloudImage';
+export { default } from './CloudImage';
 export * from './CloudImage.types';

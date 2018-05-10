@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as styled from './CloudImage.styles';
 import { ICloudImageProps } from './CloudImage.types';
 
-export class CloudImage extends React.Component<ICloudImageProps, any> {
+export default class CloudImage extends React.Component<ICloudImageProps, any> {
   public static defaultProps = {
     align: null,
     angle: '0',

@@ -1,15 +1,13 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import * as moment from 'moment';
+import * as React from 'react';
 import styled from 'styled-components';
-import moment from 'moment';
-
-import AddSkillForm from '../Forms/AddSkillForm';
+import { Flex, Page, Row } from '../../theme/grid';
+import { mediaMin } from '../../theme/style-utils';
+import { fonts, palette } from '../../theme/theme';
+import { IAppState } from '../App.types';
 import Button from '../Button';
 import CloudImage from '../CloudImage';
-
-import { Page, Row, Flex } from '../../theme/grid';
-import { palette, fonts } from '../../theme/theme';
-import { mediaMin } from '../../theme/style-utils';
+import AddSkillForm from '../Forms/AddSkillForm';
 
 const SkillsRow = styled(Row)`
   display: flex;
@@ -67,59 +65,35 @@ const HistoryColumn = styled.div`
   border-top: 2px solid ${palette.blue};
 `;
 
-class About extends Component {
-  constructor(props) {
+class About extends React.Component<Partial<IAppState>, {}> {
+  constructor(props: Partial<IAppState>) {
     super(props);
-    this.renderList = this.renderList.bind(this);
-    this.removeSkill = this.removeSkill.bind(this);
-  }
-
-  removeSkill(key) {
-    this.props.removeSkill(key);
-  }
-
-  renderList(category) {
-    return Object.keys(this.props.skills).map((key) => {
-      if (this.props.skills[key].category === category) {
-        return (
-          <li key={key}>
-            {this.props.skills[key].name}
-            {this.props.uid ? (
-              <Button
-                to="#"
-                type="delete"
-                onClick={() => this.removeSkill(key)}
-              />
-            ) : null}
-          </li>
-        );
-      }
-      return null;
-    });
+    this._renderList = this._renderList.bind(this);
+    this._removeSkill = this._removeSkill.bind(this);
   }
 
   public render(): JSX.Element {
-    const { skills, uid, addSkill } = this.props;
+    const { skills, isLoggedIn, addSkill } = this.props;
 
     return (
       <Page title="About">
         <Row>
           <h2>About, Skills and Interests</h2>
-          <SkillsRow child>
+          <SkillsRow child={true}>
             <SkillsColumn>
               <h3>Core</h3>
-              {skills && this.renderList('core')}
+              {skills && this._renderList('core')}
             </SkillsColumn>
             <SkillsColumn>
               <h3>Libraries</h3>
-              {skills && this.renderList('library')}
+              {skills && this._renderList('library')}
             </SkillsColumn>
             <SkillsColumn>
               <h3>Design</h3>
-              {skills && this.renderList('design')}
+              {skills && this._renderList('design')}
             </SkillsColumn>
           </SkillsRow>
-          {uid ? (
+          {isLoggedIn ? (
             <Row child>
               <AddSkillForm addSkill={addSkill} />
             </Row>
@@ -133,7 +107,7 @@ class About extends Component {
               name="My son Xander finger painting with our dog Gizmo in the background."
               align="right"
               width="200"
-              link
+              link={true}
             />
             I'm really passionate about design and making everything I touch on
             the web better. I'm never satisfied with my skillset and am
@@ -252,7 +226,7 @@ class About extends Component {
                 that fit seamlessly into Office and Office 365.
               </p>
               <ul>
-                <li>Adhere to strict design language guidelines.</li>
+                <li>Adhere to strict design language gisLoggedInelines.</li>
                 <li>
                   Develop within a large codebase that is integrated into dozens
                   of official Microsoft and 3rd-party products.
@@ -400,17 +374,41 @@ class About extends Component {
       </Page>
     );
   }
+
+  private _removeSkill(key: string) {
+    this.props.removeSkill!(key);
+  }
+
+  private _renderList(category: string) {
+    return Object.keys(this.props.skills!).map(key => {
+      if (this.props.skills![key].category === category) {
+        return (
+          <li key={key}>
+            {this.props.skills![key].name}
+            {this.props.isLoggedIn ? (
+              <Button
+                to="#"
+                type="delete"
+                onClick={() => this.removeSkill(key)}
+              />
+            ) : null}
+          </li>
+        );
+      }
+      return null;
+    });
+  }
 }
 
-About.propTypes = {
-  uid: PropTypes.string,
-  skills: PropTypes.object.isRequired,
-  addSkill: PropTypes.func.isRequired,
-  removeSkill: PropTypes.func.isRequired
-};
+// About.propTypes = {
+//   isLoggedIn: PropTypes.string,
+//   skills: PropTypes.object.isRequired,
+//   addSkill: PropTypes.func.isRequired,
+//   removeSkill: PropTypes.func.isRequired,
+// };
 
-About.defaultProps = {
-  uid: null
-};
+// About.defaultProps = {
+//   isLoggedIn: null,
+// };
 
 export default About;
