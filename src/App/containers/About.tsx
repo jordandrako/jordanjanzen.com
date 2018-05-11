@@ -3,10 +3,10 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { mediaMin } from '../../styling';
 import { fonts, palette } from '../../styling/theme';
-import { IAppState } from '../App.types';
+import { IAppState, TAddSkill } from '../App.types';
 import Button, { ButtonType } from '../components/Button';
 import CloudImage from '../components/CloudImage';
-import AddSkillForm from '../components/Forms/AddSkillForm';
+import AddSkillForm from '../components/Forms/AddSkillForm/AddSkillForm';
 import { Flex, Page, Row } from './Grid/grid';
 
 const SkillsRow = styled(Row)`
@@ -95,7 +95,7 @@ class About extends React.Component<Partial<IAppState>, {}> {
           </SkillsRow>
           {isLoggedIn ? (
             <Row child={true}>
-              <AddSkillForm addSkill={addSkill} />
+              <AddSkillForm addSkill={addSkill as TAddSkill} />
             </Row>
           ) : null}
         </Row>

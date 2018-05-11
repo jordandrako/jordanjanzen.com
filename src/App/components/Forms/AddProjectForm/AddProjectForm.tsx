@@ -192,7 +192,7 @@ export default class AddProjectForm extends React.Component<
     );
   }
 
-  private _createProject(e: any) {
+  private _createProject(e: any): void {
     e.preventDefault();
     if (
       Object.keys(this.state.images).length === 0 &&
@@ -226,14 +226,14 @@ export default class AddProjectForm extends React.Component<
     });
   }
 
-  private _addImage(image: IImage) {
+  private _addImage(image: IImage): void {
     // const key = image.id;
     const images = [...this.state.images];
     images.push(image);
     this.setState({ images });
   }
 
-  private _removeImage(index: string) {
+  private _removeImage(index: string): void {
     const images = [...this.state.images];
     delete images[index];
     this.setState({ images });
@@ -245,7 +245,7 @@ export default class AddProjectForm extends React.Component<
   //   this.setState({ startDate });
   // }
 
-  private _handleValues(e: any) {
+  private _handleValues(e: any): void {
     const result = [];
     const options = e.target && e.target.options;
 

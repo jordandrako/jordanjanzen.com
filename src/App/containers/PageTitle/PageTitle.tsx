@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { getFileExtension, toTitleCase } from '../../../utilities';
 import Button, { ButtonType } from '../../components/Button';
-import * as styled from './PageTitle.styles';
+import * as Styled from './PageTitle.styles';
 import { IPageTitleProps } from './PageTitle.types';
 
 const PageTitle = (props: IPageTitleProps) => {
@@ -9,7 +9,7 @@ const PageTitle = (props: IPageTitleProps) => {
   const title = [toTitleCase(props.title), ext];
 
   return (
-    <styled.Title>
+    <Styled.Title>
       <ul>
         <li>
           <i className="fa fa-file-code-o file" aria-hidden="true" />
@@ -22,7 +22,7 @@ const PageTitle = (props: IPageTitleProps) => {
           />
         </li>
       </ul>
-    </styled.Title>
+    </Styled.Title>
   );
 };
 

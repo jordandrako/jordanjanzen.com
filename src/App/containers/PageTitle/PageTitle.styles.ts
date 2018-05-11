@@ -1,5 +1,5 @@
 import { darken, lighten } from 'polished';
-import { fonts, mediaMax, palette, styled } from '../../styling';
+import { fonts, mediaMax, palette, styled } from '../../../styling';
 
 export const Title = styled.header`
   background: ${darken(0.05, palette.black)};

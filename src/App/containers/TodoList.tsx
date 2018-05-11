@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import AddTodoForm from '../components/Forms/AddTodoForm';
+import AddTodoForm from '../components/Forms/AddTodoForm/AddTodoForm';
 import Todo from '../components/Todo/Todo';
 
 import { Page, Row } from './Grid/grid';

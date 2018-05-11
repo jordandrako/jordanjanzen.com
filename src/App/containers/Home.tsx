@@ -1,10 +1,10 @@
 import * as moment from 'moment';
 import { adjustHue } from 'polished';
 import * as React from 'react';
-import CloudImage from '../components/CloudImage';
-import Project from '../components/Project/Project';
 import { fonts, mediaMin, semanticColors, styled } from '../../styling';
 import Button from '../components/Button';
+import CloudImage from '../components/CloudImage';
+import Project from '../components/Project/Project';
 import { Hero, Page, Row } from './Grid/grid';
 
 const OuterHero = styled.div`
@@ -151,7 +151,8 @@ class Home extends React.Component<any, {}> {
             <Project
               index={projectKey}
               details={projects[projectKey]}
-              style={{ margin: '0 0 1em', width: '100%' }}
+              // style={{ margin: '0 0 1em', width: '100%' }}
+              updateProject={this.props.updateProject}
             />
           ) : null}
           <Button to="/portfolio/" type="cta">
