@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import StyledForm from '../StyledForm';
-import Button from '../../App/components/Button';
-import { palette } from '../../styling/theme';
+import StyledForm from './StyledForm';
+import Button from '../Button';
+import { palette } from '../../../styling/theme';
 
 class AddTodoForm extends Component {
   public constructor(props: any) {

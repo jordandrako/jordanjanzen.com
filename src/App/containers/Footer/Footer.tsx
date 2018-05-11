@@ -1,9 +1,12 @@
 import * as React from 'react';
 import { Transition } from 'react-transition-group';
-import { LoginButton } from '../../App/components/Button';
-import Navigation from '../Navigation';
-import SocialButton from '../SocialButton';
-import * as styled from './Footer.styles';
+import {
+  LoginButton,
+  SocialButton,
+  SocialSites,
+} from '../../components/Button';
+import Navigation from '../../components/Navigation/Navigation';
+import * as Styled from './Footer.styles';
 import { IFooterProps } from './Footer.types';
 
 interface IFooterState {
@@ -29,11 +32,11 @@ export default class Footer extends React.Component<
     const { overflowOpen } = this.state;
 
     return (
-      <styled.Bottom>
+      <Styled.root>
         <Navigation isLoggedIn={this.props.isLoggedIn} />
         {overflowOpen ? (
           /* tslint:disable-next-line jsx-no-lambda */
-          <styled.ClickOutside onClick={() => this._toggleOverflow()} />
+          <Styled.overlay onClick={() => this._toggleOverflow()} />
         ) : null}
         <Transition
           timeout={200}
@@ -42,16 +45,16 @@ export default class Footer extends React.Component<
           unmountOnExit={true}
         >
           {(status: string) => (
-            <styled.OverflowMenu className={status}>
+            <Styled.overflowMenu className={status}>
               <ul>
                 <li>
-                  <SocialButton social="github" wide={true} />
+                  <SocialButton social={SocialSites.github} wide={true} />
                 </li>
                 <li>
-                  <SocialButton social="twitter" wide={true} />
+                  <SocialButton social={SocialSites.twitter} wide={true} />
                 </li>
                 <li>
-                  <SocialButton social="linkedin" wide={true} />
+                  <SocialButton social={SocialSites.linkedin} wide={true} />
                 </li>
                 <li>
                   <LoginButton
@@ -61,18 +64,18 @@ export default class Footer extends React.Component<
                   />
                 </li>
               </ul>
-            </styled.OverflowMenu>
+            </Styled.overflowMenu>
           )}
         </Transition>
         {this.props.isMobile ? (
           /* tslint:disable-next-line jsx-no-lambda */
-          <styled.OverflowButton onClick={() => this._toggleOverflow()}>
+          <Styled.overflowButton onClick={() => this._toggleOverflow()}>
             <span />
             <span />
             <span />
-          </styled.OverflowButton>
+          </Styled.overflowButton>
         ) : null}
-      </styled.Bottom>
+      </Styled.root>
     );
   }
 

@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-
-import { palette, fonts } from '../styling/theme';
-import { Row } from '../App/containers/grid';
+import { fonts, palette } from '../../../styling';
+import { Row } from '../../containers/Grid/grid';
 
 const StyledForm = styled(Row)`
   display: flex;

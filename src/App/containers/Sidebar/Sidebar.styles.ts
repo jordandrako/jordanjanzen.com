@@ -6,7 +6,7 @@ import {
   palette,
   semanticColors,
   styled,
-} from '../../styling/index';
+} from '../../../styling/index';
 
 export const LeftColumn = styled.aside`
   background: ${palette.black};

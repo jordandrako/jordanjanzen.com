@@ -2,10 +2,10 @@ import * as moment from 'moment';
 import { adjustHue } from 'polished';
 import * as React from 'react';
 import CloudImage from '../components/CloudImage';
-import Project from '../../components/Project';
+import Project from '../components/Project/Project';
 import { fonts, mediaMin, semanticColors, styled } from '../../styling';
 import Button from '../components/Button';
-import { Hero, Page, Row } from './grid';
+import { Hero, Page, Row } from './Grid/grid';
 
 const OuterHero = styled.div`
   width: 100%;

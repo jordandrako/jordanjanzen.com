@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import StyledForm from '../StyledForm';
-import Button from '../../App/components/Button';
+import StyledForm from './StyledForm';
+import Button from '../Button';
 import Dropzone from './FormUtilities/Dropzone';
 
-import { palette } from '../../styling/theme';
-import { Row } from '../../App/containers/grid';
+import { palette } from '../../../styling/theme';
+import { Row } from '../../containers/Grid/grid';
 
-import { truncate } from '../../helpers';
+import { truncate } from '../../../helpers';
 
 const UploadedImageList = styled.ul`
   list-style: none;

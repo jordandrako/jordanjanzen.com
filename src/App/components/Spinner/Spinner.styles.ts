@@ -1,12 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
+import { palette, styled } from '../../../styling';
 
-import Button from '../App/components/Button';
-
-import codeLoader from '../images/codeLoader.svg';
-import { palette } from '../styling/theme';
-
-const Loader = styled.div`
+export const loader = styled.div`
   border: 3px solid ${palette.black};
   border-top: 0;
   padding: 0 1.2em;
@@ -16,7 +10,7 @@ const Loader = styled.div`
   background: ${palette.lightwhite};
 `;
 
-const Frame = styled.div`
+export const frame = styled.div`
   background: ${palette.black};
   width: 100%;
   height: 28px;
@@ -35,7 +29,7 @@ const Frame = styled.div`
   }
 `;
 
-const Scrollbar = styled.div`
+export const scrollbar = styled.div`
   position: absolute;
   right: 0;
   top: 0;
@@ -55,17 +49,3 @@ const Scrollbar = styled.div`
     background: rgba(0, 0, 0, 0.2);
   }
 `;
-
-const StyledLoader = () => (
-  <Loader>
-    <Frame>
-      <Button to="#" type="delete" />
-    </Frame>
-    <object type="image/svg+xml" data={codeLoader}>
-      loading...
-    </object>
-    <Scrollbar />
-  </Loader>
-);
-
-export default StyledLoader;

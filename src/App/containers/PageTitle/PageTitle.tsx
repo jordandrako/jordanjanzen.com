@@ -16,7 +16,7 @@ const PageTitle = (props: IPageTitleProps) => {
           <h1>{title}</h1>
           <Button
             to="/"
-            buttonType={ButtonType.delete}
+            buttonType={ButtonType.Delete}
             aria-hidden="true"
             style={{ margin: 0 }}
           />

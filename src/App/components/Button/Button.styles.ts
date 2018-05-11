@@ -14,16 +14,16 @@ const buttonBackground = (props: IButtonStyleProps) => {
   let color = semanticColors.buttonColor;
 
   switch (props.buttonType) {
-    case type.success || type.submit:
+    case type.Success || type.Submit:
       color = palette.green;
       break;
-    case type.warn:
+    case type.Warn:
       color = palette.red;
       break;
-    case type.login:
+    case type.Login:
       color = palette.lightblack;
       break;
-    case type.cta:
+    case type.Cta:
       color = palette.blue;
     default:
       break;
@@ -33,7 +33,7 @@ const buttonBackground = (props: IButtonStyleProps) => {
 };
 
 const borderRadius = (props: IButtonStyleProps) => {
-  if (props.circle || props.buttonType === type.delete || props.del) {
+  if (props.circle || props.buttonType === type.Delete || props.del) {
     return '100%';
   }
   if (props.pill) {
@@ -49,7 +49,7 @@ export const BaseButton = styled.button`
     !!props.arrows ? '0.25em 0.8em 0.25em 1.5em' : '.5em .8em'};
   position: relative;
   color: ${(props: IButtonStyleProps) => {
-    if (props.buttonType === type.cta) {
+    if (props.buttonType === type.Cta) {
       return palette.lightwhite;
     }
     if (props.color) {
@@ -63,7 +63,7 @@ export const BaseButton = styled.button`
   justify-content: space-around;
 
   opacity: ${(props: IButtonStyleProps) =>
-    props.buttonType === type.secondary ? 0.75 : 1};
+    props.buttonType === type.Secondary ? 0.75 : 1};
   transform: translateY(0);
 
   width: ${(props: IButtonStyleProps) => (props.wide ? '100%' : 'auto')};
@@ -146,13 +146,13 @@ export const DeleteButton = styled.button`
   }
 `;
 
-export const AnchorButton = styled.a`
+export const anchorWrapper = styled.a`
   border-bottom: 0;
   line-height: 1;
   text-shadow: none;
 `;
 
-export const LinkButton = styled(Link)`
+export const linkWrapper = styled(Link)`
   border-bottom: 0;
   line-height: 1;
   text-shadow: none;

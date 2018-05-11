@@ -5,7 +5,7 @@ import sha1 from 'sha1';
 import superagent from 'superagent';
 import styled from 'styled-components';
 
-import { semanticColors, fonts } from '../../../styling/theme';
+import { semanticColors, fonts } from '../../../../styling/theme';
 
 const Zone = styled(Dropzone)`
   height: 100px;

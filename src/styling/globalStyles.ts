@@ -1,7 +1,7 @@
 import { injectGlobal } from 'styled-components';
 import styledNormalize from 'styled-normalize';
 
-// import FiraCode from "./fonts/FiraCode-Regular.ttf";
+import FiraCode from './fonts/FiraCode-Regular.ttf';
 import { mediaMax } from './style-utils';
 import { getTheme, loadTheme } from './theme';
 import { IPartialTheme } from './theme.types';
@@ -18,7 +18,7 @@ export const globalStyles = (theme: IPartialTheme) => {
 
     @font-face {
       font-family: "FiraCode";
-      src: url(./fonts/FiraCode-Regular.ttf);
+      src: url(${FiraCode});
       font-weight: normal;
       font-style: normal;
       font-feature-settings: "calt" 1;

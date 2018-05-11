@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as styled from './Button.styles';
+import * as Styled from './Button.styles';
 import {
   ButtonType as bType,
   IButtonProps,
@@ -34,19 +34,19 @@ export default class Button extends React.Component<IButtonProps, {}> {
       wide: this.props.wide,
     };
 
-    if (this.props.buttonType === bType.delete) {
+    if (this.props.buttonType === bType.Delete) {
       if (this.props.to) {
         return (
-          <styled.LinkButton to={this.props.to} innerRef={this._button}>
-            <styled.DeleteButton
+          <Styled.linkWrapper to={this.props.to} innerRef={this._button}>
+            <Styled.DeleteButton
               {...styleProps}
               className="fa fa-times-circle close"
             />
-          </styled.LinkButton>
+          </Styled.linkWrapper>
         );
       }
       return (
-        <styled.DeleteButton
+        <Styled.DeleteButton
           {...styleProps}
           className="fa fa-times-circle close"
           innerRef={this._button}
@@ -56,7 +56,7 @@ export default class Button extends React.Component<IButtonProps, {}> {
 
     if (this.props.href) {
       return (
-        <styled.AnchorButton
+        <Styled.anchorWrapper
           href={this.props.href}
           target={this.props.target}
           rel={
@@ -66,30 +66,30 @@ export default class Button extends React.Component<IButtonProps, {}> {
           }
           innerRef={this._button}
         >
-          <styled.BaseButton {...styleProps}>
+          <Styled.BaseButton {...styleProps}>
             {this.props.text || this.props.children || 'Button'}
-          </styled.BaseButton>
-        </styled.AnchorButton>
+          </Styled.BaseButton>
+        </Styled.anchorWrapper>
       );
     }
 
     if (this.props.to) {
       return (
-        <styled.LinkButton to={this.props.to}>
-          <styled.BaseButton {...styleProps}>
+        <Styled.linkWrapper to={this.props.to}>
+          <Styled.BaseButton {...styleProps}>
             {this.props.text || this.props.children || 'Button'}
-          </styled.BaseButton>
-        </styled.LinkButton>
+          </Styled.BaseButton>
+        </Styled.linkWrapper>
       );
     }
 
     return (
-      <styled.BaseButton
+      <Styled.BaseButton
         {...styleProps}
         type={this.props.type ? this.props.type : undefined}
       >
         {this.props.text || this.props.children || 'Button'}
-      </styled.BaseButton>
+      </Styled.BaseButton>
     );
   }
 }

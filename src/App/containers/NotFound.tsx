@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Banner, { BannerType } from '../components/Banner';
 import { SocialButton, SocialSites } from '../components/Button';
-import { Page, Row } from './grid';
+import { Page, Row } from './Grid/grid';
 
 const NotFound = () => (
   <Page title="404">

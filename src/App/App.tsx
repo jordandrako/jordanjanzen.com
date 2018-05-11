@@ -6,13 +6,13 @@ import {
   IAppState,
   ILocalStorage,
   IObject,
-  IProject,
-  ISkill,
-  ITodo,
+  IProjectObject,
+  ISkillObject,
+  ITodoObject,
 } from './App.types';
 import AppRouter from './AppRouter';
-import Footer from '../components/Footer';
-import Sidebar from '../components/Sidebar';
+import Footer from './containers/Footer';
+import Sidebar from './containers/Sidebar';
 
 const appTheme = loadTheme({});
 const { palette } = appTheme;
@@ -250,14 +250,14 @@ export default class App extends React.Component<{}, IAppState> {
   }
 
   // update our state
-  private _addTodo(todo: ITodo): void {
+  private _addTodo(todo: ITodoObject): void {
     const todos = { ...this.state.todos };
     const timestamp = Date.now();
     todos[`todo-${timestamp}`] = { ...todo };
     this.setState({ todos }); // same as this.setState({ todos: todos })
   }
 
-  private _updateTodo(key: string, updatedProp: ITodo): void {
+  private _updateTodo(key: string, updatedProp: ITodoObject): void {
     const todos = { ...this.state.todos };
     const todo = todos[key];
     const updatedTodo = {
@@ -277,7 +277,7 @@ export default class App extends React.Component<{}, IAppState> {
     this.setState({ todos });
   }
 
-  private _addProject(project: IProject): void {
+  private _addProject(project: IProjectObject): void {
     const projects = { ...this.state.projects };
     const timestamp = Date.now();
     projects[`project-${timestamp}`] = project;
@@ -285,7 +285,7 @@ export default class App extends React.Component<{}, IAppState> {
     this.setState({ projects });
   }
 
-  private _updateProject(key: string, updatedProject: IProject): void {
+  private _updateProject(key: string, updatedProject: IProjectObject): void {
     const projects = { ...this.state.projects };
     projects[key] = updatedProject;
     this.setState({
@@ -300,14 +300,14 @@ export default class App extends React.Component<{}, IAppState> {
     this.setState({ projects });
   }
 
-  private _addSkill(skill: ISkill): void {
+  private _addSkill(skill: ISkillObject): void {
     const skills = { ...this.state.skills };
     const name = slugify(skill.name);
     skills[`skill-${name}`] = skill;
     this.setState({ skills });
   }
 
-  private _updateSkill(key: string, updatedSkill: ISkill): void {
+  private _updateSkill(key: string, updatedSkill: ISkillObject): void {
     const skills = { ...this.state.skills };
     skills[key] = updatedSkill;
     this.setState({

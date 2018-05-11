@@ -1,13 +1,13 @@
 import * as moment from 'moment';
 import * as React from 'react';
 import styled from 'styled-components';
-import CloudImage from '../components/CloudImage';
-import AddSkillForm from '../../components/Forms/AddSkillForm';
-import { mediaMin } from '../../styling/style-utils';
+import { mediaMin } from '../../styling';
 import { fonts, palette } from '../../styling/theme';
 import { IAppState } from '../App.types';
-import Button from '../components/Button';
-import { Flex, Page, Row } from './grid';
+import Button, { ButtonType } from '../components/Button';
+import CloudImage from '../components/CloudImage';
+import AddSkillForm from '../components/Forms/AddSkillForm';
+import { Flex, Page, Row } from './Grid/grid';
 
 const SkillsRow = styled(Row)`
   display: flex;
@@ -94,7 +94,7 @@ class About extends React.Component<Partial<IAppState>, {}> {
             </SkillsColumn>
           </SkillsRow>
           {isLoggedIn ? (
-            <Row child>
+            <Row child={true}>
               <AddSkillForm addSkill={addSkill} />
             </Row>
           ) : null}
@@ -375,40 +375,30 @@ class About extends React.Component<Partial<IAppState>, {}> {
     );
   }
 
-  private _removeSkill(key: string) {
+  private _removeSkill(key: string): void {
     this.props.removeSkill!(key);
   }
 
-  private _renderList(category: string) {
+  private _renderList(category: string): JSX.Element | JSX.Element[] {
     return Object.keys(this.props.skills!).map(key => {
       if (this.props.skills![key].category === category) {
         return (
           <li key={key}>
             {this.props.skills![key].name}
-            {this.props.isLoggedIn ? (
+            {this.props.isLoggedIn && (
               <Button
                 to="#"
-                type="delete"
-                onClick={() => this.removeSkill(key)}
+                buttonType={ButtonType.Delete}
+                /* tslint:disable-next-line jsx-no-lambda */
+                onClick={() => this._removeSkill(key)}
               />
-            ) : null}
+            )}
           </li>
         );
       }
-      return null;
+      return <li key={0}>No Skills in this category. Log in and add some.</li>;
     });
   }
 }
-
-// About.propTypes = {
-//   isLoggedIn: PropTypes.string,
-//   skills: PropTypes.object.isRequired,
-//   addSkill: PropTypes.func.isRequired,
-//   removeSkill: PropTypes.func.isRequired,
-// };
-
-// About.defaultProps = {
-//   isLoggedIn: null,
-// };
 
 export default About;

@@ -1,9 +1,9 @@
 import * as React from 'react';
 import DocumentTitle from 'react-document-title';
-import Banner, { BannerAction, BannerType } from '../components/Banner';
-import StyledLoader from '../../components/StyledLoader';
 import { styled } from '../../styling';
-import { Main, MainContainer, Row } from './grid';
+import Banner, { BannerAction, BannerType } from '../components/Banner';
+import StyledLoader from '../components/Spinner/Spinner';
+import { Main, MainContainer, Row } from './Grid/grid';
 import PageTitle from './PageTitle';
 
 const Load = styled(Main)`

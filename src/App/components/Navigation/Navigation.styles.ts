@@ -1,13 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
-import styled from 'styled-components';
 import { darken } from 'polished';
+import { NavLink } from 'react-router-dom';
+import { fonts, mediaMax, mediaMin, palette, styled } from '../../../styling';
 
-import { palette, fonts } from '../styling/theme';
-import { mediaMax, mediaMin } from '../styling/style-utils';
-
-const NavList = styled.ul`
+export const navList = styled.ul`
   list-style: none;
   padding: 0;
   margin: 0;
@@ -28,7 +23,7 @@ const NavList = styled.ul`
   }
 `;
 
-const Link = styled(NavLink) `
+export const link = styled(NavLink)`
   display: block;
   color: ${palette.white};
   font-family: Roboto, ${fonts.monospace};
@@ -108,46 +103,3 @@ const Link = styled(NavLink) `
     }
   `};
 `;
-
-const Navigation = (props) => (
-  <nav>
-    <NavList>
-      <li>
-        <Link exact to="/">
-          <i className="fa fa-usd" aria-hidden="true" />
-          <span>Home</span>
-        </Link>
-      </li>
-      <li>
-        <Link to="/about">
-          <i className="fa fa-info" aria-hidden="true" />
-          <span>About</span>
-        </Link>
-      </li>
-      <li>
-        <Link to="/portfolio">
-          <i className="fa fa-code" aria-hidden="true" />
-          <span>Portfolio</span>
-        </Link>
-      </li>
-      {props.uid ? (
-        <li>
-          <Link to="/todo">
-            <i className="fa fa-check-square-o" aria-hidden="true" />
-            <span>Todo</span>
-          </Link>
-        </li>
-      ) : null}
-    </NavList>
-  </nav>
-);
-
-Navigation.propTypes = {
-  uid: PropTypes.string,
-};
-
-Navigation.defaultProps = {
-  uid: null,
-};
-
-export default Navigation;

@@ -1,10 +1,8 @@
 import { darken } from 'polished';
+import { palette, styled } from '../../../styling';
+import { mediaMax, mediaMin } from '../../../styling/style-utils';
 
-import { mediaMax, mediaMin } from '../../styling/style-utils';
-import styled from '../../styling/styled-components';
-import { palette } from '../../styling/theme';
-
-export const Bottom = styled.footer`
+export const root = styled.footer`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -21,7 +19,7 @@ export const Bottom = styled.footer`
   `};
 `;
 
-export const OverflowButton = styled.button`
+export const overflowButton = styled.button`
   position: absolute;
   bottom: 0;
   right: 0;
@@ -44,7 +42,7 @@ export const OverflowButton = styled.button`
   }
 `;
 
-export const ClickOutside = styled.div`
+export const overlay = styled.div`
   display: none;
 
   ${mediaMax.tablet`
@@ -59,7 +57,7 @@ export const ClickOutside = styled.div`
   `};
 `;
 
-export const OverflowMenu = styled.div`
+export const overflowMenu = styled.div`
   background: ${palette.black};
   position: absolute;
   bottom: 54px;

@@ -1,4 +1,4 @@
-import { TChildren } from '../App.types';
+import { TChildren } from '../../App.types';
 
 export interface IRow {
   full?: boolean;

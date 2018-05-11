@@ -1,8 +1,8 @@
 import * as React from 'react';
 import DocumentTitle from 'react-document-title';
-import { mediaMax, semanticColors, styled } from '../../styling';
+import { mediaMax, semanticColors, styled } from '../../../styling';
+import PageTitle from '../PageTitle';
 import { IFlex, IPageProps, IRow } from './grid.types';
-import PageTitle from './PageTitle';
 
 export const MainContainer = styled.main`
   flex: 4;

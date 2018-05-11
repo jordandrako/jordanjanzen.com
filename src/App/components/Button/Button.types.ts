@@ -44,15 +44,15 @@ export interface IButtonStyleProps {
 }
 
 export enum ButtonType {
-  primary,
-  secondary,
-  cta,
-  login,
-  success,
-  warn,
-  danger,
-  delete,
-  submit,
+  Cta,
+  Danger,
+  Delete,
+  Login,
+  Primary,
+  Secondary,
+  Submit,
+  Success,
+  Warn,
 }
 
 export enum SocialSites {
