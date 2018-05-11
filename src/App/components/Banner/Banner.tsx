@@ -71,16 +71,15 @@ export default class Banner extends React.Component<IBannerProps, IBannerState>
     }
   };
 
-  private _actionButton = () => {
+  private _actionButton = (): JSX.Element | undefined => {
     const { action, actionText } = this.props;
-    if (action) {
-      return (
-        <Styled.actionButton
-          text={actionText || 'Action'}
-          onClick={this._bannerAction}
-        />
-      );
-    }
-    return undefined;
+    return action ? (
+      <Styled.actionButton
+        text={actionText || 'Action'}
+        onClick={this._bannerAction}
+      />
+    ) : (
+      undefined
+    );
   };
 }

@@ -12,7 +12,6 @@ export interface IButtonProps {
   circle?: boolean;
   className?: string;
   color?: string;
-  componentRef?: (component: IButton | null) => void;
   del?: boolean;
   href?: string;
   large?: boolean;

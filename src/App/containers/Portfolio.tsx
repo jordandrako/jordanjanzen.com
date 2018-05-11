@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Route } from 'react-router-dom';
 
-import AddProjectForm from '../components/Forms/AddProjectForm';
+import AddProjectForm from '../components/Forms/AddProjectForm/AddProjectForm';
 import Project from '../components/Project/Project';
 import ProjectSingle from '../components/Project/ProjectSingle/ProjectSingle';
 

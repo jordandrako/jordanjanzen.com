@@ -4,19 +4,34 @@ import { ICloudImageProps } from './CloudImage.types';
 
 export default class CloudImage extends React.Component<ICloudImageProps, {}> {
   public render(): JSX.Element {
+    const { align = null, border = true, children = null, name } = this.props;
+
+    if (children) {
+      return this._renderContainerImage();
+    }
+
+    return (
+      <Styled.image
+        src={this._getURL()}
+        alt={name}
+        border={border}
+        align={align}
+        onClick={this._handleClick}
+        className={this.props.className}
+      />
+    );
+  }
+
+  private _getURL = (): string => {
     const {
-      align = null,
       angle = 0,
       background = null,
       bo = null,
-      border = true,
-      children = null,
       crop = 'limit',
       effects = null,
       format = 'jpg',
       gravity = 'center',
       height = 'ih',
-      name,
       opacity = '100',
       publicId,
       radius = '0',
@@ -29,31 +44,21 @@ export default class CloudImage extends React.Component<ICloudImageProps, {}> {
       effects ? `${effects}/` : ''
     }${publicId}.${format}`;
 
-    if (children) {
-      return (
-        <Styled.imageContainer
-          background={url}
-          dim={this.props.dim}
-          border={this.props.border}
-          className={`cloud-image ${this.props.className}`}
-        >
-          {children}
-        </Styled.imageContainer>
-      );
-    }
-    return (
-      <Styled.image
-        src={url}
-        alt={name}
-        border={border}
-        align={align}
-        onClick={this._handleClick}
-        className={this.props.className}
-      />
-    );
-  }
+    return url;
+  };
 
-  private _handleClick = () => {
+  private _renderContainerImage = (): JSX.Element => (
+    <Styled.imageContainer
+      background={this._getURL()}
+      dim={this.props.dim}
+      border={this.props.border}
+      className={`cloud-image ${this.props.className}`}
+    >
+      {this.props.children}
+    </Styled.imageContainer>
+  );
+
+  private _handleClick = (ev: any) => {
     this.props.link &&
       window.open(
         `https://res.cloudinary.com/jordan-janzen/image/upload/${

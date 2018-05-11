@@ -1,7 +1,7 @@
 import styled from '../../../styling/styled-components';
 import { fonts, palette } from '../../../styling/theme';
-import { BannerType, IBannerStyleProps } from './Banner.types';
 import Button from '../Button';
+import { BannerType, IBannerStyleProps } from './Banner.types';
 
 export const root = styled.div`
   background: ${(props: IBannerStyleProps) => {

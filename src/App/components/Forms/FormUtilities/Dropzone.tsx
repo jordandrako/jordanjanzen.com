@@ -1,39 +1,30 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import Dropzone from 'react-dropzone';
-import sha1 from 'sha1';
-import superagent from 'superagent';
-import styled from 'styled-components';
-
-import { semanticColors, fonts } from '../../../../styling/theme';
-
-const Zone = styled(Dropzone)`
-  height: 100px;
-  border: 3px dashed ${semanticColors.textColor};
-  margin-bottom: 1em;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-
-  &:before {
-    content: 'Upload Files Here';
-    font-family: ${fonts.monospace};
-    font-weight: 700;
-    color: ${semanticColors.textColor};
-    opacity: 0.7;
-  }
-`;
-
-class ImageDropzone extends Component {
-  constructor(props) {
+import * as React from 'react';
+import * as superagent from 'superagent';
+import * as Styled from './Dropzone.styles';
+import { IDropzoneProps } from './Dropzone.types';
+const sha1 = require('sha1'); // tslint:disable-line no-var-requires
+class ImageDropzone extends React.Component<IDropzoneProps, {}> {
+  public constructor(props: IDropzoneProps) {
     super(props);
-    this.uploadFile = this.uploadFile.bind(this);
+    this._uploadFile = this._uploadFile.bind(this);
   }
 
-  uploadFile(files) {
+  public render(): JSX.Element {
+    return (
+      <div>
+        <h4>Upload Images</h4>
+        <Styled.zone onDrop={this._uploadFile} accept={this.props.accept} />
+        <h4>Uploaded Images</h4>
+      </div>
+    );
+  }
+
+  private _uploadFile(files: any[]) {
     const { cloudinary } = this.props;
-    console.log(files);
+    if (!cloudinary) {
+      throw () => 'Not logged in.';
+    }
+
     const file = files[0];
 
     const cloudName = 'jordan-janzen';
@@ -42,69 +33,45 @@ class ImageDropzone extends Component {
     const timestamp = Date.now() / 1000;
     const uploadPreset = 'gmyz0it7';
 
-    const paramsStr = `timestamp=${timestamp}&upload_preset=${uploadPreset}${cloudinary.secret}`;
+    const paramsStr = `timestamp=${timestamp}&upload_preset=${uploadPreset}${
+      cloudinary.secret
+    }`;
     const signature = sha1(paramsStr);
 
+    // tslint:disable
+    // Disable tslint since the Cloudinary API requires these in a specific order.
     const params = {
       api_key: cloudinary.key,
       upload_preset: uploadPreset,
       signature,
-      timestamp
+      timestamp,
     };
+    // tslint:enable
 
     const uploadRequest = superagent.post(url);
     uploadRequest.attach('file', file);
 
-    Object.keys(params).forEach((key) => {
+    Object.keys(params).forEach(key => {
       uploadRequest.field(key, params[key]);
     });
 
-    console.log(uploadRequest.resp);
-
     uploadRequest.end((err, resp) => {
       if (err) {
-        console.error(err);
-        return;
+        throw err;
       }
 
       const uploaded = resp.body;
-      console.log(resp.body);
+
       const image = {
+        format: uploaded.format,
         id: uploaded.public_id,
         name: uploaded.original_filename,
         url: uploaded.secure_url,
-        format: uploaded.format
       };
 
       this.props.addImage(image);
     });
   }
-
-  public render(): JSX.Element {
-    return (
-      <div>
-        <h4>Upload Images</h4>
-        <Zone onDrop={this.uploadFile} accept={this.props.accept} />
-        <h4>Uploaded Images</h4>
-      </div>
-    );
-  }
 }
-
-ImageDropzone.propTypes = {
-  addImage: PropTypes.func.isRequired,
-  accept: PropTypes.string.isRequired,
-  cloudinary: PropTypes.shape({
-    key: PropTypes.string,
-    secret: PropTypes.string
-  })
-};
-
-ImageDropzone.defaultProps = {
-  cloudinary: {
-    key: undefined,
-    secrect: undefined
-  }
-};
 
 export default ImageDropzone;
