@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import AddTodoForm from '../Forms/AddTodoForm';
-import Todo from '../Todo';
+import AddTodoForm from '../../components/Forms/AddTodoForm';
+import Todo from '../../components/Todo';
 
-import { Page, Row } from '../../styling/grid';
+import { Page, Row } from './grid';
 
 const ListOfTodos = styled.ul`
   list-style-type: none;

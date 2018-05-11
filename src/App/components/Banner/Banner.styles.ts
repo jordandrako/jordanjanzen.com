@@ -1,15 +1,18 @@
-import styled from '../../styling/styled-components';
-import { fonts, palette } from '../../styling/theme';
-import { IBannerStyleProps } from './Banner.types';
+import styled from '../../../styling/styled-components';
+import { fonts, palette } from '../../../styling/theme';
+import { BannerType, IBannerStyleProps } from './Banner.types';
+import Button from '../Button';
 
-export const Alert = styled.div`
+export const root = styled.div`
   background: ${(props: IBannerStyleProps) => {
     const type = props.type;
-    if (type === 'alert') {
+    if (type === BannerType.Alert) {
       return palette.lightyellow;
-    } else if (type === 'success') {
+    }
+    if (type === BannerType.Success) {
       return palette.green;
-    } else if (type === 'error') {
+    }
+    if (type === BannerType.Danger) {
       return palette.red;
     }
     return palette.lightblack;
@@ -85,3 +88,34 @@ export const Alert = styled.div`
     }
   }
 `;
+
+export const showHide = styled.button`
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  width: 1.5em;
+  height: 1.5em;
+  padding: 0;
+  border: 2px solid ${palette.black};
+  border-radius: 50%;
+  background: transparent;
+
+  span {
+    display: block;
+    position: absolute;
+    width: 80%;
+    height: 3px;
+    background: ${palette.black};
+    transition: all 0.1s ease-in-out;
+    transform-origin: 50% 50%;
+    left: 10%;
+    top: 50%;
+    margin-top: -1.5px;
+  }
+
+  .closed & .vertical {
+    transform: rotate(90deg);
+  }
+`;
+
+export const actionButton = styled(Button)``;

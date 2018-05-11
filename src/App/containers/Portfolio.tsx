@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Route } from 'react-router-dom';
 
-import AddProjectForm from '../Forms/AddProjectForm';
-import Project from '../Project';
-import ProjectSingle from '../ProjectSingle';
+import AddProjectForm from '../../components/Forms/AddProjectForm';
+import Project from '../../components/Project';
+import ProjectSingle from '../../components/ProjectSingle';
 
-import { Page, Row } from '../../styling/grid';
+import { Page, Row } from './grid';
 
 const ListOfProjects = styled.ul`
   list-style-type: none;

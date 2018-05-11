@@ -1,16 +1,15 @@
 import * as React from 'react';
 import DocumentTitle from 'react-document-title';
-import PageTitle from '../components/PageTitle';
+import { mediaMax, semanticColors, styled } from '../../styling';
 import { IFlex, IPageProps, IRow } from './grid.types';
-import { mediaMax } from './style-utils';
-import styled from './styled-components';
-import { semanticColors } from './theme';
+import PageTitle from './PageTitle';
 
 export const MainContainer = styled.main`
   flex: 4;
   height: 100%;
   display: flex;
   flex-direction: column;
+
   overflow-y: hidden;
   ${mediaMax.tablet`
     overflow-y: auto;
@@ -95,7 +94,7 @@ export const Page = (props: IPageProps) => {
   return (
     <DocumentTitle title={docTitle}>
       <MainContainer>
-        <PageTitle title={props.title} ext={props.ext} />
+        <PageTitle title={docTitle} ext={props.ext} />
         <Main>{props.children}</Main>
       </MainContainer>
     </DocumentTitle>

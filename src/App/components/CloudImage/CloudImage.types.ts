@@ -1,12 +1,14 @@
+import { TChildren } from '../../App.types';
+
 export interface ICloudImage {}
 
 export interface ICloudImageProps {
   align?: string | null;
   angle?: string;
   background?: string | null;
-  bo: string | null;
+  bo?: string | null;
   border?: boolean;
-  children?: React.ReactChildren | null;
+  children?: TChildren | null;
   className?: string;
   crop?:
     | 'scale'

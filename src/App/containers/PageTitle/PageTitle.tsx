@@ -1,12 +1,11 @@
 import * as React from 'react';
-import { getFileExtension, toTitleCase } from '../../helpers';
-import Button, { ButtonType } from '../Button';
+import { getFileExtension, toTitleCase } from '../../../utilities';
+import Button, { ButtonType } from '../../components/Button';
 import * as styled from './PageTitle.styles';
 import { IPageTitleProps } from './PageTitle.types';
 
-const fileExtention = getFileExtension();
 const PageTitle = (props: IPageTitleProps) => {
-  const ext = props.ext === true && fileExtention;
+  const ext = props.ext && getFileExtension();
   const title = [toTitleCase(props.title), ext];
 
   return (

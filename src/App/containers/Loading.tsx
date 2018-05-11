@@ -1,22 +1,23 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import DocumentTitle from 'react-document-title';
-import styled from 'styled-components';
-
-import PageTitle from '../PageTitle';
-import Banner from '../Banner';
-import StyledLoader from '../StyledLoader';
-
-import { MainContainer, Main, Row } from '../../styling/grid';
+import Banner, { BannerAction, BannerType } from '../components/Banner';
+import StyledLoader from '../../components/StyledLoader';
+import { styled } from '../../styling';
+import { Main, MainContainer, Row } from './grid';
+import PageTitle from './PageTitle';
 
 const Load = styled(Main)`
   align-items: center;
   justify-content: center;
 `;
 
-const Loading = ({ isLoading }) => {
+interface ILoadingProps {
+  isLoading: boolean;
+}
+
+const Loading = (props: ILoadingProps) => {
   // Handle the loading state
-  if (isLoading) {
+  if (props.isLoading) {
     return (
       <DocumentTitle title="Loading...">
         <MainContainer>
@@ -35,7 +36,7 @@ const Loading = ({ isLoading }) => {
         <PageTitle title="😥 Sorry" ext={false} />
         <Main>
           <Row>
-            <Banner type="error" action="reload">
+            <Banner type={BannerType.Danger} action={BannerAction.Reload}>
               There seems to have been a problem loading this page...
             </Banner>
           </Row>
@@ -43,10 +44,6 @@ const Loading = ({ isLoading }) => {
       </MainContainer>
     </DocumentTitle>
   );
-};
-
-Loading.propTypes = {
-  isLoading: PropTypes.bool.isRequired,
 };
 
 export default Loading;

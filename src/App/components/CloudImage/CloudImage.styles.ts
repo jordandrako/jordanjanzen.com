@@ -1,9 +1,9 @@
 import { adjustHue, transparentize } from 'polished';
 import styled from 'styled-components';
-import { palette } from '../../styling/theme';
+import { palette } from '../../../styling/theme';
 import { ICloudImageStyleProps } from './CloudImage.types';
 
-export const Image = styled.div`
+export const imageContainer = styled.div`
   background: ${(props: ICloudImageStyleProps) =>
     props.dim
       ? `linear-gradient(135deg,
@@ -24,7 +24,7 @@ export const Image = styled.div`
   }};
 `;
 
-export const Img = styled.img`
+export const image = styled.img`
   border: ${(props: ICloudImageStyleProps) =>
     props.border ? `3px solid ${palette.black}` : 'none'};
   border-radius: ${props => {

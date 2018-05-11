@@ -11,8 +11,8 @@ import {
   ITodo,
 } from './App.types';
 import AppRouter from './AppRouter';
-import Footer from './Footer';
-import Sidebar from './Sidebar';
+import Footer from '../components/Footer';
+import Sidebar from '../components/Sidebar';
 
 const appTheme = loadTheme({});
 const { palette } = appTheme;

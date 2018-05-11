@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ISocialButton, SocialSites } from '../../Button';
 import * as Styled from './SocialButton.styles';
 
-const SocialButton = (props: ISocialButton) => {
+export const SocialButton = (props: ISocialButton) => {
   const social = props.social;
   let link;
   let text;
@@ -56,5 +56,3 @@ const SocialButton = (props: ISocialButton) => {
     </Styled.root>
   );
 };
-
-export default SocialButton;

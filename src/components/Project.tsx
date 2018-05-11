@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { adjustHue } from 'polished';
 
-import CloudImage from './CloudImage';
-import Button from './Button';
+import CloudImage from '../App/components/CloudImage';
+import Button from '../App/components/Button';
 // import Observer from './Observer';
 
 import { toTitleCase } from '../helpers';

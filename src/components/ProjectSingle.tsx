@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import CloudImage from './CloudImage';
-import Button from './Button';
+import CloudImage from '../App/components/CloudImage';
+import Button from '../App/components/Button';
 
-import { Row } from '../styling/grid';
+import { Row } from '../App/containers/grid';
 import { palette, semanticColors, fonts } from '../styling/theme';
 import { mediaMax } from '../styling/style-utils';
 

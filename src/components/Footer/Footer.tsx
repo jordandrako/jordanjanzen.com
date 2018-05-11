@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Transition } from 'react-transition-group';
-import { LoginButton } from '../Button';
+import { LoginButton } from '../../App/components/Button';
 import Navigation from '../Navigation';
 import SocialButton from '../SocialButton';
 import * as styled from './Footer.styles';

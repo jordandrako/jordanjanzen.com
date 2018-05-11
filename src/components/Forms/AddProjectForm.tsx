@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import StyledForm from '../StyledForm';
-import Button from '../Button';
+import Button from '../../App/components/Button';
 import Dropzone from './FormUtilities/Dropzone';
 
 import { palette } from '../../styling/theme';
-import { Row } from '../../styling/grid';
+import { Row } from '../../App/containers/grid';
 
 import { truncate } from '../../helpers';
 

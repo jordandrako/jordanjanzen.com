@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Button from './Button';
+import Button from '../App/components/Button';
 
 import codeLoader from '../images/codeLoader.svg';
 import { palette } from '../styling/theme';

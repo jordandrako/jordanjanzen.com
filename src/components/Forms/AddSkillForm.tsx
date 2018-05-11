@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import StyledForm from '../StyledForm';
-import Button from '../Button';
+import Button from '../../App/components/Button';
 import { palette } from '../../styling/theme';
 
 class AddSkillForm extends Component {

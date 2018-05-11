@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Banner from '../Banner';
+import Banner from '../components/Banner';
 
-import { Page, Row } from '../../styling/grid';
+import { Page, Row } from './grid';
 
 const Unathenticated = () => (
   <Page title="Please Log In">

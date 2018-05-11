@@ -1,3 +1,5 @@
+import { TChildren } from '../App.types';
+
 export interface IRow {
   full?: boolean;
   child?: boolean;
@@ -12,6 +14,6 @@ export interface IFlex {
 
 export interface IPageProps {
   title: string;
-  ext?: string;
-  children: React.ReactChildren;
+  ext?: boolean;
+  children: TChildren;
 }

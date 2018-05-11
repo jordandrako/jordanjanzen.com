@@ -1,16 +1,11 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import * as moment from 'moment';
 import { adjustHue } from 'polished';
-import moment from 'moment';
-
-import Button from '../Button';
-import CloudImage from '../CloudImage';
-import Project from '../Project';
-
-import { Page, Row, Hero } from '../../styling/grid';
-import { semanticColors, fonts } from '../../styling/theme';
-import { mediaMin } from '../../styling/style-utils';
+import * as React from 'react';
+import CloudImage from '../components/CloudImage';
+import Project from '../../components/Project';
+import { fonts, mediaMin, semanticColors, styled } from '../../styling';
+import Button from '../components/Button';
+import { Hero, Page, Row } from './grid';
 
 const OuterHero = styled.div`
   width: 100%;
@@ -80,8 +75,8 @@ const Entice = styled.p`
   margin: 0.5em 0 0;
 `;
 
-class Home extends Component {
-  constructor(props) {
+class Home extends React.Component<any, {}> {
+  constructor(props: any) {
     super(props);
     this.state = {};
   }
@@ -105,13 +100,11 @@ class Home extends Component {
             />
           ) : null}
           <Intro>
-            Hey there!<br />I'm a Developer<br />& UX Designer.
+            Hey there!<br />I'm a Developer<br />&amp; UX Designer.
           </Intro>
           <p>
             My name is <strong>Jordan Janzen</strong>.<br />I'm{' '}
-            <strong>
-              {moment('19911109', 'YYYYMMDD').fromNow(true)} old
-            </strong>{' '}
+            <strong>{moment('19911109', 'YYYYMMDD').fromNow(true)} old</strong>{' '}
             and living in <strong>Seattle, WA</strong>. I love building sites
             and web apps that look great and function even better.
           </p>
@@ -149,8 +142,8 @@ class Home extends Component {
               {HeroContent}
             </CloudImage>
           ) : (
-              HeroContent
-            )}
+            HeroContent
+          )}
         </Hero>
         <Row>
           <h2>My latest project</h2>
@@ -170,9 +163,9 @@ class Home extends Component {
   }
 }
 
-Home.propTypes = {
-  isMobile: PropTypes.bool.isRequired,
-  projects: PropTypes.object.isRequired,
-};
+// Home.propTypes = {
+//   isMobile: PropTypes.bool.isRequired,
+//   projects: PropTypes.object.isRequired,
+// };
 
 export default Home;
