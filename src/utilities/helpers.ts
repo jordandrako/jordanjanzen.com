@@ -6,7 +6,7 @@ export function toTitleCase(str: string): string {
 }
 
 export function formatPrice(cents: number): string {
-  return `$${(cents / 100).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
+  return `$${(cents / 100).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`;
 }
 
 export function rando(arr: any[]) {
@@ -17,51 +17,43 @@ export function slugify(text: string): string {
   return text
     .toString()
     .toLowerCase()
-    .replace(/\s+/g, "-") // Replace spaces with -
-    .replace(/[^\w-]+/g, "") // Remove all non-word chars
-    .replace(/--+/g, "-") // Replace multiple - with single -
-    .replace(/^-+/, "") // Trim - from start of text
-    .replace(/-+$/, ""); // Trim - from end of text
+    .replace(/\s+/g, '-') // Replace spaces with -
+    .replace(/[^\w-]+/g, '') // Remove all non-word chars
+    .replace(/--+/g, '-') // Replace multiple - with single -
+    .replace(/^-+/, '') // Trim - from start of text
+    .replace(/-+$/, ''); // Trim - from end of text
 }
 
 export function getFileExtension(): string {
   const fileExtensions = [
-    ".js",
-    ".html",
-    ".md",
-    ".php",
-    ".csv",
-    ".jsx",
-    ".db",
-    ".ini",
-    ".css",
-    ".sh",
-    ".txt",
-    ".xml",
-    ".scss",
-    ".styl",
-    ".sql",
-    ".bat",
-    ".rss",
-    ".xhtml",
-    ".conf",
-    ".json",
-    ".lua",
-    ".py",
+    '.js',
+    '.ts',
+    '.tsx',
+    '.html',
+    '.md',
+    '.php',
+    '.jsx',
+    '.css',
+    '.sh',
+    '.txt',
+    '.xml',
+    '.scss',
+    '.bat',
+    '.json',
     // Some fun ones
-    ".coffee",
-    ".lol",
+    '.coffee',
+    '.lol',
     // Some bonus emojis for fun
-    " ⚛",
-    " ☕",
-    " 🔥",
-    " 🕸"
+    ' ⚛',
+    ' ☕',
+    ' 🔥',
+    ' 🕸',
   ];
 
   return rando(fileExtensions);
 }
 
-export function truncate(text: string, length = 20, endsIn = "...") {
+export function truncate(text: string, length = 20, endsIn = '...') {
   return text.length > length + 3
     ? `${text.substring(0, length - 3)}${endsIn}`
     : text;
