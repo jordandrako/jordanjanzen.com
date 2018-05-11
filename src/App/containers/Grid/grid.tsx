@@ -1,6 +1,6 @@
 import * as React from 'react';
 import DocumentTitle from 'react-document-title';
-import { mediaMax, semanticColors, styled } from '../../../styling';
+import { screenSizes, semanticColors, styled } from '../../../styling';
 import PageTitle from '../PageTitle';
 import { IFlex, IPageProps, IRow } from './grid.types';
 
@@ -11,9 +11,10 @@ export const MainContainer = styled.main`
   flex-direction: column;
 
   overflow-y: hidden;
-  ${mediaMax.tablet`
+
+  @media (max-width: ${screenSizes.tablet}) {
     overflow-y: auto;
-  `};
+  }
 `;
 
 export const Main = styled.div`
@@ -21,9 +22,9 @@ export const Main = styled.div`
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  ${mediaMax.tablet`
+  @media (max-width: ${screenSizes.tablet}) {
     overflow-y: initial
-  `};
+  };
 
   a {
     line-height: 0.9em;
@@ -40,32 +41,32 @@ export const Main = styled.div`
 export const Row = styled.section`
   max-width: 1000px;
   margin: ${(props: IRow) =>
-    props.full ? '0  0 2.5em' : props.child ? '0 0 2em' : '0 2em 2.5em'};
+    props.full ? '0  0 2.5em' : props.isChild ? '0 0 2em' : '0 2em 2.5em'};
 
   &:first-child {
-    margin-top: ${(props: IRow) => (props.child ? '0' : '2em')};
+    margin-top: ${(props: IRow) => (props.isChild ? '0' : '2em')};
   }
 
   &:last-child {
-    margin-bottom: ${(props: IRow) => (props.child ? '0' : 'inherit')};
+    margin-bottom: ${(props: IRow) => (props.isChild ? '0' : 'inherit')};
   }
 
-  ${mediaMax.tablet`
+  @media (max-width: ${screenSizes.tablet}) {
     margin: ${(props: IRow) => {
-      if (props.full || props.child) {
+      if (props.full || props.isChild) {
         return '0 0 2em';
       }
       return '0 1em 2em';
     }};
+  }
 
-    &:first-child {
-      margin-top: ${(props: IRow) => (props.child ? '0' : '1.5em')};
-    }
+  &:first-child {
+    margin-top: ${(props: IRow) => (props.isChild ? '0' : '1.5em')};
+  }
 
-    &:last-child {
-      margin-bottom: ${(props: IRow) => (props.child ? '0' : '2em')};
-    }
-  `};
+  &:last-child {
+    margin-bottom: ${(props: IRow) => (props.isChild ? '0' : '2em')};
+  }
 `;
 
 export const Hero = styled(Row)`
@@ -73,9 +74,9 @@ export const Hero = styled(Row)`
   margin-top: 0 !important;
   max-width: calc(1000px + 4em);
 
-  ${mediaMax.tablet`
+  @media (max-width: ${screenSizes.tablet}) {
     margin: 0 0 1.5em;
-  `};
+  }
 `;
 
 export const Flex = styled.div`
@@ -94,7 +95,7 @@ export const Page = (props: IPageProps) => {
   return (
     <DocumentTitle title={docTitle}>
       <MainContainer>
-        <PageTitle title={docTitle} ext={props.ext} />
+        <PageTitle title={props.title} ext={props.ext} />
         <Main>{props.children}</Main>
       </MainContainer>
     </DocumentTitle>

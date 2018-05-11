@@ -1,6 +1,6 @@
 import { darken } from 'polished';
 import { palette, styled } from '../../../styling';
-import { mediaMax, mediaMin } from '../../../styling/style-utils';
+import { screenSizes } from '../../../styling/style-utils';
 
 export const root = styled.footer`
   display: flex;
@@ -10,13 +10,13 @@ export const root = styled.footer`
   background: ${darken(0.05, palette.black)};
   justify-content: space-between;
 
-  ${mediaMax.tablet`
+  @media (max-width: ${screenSizes.tablet}) {
     box-shadow: 0 -4px ${darken(0.05, palette.black)};
     flex-grow: 0;
     padding-right: 40px;
     overflow: hidden;
     z-index: 10;
-  `};
+  }
 `;
 
 export const overflowButton = styled.button`
@@ -45,7 +45,7 @@ export const overflowButton = styled.button`
 export const overlay = styled.div`
   display: none;
 
-  ${mediaMax.tablet`
+  @media (max-width: ${screenSizes.tablet}) {
     display: block;
     position: fixed;
     top: 0;
@@ -54,7 +54,7 @@ export const overlay = styled.div`
     bottom: 0;
     width: 100%;
     width: 100%;
-  `};
+  }
 `;
 
 export const overflowMenu = styled.div`
@@ -92,10 +92,10 @@ export const overflowMenu = styled.div`
     opacity: 1;
   }
 
-  ${mediaMin.tablet`
+  @media (min-width: ${screenSizes.tablet}) {
     position: relative;
     bottom: auto;
     padding: 0;
     background: transparent;
-  `};
+  }
 `;

@@ -2,7 +2,7 @@ import { TChildren } from '../../App.types';
 
 export interface IRow {
   full?: boolean;
-  child?: boolean;
+  isChild?: boolean;
 }
 
 export interface IFlex {

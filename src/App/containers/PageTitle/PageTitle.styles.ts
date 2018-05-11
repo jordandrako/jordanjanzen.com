@@ -1,5 +1,5 @@
 import { darken, lighten } from 'polished';
-import { fonts, mediaMax, palette, styled } from '../../../styling';
+import { fonts, palette, screenSizes, styled } from '../../../styling';
 
 export const Title = styled.header`
   background: ${darken(0.05, palette.black)};
@@ -47,7 +47,7 @@ export const Title = styled.header`
         font-size: 1.15rem;
       }
 
-      ${mediaMax.tablet`
+      @media (max-width: ${screenSizes.tablet}) {
         display: inline-flex;
         background: transparent;
         border: none;
@@ -58,8 +58,7 @@ export const Title = styled.header`
         h1 {
           font-size: 1rem;
         }
-
-      `};
+      }
     }
   }
 `;

@@ -1,10 +1,8 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-
+import * as React from 'react';
+import { styled } from '../../styling';
+import { ITodos, TAddTodo, TRemoveTodo, TUpdateTodo } from '../App.types';
 import AddTodoForm from '../components/Forms/AddTodoForm/AddTodoForm';
 import Todo from '../components/Todo/Todo';
-
 import { Page, Row } from './Grid/grid';
 
 const ListOfTodos = styled.ul`
@@ -21,47 +19,26 @@ const ShowComplete = styled.input`
   margin: 0.5em;
 `;
 
-class TodoList extends Component {
-  constructor(props) {
+interface ITodoListProps {
+  addTodo: TAddTodo;
+  removeTodo: TRemoveTodo;
+  todos: ITodos;
+  updateTodo: TUpdateTodo;
+}
+
+interface ITodoListState {
+  showComplete: boolean;
+}
+
+class TodoList extends React.Component<ITodoListProps, ITodoListState> {
+  constructor(props: ITodoListProps) {
     super(props);
-    this.toggleShowComplete = this.toggleShowComplete.bind(this);
-    this.renderTodo = this.renderTodo.bind(this);
+    this._toggleShowComplete = this._toggleShowComplete.bind(this);
+    this._renderTodo = this._renderTodo.bind(this);
 
     this.state = {
-      showComplete: false
+      showComplete: false,
     };
-  }
-
-  toggleShowComplete() {
-    this.setState({ showComplete: !this.state.showComplete });
-  }
-
-  renderTodo(showComplete) {
-    const { removeTodo, todos, updateTodo } = this.props;
-    return Object.keys(todos).map((key) => {
-      if (showComplete) {
-        return (
-          <Todo
-            key={key}
-            index={key}
-            details={todos[key]}
-            updateTodo={updateTodo}
-            removeTodo={removeTodo}
-          />
-        );
-      } else if (!todos[key].complete) {
-        return (
-          <Todo
-            key={key}
-            index={key}
-            details={todos[key]}
-            updateTodo={updateTodo}
-            removeTodo={removeTodo}
-          />
-        );
-      }
-      return null;
-    });
   }
 
   public render(): JSX.Element {
@@ -77,20 +54,17 @@ class TodoList extends Component {
           <h2>My Todos</h2>
           <form>
             <ShowComplete
-              ref={(input) => {
-                this.todoForm = input;
-              }}
               type="checkbox"
               name="show-complete"
               checked={this.state.showComplete}
-              onChange={this.toggleShowComplete}
+              onChange={this._toggleShowComplete}
             />
-            <label htmlFor="show-complete" onClick={this.toggleShowComplete}>
+            <label htmlFor="show-complete" onClick={this._toggleShowComplete}>
               Show completed todos?
             </label>
           </form>
           <ListOfTodos>
-            {todos && this.renderTodo(this.state.showComplete)}
+            {todos && this._renderTodo(this.state.showComplete)}
           </ListOfTodos>
         </Row>
 
@@ -138,13 +112,41 @@ class TodoList extends Component {
       </Page>
     );
   }
-}
 
-TodoList.propTypes = {
-  todos: PropTypes.object.isRequired,
-  addTodo: PropTypes.func.isRequired,
-  updateTodo: PropTypes.func.isRequired,
-  removeTodo: PropTypes.func.isRequired
-};
+  private _toggleShowComplete() {
+    this.setState({ showComplete: !this.state.showComplete });
+  }
+
+  private _renderTodo(
+    showComplete: boolean
+  ): JSX.Element | null | (JSX.Element | null)[] {
+    const { removeTodo, todos, updateTodo } = this.props;
+    return Object.keys(todos).map(key => {
+      if (showComplete) {
+        return (
+          <Todo
+            key={key}
+            index={key}
+            details={todos[key]}
+            updateTodo={updateTodo}
+            removeTodo={removeTodo}
+          />
+        );
+      }
+      if (!todos[key].complete) {
+        return (
+          <Todo
+            key={key}
+            index={key}
+            details={todos[key]}
+            updateTodo={updateTodo}
+            removeTodo={removeTodo}
+          />
+        );
+      }
+      return null;
+    });
+  }
+}
 
 export default TodoList;

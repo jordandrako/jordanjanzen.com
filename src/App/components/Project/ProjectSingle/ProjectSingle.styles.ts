@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import {
   fonts,
-  mediaMax,
   palette,
+  screenSizes,
   semanticColors,
   styled,
 } from '../../../../styling';
@@ -55,11 +55,11 @@ export const Single = styled.div`
     }
   }
 
-  ${mediaMax.tablet`
+  @media (max-width: ${screenSizes.tablet}) {
     width: 90vw;
     max-width: 420px;
     height: 90vh;
-  `};
+  }
 `;
 
 export const Frame = styled.div`

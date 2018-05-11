@@ -1,4 +1,4 @@
-import { IProjectObject } from '../../App.types';
+import { IProjectObject, IProjects } from '../../App.types';
 
 export interface IProject {}
 
@@ -15,7 +15,7 @@ export interface IProjectSingleProps extends IProjectProps {
   removeProject: (key: string) => void;
   // TODO: find router type for history object
   history: any;
-  projects: IProjectObject[];
+  projects: IProjects;
   isMobile: boolean;
   isLoggedIn: boolean;
 }

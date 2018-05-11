@@ -15,9 +15,11 @@ export interface IObject {
 export type TChildren =
   | string
   | JSX.Element
-  | (string | JSX.Element)[]
+  | (string | JSX.Element | null | undefined)[]
   | (() => string | JSX.Element)
-  | (() => (string | JSX.Element)[]);
+  | (() => (string | JSX.Element)[])
+  | null
+  | undefined;
 
 export interface IImage extends IObject {
   format: string;
@@ -91,6 +93,22 @@ export interface IAppActions {
   removeProject: TRemoveProject;
   removeSkill: TRemoveSkill;
   removeTodo: TRemoveTodo;
+}
+
+export interface IProjects {
+  [key: string]: IProjectObject;
+}
+
+export interface ISkills {
+  [key: string]: ISkillObject;
+}
+
+export interface ISecrets {
+  [key: string]: ISecretObject;
+}
+
+export interface ITodos {
+  [key: string]: ITodoObject;
 }
 
 export interface IAppState extends IAppActions {

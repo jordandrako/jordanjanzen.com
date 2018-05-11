@@ -5,8 +5,14 @@ import * as Styled from './PageTitle.styles';
 import { IPageTitleProps } from './PageTitle.types';
 
 const PageTitle = (props: IPageTitleProps) => {
-  const ext = props.ext && getFileExtension();
-  const title = [toTitleCase(props.title), ext];
+  const { ext = true } = props;
+  const extension = ext && getFileExtension();
+  const title = (
+    <span>
+      {toTitleCase(props.title)}
+      {extension}
+    </span>
+  );
 
   return (
     <Styled.Title>

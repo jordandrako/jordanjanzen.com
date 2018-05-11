@@ -1,7 +1,8 @@
 import * as moment from 'moment';
 import { adjustHue } from 'polished';
 import * as React from 'react';
-import { fonts, mediaMin, semanticColors, styled } from '../../styling';
+import { fonts, screenSizes, semanticColors, styled } from '../../styling';
+import { IAppState } from '../App.types';
 import Button from '../components/Button';
 import CloudImage from '../components/CloudImage';
 import Project from '../components/Project/Project';
@@ -31,7 +32,7 @@ const InnerHero = styled.div`
   flex-direction: column;
   align-items: flex-start;
 
-  ${mediaMin.tablet`
+  @media (min-width: ${screenSizes.tablet}) {
     width: 50%;
     padding: 6em 2em;
     background: transparent;
@@ -39,7 +40,7 @@ const InnerHero = styled.div`
     p {
       font-size: 1.2rem;
     }
-  `};
+  }
 
   img {
     margin: 0 0.5em 0.5em 0;
@@ -53,9 +54,9 @@ const Intro = styled.h2`
   letter-spacing: 0;
   font-size: 1.25rem;
 
-  ${mediaMin.tablet`
+  @media (min-width: ${screenSizes.tablet}) {
     font-size: 1.75rem;
-  `};
+  }
 `;
 
 const Cta = styled.div`
@@ -64,9 +65,9 @@ const Cta = styled.div`
   flex-direction: column;
   align-items: center;
 
-  ${mediaMin.tablet`
+  @media (min-width: ${screenSizes.tablet}) {
     align-self: flex-start;
-  `};
+  }
 `;
 
 const Entice = styled.p`
@@ -75,7 +76,7 @@ const Entice = styled.p`
   margin: 0.5em 0 0;
 `;
 
-class Home extends React.Component<any, {}> {
+class Home extends React.Component<Partial<IAppState>, {}> {
   constructor(props: any) {
     super(props);
     this.state = {};
@@ -104,7 +105,9 @@ class Home extends React.Component<any, {}> {
           </Intro>
           <p>
             My name is <strong>Jordan Janzen</strong>.<br />I'm{' '}
-            <strong>{moment('19911109', 'YYYYMMDD').fromNow(true)} old</strong>{' '}
+            <strong>
+              {moment('19911109', 'YYYYMMDD').fromNow(true)} old
+            </strong>{' '}
             and living in <strong>Seattle, WA</strong>. I love building sites
             and web apps that look great and function even better.
           </p>
@@ -123,8 +126,8 @@ class Home extends React.Component<any, {}> {
       </OuterHero>
     );
 
-    const projectIndex = projects && Object.keys(projects).length - 1;
-    const projectKey = projects && Object.keys(projects)[projectIndex];
+    const projectIndex = projects ? Object.keys(projects).length - 1 : -1;
+    const projectKey = projects ? Object.keys(projects)[projectIndex] : '';
 
     return (
       <Page title="Home">
@@ -150,9 +153,9 @@ class Home extends React.Component<any, {}> {
           {projectKey ? (
             <Project
               index={projectKey}
-              details={projects[projectKey]}
+              details={projects![projectKey]}
               // style={{ margin: '0 0 1em', width: '100%' }}
-              updateProject={this.props.updateProject}
+              updateProject={this.props.updateProject!}
             />
           ) : null}
           <Button to="/portfolio/" type="cta">

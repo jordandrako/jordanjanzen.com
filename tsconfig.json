@@ -27,4 +27,6 @@
     "jest",
     "src/setupTests.ts"
   ]
+  // "baseUrl": "types",
+  // "typeRoots": ["types"]
 }

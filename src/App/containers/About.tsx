@@ -1,7 +1,7 @@
 import * as moment from 'moment';
 import * as React from 'react';
 import styled from 'styled-components';
-import { mediaMin } from '../../styling';
+import { screenSizes } from '../../styling';
 import { fonts, palette } from '../../styling/theme';
 import { IAppState, TAddSkill } from '../App.types';
 import Button, { ButtonType } from '../components/Button';
@@ -40,9 +40,9 @@ const SkillsColumn = styled.ul`
     margin: 1em 0;
     font-size: 0.85rem;
 
-    ${mediaMin.phone`
-  font-size: 0.75rem;
-  `};
+    @media (min-width: ${screenSizes.phone}) {
+      font-size: 0.75rem;
+    }
 
     &:last-child {
       margin-bottom: 0;
@@ -79,7 +79,7 @@ class About extends React.Component<Partial<IAppState>, {}> {
       <Page title="About">
         <Row>
           <h2>About, Skills and Interests</h2>
-          <SkillsRow child={true}>
+          <SkillsRow isChild={true}>
             <SkillsColumn>
               <h3>Core</h3>
               {skills && this._renderList('core')}
@@ -94,7 +94,7 @@ class About extends React.Component<Partial<IAppState>, {}> {
             </SkillsColumn>
           </SkillsRow>
           {isLoggedIn ? (
-            <Row child={true}>
+            <Row isChild={true}>
               <AddSkillForm addSkill={addSkill as TAddSkill} />
             </Row>
           ) : null}

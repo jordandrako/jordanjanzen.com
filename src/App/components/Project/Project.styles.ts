@@ -2,8 +2,8 @@ import { adjustHue } from 'polished';
 import { Link } from 'react-router-dom';
 import {
   fonts,
-  mediaMax,
   palette,
+  screenSizes,
   semanticColors,
   styled,
 } from '../../../styling';
@@ -12,9 +12,6 @@ export const imageHeight = '250';
 
 export const Item = styled.li`
   width: calc(50% - 1em);
-  ${mediaMax.tablet`
-    width: 100%;
-  `};
   min-width: 300px;
   border: 5px double ${palette.black};
   padding: 1em;
@@ -23,6 +20,10 @@ export const Item = styled.li`
   flex-direction: column;
   margin: 0 0.5em 1em;
   flex-grow: 1;
+
+  @media (max-width: ${screenSizes.tablet}) {
+    width: 100%;
+  }
 `;
 
 export const ThumbnailLink = styled(Link)`

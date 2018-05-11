@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import { asyncLoader } from '../../utilities';
 import Loading from '../containers/Loading';
-import { IAppRouterProps } from './AppRouter.types';
+import { IAppRouterProps, IHomeProps } from './AppRouter.types';
 
 const asyncLoaderOptions = {
   delay: 300,
@@ -18,99 +18,99 @@ const asyncLoaderOptions = {
 const AsyncNotFound = asyncLoader({
   ...asyncLoaderOptions,
   loader: () => import('../containers/NotFound'),
-  render(loaded) {
-    const NotFound = loaded.default;
-    return <NotFound />;
-  },
+  // render(loaded) {
+  //   const NotFound = loaded.default;
+  //   return <NotFound />;
+  // },
 });
 
 const AsyncUnauthenticated = asyncLoader({
   ...asyncLoaderOptions,
   loader: () => import('../containers/Unauthenticated'),
-  render(loaded) {
-    const Unathenticated = loaded.default;
-    return <Unathenticated />;
-  },
+  // render(loaded) {
+  //   const Unathenticated = loaded.default;
+  //   return <Unathenticated />;
+  // },
 });
 
 const AsyncHome = asyncLoader({
   ...asyncLoaderOptions,
   loader: () => import('../containers/Home'),
-  render(loaded, props) {
-    const Home = loaded.default;
-    return <Home {...props} />;
-  },
+  // render(loaded, props) {
+  //   const Home = loaded.default;
+  //   return <Home {...props} />;
+  // },
 });
 
 const AsyncAbout = asyncLoader({
   ...asyncLoaderOptions,
   loader: () => import('../containers/About'),
-  render(loaded, props) {
-    const About = loaded.default;
-    return <About {...props} />;
-  },
+  // render(loaded, props) {
+  //   const About = loaded.default;
+  //   return <About {...props} />;
+  // },
 });
 
 const AsyncPortfolio = asyncLoader({
   ...asyncLoaderOptions,
   loader: () => import('../containers/Portfolio'),
-  render(loaded, props) {
-    const Portfolio = loaded.default;
-    return <Portfolio {...props} />;
-  },
+  // render(loaded, props) {
+  //   const Portfolio = loaded.default;
+  //   return <Portfolio {...props} />;
+  // },
 });
 
 const AsyncTodoList = asyncLoader({
   ...asyncLoaderOptions,
   loader: () => import('../containers/TodoList'),
-  render(loaded, props) {
-    const TodoList = loaded.default;
-    return props.isLoggedIn ? (
-      <TodoList {...props} />
-    ) : (
-      <AsyncUnauthenticated />
-    );
-  },
+  // render(loaded, props) {
+  //   const TodoList = loaded.default;
+  //   return props.isLoggedIn ? (
+  //     <TodoList {...props} />
+  //   ) : (
+  //     <AsyncUnauthenticated />
+  //   );
+  // },
 });
 
-// const Home = (props: Partial<IAppRouterProps>): JSX.Element => (
-//   <AsyncHome isMobile={props.isMobile} projects={props.projects} />
-// );
+const Home = (props: IHomeProps): JSX.Element => (
+  <AsyncHome isMobile={props.isMobile} projects={props.projects} />
+);
 
-// const About = (props: Partial<IAppRouterProps>): JSX.Element => (
-//   <AsyncAbout
-//     isLoggedIn={props.isLoggedIn}
-//     skills={props.skills}
-//     addSkill={props.addSkill}
-//     updateSkill={props.updateSkill}
-//     removeSkill={props.removeSkill}
-//   />
-// );
+const About = (props: Partial<IAppRouterProps>): JSX.Element => (
+  <AsyncAbout
+    isLoggedIn={props.isLoggedIn}
+    skills={props.skills}
+    addSkill={props.addSkill}
+    updateSkill={props.updateSkill}
+    removeSkill={props.removeSkill}
+  />
+);
 
-// const Portfolio = (props: Partial<IAppRouterProps>): JSX.Element => (
-//   <AsyncPortfolio
-//     isLoggedIn={props.isLoggedIn}
-//     skills={props.skills}
-//     projects={props.projects}
-//     addProject={props.addProject}
-//     updateProject={props.updateProject}
-//     removeProject={props.removeProject}
-//     isMobile={props.isMobile}
-//     cloudinary={props.secrets!.cloudinary}
-//   />
-// );
+const Portfolio = (props: Partial<IAppRouterProps>): JSX.Element => (
+  <AsyncPortfolio
+    isLoggedIn={props.isLoggedIn}
+    skills={props.skills}
+    projects={props.projects}
+    addProject={props.addProject}
+    updateProject={props.updateProject}
+    removeProject={props.removeProject}
+    isMobile={props.isMobile}
+    cloudinary={props.secrets!.cloudinary}
+  />
+);
 
-// const Todo = (props: Partial<IAppRouterProps>): JSX.Element =>
-//   props.isLoggedIn ? (
-//     <AsyncTodoList
-//       todos={props.todos}
-//       addTodo={props.addTodo}
-//       updateTodo={props.updateTodo}
-//       removeTodo={props.removeTodo}
-//     />
-//   ) : (
-//     <AsyncUnauthenticated />
-//   );
+const TodoList = (props: Partial<IAppRouterProps>): JSX.Element =>
+  props.isLoggedIn ? (
+    <AsyncTodoList
+      todos={props.todos}
+      addTodo={props.addTodo}
+      updateTodo={props.updateTodo}
+      removeTodo={props.removeTodo}
+    />
+  ) : (
+    <AsyncUnauthenticated />
+  );
 
 // class AppRouter extends React.Component<RouteComponentProps<any>> {
 //   public render() {
@@ -131,10 +131,10 @@ const AppRouter: React.StatelessComponent<
   IAppRouterProps & RouteComponentProps<any>
 > = (props: IAppRouterProps) => (
   <Switch>
-    <Route exact={true} path="/" component={AsyncHome} />
-    <Route path="/about" component={AsyncAbout} />
-    <Route path="/portfolio" component={AsyncPortfolio} />
-    <Route exact={true} path="/todo" component={AsyncTodoList} />
+    <Route exact={true} path="/" component={Home} />
+    <Route path="/about" component={About} />
+    <Route path="/portfolio" component={Portfolio} />
+    <Route exact={true} path="/todo" component={TodoList} />
     {/* Unmatched URLs */}
     <Route component={AsyncNotFound} />
   </Switch>

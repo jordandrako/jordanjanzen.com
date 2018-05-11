@@ -1,6 +1,12 @@
 import * as React from 'react';
 import { auth, base, database, provider } from '../base';
-import { globalStyles, loadTheme, mediaMax, sizes, styled } from '../styling';
+import {
+  globalStyles,
+  loadTheme,
+  screenSizes,
+  screenSizesPx,
+  styled,
+} from '../styling';
 import { slugify } from '../utilities';
 import {
   IAppState,
@@ -20,10 +26,13 @@ globalStyles(appTheme);
 
 const Wrapper = styled.div`
   display: flex;
-  ${mediaMax.tablet`flex-direction: column`};
   height: 100%;
   border-top: 2px solid ${palette.darkblack};
   flex-wrap: wrap;
+
+  @media (max-width: ${screenSizes.tablet}) {
+    flex-direction: column;
+  }
 `;
 
 export default class App extends React.Component<{}, IAppState> {
@@ -65,7 +74,7 @@ export default class App extends React.Component<{}, IAppState> {
       addSkill: this._addSkill,
       addTodo: this._addTodo,
       isLoggedIn: false,
-      isMobile: window.innerWidth <= sizes.tablet,
+      isMobile: window.innerWidth <= screenSizesPx.tablet,
       projects: this._localStorage.projects
         ? JSON.parse(this._localStorage.projects)
         : {},
@@ -188,7 +197,7 @@ export default class App extends React.Component<{}, IAppState> {
   }
 
   private _updateSize(): void {
-    if (window.innerWidth <= sizes.tablet) {
+    if (window.innerWidth <= screenSizesPx.tablet) {
       this.setState({ isMobile: true });
     } else {
       this.setState({ isMobile: false });

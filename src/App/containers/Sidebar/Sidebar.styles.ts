@@ -2,8 +2,8 @@ import { adjustHue } from 'polished';
 import { Link } from 'react-router-dom';
 import {
   fonts,
-  mediaMax,
   palette,
+  screenSizes,
   semanticColors,
   styled,
 } from '../../../styling/index';
@@ -19,20 +19,20 @@ export const LeftColumn = styled.aside`
   position: relative;
   border-top: 3px solid ${palette.lightblue};
   box-shadow: 2px 0 0 ${palette.darkblack};
-  ${mediaMax.tablet`
+  @media (max-width: ${screenSizes.tablet}) {
     flex: none;
     height: auto;
-  `};
+  }
 `;
 
 export const Top = styled.section`
   flex-shrink: 0;
-  ${mediaMax.tablet`
+  @media (max-width: ${screenSizes.tablet}) {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-  `};
+  }
 `;
 
 export const Logo = styled.h2`
@@ -65,9 +65,9 @@ export const Logo = styled.h2`
     z-index: 0;
   }
 
-  ${mediaMax.tablet`
+  @media (max-width: ${screenSizes.tablet}) {
     width: 100%;
-    padding: .2em 0;
+    padding: 0.2em 0;
     font-size: 1.5rem;
     flex-direction: row;
     justify-content: center;
@@ -77,13 +77,16 @@ export const Logo = styled.h2`
       background-size: 1.5em;
       opacity: 1;
     }
-  `};
+  }
 
   span {
     letter-spacing: 0.1em;
     padding: 0 1em;
     z-index: 1;
-    ${mediaMax.tablet`padding: 0 .2em`};
+
+    @media (max-width: ${screenSizes.tablet}) {
+      padding: 0 0.2em;
+    }
   }
 `;
 
@@ -104,7 +107,10 @@ export const Tagline = styled.h3`
   text-transform: lowercase;
   margin: 0;
   white-space: nowrap;
-  ${mediaMax.tablet`display: none`};
+
+  @media (max-width: ${screenSizes.tablet}) {
+    display: none;
+  }
 `;
 
 export const LogoLink = styled(Link)`

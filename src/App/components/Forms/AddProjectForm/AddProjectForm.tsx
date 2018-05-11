@@ -175,7 +175,7 @@ export default class AddProjectForm extends React.Component<
               placeholder="Industry"
               required={true}
             />
-            <Row child={true}>
+            <Row isChild={true}>
               <Dropzone
                 addImage={this._addImage}
                 accept="image/jpeg, image/png"

@@ -1,25 +1,27 @@
 import { darken } from 'polished';
 import { NavLink } from 'react-router-dom';
-import { fonts, mediaMax, mediaMin, palette, styled } from '../../../styling';
+import { fonts, palette, screenSizes, styled } from '../../../styling';
 
 export const navList = styled.ul`
   list-style: none;
   padding: 0;
   margin: 0;
 
-  ${mediaMax.tablet`
+  @media (max-width: ${screenSizes.tablet}) {
     display: flex;
     justify-content: space-around;
-  `} li {
-    ${mediaMax.tablet`
-      display: inline-block;
-    `};
 
-    ${mediaMin.tablet`
+    li {
+      display: inline-block;
+    }
+  }
+
+  @media (min-width: ${screenSizes.tablet}) {
+    li {
       background: ${palette.black};
       border-top: 1px solid rgba(255, 255, 255, 0.1);
       border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-    `};
+    }
   }
 `;
 
@@ -52,7 +54,7 @@ export const link = styled(NavLink)`
     }
   }
 
-  ${mediaMin.tablet`
+  @media (min-width: ${screenSizes.tablet}) {
     text-transform: lowercase;
     text-align: center;
     padding: 10px 15px;
@@ -101,5 +103,5 @@ export const link = styled(NavLink)`
         opacity: 1;
       }
     }
-  `};
+  }
 `;

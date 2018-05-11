@@ -1,8 +1,7 @@
 import { injectGlobal } from 'styled-components';
 import styledNormalize from 'styled-normalize';
-
 import FiraCode from './fonts/FiraCode-Regular.ttf';
-import { mediaMax } from './style-utils';
+import { screenSizes } from './style-utils';
 import { getTheme, loadTheme } from './theme';
 import { IPartialTheme } from './theme.types';
 
@@ -43,9 +42,12 @@ export const globalStyles = (theme: IPartialTheme) => {
       color: ${semanticColors.textColor};
       background: ${semanticColors.siteBackground};
       line-height: 1.6;
-      ${mediaMax.tablet`font-size: 16px`};
       margin: 0;
       padding: 0;
+
+      @media (max-width: ${screenSizes.tablet}) {
+        font-size: 16px
+      };
     }
 
     img {

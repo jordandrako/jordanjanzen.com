@@ -1,12 +1,16 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import * as React from 'react';
 import { Route } from 'react-router-dom';
-
+import { styled } from '../../styling';
+import {
+  IProjects,
+  ISkills,
+  TAddProject,
+  TRemoveProject,
+  TUpdateProject,
+} from '../App.types';
 import AddProjectForm from '../components/Forms/AddProjectForm/AddProjectForm';
 import Project from '../components/Project/Project';
 import ProjectSingle from '../components/Project/ProjectSingle/ProjectSingle';
-
 import { Page, Row } from './Grid/grid';
 
 const ListOfProjects = styled.ul`
@@ -18,12 +22,30 @@ const ListOfProjects = styled.ul`
   justify-content: space-between;
 `;
 
-class Portfolio extends Component {
-  constructor(props) {
+interface IPortfolioProps {
+  addProject: TAddProject;
+  isLoggedIn: boolean;
+  isMobile: boolean;
+  projects: IProjects;
+  removeProject: TRemoveProject;
+  skills: ISkills;
+  updateProject: TUpdateProject;
+  cloudinary?: {
+    key?: string;
+    secret?: string;
+  };
+}
+
+interface IPortfolioState {
+  category?: string;
+}
+
+class Portfolio extends React.Component<IPortfolioProps, IPortfolioState> {
+  constructor(props: IPortfolioProps) {
     super(props);
 
     this.state = {
-      category: 'all'
+      category: 'all',
     };
   }
 
@@ -31,12 +53,12 @@ class Portfolio extends Component {
     const {
       addProject,
       cloudinary,
+      isLoggedIn,
       isMobile,
       projects,
       removeProject,
       skills,
-      uid,
-      updateProject
+      updateProject,
     } = this.props;
 
     return projects ? (
@@ -45,18 +67,17 @@ class Portfolio extends Component {
           <ListOfProjects>
             {Object.keys(projects)
               .reverse()
-              .map((key) => (
+              .map(key => (
                 <Project
                   key={key}
                   index={key}
                   details={projects[key]}
-                  uid={uid}
                   updateProject={updateProject}
                 />
               ))}
           </ListOfProjects>
         </Row>
-        {uid && skills ? (
+        {isLoggedIn && skills ? (
           <Row>
             <AddProjectForm
               addProject={addProject}
@@ -66,11 +87,12 @@ class Portfolio extends Component {
           </Row>
         ) : null}
         <Route
-          exact
+          exact={true}
           path="/portfolio/:projectId"
-          render={(props) => (
+          /* tslint:disable-next-line jsx-no-lambda*/
+          render={props => (
             <ProjectSingle
-              uid={uid}
+              isLoggedIn={isLoggedIn}
               isMobile={isMobile}
               projects={projects}
               index={props.match.params.projectId}
@@ -83,31 +105,9 @@ class Portfolio extends Component {
         />
       </Page>
     ) : (
-      undefined
+      <div />
     );
   }
 }
-
-Portfolio.propTypes = {
-  uid: PropTypes.string,
-  isMobile: PropTypes.bool.isRequired,
-  addProject: PropTypes.func.isRequired,
-  updateProject: PropTypes.func.isRequired,
-  removeProject: PropTypes.func.isRequired,
-  projects: PropTypes.object.isRequired,
-  skills: PropTypes.object.isRequired,
-  cloudinary: PropTypes.shape({
-    key: PropTypes.string,
-    secret: PropTypes.string
-  })
-};
-
-Portfolio.defaultProps = {
-  uid: null,
-  cloudinary: {
-    key: undefined,
-    secrect: undefined
-  }
-};
 
 export default Portfolio;

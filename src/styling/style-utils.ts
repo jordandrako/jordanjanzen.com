@@ -1,75 +1,41 @@
-import { css } from "styled-components";
+import { css } from 'styled-components';
 
-export const sizes = {
+export const screenSizesPx = {
   desktop: 1100,
   giant: 1400,
   phone: 480,
-  tablet: 930
+  tablet: 930,
 };
 
+export const screenSizes = {
+  desktop: screenSizesPx.desktop / 16 + 'em',
+  giant: screenSizesPx.giant / 16 + 'em',
+  phone: screenSizesPx.phone / 16 + 'em',
+  tablet: screenSizesPx.tablet / 16 + 'em',
+};
+
+// These utilities aren't working with typescript.
 // iterate through the sizes and create a media template
-// export const mediaMax = Object.keys(sizes).reduce((accumulator, label) => {
-//   const emSize = sizes[label] / 16;
-//   accumulator[label] = (args: TemplateStringsArray) => css`
-//     @media (max-width: ${emSize}em) {
-//       ${css(args)};
-//     }
-//   `;
-//   return accumulator;
-// }, {});
+export const mediaMax = Object.keys(
+  screenSizes
+).reduce((accumulator, label) => {
+  const emSize = screenSizes[label] / 16;
+  accumulator[label] = (...args: any[]) => css`
+    @media (max-width: ${emSize}em) {
+      ${/* css(...args) */ ''};
+    }
+  `;
+  return accumulator;
+}, {});
 
-// export const mediaMin = Object.keys(sizes).reduce((accumulator, label) => {
-//   const emSize = sizes[label] / 16;
-//   accumulator[label] = (args: TemplateStringsArray) => css`
-//     @media (min-width: ${emSize}em) {
-//       ${css(args)};
-//     }
-//   `;
-//   return accumulator;
-// }, {});
-
-export const mediaMin = {
-  desktop: (...args) => css`
-    @media (min-width: ${sizes.desktop}) {
-      ${ css(...args)}
+export const mediaMin = Object.keys(
+  screenSizes
+).reduce((accumulator, label) => {
+  const emSize = screenSizes[label] / 16;
+  accumulator[label] = (...args: any[]) => css`
+    @media (min-width: ${emSize}em) {
+      ${/* css(...args) */ ''};
     }
-  `,
-  giant: (...args) => css`
-    @media (min-width: ${sizes.giant / 16}em) {
-      ${ css(...args)}
-    }
-  `,
-  phone: (...args) => css`
-    @media (min-width: ${sizes.phone / 16}em) {
-      ${ css(...args)}
-    }
-  `,
-  tablet: (...args) => css`
-    @media (min-width: ${sizes.tablet / 16}em) {
-      ${ css(...args)}
-    }
-  `,
-}
-
-export const mediaMax = {
-  desktop: (...args) => css`
-    @media (max-width: ${sizes.desktop / 16}em) {
-      ${ css(...args)}
-    }
-  `,
-  giant: (...args) => css`
-    @media (max-width: ${sizes.giant / 16}em) {
-      ${ css(...args)}
-    }
-  `,
-  phone: (...args) => css`
-    @media (max-width: ${sizes.phone / 16}em) {
-      ${ css(...args)}
-    }
-  `,
-  tablet: (...args) => css`
-    @media (max-width: ${sizes.tablet / 16}em) {
-      ${ css(...args)}
-    }
-  `,
-}
+  `;
+  return accumulator;
+}, {});
