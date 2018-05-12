@@ -1,7 +1,7 @@
 import * as React from 'react';
-import codeLoader from '../../../images/codeLoader.svg';
 import Button, { ButtonType } from '../Button';
 import * as Styled from './Spinner.styles';
+const codeLoader = require('../../../images/codeLoader.svg');
 
 const StyledLoader = () => (
   <Styled.loader>

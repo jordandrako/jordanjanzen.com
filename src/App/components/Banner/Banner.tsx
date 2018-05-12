@@ -1,6 +1,8 @@
 import * as React from 'react';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { Transition } from 'react-transition-group';
 import { toTitleCase } from '../../../utilities';
+import { ButtonType } from '../Button';
 import * as Styled from './Banner.styles';
 import {
   BannerAction,
@@ -13,22 +15,22 @@ interface IBannerState {
   closed: boolean;
 }
 
-export default class Banner extends React.Component<IBannerProps, IBannerState>
+class Banner
+  extends React.Component<IBannerProps & RouteComponentProps<any>, IBannerState>
   implements IBanner {
-  public constructor(props: any) {
+  public constructor(props: IBannerProps & RouteComponentProps<any>) {
     super(props);
-    this.showHide = this.showHide.bind(this);
 
     this.state = {
       closed: false,
     };
   }
 
-  public showHide(): void {
+  public showHide = (): void => {
     this.setState({
       closed: !this.state.closed,
     });
-  }
+  };
 
   public render(): JSX.Element {
     const { closed } = this.state;
@@ -41,9 +43,9 @@ export default class Banner extends React.Component<IBannerProps, IBannerState>
             <h4>
               {title ? title : `${toTitleCase(BannerType[type])} Message`}
             </h4>
-            {this._showHideButton}
-            {this._bannerContent}
-            {this._actionButton}
+            {this._showHideButton()}
+            {this._bannerContent()}
+            {this._actionButton()}
           </Styled.root>
         )}
       </Transition>
@@ -59,27 +61,60 @@ export default class Banner extends React.Component<IBannerProps, IBannerState>
 
   private _bannerContent = (): JSX.Element => <p>{this.props.children}</p>;
 
-  private _bannerAction = (): void => {
-    const { action } = this.props;
-    if (action) {
-      if (typeof action !== 'function') {
-        if (action === BannerAction.Reload) {
-          return; // TODO: make reload function
-        }
-      }
-      action();
-    }
-  };
+  // private _bannerAction = (): void => {
+  //   const { action, history, location } = this.props;
+  //   let click;
+  //   let text;
+  //   switch (action) {
+  //     case BannerAction.Reload:
+  //       click = history.push(location.pathname);
+  //       text = 'Reload';
+  //       break;
+  //     case BannerAction.Home:
+  //       click = history.push('/');
+  //       text = 'Go Home';
+  //       break;
+  //     case BannerAction.Back:
+  //       click = history.goBack();
+  //       text = 'Go Back';
+  //       break;
+  //     default:
+  //       return;
+  //   }
+  // };
 
   private _actionButton = (): JSX.Element | undefined => {
-    const { action, actionText } = this.props;
-    return action ? (
+    const { action, actionText, customAction, history } = this.props;
+    const renderButton = action !== undefined || customAction !== undefined;
+    let click: () => void;
+    let text;
+    switch (action) {
+      case BannerAction.Reload:
+        click = () => history.push(location.pathname);
+        text = '🔄 Reload';
+        break;
+      case BannerAction.Home:
+        click = () => history.push('/');
+        text = '🏠 Go Home';
+        break;
+      case BannerAction.Back:
+        click = () => history.goBack();
+        text = '🔙 Go Back';
+        break;
+      default:
+        return;
+    }
+    return renderButton ? (
       <Styled.actionButton
-        text={actionText || 'Action'}
-        onClick={this._bannerAction}
+        buttonType={ButtonType.Subtle}
+        text={actionText || text}
+        onClick={click}
+        small={true}
       />
     ) : (
       undefined
     );
   };
 }
+
+export default withRouter(Banner);

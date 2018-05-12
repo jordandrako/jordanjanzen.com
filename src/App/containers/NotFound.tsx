@@ -1,12 +1,16 @@
 import * as React from 'react';
-import Banner, { BannerType } from '../components/Banner';
+import Banner, { BannerAction, BannerType } from '../components/Banner';
 import { SocialButton, SocialSites } from '../components/Button';
 import { Page, Row } from './Grid/grid';
 
 const NotFound = () => (
   <Page title="404">
     <Row>
-      <Banner type={BannerType.Danger}>
+      <Banner
+        title="Not Found"
+        type={BannerType.Danger}
+        action={BannerAction.Home}
+      >
         Sorry, I couldn't find that page.
       </Banner>
       <p>
@@ -14,13 +18,11 @@ const NotFound = () => (
         <span role="img" aria-label="bug">
           🐛
         </span>{' '}
-        link?<br />
+        link? Send me a tweet to let me know, thanks!<br />
         <SocialButton
           href="https://twitter.com/jordancjanzen"
           social={SocialSites.twitter}
-        >
-          Send me a tweet
-        </SocialButton>
+        />
       </p>
     </Row>
   </Page>

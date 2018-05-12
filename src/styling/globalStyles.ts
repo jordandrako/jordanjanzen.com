@@ -2,7 +2,7 @@ import { injectGlobal } from 'styled-components';
 import styledNormalize from 'styled-normalize';
 import FiraCode from './fonts/FiraCode-Regular.ttf';
 import { screenSizes } from './style-utils';
-import { getTheme, loadTheme } from './theme';
+import { getTheme, loadTheme, palette } from './theme';
 import { IPartialTheme } from './theme.types';
 
 export const globalStyles = (theme: IPartialTheme) => {
@@ -66,7 +66,7 @@ export const globalStyles = (theme: IPartialTheme) => {
     a {
       color: ${semanticColors.textColor};
       text-decoration: none;
-      border-bottom: 2px solid ${semanticColors.secondaryColor};
+      border-bottom: 2px solid ${palette.themeSecondary};
     }
   `;
 };

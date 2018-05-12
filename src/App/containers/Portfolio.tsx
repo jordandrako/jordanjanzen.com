@@ -1,13 +1,7 @@
 import * as React from 'react';
 import { Route } from 'react-router-dom';
 import { styled } from '../../styling';
-import {
-  IProjects,
-  ISkills,
-  TAddProject,
-  TRemoveProject,
-  TUpdateProject,
-} from '../App.types';
+import { IPortfolioProps } from '../App.types';
 import AddProjectForm from '../components/Forms/AddProjectForm/AddProjectForm';
 import Project from '../components/Project/Project';
 import ProjectSingle from '../components/Project/ProjectSingle/ProjectSingle';
@@ -21,20 +15,6 @@ const ListOfProjects = styled.ul`
   flex-flow: row wrap;
   justify-content: space-between;
 `;
-
-interface IPortfolioProps {
-  addProject: TAddProject;
-  isLoggedIn: boolean;
-  isMobile: boolean;
-  projects: IProjects;
-  removeProject: TRemoveProject;
-  skills: ISkills;
-  updateProject: TUpdateProject;
-  cloudinary?: {
-    key?: string;
-    secret?: string;
-  };
-}
 
 interface IPortfolioState {
   category?: string;
@@ -52,36 +32,39 @@ class Portfolio extends React.Component<IPortfolioProps, IPortfolioState> {
   public render(): JSX.Element {
     const {
       addProject,
-      cloudinary,
       isLoggedIn,
       isMobile,
       projects,
       removeProject,
+      secrets,
       skills,
-      updateProject,
+      // updateProject,
     } = this.props;
 
-    return projects ? (
+    return (
       <Page title="Portfolio">
-        <Row>
-          <ListOfProjects>
-            {Object.keys(projects)
-              .reverse()
-              .map(key => (
-                <Project
-                  key={key}
-                  index={key}
-                  details={projects[key]}
-                  updateProject={updateProject}
-                />
-              ))}
-          </ListOfProjects>
-        </Row>
+        {projects &&
+          Object.keys(projects).length > -1 && (
+            <Row>
+              <ListOfProjects>
+                {Object.keys(projects)
+                  .reverse()
+                  .map(key => (
+                    <Project
+                      key={key}
+                      index={key}
+                      details={projects[key]}
+                      // updateProject={updateProject}
+                    />
+                  ))}
+              </ListOfProjects>
+            </Row>
+          )}
         {isLoggedIn && skills ? (
           <Row>
             <AddProjectForm
               addProject={addProject}
-              cloudinary={cloudinary}
+              cloudinary={secrets.cloudinary}
               skills={skills}
             />
           </Row>
@@ -97,15 +80,13 @@ class Portfolio extends React.Component<IPortfolioProps, IPortfolioState> {
               projects={projects}
               index={props.match.params.projectId}
               details={projects[props.match.params.projectId]}
-              updateProject={updateProject}
+              // updateProject={updateProject}
               removeProject={removeProject}
               {...props}
             />
           )}
         />
       </Page>
-    ) : (
-      <div />
     );
   }
 }

@@ -1,17 +1,5 @@
 import { ITheme } from '../styling';
 
-export interface IObject {
-  [key: string]:
-    | string
-    | number
-    | boolean
-    | (string | number)[]
-    | any[]
-    | IObject
-    | null
-    | undefined;
-}
-
 export type TChildren =
   | string
   | JSX.Element
@@ -19,16 +7,17 @@ export type TChildren =
   | (() => string | JSX.Element)
   | (() => (string | JSX.Element)[])
   | null
-  | undefined;
+  | undefined
+  | any;
 
-export interface IImage extends IObject {
+export interface IImage extends Object {
   format: string;
   id: string;
   name: string;
   url: string;
 }
 
-export interface IProjectObject extends IObject {
+export interface IProjectObject extends Object {
   category: string;
   client: {
     industry: string;
@@ -40,25 +29,27 @@ export interface IProjectObject extends IObject {
   name: string;
   repo?: string;
   short_desc?: string | string[];
-  // skills: {
-  //   [key: number]: string;
-  // };
   skills: string[];
 }
 
-export interface ISkillObject extends IObject {
+export type TProject = IProjectObject;
+
+export interface IProjects {
+  [key: string]: TProject;
+}
+
+export interface ISkillObject extends Object {
   category: string;
   name: string;
 }
 
-export interface ISecretObject extends IObject {
-  cloudinary?: {
-    api?: string;
-    secret?: string;
-  };
+export type TSkill = ISkillObject;
+
+export interface ISkills {
+  [key: string]: TSkill;
 }
 
-export interface ITodoObject extends IObject {
+export interface ITodoObject extends Object {
   category: string;
   complete: boolean;
   desc: string | string[];
@@ -67,7 +58,13 @@ export interface ITodoObject extends IObject {
   priority: string;
 }
 
-export interface ILocalStorage extends IObject {
+export type TTodo = ITodoObject;
+
+export interface ITodos {
+  [key: string]: TTodo;
+}
+
+export interface ILocalStorage extends Object {
   projects: string | null;
   skills: string | null;
   todos: string | null;
@@ -87,7 +84,7 @@ export interface IAppActions {
   addProject: TAddProject;
   addSkill: TAddSkill;
   addTodo: TAddTodo;
-  updateProject: TUpdateProject;
+  updateProject?: TUpdateProject;
   updateSkill: TUpdateSkill;
   updateTodo: TUpdateTodo;
   removeProject: TRemoveProject;
@@ -95,28 +92,55 @@ export interface IAppActions {
   removeTodo: TRemoveTodo;
 }
 
-export interface IProjects {
-  [key: string]: IProjectObject;
-}
-
-export interface ISkills {
-  [key: string]: ISkillObject;
-}
-
-export interface ISecrets {
-  [key: string]: ISecretObject;
-}
-
-export interface ITodos {
-  [key: string]: ITodoObject;
+export interface ISecrets extends Object {
+  cloudinary?: {
+    api?: string;
+    secret?: string;
+  };
 }
 
 export interface IAppState extends IAppActions {
   isMobile: boolean;
-  isLoggedIn: boolean;
-  projects: { [key: string]: IProjectObject };
-  secrets: { [key: string]: ISecretObject };
-  skills: { [key: string]: ISkillObject };
+  secrets: ISecrets;
   theme: ITheme;
-  todos: { [key: string]: ITodoObject };
+  projects: {
+    [key: string]: TProject | null;
+  };
+  skills: {
+    [key: string]: TSkill | null;
+  };
+  todos: {
+    [key: string]: TTodo | null;
+  };
+}
+
+export interface IHomeProps {
+  isMobile: boolean;
+  projects: IProjects;
+}
+
+export interface IAboutProps {
+  isLoggedIn: boolean;
+  addSkill: TAddSkill;
+  removeSkill: TRemoveSkill;
+  skills: ISkills;
+  updateSkill: TUpdateSkill;
+}
+
+export interface IPortfolioProps {
+  isLoggedIn: boolean;
+  isMobile: boolean;
+  projects: IProjects;
+  skills: ISkills;
+  addProject: TAddProject;
+  removeProject: TRemoveProject;
+  // updateProject: TUpdateProject;
+  secrets: ISecrets;
+}
+
+export interface ITodoListProps {
+  todos: ITodos;
+  addTodo: TAddTodo;
+  updateTodo: TUpdateTodo;
+  removeTodo: TRemoveTodo;
 }

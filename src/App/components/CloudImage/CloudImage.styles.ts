@@ -1,7 +1,9 @@
 import { adjustHue, transparentize } from 'polished';
 import styled from 'styled-components';
-import { palette } from '../../../styling/theme';
+import { palette, semanticColors } from '../../../styling/theme';
 import { ICloudImageStyleProps } from './CloudImage.types';
+
+const borderSize = '3px';
 
 export const imageContainer = styled.div`
   background: ${(props: ICloudImageStyleProps) =>
@@ -15,24 +17,35 @@ export const imageContainer = styled.div`
   background-position: center top;
   width: 100%;
   height: 100%;
-  border: ${props => (props.border ? `3px solid ${palette.black}` : 'none')};
-  border-radius: ${props => {
+  border: ${(props: ICloudImageStyleProps) =>
+    props.border
+      ? `${borderSize} solid ${semanticColors.imageBorder}`
+      : 'none'};
+  ${(props: ICloudImageStyleProps) => {
     if (props.radius === 'max') {
-      return '50%';
+      return `
+        border-radius: 50%;
+        background: ${props.border ? semanticColors.imageBorder : undefined};
+      `;
     }
-    return '0';
-  }};
+    return '';
+  }}
 `;
 
 export const image = styled.img`
   border: ${(props: ICloudImageStyleProps) =>
-    props.border ? `3px solid ${palette.black}` : 'none'};
-  border-radius: ${props => {
+    props.border
+      ? `${borderSize} solid ${semanticColors.imageBorder}`
+      : 'none'};
+  ${(props: ICloudImageStyleProps) => {
     if (props.radius === 'max') {
-      return '50%';
+      return `
+        border-radius: 50%;
+        background: ${props.border ? semanticColors.imageBorder : undefined};
+      `;
     }
-    return '0';
-  }};
+    return '';
+  }}
   cursor: ${(props: ICloudImageStyleProps) =>
     props.link ? 'pointer' : 'unset'};
   ${(props: ICloudImageStyleProps) => {

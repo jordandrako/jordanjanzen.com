@@ -42,28 +42,8 @@ export const root = styled.div`
     }
   }
 
-  .showHide {
-    position: absolute;
-    top: 1em;
-    right: 1em;
-    width: 1.5em;
-    height: 1.5em;
-    padding: 0;
-    border: 2px solid ${palette.black};
-    border-radius: 50%;
-    background: transparent;
-    span {
-      display: block;
-      position: absolute;
-      width: 80%;
-      height: 3px;
-      background: ${palette.black};
-      transition: all 0.1s ease-in-out;
-      transform-origin: 50% 50%;
-      left: 10%;
-      top: 50%;
-      margin-top: -1.5px;
-    }
+  &.exited {
+    overflow-y: auto;
   }
 
   h4 {
@@ -80,11 +60,6 @@ export const root = styled.div`
   &.closed {
     h4 {
       margin: 0;
-    }
-    .showHide {
-      .vertical {
-        transform: rotate(90deg);
-      }
     }
   }
 `;
@@ -113,7 +88,7 @@ export const showHide = styled.button`
     margin-top: -1.5px;
   }
 
-  .closed & .vertical {
+  .entered & .vertical {
     transform: rotate(90deg);
   }
 `;

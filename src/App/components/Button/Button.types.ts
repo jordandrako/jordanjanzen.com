@@ -24,7 +24,7 @@ export interface IButtonProps {
   to?: string;
   type?: string;
   wide?: boolean;
-  onClick?: () => void;
+  onClick?: (e?: any) => void;
   icon?: boolean;
 }
 
@@ -50,6 +50,7 @@ export enum ButtonType {
   Primary,
   Secondary,
   Submit,
+  Subtle,
   Success,
   Warn,
 }

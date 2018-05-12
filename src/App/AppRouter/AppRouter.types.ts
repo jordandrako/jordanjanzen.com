@@ -1,14 +1,7 @@
-import { IAppState, IProjects } from '../App.types';
+import { IAppState } from '../App.types';
 
 export interface IAppRouter {}
 
-export interface IAppRouterProps extends IAppState {}
-
-export interface IAppRouterBaseProps {
+export interface IAppRouterProps extends IAppState {
   isLoggedIn: boolean;
-  isMobile?: boolean;
-}
-
-export interface IHomeProps extends IAppRouterBaseProps {
-  projects: IProjects;
 }

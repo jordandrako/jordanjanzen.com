@@ -1,12 +1,10 @@
-import { IObject, ITodoObject } from '../../App.types';
-
-export interface ITodo {}
+import { TTodo } from '../../App.types';
 
 export interface ITodoProps {
-  details: ITodoObject;
+  details: TTodo;
   index: string;
   removeTodo: (key: string) => void;
-  updateTodo: (key: string, updatedProp: IObject) => void;
+  updateTodo: (key: string, updatedProp: {}) => void;
 }
 
 export interface ITodoStyleProps {

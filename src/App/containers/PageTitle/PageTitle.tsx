@@ -4,13 +4,13 @@ import Button, { ButtonType } from '../../components/Button';
 import * as Styled from './PageTitle.styles';
 import { IPageTitleProps } from './PageTitle.types';
 
+const extension = getFileExtension();
 const PageTitle = (props: IPageTitleProps) => {
   const { ext = true } = props;
-  const extension = ext && getFileExtension();
   const title = (
     <span>
       {toTitleCase(props.title)}
-      {extension}
+      {ext && extension}
     </span>
   );
 

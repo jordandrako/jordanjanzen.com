@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { palette } from '../../../../styling';
 import Loading from '../../../containers/Loading';
-import Button from '../../Button';
+import Button, { ButtonType } from '../../Button';
 import CloudImage from '../../CloudImage';
 import { IProjectSingleProps } from '../Project.types';
 import * as Styled from './ProjectSingle.styles';
@@ -21,7 +21,7 @@ export default class ProjectSingle extends React.Component<
     if (nextProps.index !== prevState.delete) {
       return { delete: undefined };
     }
-    return;
+    return null;
   }
   constructor(props: IProjectSingleProps) {
     super(props);
@@ -56,7 +56,11 @@ export default class ProjectSingle extends React.Component<
             <Styled.Single>
               <Styled.Frame>
                 <Styled.Title>{details.name || 'Name'}</Styled.Title>
-                <Button to="/portfolio" type="delete" style={{ margin: 0 }} />
+                <Button
+                  to="/portfolio"
+                  buttonType={ButtonType.Delete}
+                  style={{ margin: 0 }}
+                />
               </Styled.Frame>
               <Styled.Content>
                 <p>{details.long_desc}</p>

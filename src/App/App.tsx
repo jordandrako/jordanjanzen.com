@@ -11,8 +11,8 @@ import { slugify } from '../utilities';
 import {
   IAppState,
   ILocalStorage,
-  IObject,
   IProjectObject,
+  ISecrets,
   ISkillObject,
   ITodoObject,
 } from './App.types';
@@ -38,14 +38,15 @@ const Wrapper = styled.div`
 export default class App extends React.Component<{}, IAppState> {
   private _ref?: any[];
   private _localStorage: ILocalStorage;
+  private _isLoggedIn: boolean;
 
   public constructor(props: any) {
     super(props);
     this._updateSize = this._updateSize.bind(this);
 
     // Authentication
-    this._authenticate = this._authenticate.bind(this);
     this._authHandler = this._authHandler.bind(this);
+    this._login = this._login.bind(this);
     this._logout = this._logout.bind(this);
     this._setRef = this._setRef.bind(this);
 
@@ -62,6 +63,7 @@ export default class App extends React.Component<{}, IAppState> {
     this._removeSkill = this._removeSkill.bind(this);
 
     this._ref = undefined;
+    this._isLoggedIn = false;
 
     this._localStorage = {
       projects: localStorage.getItem('projects'),
@@ -73,7 +75,6 @@ export default class App extends React.Component<{}, IAppState> {
       addProject: this._addProject,
       addSkill: this._addSkill,
       addTodo: this._addTodo,
-      isLoggedIn: false,
       isMobile: window.innerWidth <= screenSizesPx.tablet,
       projects: this._localStorage.projects
         ? JSON.parse(this._localStorage.projects)
@@ -124,17 +125,17 @@ export default class App extends React.Component<{}, IAppState> {
     return (
       <Wrapper className="App wrapper">
         <Sidebar
-          isLoggedIn={this.state.isLoggedIn}
+          isLoggedIn={this._isLoggedIn}
           isMobile={this.state.isMobile}
-          login={this._authenticate}
+          login={this._login}
           logout={this._logout}
         />
-        <AppRouter {...this.state} />
+        <AppRouter {...this.state} isLoggedIn={this._isLoggedIn} />
         {this.state.isMobile ? (
           <Footer
-            isLoggedIn={this.state.isLoggedIn}
+            isLoggedIn={this._isLoggedIn}
             isMobile={this.state.isMobile}
-            login={this._authenticate}
+            login={this._login}
             logout={this._logout}
           />
         ) : null}
@@ -143,6 +144,7 @@ export default class App extends React.Component<{}, IAppState> {
   }
 
   private _setRef(ref: 'unauthRef' | 'authRef'): Promise<any[] | string> {
+    console.log(`Setting ref: ${ref}`);
     return new Promise((resolve, reject) => {
       if (ref !== 'unauthRef' && ref !== 'authRef') {
         reject(
@@ -186,7 +188,7 @@ export default class App extends React.Component<{}, IAppState> {
           }),
           base.fetch('secrets', {
             context: this,
-            then(data: IObject[]) {
+            then(data: ISecrets) {
               this.setState({ secrets: data });
             },
           }),
@@ -204,7 +206,7 @@ export default class App extends React.Component<{}, IAppState> {
     }
   }
 
-  private _authenticate(): void {
+  private _login(): void {
     auth
       .signInWithPopup(provider)
       .then(result => this._authHandler(result))
@@ -217,8 +219,8 @@ export default class App extends React.Component<{}, IAppState> {
     this._setRef('unauthRef')
       .then(() =>
         auth.signOut().then(() => {
+          this._isLoggedIn = false;
           this.setState({
-            isLoggedIn: false,
             secrets: {},
           });
         })
@@ -233,7 +235,7 @@ export default class App extends React.Component<{}, IAppState> {
     const rootRef = database.ref();
     const successfulLogin = () => {
       this._setRef('authRef');
-      this.setState({ isLoggedIn: true });
+      this._isLoggedIn = true;
     };
     rootRef.once('value').then(snapshot => {
       const data = snapshot.val() || {};
@@ -281,8 +283,7 @@ export default class App extends React.Component<{}, IAppState> {
 
   private _removeTodo(key: string): void {
     const todos = { ...this.state.todos };
-    // TODO: make sure delete works
-    delete todos[key];
+    todos[key] = null;
     this.setState({ todos });
   }
 
@@ -304,14 +305,13 @@ export default class App extends React.Component<{}, IAppState> {
 
   private _removeProject(key: string): void {
     const projects = { ...this.state.projects };
-    // TODO: make sure delete works
-    delete projects[key];
+    projects[key] = null;
     this.setState({ projects });
   }
 
   private _addSkill(skill: ISkillObject): void {
     const skills = { ...this.state.skills };
-    const name = slugify(skill.name);
+    const name = slugify(skill!.name);
     skills[`skill-${name}`] = skill;
     this.setState({ skills });
   }
@@ -325,9 +325,9 @@ export default class App extends React.Component<{}, IAppState> {
   }
 
   private _removeSkill(key: string): void {
+    console.log('i tried...');
     const skills = { ...this.state.skills };
-    // TODO: make sure delete works
-    delete skills[key];
+    skills[key] = null;
     this.setState({ skills });
   }
 }

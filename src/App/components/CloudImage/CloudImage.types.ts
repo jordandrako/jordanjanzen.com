@@ -3,10 +3,10 @@ import { TChildren } from '../../App.types';
 export interface ICloudImage {}
 
 export interface ICloudImageProps {
-  align?: string | null;
+  align?: 'left' | 'right';
   angle?: string;
-  background?: string | null;
-  bo?: string | null;
+  background?: string;
+  bo?: string;
   border?: boolean;
   children?: TChildren | null;
   className?: string;
@@ -48,16 +48,15 @@ export interface ICloudImageProps {
   opacity?: string;
   publicId: string;
   radius?: string;
-  style?: {} | null;
+  style?: {};
   width?: string;
 }
 
 export interface ICloudImageStyleProps {
+  align?: string;
   background?: string;
-  dim?: boolean;
-  border?: boolean;
+  border: boolean;
+  dim: boolean;
+  link: boolean;
   radius?: string;
-  link?: boolean;
-  align?: string | null;
-  style?: {} | null;
 }

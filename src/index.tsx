@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { render } from 'react-dom';
 // import * as ReactGA from 'react-ga';
-import { HashRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 import App from './App/App';
 import registerServiceWorker from './registerServiceWorker';

@@ -133,7 +133,7 @@ class TodoList extends React.Component<ITodoListProps, ITodoListState> {
           />
         );
       }
-      if (!todos[key].complete) {
+      if (todos[key] && !todos[key].complete) {
         return (
           <Todo
             key={key}

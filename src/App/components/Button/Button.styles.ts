@@ -3,8 +3,21 @@ import styled from '../../../styling/styled-components';
 import { fonts, palette, semanticColors } from '../../../styling/theme';
 import { ButtonType as type, IButtonStyleProps } from './Button.types';
 
-const buttonTextColor = (props: IButtonStyleProps) =>
-  props.color || semanticColors.buttonText;
+const buttonTextColor = (props: IButtonStyleProps) => {
+  if (props.color) {
+    return props.color;
+  }
+  if (props.buttonType === type.Cta) {
+    return palette.lightwhite;
+  }
+  if (props.buttonType === type.Subtle) {
+    return palette.white;
+  }
+  return semanticColors.buttonColor;
+};
+// props.color || props.buttonType === type.Subtle
+//   ? palette.lightwhite
+//   : semanticColors.buttonText;
 
 const buttonBackground = (props: IButtonStyleProps) => {
   if (props.bg) {
@@ -25,6 +38,10 @@ const buttonBackground = (props: IButtonStyleProps) => {
       break;
     case type.Cta:
       color = palette.blue;
+      break;
+    case type.Subtle:
+      color = palette.grey;
+      break;
     default:
       break;
   }
@@ -48,15 +65,7 @@ export const BaseButton = styled.button`
   padding: ${(props: IButtonStyleProps) =>
     !!props.arrows ? '0.25em 0.8em 0.25em 1.5em' : '.5em .8em'};
   position: relative;
-  color: ${(props: IButtonStyleProps) => {
-    if (props.buttonType === type.Cta) {
-      return palette.lightwhite;
-    }
-    if (props.color) {
-      return props.color;
-    }
-    return semanticColors.buttonText;
-  }};
+  color: ${buttonTextColor};
   font-family: ${fonts.monospace};
   background: ${buttonBackground};
   display: flex;

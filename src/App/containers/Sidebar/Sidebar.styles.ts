@@ -1,12 +1,7 @@
 import { adjustHue } from 'polished';
 import { Link } from 'react-router-dom';
-import {
-  fonts,
-  palette,
-  screenSizes,
-  semanticColors,
-  styled,
-} from '../../../styling/index';
+import { fonts, palette, screenSizes, styled } from '../../../styling/index';
+const JJMark = require('../../../images/JJMark.svg');
 
 export const LeftColumn = styled.aside`
   background: ${palette.black};
@@ -53,7 +48,7 @@ export const Logo = styled.h2`
   &:after {
     content: '';
     display: block;
-    background: url('../../images/JJMark.svg') no-repeat;
+    background: url(${JJMark}) no-repeat;
     background-position: center;
     background-size: 4em;
     opacity: 0.5;
@@ -96,8 +91,8 @@ export const Tagline = styled.h3`
   background: ${palette.lightblue};
   background: linear-gradient(
     135deg,
-    ${adjustHue(-20, semanticColors.primaryColor)} 0,
-    ${semanticColors.primaryColor} 100%
+    ${adjustHue(-20, palette.themePrimary)} 0,
+    ${palette.themePrimary} 100%
   );
   padding: 4px 1em;
   text-align: center;

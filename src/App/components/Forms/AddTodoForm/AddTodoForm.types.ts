@@ -1,5 +1,5 @@
-import { ITodoObject } from '../../../App.types';
+import { TTodo } from '../../../App.types';
 
 export interface IAddTodoFormProps {
-  addTodo: (todo: ITodoObject) => void;
+  addTodo: (todo: TTodo) => void;
 }

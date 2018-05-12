@@ -1,9 +1,15 @@
 import * as moment from 'moment';
 import { adjustHue } from 'polished';
 import * as React from 'react';
-import { fonts, screenSizes, semanticColors, styled } from '../../styling';
-import { IAppState } from '../App.types';
-import Button from '../components/Button';
+import {
+  fonts,
+  palette,
+  screenSizes,
+  semanticColors,
+  styled,
+} from '../../styling';
+import { IHomeProps } from '../App.types';
+import Button, { ButtonType } from '../components/Button';
 import CloudImage from '../components/CloudImage';
 import Project from '../components/Project/Project';
 import { Hero, Page, Row } from './Grid/grid';
@@ -25,8 +31,8 @@ const InnerHero = styled.div`
   width: 100%;
   background: linear-gradient(
     135deg,
-    ${adjustHue(-20, semanticColors.primaryColor)} 0,
-    ${semanticColors.primaryColor} 100%
+    ${adjustHue(-20, palette.themePrimary)} 0,
+    ${palette.themePrimary} 100%
   );
   display: flex;
   flex-direction: column;
@@ -76,55 +82,14 @@ const Entice = styled.p`
   margin: 0.5em 0 0;
 `;
 
-class Home extends React.Component<Partial<IAppState>, {}> {
-  constructor(props: any) {
+class Home extends React.Component<IHomeProps, {}> {
+  constructor(props: IHomeProps) {
     super(props);
     this.state = {};
   }
 
   public render(): JSX.Element {
     const { projects, isMobile } = this.props;
-
-    const HeroContent = (
-      <OuterHero>
-        <InnerHero>
-          {isMobile ? (
-            <CloudImage
-              publicId="Jordan_Headshot"
-              format="jpg"
-              name="Jordan's Headshot."
-              width="140"
-              height="140"
-              crop="fill"
-              gravity="face"
-              radius="max"
-            />
-          ) : null}
-          <Intro>
-            Hey there!<br />I'm a Developer<br />&amp; UX Designer.
-          </Intro>
-          <p>
-            My name is <strong>Jordan Janzen</strong>.<br />I'm{' '}
-            <strong>
-              {moment('19911109', 'YYYYMMDD').fromNow(true)} old
-            </strong>{' '}
-            and living in <strong>Seattle, WA</strong>. I love building sites
-            and web apps that look great and function even better.
-          </p>
-          <Cta>
-            <Button
-              href="https://res.cloudinary.com/jordan-janzen/image/upload/v1511291826/Jordan_Janzen_CV.pdf"
-              target="_blank"
-              type="cta"
-            >
-              <i className="fa fa-file-text" aria-hidden="true" /> Download My
-              CV
-            </Button>
-            <Entice>See what I can do for your company!</Entice>
-          </Cta>
-        </InnerHero>
-      </OuterHero>
-    );
 
     const projectIndex = projects ? Object.keys(projects).length - 1 : -1;
     const projectKey = projects ? Object.keys(projects)[projectIndex] : '';
@@ -142,10 +107,10 @@ class Home extends React.Component<Partial<IAppState>, {}> {
               crop="limit"
               style={{ backgroundPosition: 'left' }}
             >
-              {HeroContent}
+              {this._heroContent()}
             </CloudImage>
           ) : (
-            HeroContent
+            this._heroContent()
           )}
         </Hero>
         <Row>
@@ -153,18 +118,55 @@ class Home extends React.Component<Partial<IAppState>, {}> {
           {projectKey ? (
             <Project
               index={projectKey}
-              details={projects![projectKey]}
-              // style={{ margin: '0 0 1em', width: '100%' }}
-              updateProject={this.props.updateProject!}
+              details={projects[projectKey]}
+              style={{ margin: '0 0 1em', width: '100%' }}
             />
           ) : null}
-          <Button to="/portfolio/" type="cta">
+          <Button to="/portfolio/" buttonType={ButtonType.Cta}>
             View My Portfolio
           </Button>
         </Row>
       </Page>
     );
   }
+
+  private _heroContent = (): JSX.Element => (
+    <OuterHero>
+      <InnerHero>
+        {this.props.isMobile ? (
+          <CloudImage
+            publicId="Jordan_Headshot"
+            format="png"
+            name="Jordan's Headshot."
+            width="142"
+            height="142"
+            crop="fill"
+            gravity="face"
+            radius="max"
+          />
+        ) : null}
+        <Intro>
+          Hey there!<br />I'm a Developer<br />&amp; UX Designer.
+        </Intro>
+        <p>
+          My name is <strong>Jordan Janzen</strong>.<br />I'm{' '}
+          <strong>{moment('19911109', 'YYYYMMDD').fromNow(true)} old</strong>{' '}
+          and living in <strong>Seattle, WA</strong>. I love building sites and
+          web apps that look great and function even better.
+        </p>
+        <Cta>
+          <Button
+            href="https://res.cloudinary.com/jordan-janzen/image/upload/v1511291826/Jordan_Janzen_CV.pdf"
+            target="_blank"
+            buttonType={ButtonType.Cta}
+          >
+            <i className="fa fa-file-text" aria-hidden="true" /> Download My CV
+          </Button>
+          <Entice>See what I can do for your company!</Entice>
+        </Cta>
+      </InnerHero>
+    </OuterHero>
+  );
 }
 
 // Home.propTypes = {

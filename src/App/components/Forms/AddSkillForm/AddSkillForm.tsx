@@ -14,7 +14,9 @@ export default class AddSkillForm extends React.Component<
 
   public constructor(props: IAddSkillFormProps) {
     super(props);
-    this._createSkill = this._createSkill.bind(this);
+    this._form = React.createRef();
+    this._name = React.createRef();
+    this._category = React.createRef();
   }
 
   public render(): JSX.Element {
@@ -59,7 +61,7 @@ export default class AddSkillForm extends React.Component<
     );
   }
 
-  private _createSkill(e: any): void {
+  private _createSkill = (e: any): void => {
     e.preventDefault();
     const skill = {
       category: this._category.current!.value,
@@ -67,5 +69,5 @@ export default class AddSkillForm extends React.Component<
     };
     this.props.addSkill(skill);
     this._form.current!.reset();
-  }
+  };
 }

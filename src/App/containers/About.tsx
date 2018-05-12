@@ -3,7 +3,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { screenSizes } from '../../styling';
 import { fonts, palette } from '../../styling/theme';
-import { IAppState, TAddSkill } from '../App.types';
+import { IAboutProps, TAddSkill } from '../App.types';
 import Button, { ButtonType } from '../components/Button';
 import CloudImage from '../components/CloudImage';
 import AddSkillForm from '../components/Forms/AddSkillForm/AddSkillForm';
@@ -65,11 +65,11 @@ const HistoryColumn = styled.div`
   border-top: 2px solid ${palette.blue};
 `;
 
-class About extends React.Component<Partial<IAppState>, {}> {
-  constructor(props: Partial<IAppState>) {
+class About extends React.Component<IAboutProps, {}> {
+  constructor(props: IAboutProps) {
     super(props);
-    this._renderList = this._renderList.bind(this);
-    this._removeSkill = this._removeSkill.bind(this);
+    // this._renderList = this._renderList.bind(this);
+    // this._removeSkill = this._removeSkill.bind(this);
   }
 
   public render(): JSX.Element {
@@ -375,16 +375,16 @@ class About extends React.Component<Partial<IAppState>, {}> {
     );
   }
 
-  private _removeSkill(key: string): void {
-    this.props.removeSkill!(key);
-  }
+  private _removeSkill = (key: string): void => {
+    this.props.removeSkill(key);
+  };
 
-  private _renderList(category: string): JSX.Element | JSX.Element[] {
-    return Object.keys(this.props.skills!).map(key => {
-      if (this.props.skills![key].category === category) {
+  private _renderList = (category: string): (JSX.Element | undefined)[] => {
+    return Object.keys(this.props.skills).map(key => {
+      if (this.props.skills![key]!.category === category) {
         return (
           <li key={key}>
-            {this.props.skills![key].name}
+            {this.props.skills![key]!.name}
             {this.props.isLoggedIn && (
               <Button
                 to="#"
@@ -396,9 +396,9 @@ class About extends React.Component<Partial<IAppState>, {}> {
           </li>
         );
       }
-      return <li key={0}>No Skills in this category. Log in and add some.</li>;
+      return undefined;
     });
-  }
+  };
 }
 
 export default About;

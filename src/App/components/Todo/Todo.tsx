@@ -13,8 +13,11 @@ export default class Todo extends React.Component<ITodoProps, {}> {
     this._index = this.props.index;
   }
 
-  public render(): JSX.Element {
+  public render(): JSX.Element | null {
     const { details } = this.props;
+    if (!details) {
+      return null;
+    }
     const link = details.link ? (
       <p>
         <a target="_blank" rel="noopener noreferrer" href={details.link}>
@@ -96,7 +99,7 @@ export default class Todo extends React.Component<ITodoProps, {}> {
 
   private _toggleComplete(e: any): void {
     const updatedProp = {
-      complete: !this.props.details.complete,
+      complete: !this.props.details!.complete,
     };
     this.props.updateTodo(this._index, updatedProp);
   }

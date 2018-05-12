@@ -11,20 +11,20 @@ const imageHeight = '250';
 export default class Project extends React.Component<IProjectProps, {}> {
   public constructor(props: any) {
     super(props);
-    this._handleChange = this._handleChange.bind(this);
+    // this._handleChange = this._handleChange.bind(this);
   }
 
   public render(): JSX.Element {
     const { details, index } = this.props;
-    if (details.images) {
-      const firstImage = Object.keys(details.images)[0];
+    if (details!.images) {
+      const firstImage = Object.keys(details!.images)[0];
       const {
         id: imageId,
         format: imageFormat,
         name: imageName,
-      } = details.images[firstImage];
+      } = details!.images[firstImage];
 
-      const { name: clientName, industry: clientIndustry } = details.client;
+      const { name: clientName, industry: clientIndustry } = details!.client;
       return (
         <Styled.Item key={index} {...this.props}>
           <Styled.ThumbnailLink to={`/portfolio/${index}`}>
@@ -41,7 +41,7 @@ export default class Project extends React.Component<IProjectProps, {}> {
                 effects="e_blur:80"
                 dim={true}
               >
-                <Styled.ProjectTitle>{details.name}</Styled.ProjectTitle>
+                <Styled.ProjectTitle>{details!.name}</Styled.ProjectTitle>
               </CloudImage>
             </Styled.Thumbnail>
           </Styled.ThumbnailLink>
@@ -58,14 +58,14 @@ export default class Project extends React.Component<IProjectProps, {}> {
             </Styled.Client>
             <Styled.Skills>
               <Styled.Subheading>
-                Category: {toTitleCase(details.category)}
+                Category: {toTitleCase(details!.category)}
               </Styled.Subheading>
               <ul>
-                {details.skills.map(skill => <li key={skill}>{skill}</li>)}
+                {details!.skills.map(skill => <li key={skill}>{skill}</li>)}
               </ul>
             </Styled.Skills>
           </Styled.Details>
-          <Styled.Description>{details.short_desc}</Styled.Description>
+          <Styled.Description>{details!.short_desc}</Styled.Description>
           <Styled.Buttons>
             <li>
               <Button
@@ -76,10 +76,10 @@ export default class Project extends React.Component<IProjectProps, {}> {
                 <i className="fa fa-search" aria-hidden="true" /> More Details
               </Button>
             </li>
-            {details.link !== '' ? (
+            {details!.link !== '' ? (
               <li>
                 <Button
-                  href={details.link}
+                  href={details!.link}
                   target="_blank"
                   small={true}
                   buttonType={ButtonType.Secondary}
@@ -89,10 +89,10 @@ export default class Project extends React.Component<IProjectProps, {}> {
                 </Button>
               </li>
             ) : null}
-            {details.repo !== '' ? (
+            {details!.repo !== '' ? (
               <li>
                 <Button
-                  href={details.repo}
+                  href={details!.repo}
                   target="_blank"
                   small={true}
                   buttonType={ButtonType.Secondary}
@@ -108,11 +108,11 @@ export default class Project extends React.Component<IProjectProps, {}> {
     return <Loading isLoading={true} />;
   }
 
-  private _handleChange(e: any, key: string) {
-    const updatedProp = {
-      [e.target.name]:
-        e.target.type === 'checkbox' ? e.target.checked : e.target.value,
-    };
-    this.props.updateProject(key, updatedProp);
-  }
+  // private _handleChange(e: any, key: string) {
+  //   const updatedProp = {
+  //     [e.target.name]:
+  //       e.target.type === 'checkbox' ? e.target.checked : e.target.value,
+  //   };
+  //   this.props.updateProject(key, updatedProp);
+  // }
 }

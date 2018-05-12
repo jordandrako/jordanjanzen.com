@@ -1,7 +1,7 @@
-import { IProjectObject, ISkills } from '../../../App.types';
+import { ISkills, TProject } from '../../../App.types';
 
 export interface IAddProjectFormProps {
-  addProject: (project: IProjectObject) => void;
+  addProject: (project: TProject) => void;
   skills: ISkills;
   cloudinary?: {
     key?: string;

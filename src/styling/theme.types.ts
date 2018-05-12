@@ -12,7 +12,7 @@ export interface IPartialTheme {
   semanticColors?: Partial<ISemanticColors>;
 }
 
-export interface IPalette {
+export interface IPaletteColors {
   black: string;
   blue: string;
   cyan: string;
@@ -29,12 +29,21 @@ export interface IPalette {
   yellow: string;
 }
 
+export interface IPalette extends IPaletteColors {
+  themeDark: string;
+  themeDarker: string;
+  themePrimary: string;
+  themeSecondary: string;
+  themeTertiary: string;
+  themeLight: string;
+  themeLighter: string;
+}
+
 export interface ISemanticColors {
   buttonColor: string;
   buttonText: string;
+  imageBorder: string;
   linkColor: string;
-  primaryColor: string;
-  secondaryColor: string;
   siteBackground: string;
   textColor: string;
 }

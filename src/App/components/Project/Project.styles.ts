@@ -1,19 +1,13 @@
 import { adjustHue } from 'polished';
 import { Link } from 'react-router-dom';
-import {
-  fonts,
-  palette,
-  screenSizes,
-  semanticColors,
-  styled,
-} from '../../../styling';
+import { fonts, palette, screenSizes, styled } from '../../../styling';
 
 export const imageHeight = '250';
 
 export const Item = styled.li`
   width: calc(50% - 1em);
   min-width: 300px;
-  border: 5px double ${palette.black};
+  border: 5px double ${palette.themeDark};
   padding: 1em;
   position: relative;
   display: flex;
@@ -27,10 +21,12 @@ export const Item = styled.li`
 `;
 
 export const ThumbnailLink = styled(Link)`
-  line-height: unset !important;
-  text-shadow: none !important;
-  color: unset !important;
-  border: none !important;
+  h2 {
+    line-height: 1.6;
+    text-shadow: none;
+    color: unset;
+  }
+  border: none;
 `;
 
 // export const ThumbnailArea = styled.div`
@@ -46,6 +42,10 @@ export const Thumbnail = styled.section`
     justify-content: center;
     padding: 4em 2em;
     border-width: 5px;
+
+    @media (max-width: ${screenSizes.phone}) {
+      padding: 2em 0;
+    }
   }
 `;
 
@@ -55,14 +55,18 @@ export const ProjectTitle = styled.h2`
   text-align: center;
   text-transform: uppercase;
   margin: 0;
-  background: ${palette.lightblue};
+  background: ${palette.themePrimary};
   background: linear-gradient(
     135deg,
-    ${adjustHue(-20, semanticColors.primaryColor)} 0,
-    ${semanticColors.primaryColor} 100%
+    ${adjustHue(-20, palette.themePrimary)} 0,
+    ${palette.themePrimary} 100%
   );
   padding: 0.33em 0.5em;
   box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.33);
+
+  @media (max-width: ${screenSizes.phone}) {
+    font-size: 1.2rem;
+  }
 `;
 
 export const Details = styled.div`
@@ -72,8 +76,8 @@ export const Details = styled.div`
   justify-content: space-between;
   padding: 1em;
   margin-bottom: 1em;
-  background: ${palette.black};
-  color: ${palette.lightwhite};
+  background: ${palette.themeDark};
+  color: ${palette.themeLight};
 `;
 
 export const Description = styled.p`

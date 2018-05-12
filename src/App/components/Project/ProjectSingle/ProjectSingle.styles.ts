@@ -40,7 +40,7 @@ export const Single = styled.div`
   height: 84vh;
   margin: 30px;
   background: ${semanticColors.siteBackground};
-  box-shadow: 0 -3px 0 ${semanticColors.primaryColor}, 0 0 9px #000;
+  box-shadow: 0 -3px 0 ${palette.themePrimary}, 0 0 9px #000;
   z-index: 1000;
   pointer-events: all;
   display: flex;

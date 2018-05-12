@@ -41,6 +41,7 @@ export default class Button extends React.Component<IButtonProps, {}> {
             <Styled.DeleteButton
               {...styleProps}
               className="fa fa-times-circle close"
+              onClick={this.props.onClick}
             />
           </Styled.linkWrapper>
         );
@@ -50,6 +51,7 @@ export default class Button extends React.Component<IButtonProps, {}> {
           {...styleProps}
           className="fa fa-times-circle close"
           innerRef={this._button}
+          onClick={this.props.onClick}
         />
       );
     }
@@ -87,6 +89,7 @@ export default class Button extends React.Component<IButtonProps, {}> {
       <Styled.BaseButton
         {...styleProps}
         type={this.props.type ? this.props.type : undefined}
+        onClick={this.props.onClick}
       >
         {this.props.text || this.props.children || 'Button'}
       </Styled.BaseButton>

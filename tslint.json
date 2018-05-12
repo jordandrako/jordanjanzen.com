@@ -9,6 +9,7 @@
     "exclude": ["config/**/*.js", "node_modules/**/*.ts"]
   },
   "rules": {
+    "no-console": false,
     "array-type": [true, "array"],
     "function-name": [
       true,
@@ -21,14 +22,16 @@
       }
     ],
     "import-name": false,
+    "no-empty-interface": false,
+    "no-unused-expression": [true, "allow-fast-null-checks"],
+    "no-var-requires": false,
+    "object-shorthand-properties-first": false,
     "variable-name": [
       true,
       "ban-keywords",
       "check-format",
       "allow-leading-underscore",
       "allow-pascal-case"
-    ],
-    "no-empty-interface": false,
-    "no-unused-expression": [true, "allow-fast-null-checks"]
+    ]
   }
 }

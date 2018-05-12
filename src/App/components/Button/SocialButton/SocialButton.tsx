@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { ISocialButton, SocialSites } from '../../Button';
-import * as Styled from './SocialButton.styles';
+import Button, { ISocialButton, SocialSites } from '../../Button';
+// import * as Styled from './SocialButton.styles';
 
 export const SocialButton = (props: ISocialButton) => {
   const social = props.social;
+  const socialIcon = SocialSites[social];
   let link;
   let text;
   let bg;
@@ -42,7 +43,7 @@ export const SocialButton = (props: ISocialButton) => {
   }
 
   return (
-    <Styled.root
+    <Button
       href={link}
       target="_blank"
       small={true}
@@ -50,9 +51,7 @@ export const SocialButton = (props: ISocialButton) => {
       color={color}
       {...props}
     >
-      <span>
-        <i className={`fa social fa-${social}`} aria-hidden="true" /> {text}
-      </span>
-    </Styled.root>
+      <i className={`fa social fa-${socialIcon}`} aria-hidden="true" /> {text}
+    </Button>
   );
 };

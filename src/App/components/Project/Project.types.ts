@@ -1,20 +1,19 @@
-import { IProjectObject, IProjects } from '../../App.types';
-
-export interface IProject {}
+import { History } from 'history';
+import { IProjects, TProject, TUpdateProject } from '../../App.types';
 
 export interface IProjectProps {
-  details: IProjectObject;
+  details: TProject;
   index: string;
   hasBeenVisible?: boolean;
-  updateProject: (key: string, updatedProp: {}) => void;
+  updateProject?: TUpdateProject;
+  style?: {};
 }
 
 export interface IProjectStyleProps {}
 
 export interface IProjectSingleProps extends IProjectProps {
   removeProject: (key: string) => void;
-  // TODO: find router type for history object
-  history: any;
+  history: History;
   projects: IProjects;
   isMobile: boolean;
   isLoggedIn: boolean;
