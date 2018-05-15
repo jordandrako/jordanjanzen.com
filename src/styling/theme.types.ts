@@ -40,7 +40,7 @@ export interface IPalette extends IPaletteColors {
 }
 
 export interface ISemanticColors {
-  buttonColor: string;
+  buttonBackground: string;
   buttonText: string;
   imageBorder: string;
   linkColor: string;

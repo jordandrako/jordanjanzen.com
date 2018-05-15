@@ -36,9 +36,7 @@ class Portfolio extends React.Component<IPortfolioProps, IPortfolioState> {
       isMobile,
       projects,
       removeProject,
-      secrets,
       skills,
-      // updateProject,
     } = this.props;
 
     return (
@@ -50,23 +48,14 @@ class Portfolio extends React.Component<IPortfolioProps, IPortfolioState> {
                 {Object.keys(projects)
                   .reverse()
                   .map(key => (
-                    <Project
-                      key={key}
-                      index={key}
-                      details={projects[key]}
-                      // updateProject={updateProject}
-                    />
+                    <Project key={key} index={key} details={projects[key]} />
                   ))}
               </ListOfProjects>
             </Row>
           )}
         {isLoggedIn && skills ? (
           <Row>
-            <AddProjectForm
-              addProject={addProject}
-              cloudinary={secrets.cloudinary}
-              skills={skills}
-            />
+            <AddProjectForm addProject={addProject} skills={skills} />
           </Row>
         ) : null}
         <Route
@@ -80,7 +69,6 @@ class Portfolio extends React.Component<IPortfolioProps, IPortfolioState> {
               projects={projects}
               index={props.match.params.projectId}
               details={projects[props.match.params.projectId]}
-              // updateProject={updateProject}
               removeProject={removeProject}
               {...props}
             />

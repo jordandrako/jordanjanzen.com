@@ -2,11 +2,11 @@ import * as React from 'react';
 import * as superagent from 'superagent';
 import * as Styled from './Dropzone.styles';
 import { IDropzoneProps } from './Dropzone.types';
-const sha1 = require('sha1'); // tslint:disable-line no-var-requires
+const sha1 = require('sha1');
+
 class ImageDropzone extends React.Component<IDropzoneProps, {}> {
   public constructor(props: IDropzoneProps) {
     super(props);
-    this._uploadFile = this._uploadFile.bind(this);
   }
 
   public render(): JSX.Element {
@@ -19,11 +19,11 @@ class ImageDropzone extends React.Component<IDropzoneProps, {}> {
     );
   }
 
-  private _uploadFile(files: any[]) {
-    const { cloudinary } = this.props;
-    if (!cloudinary) {
-      throw () => 'Not logged in.';
-    }
+  private _uploadFile = (files: any[]): void => {
+    const cloudinary = {
+      api: process.env.REACT_APP_CLOUDINARY_API,
+      secret: process.env.REACT_APP_CLOUDINARY_SECRET,
+    };
 
     const file = files[0];
 
@@ -38,10 +38,10 @@ class ImageDropzone extends React.Component<IDropzoneProps, {}> {
     }`;
     const signature = sha1(paramsStr);
 
-    // tslint:disable
     // Disable tslint since the Cloudinary API requires these in a specific order.
+    // tslint:disable:object-literal-sort-keys
     const params = {
-      api_key: cloudinary.key,
+      api_key: cloudinary.api,
       upload_preset: uploadPreset,
       signature,
       timestamp,
@@ -71,7 +71,7 @@ class ImageDropzone extends React.Component<IDropzoneProps, {}> {
 
       this.props.addImage(image);
     });
-  }
+  };
 }
 
 export default ImageDropzone;

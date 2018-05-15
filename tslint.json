@@ -23,6 +23,7 @@
     ],
     "import-name": false,
     "no-empty-interface": false,
+    "no-reference": false,
     "no-unused-expression": [true, "allow-fast-null-checks"],
     "no-var-requires": false,
     "object-shorthand-properties-first": false,

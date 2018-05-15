@@ -87,7 +87,6 @@ class AppRouter extends React.Component<
       isMobile: this.props.isMobile,
       projects: this.props.projects as IProjects,
       removeProject: this.props.removeProject,
-      secrets: this.props.secrets,
       skills: this.props.skills as ISkills,
       // updateProject: this.props.updateProject,
     };

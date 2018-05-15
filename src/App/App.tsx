@@ -12,7 +12,6 @@ import {
   IAppState,
   ILocalStorage,
   IProjectObject,
-  ISecrets,
   ISkillObject,
   ITodoObject,
 } from './App.types';
@@ -35,35 +34,20 @@ const Wrapper = styled.div`
   }
 `;
 
+// TODO: remove when re-base has typing
+// tslint:disable-next-line interface-name
+interface RebaseBinding {}
+
 export default class App extends React.Component<{}, IAppState> {
-  private _ref?: any[];
+  private _ref: RebaseBinding[];
   private _localStorage: ILocalStorage;
   private _isLoggedIn: boolean;
 
   public constructor(props: any) {
     super(props);
-    this._updateSize = this._updateSize.bind(this);
 
-    // Authentication
-    this._authHandler = this._authHandler.bind(this);
-    this._login = this._login.bind(this);
-    this._logout = this._logout.bind(this);
-    this._setRef = this._setRef.bind(this);
-
-    // Database management
-    this._addTodo = this._addTodo.bind(this);
-    this._updateTodo = this._updateTodo.bind(this);
-    this._removeTodo = this._removeTodo.bind(this);
-
-    this._addProject = this._addProject.bind(this);
-    this._updateProject = this._updateProject.bind(this);
-    this._removeProject = this._removeProject.bind(this);
-
-    this._addSkill = this._addSkill.bind(this);
-    this._removeSkill = this._removeSkill.bind(this);
-
-    this._ref = undefined;
     this._isLoggedIn = false;
+    this._ref = [];
 
     this._localStorage = {
       projects: localStorage.getItem('projects'),
@@ -82,7 +66,6 @@ export default class App extends React.Component<{}, IAppState> {
       removeProject: this._removeProject,
       removeSkill: this._removeSkill,
       removeTodo: this._removeTodo,
-      secrets: {},
       skills: this._localStorage.skills
         ? JSON.parse(this._localStorage.skills)
         : {},
@@ -142,18 +125,21 @@ export default class App extends React.Component<{}, IAppState> {
     );
   }
 
-  private _setRef(ref: 'unauthRef' | 'authRef'): Promise<any[] | string> {
-    console.log(`Setting ref: ${ref}`);
+  private _setRef = (
+    ref: 'unauthRef' | 'authRef'
+  ): Promise<RebaseBinding[]> => {
     return new Promise((resolve, reject) => {
       if (ref !== 'unauthRef' && ref !== 'authRef') {
         reject(
           `Ref is not correctly defined. Must be either 'unauthRef' or 'authRef'. Was: ${ref}`
         );
       }
-      if (this._ref) {
+
+      if (this._ref.length > 0) {
         base.removeBinding(this._ref);
-        this._ref = undefined;
+        this._ref = [];
       }
+
       if (ref === 'unauthRef') {
         this._ref = [
           base.bindToState('todos', {
@@ -172,6 +158,7 @@ export default class App extends React.Component<{}, IAppState> {
       }
 
       if (ref === 'authRef') {
+        // const that = this;
         this._ref = [
           base.syncState('todos', {
             context: this,
@@ -185,51 +172,42 @@ export default class App extends React.Component<{}, IAppState> {
             context: this,
             state: 'skills',
           }),
-          base.fetch('secrets', {
-            context: this,
-            then(data: ISecrets) {
-              this.setState({ secrets: data });
-            },
-          }),
         ];
       }
-      resolve('Ref (re)set');
+      resolve(['Ref (re)set']);
     });
-  }
+  };
 
-  private _updateSize(): void {
+  private _updateSize = (): void => {
     if (window.innerWidth <= screenSizesPx.tablet) {
       this.setState({ isMobile: true });
     } else {
       this.setState({ isMobile: false });
     }
-  }
+  };
 
-  private _login(): void {
+  private _login = (): void => {
     auth
       .signInWithPopup(provider)
       .then(result => this._authHandler(result))
       .catch((error: any) => {
         throw error;
       });
-  }
+  };
 
-  private _logout(): void {
+  private _logout = (): void => {
     this._setRef('unauthRef')
       .then(() =>
         auth.signOut().then(() => {
           this._isLoggedIn = false;
-          this.setState({
-            secrets: {},
-          });
         })
       )
       .catch((error: any) => {
         throw error;
       });
-  }
+  };
 
-  private _authHandler(authData: any): void {
+  private _authHandler = (authData: any): void => {
     const uid = authData.user.uid || authData.uid;
     const rootRef = database.ref();
     const successfulLogin = () => {
@@ -257,17 +235,17 @@ export default class App extends React.Component<{}, IAppState> {
         throw new Error('Log in denied. You are not the owner of this site.');
       }
     });
-  }
+  };
 
   // update our state
-  private _addTodo(todo: ITodoObject): void {
+  private _addTodo = (todo: ITodoObject): void => {
     const todos = { ...this.state.todos };
     const timestamp = Date.now();
     todos[`todo-${timestamp}`] = { ...todo };
-    this.setState({ todos }); // same as this.setState({ todos: todos })
-  }
+    this.setState({ todos });
+  };
 
-  private _updateTodo(key: string, updatedProp: ITodoObject): void {
+  private _updateTodo = (key: string, updatedProp: ITodoObject): void => {
     const todos = { ...this.state.todos };
     const todo = todos[key];
     const updatedTodo = {
@@ -278,55 +256,57 @@ export default class App extends React.Component<{}, IAppState> {
     this.setState({
       todos,
     });
-  }
+  };
 
-  private _removeTodo(key: string): void {
+  private _removeTodo = (key: string): void => {
     const todos = { ...this.state.todos };
     todos[key] = null;
     this.setState({ todos });
-  }
+  };
 
-  private _addProject(project: IProjectObject): void {
+  private _addProject = (project: IProjectObject): void => {
     const projects = { ...this.state.projects };
     const timestamp = Date.now();
     projects[`project-${timestamp}`] = project;
     // set state
     this.setState({ projects });
-  }
+  };
 
-  private _updateProject(key: string, updatedProject: IProjectObject): void {
+  private _updateProject = (
+    key: string,
+    updatedProject: IProjectObject
+  ): void => {
     const projects = { ...this.state.projects };
     projects[key] = updatedProject;
     this.setState({
       projects,
     });
-  }
+  };
 
-  private _removeProject(key: string): void {
+  private _removeProject = (key: string): void => {
     const projects = { ...this.state.projects };
     projects[key] = null;
     this.setState({ projects });
-  }
+  };
 
-  private _addSkill(skill: ISkillObject): void {
+  private _addSkill = (skill: ISkillObject): void => {
     const skills = { ...this.state.skills };
     const name = slugify(skill!.name);
     skills[`skill-${name}`] = skill;
     this.setState({ skills });
-  }
+  };
 
-  private _updateSkill(key: string, updatedSkill: ISkillObject): void {
+  private _updateSkill = (key: string, updatedSkill: ISkillObject): void => {
     const skills = { ...this.state.skills };
     skills[key] = updatedSkill;
     this.setState({
       skills,
     });
-  }
+  };
 
-  private _removeSkill(key: string): void {
-    console.log('i tried...');
+  private _removeSkill = (key: string): void => {
     const skills = { ...this.state.skills };
     skills[key] = null;
     this.setState({ skills });
-  }
+  };
 }

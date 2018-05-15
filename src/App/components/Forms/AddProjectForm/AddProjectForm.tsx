@@ -3,7 +3,7 @@ import { palette } from '../../../../styling';
 import { truncate } from '../../../../utilities';
 import { IImage, TProject } from '../../../App.types';
 import { Row } from '../../../containers/Grid/grid';
-import Button from '../../Button';
+import Button, { ButtonType } from '../../Button';
 import Dropzone from '../FormUtilities/Dropzone';
 import StyledForm from '../StyledForm';
 import * as Styled from './AddProjectForm.styles';
@@ -52,7 +52,7 @@ export default class AddProjectForm extends React.Component<
   }
 
   public render(): JSX.Element {
-    const { skills, cloudinary } = this.props;
+    const { skills } = this.props;
 
     const list = Object.keys(this.state.images).map(key => (
       <Styled.uploadedImage key={key}>
@@ -61,7 +61,7 @@ export default class AddProjectForm extends React.Component<
           alt={this.state.images[key].name}
         />
         <Button
-          type="delete"
+          buttonType={ButtonType.Delete}
           // tslint:disable-next-line jsx-no-lambda
           onClick={() => this._removeImage(key)}
           className="fa fa-times-circle close"
@@ -179,7 +179,6 @@ export default class AddProjectForm extends React.Component<
               <Dropzone
                 addImage={this._addImage}
                 accept="image/jpeg, image/png"
-                cloudinary={cloudinary}
               />
               <Styled.uploadedImageList>{list}</Styled.uploadedImageList>
             </Row>
@@ -239,11 +238,6 @@ export default class AddProjectForm extends React.Component<
     this.setState({ images });
     // TODO: use api to delete image from cloudinary
   }
-
-  // private _handleChange(date: any) {
-  //   const startDate = { startDate: date };
-  //   this.setState({ startDate });
-  // }
 
   private _handleValues(e: any): void {
     const result = [];

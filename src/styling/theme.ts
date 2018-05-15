@@ -9,7 +9,7 @@ import {
 
 function _makeSemanticColorsFromPalette(p: IPalette, isInverted: boolean) {
   const toReturn: ISemanticColors = {
-    buttonColor: p.themePrimary,
+    buttonBackground: p.themePrimary,
     buttonText: isInverted ? p.lightwhite : p.black,
     imageBorder: isInverted ? p.lightwhite : p.black,
     linkColor: isInverted ? p.lightwhite : p.black,

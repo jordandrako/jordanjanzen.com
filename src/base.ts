@@ -1,7 +1,7 @@
-/* tslint:disable */
 import * as firebase from 'firebase';
-// import * as reBase from 're-base';
-const rebase = require('re-base');
+import REBASE from './types/re-base';
+// TODO: remove as any after re-base has types.
+const rebase = require('re-base') as REBASE;
 
 const {
   REACT_APP_DATABASE,

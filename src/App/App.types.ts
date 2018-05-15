@@ -92,16 +92,8 @@ export interface IAppActions {
   removeTodo: TRemoveTodo;
 }
 
-export interface ISecrets extends Object {
-  cloudinary?: {
-    api?: string;
-    secret?: string;
-  };
-}
-
 export interface IAppState extends IAppActions {
   isMobile: boolean;
-  secrets: ISecrets;
   theme: ITheme;
   projects: {
     [key: string]: TProject | null;
@@ -134,8 +126,6 @@ export interface IPortfolioProps {
   skills: ISkills;
   addProject: TAddProject;
   removeProject: TRemoveProject;
-  // updateProject: TUpdateProject;
-  secrets: ISecrets;
 }
 
 export interface ITodoListProps {

@@ -13,18 +13,15 @@ const buttonTextColor = (props: IButtonStyleProps) => {
   if (props.buttonType === type.Subtle) {
     return palette.white;
   }
-  return semanticColors.buttonColor;
+  return semanticColors.buttonText;
 };
-// props.color || props.buttonType === type.Subtle
-//   ? palette.lightwhite
-//   : semanticColors.buttonText;
 
 const buttonBackground = (props: IButtonStyleProps) => {
   if (props.bg) {
     return props.bg;
   }
 
-  let color = semanticColors.buttonColor;
+  let color;
 
   switch (props.buttonType) {
     case type.Success || type.Submit:
@@ -43,6 +40,7 @@ const buttonBackground = (props: IButtonStyleProps) => {
       color = palette.grey;
       break;
     default:
+      color = semanticColors.buttonBackground;
       break;
   }
 
@@ -144,7 +142,7 @@ export const DeleteButton = styled.button`
   line-height: 20px;
   opacity: 0.85;
   color: ${palette.red};
-  background: transparent;
+  background: ${palette.black};
   border: none;
   border-radius: 50%;
   cursor: pointer;
