@@ -117,7 +117,6 @@ export default class App extends React.Component<{}, IAppState> {
   }
 
   public componentWillUnmount(): void {
-    base.removeBinding(this._ref);
     window.removeEventListener('resize', this._updateSize);
   }
 
