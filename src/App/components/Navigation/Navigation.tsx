@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { isLoggedIn } from '../../../base';
 import * as Styled from './Navigation.styles';
 import { INavigationProps } from './Navigation.types';
 
@@ -23,7 +24,7 @@ const Navigation = (props: INavigationProps) => (
           <span>Portfolio</span>
         </Styled.link>
       </li>
-      {props.isLoggedIn ? (
+      {isLoggedIn ? (
         <li>
           <Styled.link to="/todo">
             <i className="fa fa-check-square-o" aria-hidden="true" />

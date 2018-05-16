@@ -61,8 +61,8 @@ export default class AddSkillForm extends React.Component<
     );
   }
 
-  private _createSkill = (e: any): void => {
-    e.preventDefault();
+  private _createSkill = (ev: React.FormEvent<HTMLFormElement>): void => {
+    ev.preventDefault();
     const skill = {
       category: this._category.current!.value,
       name: this._name.current!.value,

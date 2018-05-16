@@ -17,7 +17,8 @@ export interface IImage extends Object {
   url: string;
 }
 
-export interface IProjectObject extends Object {
+// Data types and interfaces
+export interface IProject extends Object {
   category: string;
   client: {
     industry: string;
@@ -32,24 +33,20 @@ export interface IProjectObject extends Object {
   skills: string[];
 }
 
-export type TProject = IProjectObject;
-
 export interface IProjects {
-  [key: string]: TProject;
+  [key: string]: IProject;
 }
 
-export interface ISkillObject extends Object {
+export interface ISkill extends Object {
   category: string;
   name: string;
 }
 
-export type TSkill = ISkillObject;
-
 export interface ISkills {
-  [key: string]: TSkill;
+  [key: string]: ISkill;
 }
 
-export interface ITodoObject extends Object {
+export interface ITodo extends Object {
   category: string;
   complete: boolean;
   desc: string | string[];
@@ -58,27 +55,25 @@ export interface ITodoObject extends Object {
   priority: string;
 }
 
-export type TTodo = ITodoObject;
-
 export interface ITodos {
-  [key: string]: TTodo;
+  [key: string]: ITodo;
 }
+
+export type TAddProject = (project: IProject) => void;
+export type TAddSkill = (skill: ISkill) => void;
+export type TAddTodo = (todo: ITodo) => void;
+export type TUpdateProject = (key: string, project: IProject) => void;
+export type TUpdateSkill = (key: string, skill: ISkill) => void;
+export type TUpdateTodo = (key: string, todo: ITodo) => void;
+export type TRemoveProject = (key: string) => void;
+export type TRemoveSkill = (key: string) => void;
+export type TRemoveTodo = (key: string) => void;
 
 export interface ILocalStorage extends Object {
   projects: string | null;
   skills: string | null;
   todos: string | null;
 }
-
-export type TAddProject = (project: IProjectObject) => void;
-export type TAddSkill = (skill: ISkillObject) => void;
-export type TAddTodo = (todo: ITodoObject) => void;
-export type TUpdateProject = (key: string, project: IProjectObject) => void;
-export type TUpdateSkill = (key: string, skill: ISkillObject) => void;
-export type TUpdateTodo = (key: string, todo: ITodoObject) => void;
-export type TRemoveProject = (key: string) => void;
-export type TRemoveSkill = (key: string) => void;
-export type TRemoveTodo = (key: string) => void;
 
 export interface IAppActions {
   addProject: TAddProject;
@@ -92,18 +87,14 @@ export interface IAppActions {
   removeTodo: TRemoveTodo;
 }
 
+export interface IAppProps {}
+
 export interface IAppState extends IAppActions {
   isMobile: boolean;
   theme: ITheme;
-  projects: {
-    [key: string]: TProject | null;
-  };
-  skills: {
-    [key: string]: TSkill | null;
-  };
-  todos: {
-    [key: string]: TTodo | null;
-  };
+  projects: IProjects;
+  skills: ISkills;
+  todos: ITodos;
 }
 
 export interface IHomeProps {
@@ -112,7 +103,6 @@ export interface IHomeProps {
 }
 
 export interface IAboutProps {
-  isLoggedIn: boolean;
   addSkill: TAddSkill;
   removeSkill: TRemoveSkill;
   skills: ISkills;
@@ -120,7 +110,6 @@ export interface IAboutProps {
 }
 
 export interface IPortfolioProps {
-  isLoggedIn: boolean;
   isMobile: boolean;
   projects: IProjects;
   skills: ISkills;

@@ -85,7 +85,6 @@ const Entice = styled.p`
 class Home extends React.Component<IHomeProps, {}> {
   constructor(props: IHomeProps) {
     super(props);
-    this.state = {};
   }
 
   public render(): JSX.Element {
@@ -168,10 +167,5 @@ class Home extends React.Component<IHomeProps, {}> {
     </OuterHero>
   );
 }
-
-// Home.propTypes = {
-//   isMobile: PropTypes.bool.isRequired,
-//   projects: PropTypes.object.isRequired,
-// };
 
 export default Home;

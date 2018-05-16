@@ -1,6 +1,6 @@
-import { ISkills, TProject } from '../../../App.types';
+import { IProject, ISkills } from '../../../App.types';
 
 export interface IAddProjectFormProps {
-  addProject: (project: TProject) => void;
+  addProject: (project: IProject) => void;
   skills: ISkills;
 }

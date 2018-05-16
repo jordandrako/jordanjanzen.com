@@ -1,8 +1,8 @@
 import { History } from 'history';
-import { IProjects, TProject, TUpdateProject } from '../../App.types';
+import { IProject, IProjects, TUpdateProject } from '../../App.types';
 
 export interface IProjectProps {
-  details: TProject;
+  details: IProject;
   index: string;
   hasBeenVisible?: boolean;
   updateProject?: TUpdateProject;
@@ -16,5 +16,4 @@ export interface IProjectSingleProps extends IProjectProps {
   history: History;
   projects: IProjects;
   isMobile: boolean;
-  isLoggedIn: boolean;
 }

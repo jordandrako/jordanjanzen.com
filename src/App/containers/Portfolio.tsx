@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, RouteComponentProps } from 'react-router-dom';
+import { isLoggedIn } from '../../base';
 import { styled } from '../../styling';
 import { IPortfolioProps } from '../App.types';
 import AddProjectForm from '../components/Forms/AddProjectForm/AddProjectForm';
@@ -30,14 +31,7 @@ class Portfolio extends React.Component<IPortfolioProps, IPortfolioState> {
   }
 
   public render(): JSX.Element {
-    const {
-      addProject,
-      isLoggedIn,
-      isMobile,
-      projects,
-      removeProject,
-      skills,
-    } = this.props;
+    const { addProject, projects, skills } = this.props;
 
     return (
       <Page title="Portfolio">
@@ -61,22 +55,22 @@ class Portfolio extends React.Component<IPortfolioProps, IPortfolioState> {
         <Route
           exact={true}
           path="/portfolio/:projectId"
-          /* tslint:disable-next-line jsx-no-lambda*/
-          render={props => (
-            <ProjectSingle
-              isLoggedIn={isLoggedIn}
-              isMobile={isMobile}
-              projects={projects}
-              index={props.match.params.projectId}
-              details={projects[props.match.params.projectId]}
-              removeProject={removeProject}
-              {...props}
-            />
-          )}
+          render={this._renderProjectSingle}
         />
       </Page>
     );
   }
+
+  private _renderProjectSingle = (routeProps: RouteComponentProps<any>) => (
+    <ProjectSingle
+      isMobile={this.props.isMobile}
+      projects={this.props.projects}
+      index={routeProps.match.params.projectId}
+      details={this.props.projects[routeProps.match.params.projectId]}
+      removeProject={this.props.removeProject}
+      {...routeProps}
+    />
+  );
 }
 
 export default Portfolio;

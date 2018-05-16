@@ -33,7 +33,6 @@ export default class Sidebar extends React.Component<
         </styled.Top>
         {!this.props.isMobile ? (
           <Footer
-            isLoggedIn={this.props.isLoggedIn}
             isMobile={this.props.isMobile}
             login={this.props.login}
             logout={this.props.logout}

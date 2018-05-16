@@ -1,4 +1,6 @@
+import { TChildren } from '../../App.types';
+
 export interface IObserverProps {
   isVisible: boolean;
-  children?: any;
+  children?: TChildren;
 }

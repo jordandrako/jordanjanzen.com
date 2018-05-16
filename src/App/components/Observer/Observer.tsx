@@ -8,12 +8,13 @@ interface IObserverState {
 
 class Observer extends React.Component<IObserverProps, IObserverState> {
   private _io: IntersectionObserver | null;
-  private _container: Element;
+  private _container: React.RefObject<HTMLDivElement>;
 
-  public constructor(props: any) {
+  public constructor(props: IObserverProps) {
     super(props);
 
     this._io = null;
+    this._container = React.createRef<HTMLDivElement>();
 
     this.state = {
       hasBeenVisible: false,
@@ -28,7 +29,7 @@ class Observer extends React.Component<IObserverProps, IObserverState> {
         this.setState({ hasBeenVisible: true });
       }
     }, {});
-    this._io.observe(this._container);
+    this._io.observe(this._container.current as Element);
   }
 
   public componentWillUnmount(): void {
@@ -48,7 +49,7 @@ class Observer extends React.Component<IObserverProps, IObserverState> {
       // we create a div to get a reference.
       // It's possible to use findDOMNode() to avoid
       // creating extra elements, but findDOMNode is discouraged
-      <div ref={div => (this._container = div as Element)}>
+      <div ref={this._container}>
         {Array.isArray(this.props.children)
           ? this.props.children.map(child =>
               child(this.state.isVisible, this.state.hasBeenVisible)

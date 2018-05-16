@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { palette } from '../../../../styling';
-import Button from '../../Button';
+import { semanticColors } from '../../../../styling';
+import Button, { ButtonType } from '../../Button';
 import StyledForm from '../StyledForm';
 import { IAddTodoFormProps } from './AddTodoForm.types';
 
@@ -17,7 +17,6 @@ export default class AddTodoForm extends React.Component<
 
   public constructor(props: IAddTodoFormProps) {
     super(props);
-    this._createTodo = this._createTodo.bind(this);
 
     this._form = React.createRef();
     this._name = React.createRef();
@@ -74,7 +73,11 @@ export default class AddTodoForm extends React.Component<
               name="link"
               placeholder="Todo link"
             />
-            <Button type="success" arrows={palette.lightwhite}>
+            <Button
+              type="submit"
+              buttonType={ButtonType.Submit}
+              arrows={semanticColors.siteBackground}
+            >
               + Add Todo
             </Button>
           </form>
@@ -83,8 +86,8 @@ export default class AddTodoForm extends React.Component<
     );
   }
 
-  private _createTodo(e: any): void {
-    e.preventDefault();
+  private _createTodo = (ev: React.FormEvent<HTMLFormElement>): void => {
+    ev.preventDefault();
     const todo = {
       category: this._category.current!.value,
       complete: false,
@@ -95,5 +98,5 @@ export default class AddTodoForm extends React.Component<
     };
     this.props.addTodo(todo);
     this._form.current!.reset();
-  }
+  };
 }

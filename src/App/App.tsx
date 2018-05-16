@@ -9,11 +9,12 @@ import {
 } from '../styling';
 import { slugify } from '../utilities';
 import {
+  IAppProps,
   IAppState,
   ILocalStorage,
-  IProjectObject,
-  ISkillObject,
-  ITodoObject,
+  IProject,
+  ISkill,
+  ITodo,
 } from './App.types';
 import AppRouter from './AppRouter';
 import Footer from './containers/Footer';
@@ -38,15 +39,11 @@ const Wrapper = styled.div`
 // tslint:disable-next-line interface-name
 interface RebaseBinding {}
 
-export default class App extends React.Component<{}, IAppState> {
+export default class App extends React.Component<IAppProps, IAppState> {
   private _ref: RebaseBinding[];
   private _localStorage: ILocalStorage;
-  private _isLoggedIn: boolean;
-
-  public constructor(props: any) {
+  public constructor(props: IAppProps) {
     super(props);
-
-    this._isLoggedIn = false;
     this._ref = [];
 
     this._localStorage = {
@@ -80,17 +77,24 @@ export default class App extends React.Component<{}, IAppState> {
   }
 
   public componentDidMount(): void {
-    this._setRef('unauthRef').catch((err: any) => {
-      throw err;
+    this._setRef('unauthRef').catch((error: any) => {
+      // throw error;
+      return;
     });
 
     window.addEventListener('resize', this._updateSize);
 
-    auth.onAuthStateChanged(user => {
-      if (user) {
-        this._authHandler({ user });
+    auth.onAuthStateChanged(
+      user => {
+        if (user) {
+          this._authHandler({ user });
+        }
+      },
+      (error: any) => {
+        // throw error;
+        return;
       }
-    });
+    );
   }
 
   public componentDidUpdate(): void {
@@ -107,15 +111,13 @@ export default class App extends React.Component<{}, IAppState> {
     return (
       <Wrapper className="App wrapper">
         <Sidebar
-          isLoggedIn={this._isLoggedIn}
           isMobile={this.state.isMobile}
           login={this._login}
           logout={this._logout}
         />
-        <AppRouter {...this.state} isLoggedIn={this._isLoggedIn} />
+        <AppRouter {...this.state} />
         {this.state.isMobile ? (
           <Footer
-            isLoggedIn={this._isLoggedIn}
             isMobile={this.state.isMobile}
             login={this._login}
             logout={this._logout}
@@ -191,19 +193,18 @@ export default class App extends React.Component<{}, IAppState> {
       .signInWithPopup(provider)
       .then(result => this._authHandler(result))
       .catch((error: any) => {
-        throw error;
+        // throw error;
+        return;
       });
   };
 
   private _logout = (): void => {
     this._setRef('unauthRef')
-      .then(() =>
-        auth.signOut().then(() => {
-          this._isLoggedIn = false;
-        })
-      )
+      .then(() => auth.signOut())
+      .then(() => this.forceUpdate())
       .catch((error: any) => {
-        throw error;
+        // throw error;
+        return;
       });
   };
 
@@ -212,7 +213,8 @@ export default class App extends React.Component<{}, IAppState> {
     const rootRef = database.ref();
     const successfulLogin = () => {
       this._setRef('authRef');
-      this._isLoggedIn = true;
+      // TODO: move logged in state out of props entirely.
+      this.forceUpdate();
     };
     rootRef.once('value').then(snapshot => {
       const data = snapshot.val() || {};
@@ -227,7 +229,8 @@ export default class App extends React.Component<{}, IAppState> {
             successfulLogin();
           })
           .catch((error: any) => {
-            throw error;
+            // throw error;
+            return;
           });
       } else if (data.owner === uid) {
         successfulLogin();
@@ -237,15 +240,14 @@ export default class App extends React.Component<{}, IAppState> {
     });
   };
 
-  // update our state
-  private _addTodo = (todo: ITodoObject): void => {
+  private _addTodo = (todo: ITodo): void => {
     const todos = { ...this.state.todos };
     const timestamp = Date.now();
     todos[`todo-${timestamp}`] = { ...todo };
     this.setState({ todos });
   };
 
-  private _updateTodo = (key: string, updatedProp: ITodoObject): void => {
+  private _updateTodo = (key: string, updatedProp: ITodo): void => {
     const todos = { ...this.state.todos };
     const todo = todos[key];
     const updatedTodo = {
@@ -260,11 +262,11 @@ export default class App extends React.Component<{}, IAppState> {
 
   private _removeTodo = (key: string): void => {
     const todos = { ...this.state.todos };
-    todos[key] = null;
+    delete todos[key];
     this.setState({ todos });
   };
 
-  private _addProject = (project: IProjectObject): void => {
+  private _addProject = (project: IProject): void => {
     const projects = { ...this.state.projects };
     const timestamp = Date.now();
     projects[`project-${timestamp}`] = project;
@@ -272,10 +274,7 @@ export default class App extends React.Component<{}, IAppState> {
     this.setState({ projects });
   };
 
-  private _updateProject = (
-    key: string,
-    updatedProject: IProjectObject
-  ): void => {
+  private _updateProject = (key: string, updatedProject: IProject): void => {
     const projects = { ...this.state.projects };
     projects[key] = updatedProject;
     this.setState({
@@ -285,18 +284,18 @@ export default class App extends React.Component<{}, IAppState> {
 
   private _removeProject = (key: string): void => {
     const projects = { ...this.state.projects };
-    projects[key] = null;
+    delete projects[key];
     this.setState({ projects });
   };
 
-  private _addSkill = (skill: ISkillObject): void => {
+  private _addSkill = (skill: ISkill): void => {
     const skills = { ...this.state.skills };
-    const name = slugify(skill!.name);
+    const name = slugify(skill.name);
     skills[`skill-${name}`] = skill;
     this.setState({ skills });
   };
 
-  private _updateSkill = (key: string, updatedSkill: ISkillObject): void => {
+  private _updateSkill = (key: string, updatedSkill: ISkill): void => {
     const skills = { ...this.state.skills };
     skills[key] = updatedSkill;
     this.setState({
@@ -306,7 +305,7 @@ export default class App extends React.Component<{}, IAppState> {
 
   private _removeSkill = (key: string): void => {
     const skills = { ...this.state.skills };
-    skills[key] = null;
+    delete skills[key];
     this.setState({ skills });
   };
 }

@@ -1,7 +1,7 @@
-import { TTodo } from '../../App.types';
+import { ITodo } from '../../App.types';
 
 export interface ITodoProps {
-  details: TTodo;
+  details: ITodo;
   index: string;
   removeTodo: (key: string) => void;
   updateTodo: (key: string, updatedProp: {}) => void;

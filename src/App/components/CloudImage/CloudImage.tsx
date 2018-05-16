@@ -89,7 +89,7 @@ export default class CloudImage extends React.Component<ICloudImageProps, {}> {
     );
   };
 
-  private _handleClick = (ev: any) => {
+  private _handleClick = (ev: React.MouseEvent<HTMLImageElement>): void => {
     this.props.link &&
       window.open(
         `https://res.cloudinary.com/jordan-janzen/image/upload/${

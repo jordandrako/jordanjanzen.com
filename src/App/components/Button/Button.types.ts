@@ -1,8 +1,6 @@
 import { TChildren } from '../../App.types';
 
-export interface IButton {
-  focus: () => void;
-}
+export interface IButton {}
 
 export interface IButtonProps {
   arrows?: boolean | string;
@@ -24,7 +22,9 @@ export interface IButtonProps {
   to?: string;
   type?: string;
   wide?: boolean;
-  onClick?: (e?: any) => void;
+  onClick?: (
+    e?: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>
+  ) => void;
   icon?: boolean;
 }
 

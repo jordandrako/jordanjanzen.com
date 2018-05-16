@@ -1,5 +1,4 @@
-import styled from 'styled-components';
-import { fonts, palette } from '../../../styling';
+import { fonts, palette, styled } from '../../../styling';
 import { Row } from '../../containers/Grid/grid';
 
 const StyledForm = styled(Row)`

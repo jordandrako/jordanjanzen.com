@@ -1,5 +1,4 @@
-import styled from '../../../styling/styled-components';
-import { fonts, palette } from '../../../styling/theme';
+import { fonts, palette, styled } from '../../../styling';
 import Button from '../Button';
 import { BannerType, IBannerStyleProps } from './Banner.types';
 

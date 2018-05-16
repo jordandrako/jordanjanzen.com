@@ -57,7 +57,8 @@ class ImageDropzone extends React.Component<IDropzoneProps, {}> {
 
     uploadRequest.end((err, resp) => {
       if (err) {
-        throw err;
+        // throw err;
+        return;
       }
 
       const uploaded = resp.body;

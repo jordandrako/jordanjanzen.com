@@ -27,3 +27,7 @@ export const database = firebase.database(app);
 export const auth = firebase.auth();
 export const provider = new firebase.auth.GoogleAuthProvider();
 export const base = rebase.createClass(database);
+
+export const isLoggedIn = () => {
+  return !!firebase.auth().currentUser;
+};

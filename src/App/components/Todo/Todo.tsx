@@ -1,5 +1,5 @@
 import * as React from 'react';
-import TextareaAutosize from 'react-autosize-textarea';
+// import TextareaAutosize from 'react-autosize-textarea';
 import { truncate } from '../../../utilities';
 import StyledForm from '../Forms/StyledForm';
 import * as Styled from './Todo.styles';
@@ -7,9 +7,8 @@ import { ITodoProps } from './Todo.types';
 
 export default class Todo extends React.Component<ITodoProps, {}> {
   private _index: string;
-  public constructor(props: any) {
+  public constructor(props: ITodoProps) {
     super(props);
-    this._handleChange = this._handleChange.bind(this);
     this._index = this.props.index;
   }
 
@@ -72,12 +71,12 @@ export default class Todo extends React.Component<ITodoProps, {}> {
             <option value="1">1</option>
             <option value="2">2</option>
           </select>
-          <TextareaAutosize
-            type="text"
+          <textarea
             name="desc"
             defaultValue={details.desc}
             placeholder="Description"
             onChange={this._handleChange}
+            rows={3}
           />
           {link}
         </StyledForm>
@@ -85,22 +84,28 @@ export default class Todo extends React.Component<ITodoProps, {}> {
     );
   }
 
-  private _removeTodo(e: any): void {
+  private _removeTodo = (ev: React.MouseEvent<HTMLButtonElement>): void => {
     this.props.removeTodo(this._index);
-  }
+  };
 
-  private _handleChange(e: any): void {
+  private _handleChange = (
+    ev: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ): void => {
     const updatedProp = {
-      [e.target.name]:
-        e.target.type === 'checkbox' ? e.target.checked : e.target.value,
+      [ev.target.name]:
+        ev.target instanceof HTMLInputElement && ev.target.type === 'checkbox'
+          ? ev.target.checked
+          : ev.target.value,
     };
     this.props.updateTodo(this._index, updatedProp);
-  }
+  };
 
-  private _toggleComplete(e: any): void {
+  private _toggleComplete = (ev: React.MouseEvent<HTMLButtonElement>): void => {
     const updatedProp = {
-      complete: !this.props.details!.complete,
+      complete: !this.props.details.complete,
     };
     this.props.updateTodo(this._index, updatedProp);
-  }
+  };
 }

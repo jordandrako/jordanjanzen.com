@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { isLoggedIn } from '../../../../base';
 import { palette } from '../../../../styling';
 import Loading from '../../../containers/Loading';
 import Button, { ButtonType } from '../../Button';
@@ -28,9 +29,6 @@ export default class ProjectSingle extends React.Component<
     this.state = {
       delete: undefined,
     };
-
-    this._removeProject = this._removeProject.bind(this);
-    this._handleDelete = this._handleDelete.bind(this);
   }
 
   public render(): JSX.Element {
@@ -80,7 +78,7 @@ export default class ProjectSingle extends React.Component<
                 <Button
                   to={`/portfolio/${prevId}`}
                   small={true}
-                  type="secondary"
+                  buttonType={ButtonType.Secondary}
                 >
                   <i className="fa fa-arrow-left" aria-hidden="true" />
                   {this.props.isMobile ? '' : ' prev'}
@@ -91,7 +89,7 @@ export default class ProjectSingle extends React.Component<
                     target="_blank"
                     rel="noopener noreferrer"
                     small={true}
-                    type="secondary"
+                    buttonType={ButtonType.Secondary}
                   >
                     {this.props.isMobile ? (
                       ''
@@ -107,18 +105,17 @@ export default class ProjectSingle extends React.Component<
                     target="_blank"
                     rel="noopener noreferrer"
                     small={true}
-                    type="secondary"
+                    buttonType={ButtonType.Secondary}
                   >
                     <i className="fa fa-github" aria-hidden="true" /> View Repo
                   </Button>
                 ) : null}
-                {this.props.isLoggedIn ? (
+                {isLoggedIn ? (
                   <Button
                     small={true}
-                    type="secondary"
+                    buttonType={ButtonType.Secondary}
                     bg={palette.red}
-                    /* tslint:disable-next-line jsx-no-lambda */
-                    onClick={() => this._handleDelete(index)}
+                    onClick={this._handleDelete}
                   >
                     {this.state.delete ? 'Confirm?' : 'Delete'}
                   </Button>
@@ -126,7 +123,7 @@ export default class ProjectSingle extends React.Component<
                 <Button
                   to={`/portfolio/${nextId}`}
                   small={true}
-                  type="secondary"
+                  buttonType={ButtonType.Secondary}
                 >
                   {this.props.isMobile ? '' : 'next '}
                   <i className="fa right fa-arrow-right" aria-hidden="true" />
@@ -140,17 +137,18 @@ export default class ProjectSingle extends React.Component<
     return <Loading isLoading={true} />;
   }
 
-  private _removeProject(key: string) {
+  private _removeProject = (key: string) => {
     const state = { ...this.state };
     this.setState({ ...state, delete: undefined });
     this.props.removeProject(key);
     return this.props.history.push('/portfolio');
-  }
+  };
 
-  private _handleDelete(index: string) {
+  private _handleDelete = () => {
+    const { index } = this.props;
     if (this.state.delete === undefined) {
       return this.setState({ delete: index });
     }
     return this._removeProject(index);
-  }
+  };
 }

@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { palette } from '../../../../styling';
+import { semanticColors } from '../../../../styling';
 import { truncate } from '../../../../utilities';
-import { IImage, TProject } from '../../../App.types';
+import { IImage, IProject } from '../../../App.types';
 import { Row } from '../../../containers/Grid/grid';
 import Button, { ButtonType } from '../../Button';
 import Dropzone from '../FormUtilities/Dropzone';
@@ -30,11 +30,6 @@ export default class AddProjectForm extends React.Component<
 
   public constructor(props: IAddProjectFormProps) {
     super(props);
-    this._createProject = this._createProject.bind(this);
-    this._addImage = this._addImage.bind(this);
-    this._removeImage = this._removeImage.bind(this);
-    this._handleValues = this._handleValues.bind(this);
-    // this.handleChange = this.handleChange.bind(this);
 
     this._category = React.createRef();
     this._clientIndustry = React.createRef();
@@ -53,21 +48,6 @@ export default class AddProjectForm extends React.Component<
 
   public render(): JSX.Element {
     const { skills } = this.props;
-
-    const list = Object.keys(this.state.images).map(key => (
-      <Styled.uploadedImage key={key}>
-        <img
-          src={this.state.images[key].url}
-          alt={this.state.images[key].name}
-        />
-        <Button
-          buttonType={ButtonType.Delete}
-          // tslint:disable-next-line jsx-no-lambda
-          onClick={() => this._removeImage(key)}
-          className="fa fa-times-circle close"
-        />
-      </Styled.uploadedImage>
-    ));
 
     return (
       <div>
@@ -109,9 +89,9 @@ export default class AddProjectForm extends React.Component<
               <optgroup label="Core Skills">
                 {Object.keys(skills).map(
                   (key: string) =>
-                    skills[key]!.category === 'core' && (
-                      <option key={key} value={skills[key]!.name}>
-                        {skills[key]!.name}
+                    skills[key].category === 'core' && (
+                      <option key={key} value={skills[key].name}>
+                        {skills[key].name}
                       </option>
                     )
                 )}
@@ -119,9 +99,9 @@ export default class AddProjectForm extends React.Component<
               <optgroup label="Library Skills">
                 {Object.keys(skills).map(
                   key =>
-                    skills[key]!.category === 'library' && (
-                      <option key={key} value={skills[key]!.name}>
-                        {skills[key]!.name}
+                    skills[key].category === 'library' && (
+                      <option key={key} value={skills[key].name}>
+                        {skills[key].name}
                       </option>
                     )
                 )}
@@ -129,9 +109,9 @@ export default class AddProjectForm extends React.Component<
               <optgroup label="Design Skills">
                 {Object.keys(skills).map(
                   key =>
-                    skills[key]!.category === 'design' && (
-                      <option key={key} value={skills[key]!.name}>
-                        {skills[key]!.name}
+                    skills[key].category === 'design' && (
+                      <option key={key} value={skills[key].name}>
+                        {skills[key].name}
                       </option>
                     )
                 )}
@@ -180,9 +160,15 @@ export default class AddProjectForm extends React.Component<
                 addImage={this._addImage}
                 accept="image/jpeg, image/png"
               />
-              <Styled.uploadedImageList>{list}</Styled.uploadedImageList>
+              <Styled.uploadedImageList>
+                {this._renderUploadedImageList()}
+              </Styled.uploadedImageList>
             </Row>
-            <Button type="success" arrows={palette.lightwhite}>
+            <Button
+              type="submit"
+              buttonType={ButtonType.Submit}
+              arrows={semanticColors.siteBackground}
+            >
               + Add Project
             </Button>
           </form>
@@ -191,15 +177,31 @@ export default class AddProjectForm extends React.Component<
     );
   }
 
-  private _createProject(e: any): void {
-    e.preventDefault();
+  private _renderUploadedImageList = () =>
+    Object.keys(this.state.images).map(key => (
+      <Styled.uploadedImage key={key}>
+        <img
+          src={this.state.images[key].url}
+          alt={this.state.images[key].name}
+        />
+        <Button
+          buttonType={ButtonType.Delete}
+          // tslint:disable-next-line jsx-no-lambda
+          onClick={() => this._removeImage(key)}
+          className="fa fa-times-circle close"
+        />
+      </Styled.uploadedImage>
+    ));
+
+  private _createProject = (ev: React.FormEvent<HTMLFormElement>): void => {
+    ev.preventDefault();
     if (
       Object.keys(this.state.images).length === 0 &&
       this.state.images.constructor === Object
     ) {
       return alert('At least one image is required.'); // eslint-disable-line
     }
-    const project: TProject = {
+    const project: IProject = {
       category: this._category.current!.value,
       client: {
         industry: this._clientIndustry.current!.value,
@@ -223,25 +225,25 @@ export default class AddProjectForm extends React.Component<
       images: [],
       skillValues: [],
     });
-  }
+  };
 
-  private _addImage(image: IImage): void {
+  private _addImage = (image: IImage): void => {
     // const key = image.id;
     const images = [...this.state.images];
     images.push(image);
     this.setState({ images });
-  }
+  };
 
-  private _removeImage(index: string): void {
+  private _removeImage = (index: string): void => {
     const images = [...this.state.images];
     delete images[index];
     this.setState({ images });
     // TODO: use api to delete image from cloudinary
-  }
+  };
 
-  private _handleValues(e: any): void {
+  private _handleValues = (ev: React.ChangeEvent<HTMLSelectElement>): void => {
     const result = [];
-    const options = e.target && e.target.options;
+    const options = Array.from(ev.target.options);
 
     for (const option of options) {
       if (option.selected) {
@@ -249,5 +251,5 @@ export default class AddProjectForm extends React.Component<
       }
     }
     this.setState({ skillValues: result });
-  }
+  };
 }

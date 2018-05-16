@@ -1,6 +1,5 @@
 import { adjustHue, transparentize } from 'polished';
-import styled from 'styled-components';
-import { palette, semanticColors } from '../../../styling/theme';
+import { palette, semanticColors, styled } from '../../../styling';
 import { ICloudImageStyleProps } from './CloudImage.types';
 
 const borderSize = '3px';

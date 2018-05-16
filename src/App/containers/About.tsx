@@ -1,7 +1,7 @@
 import * as moment from 'moment';
 import * as React from 'react';
-import styled from 'styled-components';
-import { screenSizes } from '../../styling';
+import { isLoggedIn } from '../../base';
+import { screenSizes, styled } from '../../styling';
 import { fonts, palette } from '../../styling/theme';
 import { IAboutProps, TAddSkill } from '../App.types';
 import Button, { ButtonType } from '../components/Button';
@@ -68,12 +68,10 @@ const HistoryColumn = styled.div`
 class About extends React.Component<IAboutProps, {}> {
   constructor(props: IAboutProps) {
     super(props);
-    // this._renderList = this._renderList.bind(this);
-    // this._removeSkill = this._removeSkill.bind(this);
   }
 
   public render(): JSX.Element {
-    const { skills, isLoggedIn, addSkill } = this.props;
+    const { skills, addSkill } = this.props;
 
     return (
       <Page title="About">
@@ -366,7 +364,7 @@ class About extends React.Component<IAboutProps, {}> {
           <Button
             href="https://res.cloudinary.com/jordan-janzen/image/upload/v1511291826/Jordan_Janzen_CV.pdf"
             target="_blank"
-            type="cta"
+            buttonType={ButtonType.Cta}
           >
             <i className="fa fa-file-text" aria-hidden="true" /> Download My CV
           </Button>
@@ -381,11 +379,11 @@ class About extends React.Component<IAboutProps, {}> {
 
   private _renderList = (category: string): (JSX.Element | undefined)[] => {
     return Object.keys(this.props.skills).map(key => {
-      if (this.props.skills![key]!.category === category) {
+      if (this.props.skills[key].category === category) {
         return (
           <li key={key}>
-            {this.props.skills![key]!.name}
-            {this.props.isLoggedIn && (
+            {this.props.skills[key].name}
+            {isLoggedIn && (
               <Button
                 to="#"
                 buttonType={ButtonType.Delete}

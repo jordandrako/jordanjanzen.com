@@ -7,17 +7,8 @@ import {
 } from './Button.types';
 
 export default class Button extends React.Component<IButtonProps, {}> {
-  private _button: any;
-
   public constructor(props: IButtonProps) {
     super(props);
-    this._button = React.createRef();
-  }
-
-  public focus(): void {
-    if (this._button.current) {
-      this._button.current.focus();
-    }
   }
 
   public render(): JSX.Element {
@@ -37,7 +28,7 @@ export default class Button extends React.Component<IButtonProps, {}> {
     if (this.props.buttonType === bType.Delete) {
       if (this.props.to) {
         return (
-          <Styled.linkWrapper to={this.props.to} innerRef={this._button}>
+          <Styled.linkWrapper to={this.props.to}>
             <Styled.DeleteButton
               {...styleProps}
               className="fa fa-times-circle close"
@@ -50,7 +41,6 @@ export default class Button extends React.Component<IButtonProps, {}> {
         <Styled.DeleteButton
           {...styleProps}
           className="fa fa-times-circle close"
-          innerRef={this._button}
           onClick={this.props.onClick}
         />
       );
@@ -66,7 +56,6 @@ export default class Button extends React.Component<IButtonProps, {}> {
               ? 'noopener noreferrer'
               : ''
           }
-          innerRef={this._button}
         >
           <Styled.BaseButton {...styleProps}>
             {this.props.text || this.props.children || 'Button'}

@@ -20,7 +20,6 @@ export default class Footer extends React.Component<
 > {
   constructor(props: IFooterProps) {
     super(props);
-    this._toggleOverflow = this._toggleOverflow.bind(this);
 
     this.state = {
       activePage: null,
@@ -33,10 +32,9 @@ export default class Footer extends React.Component<
 
     return (
       <Styled.root>
-        <Navigation isLoggedIn={this.props.isLoggedIn} />
+        <Navigation />
         {overflowOpen ? (
-          /* tslint:disable-next-line jsx-no-lambda */
-          <Styled.overlay onClick={() => this._toggleOverflow()} />
+          <Styled.overlay onClick={this._toggleOverflow} />
         ) : null}
         <Transition
           timeout={200}
@@ -58,7 +56,6 @@ export default class Footer extends React.Component<
                 </li>
                 <li>
                   <LoginButton
-                    isLoggedIn={this.props.isLoggedIn}
                     login={this.props.login}
                     logout={this.props.logout}
                   />
@@ -68,8 +65,7 @@ export default class Footer extends React.Component<
           )}
         </Transition>
         {this.props.isMobile ? (
-          /* tslint:disable-next-line jsx-no-lambda */
-          <Styled.overflowButton onClick={() => this._toggleOverflow()}>
+          <Styled.overflowButton onClick={this._toggleOverflow}>
             <span />
             <span />
             <span />
@@ -79,7 +75,7 @@ export default class Footer extends React.Component<
     );
   }
 
-  private _toggleOverflow(): void {
+  private _toggleOverflow = (): void => {
     this.setState({ overflowOpen: !this.state.overflowOpen });
-  }
+  };
 }
