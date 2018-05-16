@@ -110,7 +110,7 @@ export default class ProjectSingle extends React.Component<
                     <i className="fa fa-github" aria-hidden="true" /> View Repo
                   </Button>
                 ) : null}
-                {isLoggedIn ? (
+                {isLoggedIn() ? (
                   <Button
                     small={true}
                     buttonType={ButtonType.Secondary}

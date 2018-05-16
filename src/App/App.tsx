@@ -203,7 +203,6 @@ export default class App extends React.Component<IAppProps, IAppState> {
       .then(() => auth.signOut())
       .then(() => this.forceUpdate())
       .catch((error: any) => {
-        // throw error;
         return;
       });
   };
@@ -213,7 +212,6 @@ export default class App extends React.Component<IAppProps, IAppState> {
     const rootRef = database.ref();
     const successfulLogin = () => {
       this._setRef('authRef');
-      // TODO: move logged in state out of props entirely.
       this.forceUpdate();
     };
     rootRef.once('value').then(snapshot => {

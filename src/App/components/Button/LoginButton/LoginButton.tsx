@@ -26,7 +26,7 @@ export class LoginButton extends React.Component<
     return (
       <Button
         buttonType={ButtonType.Login}
-        className={`log-button ${isLoggedIn ? 'logout' : 'login'}`}
+        className={`log-button ${isLoggedIn() ? 'logout' : 'login'}`}
         small={true}
         wide={true}
         onClick={this._handleAuth}
@@ -39,7 +39,7 @@ export class LoginButton extends React.Component<
 
   private _buttonText = (): JSX.Element | string => {
     const icon = <i className="fa fa-google" aria-hidden="true" />;
-    const text = this.props.text || isLoggedIn ? 'Log Out' : 'Log In';
+    const text = this.props.text || isLoggedIn() ? 'Log Out' : 'Log In';
     const iconText = (
       <>
         {icon}
@@ -51,6 +51,6 @@ export class LoginButton extends React.Component<
   };
 
   private _handleAuth = (): void => {
-    isLoggedIn ? this.props.logout() : this.props.login();
+    isLoggedIn() ? this.props.logout() : this.props.login();
   };
 }

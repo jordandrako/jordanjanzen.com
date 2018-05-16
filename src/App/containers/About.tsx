@@ -91,7 +91,7 @@ class About extends React.Component<IAboutProps, {}> {
               {skills && this._renderList('design')}
             </SkillsColumn>
           </SkillsRow>
-          {isLoggedIn ? (
+          {isLoggedIn() ? (
             <Row isChild={true}>
               <AddSkillForm addSkill={addSkill as TAddSkill} />
             </Row>
@@ -383,7 +383,7 @@ class About extends React.Component<IAboutProps, {}> {
         return (
           <li key={key}>
             {this.props.skills[key].name}
-            {isLoggedIn && (
+            {isLoggedIn() && (
               <Button
                 to="#"
                 buttonType={ButtonType.Delete}

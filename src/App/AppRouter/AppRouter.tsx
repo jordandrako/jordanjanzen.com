@@ -117,7 +117,7 @@ class AppRouter extends React.Component<
   );
 
   private _renderTodoList = (): JSX.Element =>
-    isLoggedIn ? (
+    isLoggedIn() ? (
       <AsyncTodoList {...this._todoListProps} />
     ) : (
       <AsyncUnauthenticated />

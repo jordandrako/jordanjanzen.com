@@ -24,7 +24,7 @@ const Navigation = (props: INavigationProps) => (
           <span>Portfolio</span>
         </Styled.link>
       </li>
-      {isLoggedIn ? (
+      {isLoggedIn() ? (
         <li>
           <Styled.link to="/todo">
             <i className="fa fa-check-square-o" aria-hidden="true" />

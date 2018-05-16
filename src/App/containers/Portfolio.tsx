@@ -47,7 +47,7 @@ class Portfolio extends React.Component<IPortfolioProps, IPortfolioState> {
               </ListOfProjects>
             </Row>
           )}
-        {isLoggedIn && skills ? (
+        {isLoggedIn() && skills ? (
           <Row>
             <AddProjectForm addProject={addProject} skills={skills} />
           </Row>
