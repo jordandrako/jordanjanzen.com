@@ -7,7 +7,7 @@ import {
   semanticColors,
   styled,
 } from '../../styling';
-import { birthday } from '../../utilities';
+import { yearsSinceBirthday } from '../../utilities';
 import { IHomeProps } from '../App.types';
 import Button, { ButtonType } from '../components/Button';
 import CloudImage from '../components/CloudImage';
@@ -149,8 +149,8 @@ class Home extends React.Component<IHomeProps, {}> {
         </Intro>
         <p>
           My name is <strong>Jordan Janzen</strong>.<br />I'm{' '}
-          <strong>{birthday('19911109', 'YYYYMMDD')} years old</strong> and
-          living in the <strong>Greater Seattle Area</strong>. I love building
+          <strong>{yearsSinceBirthday(19911109)} years old</strong> and living
+          in the <strong>Greater Seattle Area</strong>. I love building
           libraries and web apps that look great and function even better.
         </p>
         <Cta>

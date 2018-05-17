@@ -1,8 +1,8 @@
-import * as moment from 'moment';
 import * as React from 'react';
 import { isLoggedIn } from '../../base';
 import { screenSizes, styled } from '../../styling';
 import { fonts, palette } from '../../styling/theme';
+import { yearsSinceBirthday } from '../../utilities';
 import { IAboutProps, TAddSkill } from '../App.types';
 import Button, { ButtonType } from '../components/Button';
 import CloudImage from '../components/CloudImage';
@@ -111,14 +111,14 @@ class About extends React.Component<IAboutProps, {}> {
             the web better. I'm never satisfied with my skillset and am
             constantly striving to be better and learn as much as I can when the
             time allows. There isn't time to learn everything though. My wife
-            Lee and I had our son Xander{' '}
-            {moment(20160216, 'YYYYMMDD').fromNow()} and watching him grow and
-            play with our shiba inu Gizmo has been my greatest joy in life.
+            Lee and I had our son Xander {yearsSinceBirthday(20160216)} years
+            ago and watching him grow and play with our shiba inu Gizmo has been
+            my greatest joy in life.
           </p>
           <p>
-            Recently I've dived head first into learning React.js and am loving
-            it. So much so I decided to build this portfolio with it to
-            challenge myself. Do you need React to build a <em>simple</em>{' '}
+            Recently I've dived head first into learning React and Typescript
+            and am loving it. So much so I decided to build this portfolio with
+            it to challenge myself. Do you need React to build a <em>simple</em>{' '}
             portfolio site? <strong>Of course not.</strong> Is actually building
             something in production the best way to learn something?{' '}
             <strong>¯\_(ツ)_/¯</strong>
@@ -319,7 +319,7 @@ class About extends React.Component<IAboutProps, {}> {
             <HistoryColumn>
               <h3>Internships - Graphic Design and Junior Developer</h3>
               <h4>
-                <em>Diversified Machine Systems & Helium, Inc</em>
+                <em>Diversified Machine Systems &amp; Helium, Inc</em>
               </h4>
             </HistoryColumn>
           </HistoryRow>
