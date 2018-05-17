@@ -60,7 +60,10 @@ export default class Project extends React.Component<IProjectProps, {}> {
                 Category: {toTitleCase(details.category)}
               </Styled.Subheading>
               <ul>
-                {details.skills.map(skill => <li key={skill}>{skill}</li>)}
+                {details.skills &&
+                  details.skills.map(
+                    skill => skill && <li key={skill}>{skill}</li>
+                  )}
               </ul>
             </Styled.Skills>
           </Styled.Details>
