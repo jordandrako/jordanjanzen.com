@@ -1,4 +1,4 @@
-import * as firebase from 'firebase';
+import { auth as fAuth, database as fDatabase, initializeApp } from 'firebase';
 import REBASE from './types/re-base';
 // TODO: remove as any after re-base has types.
 const rebase = require('re-base') as REBASE;
@@ -22,12 +22,12 @@ const staging = {
 };
 
 const appDatabase = REACT_APP_DATABASE === 'production' ? production : staging;
-const app = firebase.initializeApp(appDatabase);
-export const database = firebase.database(app);
-export const auth = firebase.auth();
-export const provider = new firebase.auth.GoogleAuthProvider();
+const app = initializeApp(appDatabase);
+export const database = fDatabase(app);
+export const auth = fAuth();
+export const provider = new fAuth.GoogleAuthProvider();
 export const base = rebase.createClass(database);
 
 export const isLoggedIn = () => {
-  return !!firebase.auth().currentUser;
+  return !!fAuth().currentUser;
 };
