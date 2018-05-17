@@ -1,4 +1,3 @@
-import * as moment from 'moment';
 import { adjustHue } from 'polished';
 import * as React from 'react';
 import {
@@ -8,6 +7,7 @@ import {
   semanticColors,
   styled,
 } from '../../styling';
+import { birthday } from '../../utilities';
 import { IHomeProps } from '../App.types';
 import Button, { ButtonType } from '../components/Button';
 import CloudImage from '../components/CloudImage';
@@ -83,7 +83,7 @@ const Entice = styled.p`
 `;
 
 class Home extends React.Component<IHomeProps, {}> {
-  constructor(props: IHomeProps) {
+  public constructor(props: IHomeProps) {
     super(props);
   }
 
@@ -145,13 +145,13 @@ class Home extends React.Component<IHomeProps, {}> {
           />
         ) : null}
         <Intro>
-          Hey there!<br />I'm a Developer<br />&amp; UX Designer.
+          Hey there!<br />I'm a UX Engineer.
         </Intro>
         <p>
           My name is <strong>Jordan Janzen</strong>.<br />I'm{' '}
-          <strong>{moment('19911109', 'YYYYMMDD').fromNow(true)} old</strong>{' '}
-          and living in <strong>Seattle, WA</strong>. I love building sites and
-          web apps that look great and function even better.
+          <strong>{birthday('19911109', 'YYYYMMDD')} years old</strong> and
+          living in the <strong>Greater Seattle Area</strong>. I love building
+          libraries and web apps that look great and function even better.
         </p>
         <Cta>
           <Button

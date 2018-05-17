@@ -1,5 +1,4 @@
 import * as React from 'react';
-// import TextareaAutosize from 'react-autosize-textarea';
 import { truncate } from '../../../utilities';
 import StyledForm from '../Forms/StyledForm';
 import * as Styled from './Todo.styles';
