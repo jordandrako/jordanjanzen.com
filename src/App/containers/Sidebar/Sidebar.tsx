@@ -1,6 +1,8 @@
 import * as React from 'react';
+import { isLoggedIn } from '../../../base';
+import Button from '../../components/Button';
 import Footer from '../Footer';
-import * as styled from './Sidebar.styles';
+import * as Styled from './Sidebar.styles';
 import { ISidebarProps } from './Sidebar.types';
 
 interface ISidebarState {
@@ -21,24 +23,26 @@ export default class Sidebar extends React.Component<
 
   public render(): JSX.Element {
     return (
-      <styled.LeftColumn>
-        <styled.Top>
-          <styled.LogoLink to="/">
-            <styled.Logo>
+      <Styled.leftColumn>
+        <Styled.top>
+          <Styled.logoLink to="/">
+            <Styled.logo>
               <span>JORDAN</span>
               <span>JANZEN</span>
-            </styled.Logo>
-          </styled.LogoLink>
-          <styled.Tagline>Never Stop Learning</styled.Tagline>
-        </styled.Top>
-        {!this.props.isMobile ? (
+            </Styled.logo>
+          </Styled.logoLink>
+          <Styled.tagline>Never Stop Learning</Styled.tagline>
+        </Styled.top>
+        {!this.props.isMobile && (
           <Footer
             isMobile={this.props.isMobile}
             login={this.props.login}
             logout={this.props.logout}
           />
-        ) : null}
-      </styled.LeftColumn>
+        )}
+        {!this.props.isMobile &&
+          isLoggedIn() && <Button text="Undo" onClick={this.props.undo} />}
+      </Styled.leftColumn>
     );
   }
 }

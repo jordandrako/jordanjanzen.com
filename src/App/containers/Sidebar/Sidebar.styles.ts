@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { fonts, palette, screenSizes, styled } from '../../../styling/index';
 const JJMark = require('../../../images/JJMark.svg');
 
-export const LeftColumn = styled.aside`
+export const leftColumn = styled.aside`
   background: ${palette.black};
   color: ${palette.white};
   height: 100%;
@@ -20,7 +20,7 @@ export const LeftColumn = styled.aside`
   }
 `;
 
-export const Top = styled.section`
+export const top = styled.section`
   flex-shrink: 0;
   @media (max-width: ${screenSizes.tablet}) {
     display: flex;
@@ -30,7 +30,7 @@ export const Top = styled.section`
   }
 `;
 
-export const Logo = styled.h2`
+export const logo = styled.h2`
   text-transform: uppercase;
   font-family: ${fonts.monospace};
   font-weight: 700;
@@ -85,7 +85,7 @@ export const Logo = styled.h2`
   }
 `;
 
-export const Tagline = styled.h3`
+export const tagline = styled.h3`
   font-family: ${fonts.monospace};
   color: ${palette.black};
   background: ${palette.lightblue};
@@ -108,7 +108,7 @@ export const Tagline = styled.h3`
   }
 `;
 
-export const LogoLink = styled(Link)`
+export const logoLink = styled(Link)`
   display: block;
   width: 100%;
   text-decoration: none;

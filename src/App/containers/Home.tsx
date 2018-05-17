@@ -117,7 +117,7 @@ class Home extends React.Component<IHomeProps, {}> {
           {projectKey ? (
             <Project
               index={projectKey}
-              details={projects[projectKey]}
+              details={projects[projectKey]!}
               style={{ margin: '0 0 1em', width: '100%' }}
             />
           ) : null}

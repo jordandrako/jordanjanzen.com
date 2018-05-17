@@ -1,10 +1,6 @@
 import * as React from 'react';
 import * as Styled from './Button.styles';
-import {
-  ButtonType as bType,
-  IButtonProps,
-  IButtonStyleProps,
-} from './Button.types';
+import { ButtonType, IButtonProps, IButtonStyleProps } from './Button.types';
 
 export default class Button extends React.Component<IButtonProps, {}> {
   public constructor(props: IButtonProps) {
@@ -25,7 +21,7 @@ export default class Button extends React.Component<IButtonProps, {}> {
       wide: this.props.wide,
     };
 
-    if (this.props.buttonType === bType.Delete) {
+    if (this.props.buttonType === ButtonType.Delete) {
       if (this.props.to) {
         return (
           <Styled.linkWrapper to={this.props.to}>
@@ -57,7 +53,7 @@ export default class Button extends React.Component<IButtonProps, {}> {
               : ''
           }
         >
-          <Styled.BaseButton {...styleProps}>
+          <Styled.BaseButton {...styleProps} onClick={this.props.onClick}>
             {this.props.text || this.props.children || 'Button'}
           </Styled.BaseButton>
         </Styled.anchorWrapper>
@@ -67,7 +63,7 @@ export default class Button extends React.Component<IButtonProps, {}> {
     if (this.props.to) {
       return (
         <Styled.linkWrapper to={this.props.to}>
-          <Styled.BaseButton {...styleProps}>
+          <Styled.BaseButton {...styleProps} onClick={this.props.onClick}>
             {this.props.text || this.props.children || 'Button'}
           </Styled.BaseButton>
         </Styled.linkWrapper>

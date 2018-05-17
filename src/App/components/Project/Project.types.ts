@@ -1,11 +1,10 @@
 import { History } from 'history';
-import { IProject, IProjects, TUpdateProject } from '../../App.types';
+import { IProject, IProjects } from '../../App.types';
 
 export interface IProjectProps {
   details: IProject;
   index: string;
   hasBeenVisible?: boolean;
-  updateProject?: TUpdateProject;
   style?: {};
 }
 

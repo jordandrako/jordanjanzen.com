@@ -42,6 +42,7 @@ interface RebaseBinding {}
 export default class App extends React.Component<IAppProps, IAppState> {
   private _ref: RebaseBinding[];
   private _localStorage: ILocalStorage;
+  private _prevState: Partial<IAppState>;
   public constructor(props: IAppProps) {
     super(props);
     this._ref = [];
@@ -70,8 +71,6 @@ export default class App extends React.Component<IAppProps, IAppState> {
       todos: this._localStorage.todos
         ? JSON.parse(this._localStorage.todos)
         : {},
-      updateProject: this._updateProject,
-      updateSkill: this._updateSkill,
       updateTodo: this._updateTodo,
     };
   }
@@ -95,6 +94,12 @@ export default class App extends React.Component<IAppProps, IAppState> {
         return;
       }
     );
+
+    this._prevState = {
+      projects: { ...this.state.projects },
+      skills: { ...this.state.skills },
+      todos: { ...this.state.todos },
+    };
   }
 
   public componentDidUpdate(): void {
@@ -114,6 +119,7 @@ export default class App extends React.Component<IAppProps, IAppState> {
           isMobile={this.state.isMobile}
           login={this._login}
           logout={this._logout}
+          undo={this._undo}
         />
         <AppRouter {...this.state} />
         {this.state.isMobile ? (
@@ -260,7 +266,8 @@ export default class App extends React.Component<IAppProps, IAppState> {
 
   private _removeTodo = (key: string): void => {
     const todos = { ...this.state.todos };
-    delete todos[key];
+    this._prevState.todos = { ...todos };
+    todos[key] = null;
     this.setState({ todos });
   };
 
@@ -268,21 +275,13 @@ export default class App extends React.Component<IAppProps, IAppState> {
     const projects = { ...this.state.projects };
     const timestamp = Date.now();
     projects[`project-${timestamp}`] = project;
-    // set state
     this.setState({ projects });
-  };
-
-  private _updateProject = (key: string, updatedProject: IProject): void => {
-    const projects = { ...this.state.projects };
-    projects[key] = updatedProject;
-    this.setState({
-      projects,
-    });
   };
 
   private _removeProject = (key: string): void => {
     const projects = { ...this.state.projects };
-    delete projects[key];
+    this._prevState.projects = { ...projects };
+    projects[key] = null;
     this.setState({ projects });
   };
 
@@ -293,17 +292,22 @@ export default class App extends React.Component<IAppProps, IAppState> {
     this.setState({ skills });
   };
 
-  private _updateSkill = (key: string, updatedSkill: ISkill): void => {
-    const skills = { ...this.state.skills };
-    skills[key] = updatedSkill;
-    this.setState({
-      skills,
-    });
-  };
-
   private _removeSkill = (key: string): void => {
     const skills = { ...this.state.skills };
-    delete skills[key];
+    this._prevState.skills = { ...skills };
+    skills[key] = null;
     this.setState({ skills });
+  };
+
+  private _undo = (): void => {
+    if (this.state.skills !== this._prevState.skills) {
+      this.setState({ skills: { ...this._prevState.skills } });
+    }
+    if (this.state.projects !== this._prevState.projects) {
+      this.setState({ projects: { ...this._prevState.projects } });
+    }
+    if (this.state.todos !== this._prevState.todos) {
+      this.setState({ todos: { ...this._prevState.todos } });
+    }
   };
 }

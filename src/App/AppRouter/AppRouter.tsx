@@ -77,7 +77,6 @@ class AppRouter extends React.Component<
       addSkill: this.props.addSkill,
       removeSkill: this.props.removeSkill,
       skills: this.props.skills as ISkills,
-      updateSkill: this.props.updateSkill,
     };
 
     this._portfolioProps = {
@@ -94,6 +93,7 @@ class AppRouter extends React.Component<
       todos: this.props.todos as ITodos,
       updateTodo: this.props.updateTodo,
     };
+
     return (
       <Switch>
         <Route exact={true} path="/" render={this._renderHome} />

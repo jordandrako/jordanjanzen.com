@@ -34,7 +34,7 @@ export interface IProject extends Object {
 }
 
 export interface IProjects {
-  [key: string]: IProject;
+  [key: string]: IProject | null;
 }
 
 export interface ISkill extends Object {
@@ -43,7 +43,7 @@ export interface ISkill extends Object {
 }
 
 export interface ISkills {
-  [key: string]: ISkill;
+  [key: string]: ISkill | null;
 }
 
 export interface ITodo extends Object {
@@ -56,14 +56,12 @@ export interface ITodo extends Object {
 }
 
 export interface ITodos {
-  [key: string]: ITodo;
+  [key: string]: ITodo | null;
 }
 
 export type TAddProject = (project: IProject) => void;
 export type TAddSkill = (skill: ISkill) => void;
 export type TAddTodo = (todo: ITodo) => void;
-export type TUpdateProject = (key: string, project: IProject) => void;
-export type TUpdateSkill = (key: string, skill: ISkill) => void;
 export type TUpdateTodo = (key: string, todo: ITodo) => void;
 export type TRemoveProject = (key: string) => void;
 export type TRemoveSkill = (key: string) => void;
@@ -79,8 +77,6 @@ export interface IAppActions {
   addProject: TAddProject;
   addSkill: TAddSkill;
   addTodo: TAddTodo;
-  updateProject?: TUpdateProject;
-  updateSkill: TUpdateSkill;
   updateTodo: TUpdateTodo;
   removeProject: TRemoveProject;
   removeSkill: TRemoveSkill;
@@ -106,7 +102,6 @@ export interface IAboutProps {
   addSkill: TAddSkill;
   removeSkill: TRemoveSkill;
   skills: ISkills;
-  updateSkill: TUpdateSkill;
 }
 
 export interface IPortfolioProps {

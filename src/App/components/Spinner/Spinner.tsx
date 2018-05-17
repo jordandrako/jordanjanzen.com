@@ -6,7 +6,7 @@ const codeLoader = require('../../../images/codeLoader.svg');
 const StyledLoader = () => (
   <Styled.loader>
     <Styled.frame>
-      <Button to="#" buttonType={ButtonType.Delete} />
+      <Button buttonType={ButtonType.Delete} />
     </Styled.frame>
     <object type="image/svg+xml" data={codeLoader}>
       loading...

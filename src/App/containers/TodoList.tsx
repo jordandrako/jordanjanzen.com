@@ -127,18 +127,18 @@ class TodoList extends React.Component<ITodoListProps, ITodoListState> {
           <Todo
             key={key}
             index={key}
-            details={todos[key]}
+            details={todos[key]!}
             updateTodo={updateTodo}
             removeTodo={removeTodo}
           />
         );
       }
-      if (todos[key] && !todos[key].complete) {
+      if (todos[key]! && !todos[key]!.complete) {
         return (
           <Todo
             key={key}
             index={key}
-            details={todos[key]}
+            details={todos[key]!}
             updateTodo={updateTodo}
             removeTodo={removeTodo}
           />
