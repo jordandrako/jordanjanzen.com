@@ -37,7 +37,7 @@ const StyledForm = styled(Row)`
     }
   }
   textarea {
-    resize: none;
+    resize: vertical;
   }
 `;
 
