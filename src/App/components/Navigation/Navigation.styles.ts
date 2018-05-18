@@ -28,7 +28,7 @@ export const navList = styled.ul`
 export const link = styled(NavLink)`
   display: block;
   color: ${palette.white};
-  font-family: Roboto, ${fonts.monospace};
+  font-family: Roboto, ${fonts.fontFamily}, sans-serif;
   text-decoration: none;
   transition: all 0.3s ease-in-out;
   padding: 1em 0.5em;

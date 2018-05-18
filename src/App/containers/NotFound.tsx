@@ -8,7 +8,7 @@ const NotFound = () => (
     <Row>
       <Banner
         title="Not Found"
-        type={BannerType.Danger}
+        bannerType={BannerType.Danger}
         action={BannerAction.Home}
       >
         Sorry, I couldn't find that page.

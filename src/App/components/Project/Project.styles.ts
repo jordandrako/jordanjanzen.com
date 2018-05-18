@@ -93,6 +93,23 @@ export const Client = styled.div`
   max-width: 50%;
 `;
 
+export const Buttons = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    padding: 0;
+    margin: 0.5em 0.5em 0 0;
+
+    a {
+      border-bottom: 0;
+    }
+  }
+`;
+
 export const Skills = styled.div`
   font-size: 0.8rem;
   text-align: right;
@@ -113,23 +130,6 @@ export const Skills = styled.div`
       color: ${palette.lightwhite};
       padding: 0.15em 0.5em;
       margin: 0 0 3px 3px;
-    }
-  }
-`;
-
-export const Buttons = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-
-  li {
-    padding: 0;
-    margin: 0.5em 0.5em 0 0;
-
-    a {
-      border-bottom: 0;
     }
   }
 `;

@@ -36,7 +36,7 @@ const Loading = (props: ILoadingProps) => {
         <PageTitle title="😥 Sorry" ext={false} />
         <Main>
           <Row>
-            <Banner type={BannerType.Danger} action={BannerAction.Reload}>
+            <Banner bannerType={BannerType.Danger} action={BannerAction.Reload}>
               There seems to have been a problem loading this page...
             </Banner>
           </Row>

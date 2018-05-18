@@ -1,15 +1,15 @@
 import { Link } from 'react-router-dom';
 import { fonts, palette, semanticColors, styled } from '../../../styling';
-import { ButtonType as type, IButtonStyleProps } from './Button.types';
+import { ButtonType, IButtonStyleProps } from './Button.types';
 
 const buttonTextColor = (props: IButtonStyleProps) => {
   if (props.color) {
     return props.color;
   }
-  if (props.buttonType === type.Cta) {
+  if (props.buttonType === ButtonType.Cta) {
     return palette.lightwhite;
   }
-  if (props.buttonType === type.Subtle) {
+  if (props.buttonType === ButtonType.Subtle) {
     return palette.white;
   }
   return semanticColors.buttonText;
@@ -23,19 +23,19 @@ const buttonBackground = (props: IButtonStyleProps) => {
   let color;
 
   switch (props.buttonType) {
-    case type.Success || type.Submit:
+    case ButtonType.Success || ButtonType.Submit:
       color = palette.green;
       break;
-    case type.Warn:
+    case ButtonType.Warn:
       color = palette.red;
       break;
-    case type.Login:
+    case ButtonType.Login:
       color = palette.lightblack;
       break;
-    case type.Cta:
+    case ButtonType.Cta:
       color = palette.blue;
       break;
-    case type.Subtle:
+    case ButtonType.Subtle:
       color = palette.grey;
       break;
     default:
@@ -47,7 +47,7 @@ const buttonBackground = (props: IButtonStyleProps) => {
 };
 
 const borderRadius = (props: IButtonStyleProps) => {
-  if (props.circle || props.buttonType === type.Delete || props.del) {
+  if (props.circle || props.buttonType === ButtonType.Delete || props.del) {
     return '100%';
   }
   if (props.pill) {
@@ -62,6 +62,7 @@ export const BaseButton = styled.button`
   padding: ${(props: IButtonStyleProps) =>
     !!props.arrows ? '0.25em 0.8em 0.25em 1.5em' : '.5em .8em'};
   position: relative;
+  ${props => !!props.arrows && 'left: -.25em;'}
   color: ${buttonTextColor};
   font-family: ${fonts.monospace};
   background: ${buttonBackground};
@@ -69,7 +70,7 @@ export const BaseButton = styled.button`
   justify-content: space-around;
 
   opacity: ${(props: IButtonStyleProps) =>
-    props.buttonType === type.Secondary ? 0.75 : 1};
+    props.buttonType === ButtonType.Secondary ? 0.75 : 1};
   transform: translateY(0);
 
   width: ${(props: IButtonStyleProps) => (props.wide ? '100%' : 'auto')};

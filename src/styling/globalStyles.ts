@@ -46,8 +46,8 @@ export const globalStyles = (theme: IPartialTheme) => {
       padding: 0;
 
       @media (max-width: ${screenSizes.tablet}) {
-        font-size: 16px
-      };
+        font-size: 16px;
+      }
     }
 
     img {

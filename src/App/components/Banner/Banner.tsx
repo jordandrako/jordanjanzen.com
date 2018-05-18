@@ -18,11 +18,28 @@ interface IBannerState {
 class Banner
   extends React.Component<IBannerProps & RouteComponentProps<any>, IBannerState>
   implements IBanner {
+  public static defaultProps = {
+    bannerType: BannerType.Info,
+    in: true,
+  };
+
+  public static getDerivedStateFromProps(
+    nextProps: IBannerProps,
+    prevState: IBannerState
+  ): IBannerState | null {
+    if (!nextProps.in !== prevState.closed) {
+      return {
+        closed: !nextProps.in,
+      };
+    }
+    return null;
+  }
+
   public constructor(props: IBannerProps & RouteComponentProps<any>) {
     super(props);
 
     this.state = {
-      closed: false,
+      closed: !this.props.in,
     };
   }
 
@@ -34,14 +51,14 @@ class Banner
 
   public render(): JSX.Element {
     const { closed } = this.state;
-    const { type = BannerType.Info, title } = this.props;
+    const { bannerType, title } = this.props;
 
     return (
       <Transition timeout={200} in={closed}>
         {(status: string) => (
-          <Styled.root type={type} className={status}>
+          <Styled.root bannerType={bannerType} className={status}>
             <h4>
-              {title ? title : `${toTitleCase(BannerType[type])} Message`}
+              {title ? title : `${toTitleCase(BannerType[bannerType])} Message`}
             </h4>
             {this._showHideButton()}
             {this._bannerContent()}
@@ -61,29 +78,7 @@ class Banner
 
   private _bannerContent = (): JSX.Element => <p>{this.props.children}</p>;
 
-  // private _bannerAction = (): void => {
-  //   const { action, history, location } = this.props;
-  //   let click;
-  //   let text;
-  //   switch (action) {
-  //     case BannerAction.Reload:
-  //       click = history.push(location.pathname);
-  //       text = 'Reload';
-  //       break;
-  //     case BannerAction.Home:
-  //       click = history.push('/');
-  //       text = 'Go Home';
-  //       break;
-  //     case BannerAction.Back:
-  //       click = history.goBack();
-  //       text = 'Go Back';
-  //       break;
-  //     default:
-  //       return;
-  //   }
-  // };
-
-  private _actionButton = (): JSX.Element | undefined => {
+  private _actionButton = (): JSX.Element | null => {
     const { action, actionText, customAction, history } = this.props;
     const renderButton = action !== undefined || customAction !== undefined;
     let click: () => void;
@@ -102,7 +97,7 @@ class Banner
         text = '🔙 Go Back';
         break;
       default:
-        return;
+        return null;
     }
     return renderButton ? (
       <Styled.actionButton
@@ -111,9 +106,7 @@ class Banner
         onClick={click}
         small={true}
       />
-    ) : (
-      undefined
-    );
+    ) : null;
   };
 }
 

@@ -11,7 +11,7 @@ export const imageContainer = styled.div`
           ${transparentize(0.5, `${adjustHue(-30, palette.blue)}`)} 0%,
           ${transparentize(0.5, `${palette.blue}`)}
           100%), url(${props.background});`
-      : `url(${props.background});`}
+      : `url(${props.background})`};
   background-size: cover;
   background-position: center top;
   width: 100%;
@@ -28,7 +28,7 @@ export const imageContainer = styled.div`
       `;
     }
     return '';
-  }}
+  }};
 `;
 
 export const image = styled.img`

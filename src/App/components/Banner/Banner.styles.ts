@@ -1,25 +1,29 @@
+import { transparentize } from 'polished';
 import { fonts, palette, styled } from '../../../styling';
 import Button from '../Button';
 import { BannerType, IBannerStyleProps } from './Banner.types';
 
-export const root = styled.div`
-  background: ${(props: IBannerStyleProps) => {
-    const type = props.type;
-    if (type === BannerType.Alert) {
+const bannerColor = (props: IBannerStyleProps): string => {
+  const type = props.bannerType;
+  switch (type) {
+    case BannerType.Alert:
       return palette.lightyellow;
-    }
-    if (type === BannerType.Success) {
+    case BannerType.Success:
       return palette.green;
-    }
-    if (type === BannerType.Danger) {
+    case BannerType.Danger:
       return palette.red;
-    }
-    return palette.lightblack;
-  }};
+    default:
+      return palette.lightblack;
+  }
+};
+
+export const root = styled.div`
+  background: ${(props: IBannerStyleProps) =>
+    transparentize(0.75, bannerColor(props))};
   padding: 1em 2em 1em 1em;
   margin: 0 0 1.5em;
   border-radius: 0.25em;
-  border: inset solid 3px rgba(255, 255, 255, 0.5);
+  box-shadow: inset 0 0 0 3px ${bannerColor};
   font-family: ${fonts.monospace};
   position: relative;
   height: auto;
@@ -34,11 +38,6 @@ export const root = styled.div`
 
   &.entered {
     max-height: 3.5em;
-    .showHide {
-      .vertical {
-        transform: rotate(90deg);
-      }
-    }
   }
 
   &.exited {
@@ -47,13 +46,6 @@ export const root = styled.div`
 
   h4 {
     margin-top: 0;
-  }
-
-  .actionButton {
-    background: transparent;
-    border: 2px solid ${palette.black};
-    font-family: ${fonts.monospace};
-    padding: 0.4em 1em;
   }
 
   &.closed {
@@ -92,4 +84,9 @@ export const showHide = styled.button`
   }
 `;
 
-export const actionButton = styled(Button)``;
+export const actionButton = styled(Button)`
+  background: transparent;
+  border: 2px solid ${palette.black};
+  font-family: ${fonts.monospace};
+  padding: 0.4em 1em;
+`;

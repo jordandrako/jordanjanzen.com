@@ -6,7 +6,11 @@
     "tslint-config-prettier"
   ],
   "linterOptions": {
-    "exclude": ["config/**/*.js", "node_modules/**/*.ts"]
+    "exclude": [
+      "config/**/*.js",
+      "node_modules/**/*.ts",
+      "src/typings/**/*.d.ts"
+    ]
   },
   "rules": {
     "no-console": false,

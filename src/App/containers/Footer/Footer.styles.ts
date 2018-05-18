@@ -53,7 +53,7 @@ export const overlay = styled.div`
     right: 0;
     bottom: 0;
     width: 100%;
-    width: 100%;
+    height: 100%;
   }
 `;
 
@@ -71,9 +71,8 @@ export const overflowMenu = styled.div`
 
   ul {
     margin: 0;
-    padding: 0;
-    list-style-type: none;
     padding: 1em;
+    list-style-type: none;
 
     li {
       margin-bottom: 0.5em;

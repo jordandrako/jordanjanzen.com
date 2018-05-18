@@ -6,18 +6,19 @@ export interface IBanner {
 }
 
 export interface IBannerProps extends React.HTMLAttributes<HTMLElement> {
+  children: TChildren;
+  bannerType: BannerType;
   action?: BannerAction | BannerAction[];
   actionText?: string;
-  customAction?: () => void;
-  componentRef?: (component: IBanner | null) => void;
-  children: TChildren;
-  type?: BannerType;
-  title?: string;
   className?: string;
+  componentRef?: (component: IBanner | null) => void;
+  customAction?: () => void;
+  in?: boolean;
+  title?: string;
 }
 
 export interface IBannerStyleProps {
-  type?: BannerType;
+  bannerType?: BannerType;
 }
 
 export enum BannerAction {
