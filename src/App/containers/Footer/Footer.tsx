@@ -58,6 +58,7 @@ export default class Footer extends React.Component<
                   <LoginButton
                     login={this.props.login}
                     logout={this.props.logout}
+                    wide={true}
                   />
                 </li>
               </ul>

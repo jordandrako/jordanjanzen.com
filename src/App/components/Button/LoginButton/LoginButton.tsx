@@ -28,7 +28,6 @@ export class LoginButton extends React.Component<
         buttonType={ButtonType.Login}
         className={`log-button ${isLoggedIn() ? 'logout' : 'login'}`}
         small={true}
-        wide={true}
         onClick={this._handleAuth}
         {...this.props}
       >

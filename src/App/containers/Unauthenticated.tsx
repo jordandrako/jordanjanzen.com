@@ -1,7 +1,5 @@
 import * as React from 'react';
-
 import Banner, { BannerType } from '../components/Banner';
-
 import { Page, Row } from './Grid/grid';
 
 const Unathenticated = () => (
