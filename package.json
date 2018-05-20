@@ -14,14 +14,8 @@
     "predeploy":
       "yarn branchcheck && cross-env REACT_APP_DATABASE=production yarn build",
     "prestaging": "yarn build",
-    "deploy":
-      "aws s3 sync build/ s3://www.jordanjanzen.com --cache-control max-age=172800",
-    "staging":
-      "aws s3 sync build/ s3://staging.jordanjanzen.com --cache-control max-age=180",
-    "postdeploy":
-      "aws cloudfront create-invalidation --distribution-id E1SASUQHSLUTW3 --paths /index.html",
-    "poststaging":
-      "aws cloudfront create-invalidation --distribution-id E2R8NA2ILW4G96 --paths /index.html",
+    "deploy": "firebase deploy -P production",
+    "staging": "firebase deploy -P staging",
     "lint:ts": "tslint --fix 'src/**/*.ts' 'src/**/*.tsx'",
     "lint:styles": "stylelint --fix 'src/**/*.ts' 'src/**/*.tsx'",
     "lint": "yarn lint:ts && yarn lint:styles"
@@ -76,5 +70,8 @@
     "tslint-config-airbnb": "^5.8.0",
     "tslint-config-prettier": "^1.12.0",
     "typescript": "^2.8.3"
+  },
+  "peerDependencies": {
+    "firebase-client": "^0.1.1"
   }
 }

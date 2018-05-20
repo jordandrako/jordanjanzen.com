@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "staging": "jordan-janzen-staging",
+    "production": "jordan-janzen"
+  }
+}
