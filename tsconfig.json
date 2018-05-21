@@ -28,5 +28,5 @@
     "src/setupTests.ts"
   ],
   "baseUrl": "types",
-  "typeRoots": ["src/types"]
+  "typeRoots": ["src/typings"]
 }
