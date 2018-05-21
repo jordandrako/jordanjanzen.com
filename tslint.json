@@ -13,7 +13,7 @@
     ]
   },
   "rules": {
-    "no-console": false,
+    "no-console": [true, "log"],
     "array-type": [true, "array"],
     "function-name": [
       true,
@@ -26,6 +26,7 @@
       }
     ],
     "import-name": false,
+    "max-line-length": [true, 140],
     "no-empty-interface": false,
     "no-reference": false,
     "no-unused-expression": [true, "allow-fast-null-checks"],
