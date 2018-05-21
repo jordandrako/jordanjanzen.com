@@ -19,9 +19,9 @@ const StyledForm = styled(Row)`
     flex-grow: 1;
   }
 
-  input:not([type='checkbox']),
+  textarea,
   select,
-  textarea {
+  input:not([type='checkbox']) {
     font-family: ${fonts.monospace};
     font-size: 0.8rem;
     line-height: 1.6;

@@ -57,7 +57,9 @@ const DateColumn = styled.div`
   border-right: 2px solid ${palette.blue};
 `;
 
-const HistoryRow = styled(Flex)``;
+const HistoryRow = styled(Flex)`
+ /* Later */
+`;
 
 const HistoryColumn = styled.div`
   flex: 4;

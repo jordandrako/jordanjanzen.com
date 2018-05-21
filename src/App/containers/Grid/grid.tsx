@@ -23,18 +23,16 @@ export const Main = styled.div`
   display: flex;
   flex-direction: column;
   @media (max-width: ${screenSizes.tablet}) {
-    overflow-y: initial
-  };
+    overflow-y: initial;
+  }
 
   a {
     line-height: 0.9em;
     display: inline-block;
-    text-shadow:
-      2px 2px ${semanticColors.siteBackground},
+    text-shadow: 2px 2px ${semanticColors.siteBackground},
       2px -2px ${semanticColors.siteBackground},
       -2px 2px ${semanticColors.siteBackground},
       -2px -2px ${semanticColors.siteBackground};
-    }
   }
 `;
 
@@ -48,7 +46,7 @@ export const Row = styled.section`
   }
 
   &:last-child {
-    margin-bottom: ${(props: IRow) => (props.isChild ? '0' : 'inherit')};
+    margin-bottom: ${(props: IRow) => (props.isChild ? '0' : '2em')};
   }
 
   @media (max-width: ${screenSizes.tablet}) {
@@ -58,14 +56,6 @@ export const Row = styled.section`
       }
       return '0 1em 2em';
     }};
-  }
-
-  &:first-child {
-    margin-top: ${(props: IRow) => (props.isChild ? '0' : '1.5em')};
-  }
-
-  &:last-child {
-    margin-bottom: ${(props: IRow) => (props.isChild ? '0' : '2em')};
   }
 `;
 
