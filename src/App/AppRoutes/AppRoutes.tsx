@@ -17,7 +17,7 @@ import {
   ITodos,
 } from '../App.types';
 import Loading from '../containers/Loading';
-import { IAppRouterProps } from './AppRouter.types';
+import { IAppRoutesProps } from './AppRoutes.types';
 
 const asyncLoaderOptions = {
   delay: 300,
@@ -55,15 +55,15 @@ const AsyncTodoList = asyncLoader({
   loader: () => import('../containers/TodoList'),
 });
 
-class AppRouter extends React.Component<
-  IAppRouterProps & RouteComponentProps<any>
+class AppRoutes extends React.Component<
+  IAppRoutesProps & RouteComponentProps<any>
 > {
   private _homeProps: IHomeProps;
   private _aboutProps: IAboutProps;
   private _portfolioProps: IPortfolioProps;
   private _todoListProps: ITodoListProps;
 
-  public constructor(props: IAppRouterProps & RouteComponentProps<any>) {
+  public constructor(props: IAppRoutesProps & RouteComponentProps<any>) {
     super(props);
   }
 
@@ -124,4 +124,4 @@ class AppRouter extends React.Component<
     );
 }
 
-export default withRouter(AppRouter);
+export default withRouter(AppRoutes);

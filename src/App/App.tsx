@@ -16,7 +16,7 @@ import {
   ISkill,
   ITodo,
 } from './App.types';
-import AppRouter from './AppRouter';
+import AppRoutes from './AppRoutes';
 import Footer from './containers/Footer';
 import Sidebar from './containers/Sidebar';
 
@@ -121,7 +121,7 @@ export default class App extends React.Component<IAppProps, IAppState> {
           logout={this._logout}
           undo={this._undo}
         />
-        <AppRouter {...this.state} />
+        <AppRoutes {...this.state} />
         {this.state.isMobile ? (
           <Footer
             isMobile={this.state.isMobile}
