@@ -1,14 +1,7 @@
+import * as React from 'react';
 import { ITheme } from '../styling';
 
-export type TChildren =
-  | string
-  | JSX.Element
-  | (string | JSX.Element | null | undefined)[]
-  | (() => string | JSX.Element)
-  | (() => (string | JSX.Element)[])
-  | null
-  | undefined
-  | any;
+export type TChildren = React.ReactNode;
 
 export interface IImage extends Object {
   format: string;
@@ -59,6 +52,12 @@ export interface ITodos {
   [key: string]: ITodo | null;
 }
 
+export interface IData {
+  projects: IProjects;
+  skills: ISkills;
+  todos: ITodos;
+}
+
 export type TAddProject = (project: IProject) => void;
 export type TAddSkill = (skill: ISkill) => void;
 export type TAddTodo = (todo: ITodo) => void;
@@ -66,6 +65,7 @@ export type TUpdateTodo = (key: string, todo: ITodo) => void;
 export type TRemoveProject = (key: string) => void;
 export type TRemoveSkill = (key: string) => void;
 export type TRemoveTodo = (key: string) => void;
+export type TUndo = (prevData: IData, nextData: IData) => void;
 
 export interface ILocalStorage extends Object {
   projects: string | null;
