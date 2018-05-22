@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { auth, base, database, isLoggedIn, provider } from '../base';
 import { ITheme, loadTheme, screenSizesPx } from '../styling';
-import { slugify } from '../utilities';
+import { setLocalStorage, slugify } from '../utilities';
 import {
   ILocalStorage,
   IProject,
@@ -18,7 +18,6 @@ import {
   TRemoveTodo,
   TUpdateTodo,
 } from './App.types';
-import { setLocalStorage } from './AppActions';
 
 interface IAppContextState {
   context: {
