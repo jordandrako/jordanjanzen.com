@@ -22,7 +22,6 @@ import {
 interface IAppContextState {
   context: {
     auth: {
-      isLoggedIn?: () => boolean;
       login?: () => void;
       logout?: () => void;
     };
@@ -69,6 +68,16 @@ export const AppContext = React.createContext(defaultState.context);
 
 export class AppProvider extends React.Component<{}, IAppContextState> {
   public componentDidMount(): void {
+    auth.onAuthStateChanged(
+      user => {
+        if (user) {
+          this.authHandler({ user });
+        }
+      },
+      (error: any) => {
+        console.error(error);
+      }
+    );
     this.getBinding().then(result => {
       setTimeout(() => {
         setLocalStorage('projects', { ...this.state.context.projects });
@@ -187,12 +196,12 @@ export class AppProvider extends React.Component<{}, IAppContextState> {
               ...data,
               owner: uid,
             })
-            .then(() => resolve())
+            .then(() => resolve(this.getBinding()))
             .catch((error: any) => {
               console.error(error);
             });
         } else if (data.owner === uid) {
-          resolve();
+          resolve(this.getBinding());
         } else {
           reject('Log in denied. You are not the owner of this site.');
         }
@@ -212,7 +221,10 @@ export class AppProvider extends React.Component<{}, IAppContextState> {
   };
 
   public logout = (): void => {
-    auth.signOut().catch((error: any) => console.error(error));
+    auth
+      .signOut()
+      .then(() => this.getBinding())
+      .catch((error: any) => console.error(error));
   };
 
   // tslint:disable-next-line:member-ordering
@@ -226,7 +238,6 @@ export class AppProvider extends React.Component<{}, IAppContextState> {
       addTodo: this.addTodo,
       auth: {
         ...defaultState.context.auth,
-        isLoggedIn: this.isLoggedIn,
         login: this.login,
         logout: this.logout,
       },
