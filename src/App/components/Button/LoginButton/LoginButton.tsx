@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { isLoggedIn } from '../../../../base';
+import { withAuth } from '../../../AppContext';
 import Button, { ButtonType, IButtonProps } from '../index';
 
 interface ILoginButtonProps extends IButtonProps {
@@ -10,7 +11,7 @@ interface ILoginButtonProps extends IButtonProps {
 
 interface ILoginButtonState {}
 
-export class LoginButton extends React.Component<
+class LoginButton extends React.Component<
   ILoginButtonProps,
   ILoginButtonState
 > {
@@ -53,3 +54,5 @@ export class LoginButton extends React.Component<
     isLoggedIn() ? this.props.logout() : this.props.login();
   };
 }
+
+export default withAuth(LoginButton);

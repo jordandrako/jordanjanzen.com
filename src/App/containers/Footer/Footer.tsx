@@ -55,11 +55,7 @@ export default class Footer extends React.Component<
                   <SocialButton social={SocialSites.linkedin} wide={true} />
                 </li>
                 <li>
-                  <LoginButton
-                    login={this.props.login}
-                    logout={this.props.logout}
-                    wide={true}
-                  />
+                  <LoginButton wide={true} />
                 </li>
               </ul>
             </Styled.overflowMenu>

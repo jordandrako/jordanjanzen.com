@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { isLoggedIn } from '../../../base';
-import Button from '../../components/Button';
+// import { isLoggedIn } from '../../../base';
+// import Button from '../../components/Button';
 import Footer from '../Footer';
 import * as Styled from './Sidebar.styles';
 import { ISidebarProps } from './Sidebar.types';
@@ -33,15 +33,9 @@ export default class Sidebar extends React.Component<
           </Styled.logoLink>
           <Styled.tagline>Never Stop Learning</Styled.tagline>
         </Styled.top>
-        {!this.props.isMobile && (
-          <Footer
-            isMobile={this.props.isMobile}
-            login={this.props.login}
-            logout={this.props.logout}
-          />
-        )}
-        {!this.props.isMobile &&
-          isLoggedIn() && <Button text="Undo" onClick={this.props.undo} />}
+        {!this.props.isMobile && <Footer isMobile={this.props.isMobile} />}
+        {/* {!this.props.isMobile &&
+          isLoggedIn() && <Button text="Undo" onClick={this.props.undo} />} */}
       </Styled.leftColumn>
     );
   }
