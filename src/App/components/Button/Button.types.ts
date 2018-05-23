@@ -1,12 +1,8 @@
-import { TChildren } from '../../App.types';
-
-export interface IButton {}
-
 export interface IButtonProps {
   arrows?: boolean | string;
   bg?: string;
   buttonType?: ButtonType;
-  children?: TChildren;
+  children?: React.ReactNode;
   circle?: boolean;
   className?: string;
   color?: string;
@@ -16,7 +12,7 @@ export interface IButtonProps {
   pill?: boolean;
   rel?: string;
   small?: boolean;
-  style?: {};
+  style?: object;
   target?: string;
   text?: string;
   to?: string;

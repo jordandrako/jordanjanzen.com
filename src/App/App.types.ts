@@ -1,8 +1,3 @@
-import * as React from 'react';
-import { ITheme } from '../styling';
-
-export type TChildren = React.ReactNode;
-
 export interface IImage extends Object {
   format: string;
   id: string;
@@ -81,16 +76,6 @@ export interface IAppActions {
   removeProject: TRemoveProject;
   removeSkill: TRemoveSkill;
   removeTodo: TRemoveTodo;
-}
-
-export interface IAppProps {}
-
-export interface IAppState extends IAppActions {
-  isMobile: boolean;
-  theme: ITheme;
-  projects: IProjects;
-  skills: ISkills;
-  todos: ITodos;
 }
 
 export interface IHomeProps {

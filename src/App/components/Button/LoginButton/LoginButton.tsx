@@ -9,19 +9,10 @@ interface ILoginButtonProps extends IButtonProps {
   logout: () => void;
 }
 
-interface ILoginButtonState {}
-
-class LoginButton extends React.Component<
-  ILoginButtonProps,
-  ILoginButtonState
-> {
+class LoginButton extends React.Component<ILoginButtonProps, {}> {
   public static defaultProps = {
     icon: true,
   };
-
-  constructor(props: ILoginButtonProps) {
-    super(props);
-  }
 
   public render() {
     return (

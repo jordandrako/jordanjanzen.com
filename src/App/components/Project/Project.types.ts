@@ -5,10 +5,8 @@ export interface IProjectProps {
   details: IProject;
   index: string;
   hasBeenVisible?: boolean;
-  style?: {};
+  style?: object;
 }
-
-export interface IProjectStyleProps {}
 
 export interface IProjectSingleProps extends IProjectProps {
   removeProject: (key: string) => void;
