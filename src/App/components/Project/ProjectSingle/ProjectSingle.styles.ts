@@ -6,7 +6,7 @@ import {
   semanticColors,
   styled,
 } from '../../../../styling';
-import { Row } from '../../../containers/Grid/grid';
+import { Row } from '../../Page';
 
 export const ClickOutside = styled(Link)`
   background: rgba(0, 0, 0, 0.5);

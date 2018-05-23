@@ -4,9 +4,9 @@ import { isLoggedIn } from '../../base';
 import { styled } from '../../styling';
 import { IPortfolioProps } from '../App.types';
 import AddProjectForm from '../components/Forms/AddProjectForm/AddProjectForm';
+import { Page, Row } from '../components/Page';
 import Project from '../components/Project/Project';
 import ProjectSingle from '../components/Project/ProjectSingle/ProjectSingle';
-import { Page, Row } from './Grid/grid';
 
 const ListOfProjects = styled.ul`
   list-style-type: none;

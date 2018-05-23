@@ -7,7 +7,7 @@ import { IAboutProps, TAddSkill } from '../App.types';
 import Button, { ButtonType } from '../components/Button';
 import CloudImage from '../components/CloudImage';
 import AddSkillForm from '../components/Forms/AddSkillForm/AddSkillForm';
-import { Flex, Page, Row } from './Grid/grid';
+import { Flex, Page, Row } from '../components/Page';
 
 const SkillsRow = styled(Row)`
   display: flex;
@@ -57,9 +57,7 @@ const DateColumn = styled.div`
   border-right: 2px solid ${palette.blue};
 `;
 
-const HistoryRow = styled(Flex)`
- /* Later */
-`;
+const HistoryRow = Flex;
 
 const HistoryColumn = styled.div`
   flex: 4;

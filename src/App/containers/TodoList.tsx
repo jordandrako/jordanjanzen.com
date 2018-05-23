@@ -2,8 +2,9 @@ import * as React from 'react';
 import { styled } from '../../styling';
 import { ITodos, TAddTodo, TRemoveTodo, TUpdateTodo } from '../App.types';
 import AddTodoForm from '../components/Forms/AddTodoForm/AddTodoForm';
+import { Page } from '../components/Page';
+import { Row } from '../components/Page/Grid';
 import Todo from '../components/Todo/Todo';
-import { Page, Row } from './Grid/grid';
 
 const ListOfTodos = styled.ul`
   list-style-type: none;

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Banner, { BannerType } from '../components/Banner';
-import { Page, Row } from './Grid/grid';
+import { Page, Row } from '../components/Page';
 
 const Unathenticated = () => (
   <Page title="Please Log In">

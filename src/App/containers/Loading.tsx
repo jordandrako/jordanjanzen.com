@@ -2,9 +2,9 @@ import * as React from 'react';
 import DocumentTitle from 'react-document-title';
 import { styled } from '../../styling';
 import Banner, { BannerAction, BannerType } from '../components/Banner';
+import { Main, MainContainer, Row } from '../components/Page';
+import PageTitle from '../components/Page/PageTitle';
 import StyledLoader from '../components/Spinner/Spinner';
-import { Main, MainContainer, Row } from './Grid/grid';
-import PageTitle from './PageTitle';
 
 const Load = styled(Main)`
   align-items: center;

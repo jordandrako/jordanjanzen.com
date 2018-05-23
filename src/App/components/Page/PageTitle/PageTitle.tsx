@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { getFileExtension, toTitleCase } from '../../../utilities';
-import Button, { ButtonType } from '../../components/Button';
+import { getFileExtension, toTitleCase } from '../../../../utilities';
+import Button, { ButtonType } from '../../../components/Button';
 import * as Styled from './PageTitle.styles';
 import { IPageTitleProps } from './PageTitle.types';
 

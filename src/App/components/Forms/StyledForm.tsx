@@ -1,5 +1,5 @@
 import { fonts, palette, styled } from '../../../styling';
-import { Row } from '../../containers/Grid/grid';
+import { Row } from '../Page';
 
 const StyledForm = styled(Row)`
   display: flex;

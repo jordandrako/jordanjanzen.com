@@ -11,8 +11,8 @@ import { yearsSinceBirthday } from '../../utilities';
 import { IHomeProps } from '../App.types';
 import Button, { ButtonType } from '../components/Button';
 import CloudImage from '../components/CloudImage';
+import { Hero, Page, Row } from '../components/Page';
 import Project from '../components/Project/Project';
-import { Hero, Page, Row } from './Grid/grid';
 
 const OuterHero = styled.div`
   width: 100%;
