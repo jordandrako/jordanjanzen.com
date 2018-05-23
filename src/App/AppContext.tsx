@@ -1,6 +1,8 @@
 import * as React from 'react';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { auth, base, database, isLoggedIn, provider } from '../base';
 import { ITheme, loadTheme, screenSizesPx } from '../styling';
+import { RebaseBinding } from '../typings/re-base';
 import { setLocalStorage, slugify } from '../utilities';
 import {
   ILocalStorage,
@@ -29,6 +31,7 @@ interface IAppContextState {
     addSkill?: TAddSkill;
     addTodo?: TAddTodo;
     isMobile: boolean;
+    bindType: string;
     projects: IProjects;
     removeProject?: TRemoveProject;
     removeSkill?: TRemoveSkill;
@@ -40,8 +43,9 @@ interface IAppContextState {
   };
 }
 
-// tslint:disable-next-line:interface-name
-interface RebaseBinding {}
+interface IAppContextProps {
+  // history: History;
+}
 
 const appTheme = loadTheme({});
 
@@ -54,6 +58,7 @@ const localStorageData: ILocalStorage = {
 const defaultState: IAppContextState = {
   context: {
     auth: {},
+    bindType: 'none',
     isMobile: window.innerWidth <= screenSizesPx.tablet,
     projects: localStorageData.projects
       ? JSON.parse(localStorageData.projects)
@@ -66,25 +71,28 @@ const defaultState: IAppContextState = {
 
 export const AppContext = React.createContext(defaultState.context);
 
-export class AppProvider extends React.Component<{}, IAppContextState> {
+class AppProvider extends React.Component<
+  IAppContextProps & RouteComponentProps<any>,
+  IAppContextState
+> {
   public componentDidMount(): void {
-    auth.onAuthStateChanged(
-      user => {
-        if (user) {
-          this.authHandler({ user });
-        }
-      },
-      (error: any) => {
-        console.error(error);
-      }
-    );
-    this.getBinding().then(result => {
+    this.getBinding('sync').then(() => {
       setTimeout(() => {
         setLocalStorage('projects', { ...this.state.context.projects });
         setLocalStorage('skills', { ...this.state.context.skills });
         setLocalStorage('todos', { ...this.state.context.todos });
       }, 2000);
     });
+    auth.onAuthStateChanged(
+      user => {
+        if (user) {
+          this.authHandler(user);
+        }
+      },
+      (error: any) => {
+        console.error(error);
+      }
+    );
   }
 
   public render() {
@@ -94,31 +102,6 @@ export class AppProvider extends React.Component<{}, IAppContextState> {
       </AppContext.Provider>
     );
   }
-
-  public getBinding = (): Promise<RebaseBinding[]> => {
-    return new Promise(resolve => {
-      const bind = (state: string): RebaseBinding => {
-        return base.bindToState(state, {
-          context: this,
-          state: `context.${state}`,
-        });
-      };
-
-      const sync = (state: string): RebaseBinding => {
-        return isLoggedIn()
-          ? base.syncState(state, {
-              context: this,
-              onFailure: () => {
-                bind(state);
-              },
-              state: `context.${state}`,
-            })
-          : bind(state);
-      };
-
-      resolve([sync('projects'), sync('skills'), sync('todos')]);
-    });
-  };
 
   public addProject = (project: IProject): void => {
     const projects = { ...this.state.context.projects };
@@ -183,9 +166,41 @@ export class AppProvider extends React.Component<{}, IAppContextState> {
     });
   };
 
+  public getBinding = (type: 'sync' | 'bind'): Promise<RebaseBinding[]> => {
+    return new Promise(resolve => {
+      const bind = (state: string): RebaseBinding => {
+        return base.bindToState(state, {
+          context: this,
+          state: `context.${state}`,
+        });
+      };
+
+      const sync = (state: string): RebaseBinding => {
+        return type === 'sync' && isLoggedIn()
+          ? base.syncState(state, {
+              context: this,
+              onFailure: () => {
+                bind(state);
+              },
+              state: `context.${state}`,
+            })
+          : bind(state);
+      };
+
+      resolve([sync('projects'), sync('skills'), sync('todos')]);
+    });
+  };
+
+  public updatePage = (): void => {
+    this.props.history.push(location.pathname);
+  };
+
   public authHandler = (authData: any): Promise<any> => {
-    const uid = authData.user.uid || authData.uid;
+    const { uid } = authData;
     const rootRef = database.ref();
+    const successfulLogin = () => {
+      this.getBinding('sync').then(() => this.updatePage());
+    };
     return new Promise((resolve, reject) => {
       rootRef.once('value').then(snapshot => {
         const data = snapshot.val() || {};
@@ -196,12 +211,12 @@ export class AppProvider extends React.Component<{}, IAppContextState> {
               ...data,
               owner: uid,
             })
-            .then(() => resolve(this.getBinding()))
+            .then(() => resolve(successfulLogin()))
             .catch((error: any) => {
               console.error(error);
             });
         } else if (data.owner === uid) {
-          resolve(this.getBinding());
+          resolve(successfulLogin());
         } else {
           reject('Log in denied. You are not the owner of this site.');
         }
@@ -209,22 +224,20 @@ export class AppProvider extends React.Component<{}, IAppContextState> {
     });
   };
 
-  public isLoggedIn = (): boolean => {
-    return !!auth.currentUser;
-  };
-
   public login = (): void => {
     auth
       .signInWithPopup(provider)
-      .then(result => this.authHandler(result))
+      .then(result => this.authHandler(result.user))
       .catch((error: any) => console.error(error));
   };
 
   public logout = (): void => {
-    auth
-      .signOut()
-      .then(() => this.getBinding())
-      .catch((error: any) => console.error(error));
+    this.getBinding('bind').then(result => {
+      auth
+        .signOut()
+        .then(() => this.updatePage())
+        .catch((error: any) => console.error(error));
+    });
   };
 
   // tslint:disable-next-line:member-ordering
@@ -248,6 +261,8 @@ export class AppProvider extends React.Component<{}, IAppContextState> {
     },
   };
 }
+
+export default withRouter(AppProvider);
 
 export function withProjects(Component: any) {
   return function ComponentWithProjects(props: any) {

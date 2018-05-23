@@ -6,7 +6,7 @@ import {
   screenSizesPx,
   styled,
 } from '../styling';
-import { AppContext, AppProvider } from './AppContext';
+import AppProvider, { AppContext } from './AppContext';
 import AppRoutes from './AppRoutes';
 import Footer from './containers/Footer';
 import Sidebar from './containers/Sidebar';

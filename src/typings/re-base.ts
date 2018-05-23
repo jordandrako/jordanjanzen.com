@@ -4,6 +4,13 @@
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 
 // tslint:disable interface-name
+
+export interface RebaseBinding {
+  context: object;
+  endpoint: string;
+  id: number;
+  method: string;
+}
 export interface SyncStateOptions {
   /**
    * The context of your component.
@@ -409,7 +416,7 @@ export interface Rebase {
    * @returns An object which you can pass to `removeBinding` if you want
    * to remove the listener while the component is still mounted.
    */
-  syncState(endpoint: string, options: SyncStateOptions): object;
+  syncState(endpoint: string, options: SyncStateOptions): RebaseBinding;
 
   /**
    * One way data binding from Firebase to your component's state. Allows
@@ -422,7 +429,7 @@ export interface Rebase {
    * @returns An object which you can pass to `removeBinding` if you want
    * to remove the listener while the component is still mounted.
    */
-  bindToState(endpoint: string, options: BindToStateOptions): object;
+  bindToState(endpoint: string, options: BindToStateOptions): RebaseBinding;
 
   /**
    * Allows you to listen to Firebase endpoints without binding those
@@ -434,7 +441,7 @@ export interface Rebase {
    * @returns An object which you can pass to `removeBinding` when your
    * component unmounts to remove the Firebase listeners.
    */
-  listenTo(endpoint: string, options: ListenToOptions): object;
+  listenTo(endpoint: string, options: ListenToOptions): RebaseBinding;
 
   /**
    * Allows you to retrieve the data from a Firebase endpoint just once
