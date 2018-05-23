@@ -77,10 +77,12 @@ class AppProvider extends React.Component<
 > {
   public componentDidMount(): void {
     this.getBinding('sync').then(() => {
+      const localEmpty = !localStorageData.projects;
       setTimeout(() => {
         setLocalStorage('projects', { ...this.state.context.projects });
         setLocalStorage('skills', { ...this.state.context.skills });
         setLocalStorage('todos', { ...this.state.context.todos });
+        localEmpty && this.updatePage();
       }, 2000);
     });
     auth.onAuthStateChanged(
