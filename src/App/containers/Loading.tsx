@@ -1,15 +1,15 @@
 import * as React from 'react';
 import DocumentTitle from 'react-document-title';
-import { styled } from '../../styling';
+// import { styled } from '../../styling';
 import Banner, { BannerAction, BannerType } from '../components/Banner';
-import { Main, MainContainer, Row } from '../components/Page';
-import PageTitle from '../components/Page/PageTitle';
+import { Row } from '../components/Page';
+// import { Main, Row } from '../components/Page';
 import StyledLoader from '../components/Spinner/Spinner';
 
-const Load = styled(Main)`
-  align-items: center;
-  justify-content: center;
-`;
+// const Load = styled(Main)`
+//   align-items: center;
+//   justify-content: center;
+// `;
 
 interface ILoadingProps {
   isLoading: boolean;
@@ -18,30 +18,16 @@ interface ILoadingProps {
 const Loading = (props: ILoadingProps) => {
   // Handle the loading state
   if (props.isLoading) {
-    return (
-      <DocumentTitle title="Loading...">
-        <MainContainer>
-          <PageTitle title="Loading..." ext={false} />
-          <Load>
-            <StyledLoader />
-          </Load>
-        </MainContainer>
-      </DocumentTitle>
-    );
+    return <StyledLoader />;
   }
   // Handle the error state
   return (
     <DocumentTitle title="😥 Sorry">
-      <MainContainer>
-        <PageTitle title="😥 Sorry" ext={false} />
-        <Main>
-          <Row>
-            <Banner bannerType={BannerType.Danger} action={BannerAction.Reload}>
-              There seems to have been a problem loading this page...
-            </Banner>
-          </Row>
-        </Main>
-      </MainContainer>
+      <Row>
+        <Banner bannerType={BannerType.Danger} action={BannerAction.Reload}>
+          There seems to have been a problem loading this page...
+        </Banner>
+      </Row>
     </DocumentTitle>
   );
 };

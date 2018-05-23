@@ -11,7 +11,11 @@ export const Page = (props: IPageProps) => {
   return (
     <DocumentTitle title={docTitle}>
       <MainContainer>
-        <PageTitle title={props.title} ext={props.ext} />
+        <PageTitle
+          title={props.title}
+          ext={props.ext}
+          prevPage={props.prevPage}
+        />
         <Main>{props.children}</Main>
       </MainContainer>
     </DocumentTitle>

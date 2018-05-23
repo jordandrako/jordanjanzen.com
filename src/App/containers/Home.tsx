@@ -11,7 +11,7 @@ import { yearsSinceBirthday } from '../../utilities';
 import { IHomeProps } from '../App.types';
 import Button, { ButtonType } from '../components/Button';
 import CloudImage from '../components/CloudImage';
-import { Hero, Page, Row } from '../components/Page';
+import { Hero, Row } from '../components/Page';
 import Project from '../components/Project/Project';
 
 const OuterHero = styled.div`
@@ -94,7 +94,7 @@ class Home extends React.Component<IHomeProps, {}> {
     const projectKey = projects ? Object.keys(projects)[projectIndex] : '';
 
     return (
-      <Page title="Home">
+      <>
         <Hero>
           {!isMobile ? (
             <CloudImage
@@ -125,7 +125,7 @@ class Home extends React.Component<IHomeProps, {}> {
             View My Portfolio
           </Button>
         </Row>
-      </Page>
+      </>
     );
   }
 

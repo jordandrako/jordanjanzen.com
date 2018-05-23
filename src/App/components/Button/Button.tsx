@@ -75,7 +75,8 @@ const Button: React.SFC<IButtonProps> = props => {
         <Styled.linkWrapper to={to}>
           <Styled.deleteButton
             {...styleProps}
-            className={`fa fa-times-circle close ${className}`}
+            {...baseProps}
+            className={`fa fa-times-circle ${className ? className : ''}`}
             onClick={onClick}
           />
         </Styled.linkWrapper>
@@ -86,7 +87,7 @@ const Button: React.SFC<IButtonProps> = props => {
       <Styled.deleteButton
         {...styleProps}
         {...baseProps}
-        className={`fa fa-times-circle close ${className}`}
+        className={`fa fa-times-circle ${className ? className : ''}`}
         onClick={onClick}
       />
     );

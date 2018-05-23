@@ -1,15 +1,16 @@
 import * as React from 'react';
+import DocumentTitle from 'react-document-title';
 import Banner, { BannerType } from '../components/Banner';
-import { Page, Row } from '../components/Page';
+import { Row } from '../components/Page';
 
 const Unathenticated = () => (
-  <Page title="Please Log In">
+  <DocumentTitle title="Please Log In">
     <Row>
       <Banner bannerType={BannerType.Alert} title="Not Logged In.">
         Please log in to view this page.
       </Banner>
     </Row>
-  </Page>
+  </DocumentTitle>
 );
 
 export default Unathenticated;

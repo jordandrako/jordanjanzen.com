@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 import {
   globalStyles,
   loadTheme,
@@ -8,6 +9,7 @@ import {
 } from '../styling';
 import AppProvider, { AppContext } from './AppContext';
 import AppRoutes from './AppRoutes';
+import { Page } from './components/Page';
 import Footer from './containers/Footer';
 import Sidebar from './containers/Sidebar';
 
@@ -26,15 +28,63 @@ const Wrapper = styled.div`
   }
 `;
 
-interface IAppState {
-  isMobile: boolean;
+export enum routeNames {
+  home = 'Home',
+  about = 'About',
+  portfolio = 'Portfolio',
+  todo = 'Todo List',
+  notFound = '404',
 }
 
-export default class App extends React.Component<{}, IAppState> {
-  public constructor(props: {}) {
+const getTitle = (path: string): string => {
+  switch (path) {
+    case '/':
+      return routeNames.home;
+    case '/about':
+      return routeNames.about;
+    case '/portfolio':
+      return routeNames.portfolio;
+    case '/todo':
+      return routeNames.todo;
+    default:
+      return routeNames.notFound;
+  }
+};
+
+interface IAppState {
+  currentPage: string | null;
+  isMobile: boolean;
+  prevPage: {
+    name: string;
+    path: string;
+  } | null;
+}
+
+interface IAppProps extends RouteComponentProps<any> {}
+
+class App extends React.Component<IAppProps, IAppState> {
+  public static getDerivedStateFromProps(
+    nextProps: IAppProps,
+    prevState: IAppState
+  ): object | null {
+    if (nextProps.location.pathname !== prevState.currentPage) {
+      return {
+        currentPage: nextProps.location.pathname,
+        prevPage: {
+          name: getTitle(prevState.currentPage as string),
+          path: prevState.currentPage,
+        },
+      };
+    }
+    return null;
+  }
+
+  public constructor(props: IAppProps) {
     super(props);
     this.state = {
+      currentPage: null,
       isMobile: window.innerWidth <= screenSizesPx.tablet,
+      prevPage: null,
     };
   }
 
@@ -47,7 +97,8 @@ export default class App extends React.Component<{}, IAppState> {
   }
 
   public render(): JSX.Element {
-    const { isMobile } = this.state;
+    const { isMobile, prevPage } = this.state;
+    const title = getTitle(this.props.location.pathname);
 
     return (
       <AppProvider>
@@ -55,7 +106,9 @@ export default class App extends React.Component<{}, IAppState> {
           {context => (
             <Wrapper className="App wrapper">
               <Sidebar isMobile={isMobile} />
-              <AppRoutes isMobile={isMobile} />
+              <Page title={title} prevPage={prevPage}>
+                <AppRoutes isMobile={isMobile} />
+              </Page>
               {isMobile ? <Footer isMobile={isMobile} /> : null}
             </Wrapper>
           )}
@@ -72,3 +125,5 @@ export default class App extends React.Component<{}, IAppState> {
     }
   };
 }
+
+export default withRouter(App);

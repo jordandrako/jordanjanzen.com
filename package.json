@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "prestart": "yarn checkenv",
+    "prestart": "yarn checkenv && scripts/branch.sh",
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
@@ -11,8 +11,9 @@
     "checkenv": "node scripts/check-env.js",
     "branchcheck": "git-branch-is master",
     "predeploy":
-      "yarn branchcheck && yarn checkenv && rm -rf build && cross-env REACT_APP_DATABASE=production yarn build",
-    "prestaging": "yarn checkenv && rm -rf build && yarn build",
+      "yarn branchcheck && yarn checkenv && scripts/branch.sh && rm -rf build && cross-env REACT_APP_DATABASE=production yarn build",
+    "prestaging":
+      "yarn checkenv && rm -rf build && scripts/branch.sh && yarn build",
     "deploy": "firebase deploy -P production",
     "staging": "firebase deploy -P staging",
     "lint:ts": "tslint -p tsconfig.json --fix",

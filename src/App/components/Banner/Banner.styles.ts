@@ -87,6 +87,7 @@ export const showHide = styled.button`
 export const actionButton = styled(Button)`
   background: transparent;
   border: 2px solid ${palette.black};
+  color: ${palette.black};
   font-family: ${fonts.monospace};
   padding: 0.4em 1em;
 `;

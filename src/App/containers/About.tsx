@@ -7,7 +7,7 @@ import { IAboutProps, TAddSkill } from '../App.types';
 import Button, { ButtonType } from '../components/Button';
 import CloudImage from '../components/CloudImage';
 import AddSkillForm from '../components/Forms/AddSkillForm/AddSkillForm';
-import { Flex, Page, Row } from '../components/Page';
+import { Flex, Row } from '../components/Page';
 
 const SkillsRow = styled(Row)`
   display: flex;
@@ -74,7 +74,7 @@ class About extends React.Component<IAboutProps, {}> {
     const { skills, addSkill } = this.props;
 
     return (
-      <Page title="About">
+      <>
         <Row>
           <h2>About, Skills and Interests</h2>
           <SkillsRow isChild={true}>
@@ -369,7 +369,7 @@ class About extends React.Component<IAboutProps, {}> {
             <i className="fa fa-file-text" aria-hidden="true" /> Download My CV
           </Button>
         </Row>
-      </Page>
+      </>
     );
   }
 
