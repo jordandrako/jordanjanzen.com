@@ -1,6 +1,4 @@
 import * as React from 'react';
-// import { isLoggedIn } from '../../../base';
-// import Button from '../../components/Button';
 import Footer from '../Footer';
 import * as Styled from './Sidebar.styles';
 import { ISidebarProps } from './Sidebar.types';

@@ -3,6 +3,9 @@ import { fonts, palette, semanticColors, styled } from '../../../styling';
 import { ButtonType, IButtonStyleProps } from './Button.types';
 
 const buttonTextColor = (props: IButtonStyleProps) => {
+  if (props.disabled) {
+    return palette.grey;
+  }
   if (props.color) {
     return props.color;
   }
@@ -16,6 +19,9 @@ const buttonTextColor = (props: IButtonStyleProps) => {
 };
 
 const buttonBackground = (props: IButtonStyleProps) => {
+  if (props.disabled) {
+    return palette.white;
+  }
   if (props.bg) {
     return props.bg;
   }
@@ -47,7 +53,7 @@ const buttonBackground = (props: IButtonStyleProps) => {
 };
 
 const borderRadius = (props: IButtonStyleProps) => {
-  if (props.circle || props.buttonType === ButtonType.Delete || props.del) {
+  if (props.circle || props.buttonType === ButtonType.Delete) {
     return '100%';
   }
   if (props.pill) {
@@ -56,7 +62,7 @@ const borderRadius = (props: IButtonStyleProps) => {
   return 0;
 };
 
-export const BaseButton = styled.button`
+export const baseButton = styled.button`
   border: none;
   border-radius: ${borderRadius};
   padding: ${(props: IButtonStyleProps) =>
@@ -84,27 +90,13 @@ export const BaseButton = styled.button`
     return '1.1rem';
   }};
 
-  transition: all 0.25s ease-in-out;
+  transition: ${(props: IButtonStyleProps) =>
+    !props.disabled && 'all 0.25s ease-in-out'};
 
   &:hover {
-    opacity: 1;
-    transform: translateY(-2px);
-  }
-
-  &.disabled {
-    background: ${palette.grey};
-    color: ${palette.black};
-  }
-
-  i.fa {
-    padding-right: 0.75em;
-    margin-right: auto;
-    align-self: flex-start;
-  }
-
-  i.fa.right {
-    padding-right: 0;
-    padding-left: 0.75em;
+    opacity: ${(props: IButtonStyleProps) => !props.disabled && '1'};
+    transform: ${(props: IButtonStyleProps) =>
+      !props.disabled && 'translateY(-2px)'};
   }
 
   &:before,
@@ -133,7 +125,14 @@ export const BaseButton = styled.button`
   }
 `;
 
-export const DeleteButton = styled.button`
+export const buttonIcon = styled.i`
+  padding: ${(props: IButtonStyleProps) =>
+    props.iconReverse ? '0 0 0 0.75em' : '0 0.75em 0 0'};
+  margin: ${(props: IButtonStyleProps) =>
+    props.iconReverse ? '0 0 0 auto' : '0 auto 0 0'};
+`;
+
+export const deleteButton = styled.button`
   font-size: 20px;
   margin: 0 0.5em;
   padding: 0;
@@ -141,15 +140,16 @@ export const DeleteButton = styled.button`
   height: 20px;
   line-height: 20px;
   opacity: 0.85;
-  color: ${palette.red};
+  color: ${(props: IButtonStyleProps) =>
+    props.disabled ? palette.grey : palette.red};
   background: ${palette.black};
   border: none;
   border-radius: 50%;
-  cursor: pointer;
+  cursor: ${(props: IButtonStyleProps) => !props.disabled && 'pointer'};
   transition: all 0.25s ease;
 
   &:hover {
-    opacity: 1;
+    opacity: ${(props: IButtonStyleProps) => !props.disabled && '1'};
   }
 `;
 
