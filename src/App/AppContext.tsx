@@ -1,9 +1,9 @@
+import { auth, base, database, isLoggedIn, provider } from 'base';
 import * as React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
-import { auth, base, database, isLoggedIn, provider } from '../base';
-import { ITheme, loadTheme, screenSizesPx } from '../styling';
-import { RebaseBinding } from '../typings/re-base';
-import { setLocalStorage, slugify } from '../utilities';
+import { ITheme, loadTheme, screenSizesPx } from 'styling';
+import { RebaseBinding } from 'typings/re-base';
+import { setLocalStorage, slugify } from 'utilities';
 import {
   ILocalStorage,
   IProject,

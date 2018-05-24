@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { truncate } from '../../../utilities';
+import { truncate } from 'utilities';
 import StyledForm from '../Forms/StyledForm';
 import * as Styled from './Todo.styles';
 import { ITodoProps } from './Todo.types';

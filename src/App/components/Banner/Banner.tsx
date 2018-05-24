@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { Transition } from 'react-transition-group';
-import { toTitleCase } from '../../../utilities';
+import { toTitleCase } from 'utilities';
 import { ButtonType } from '../Button';
 import * as Styled from './Banner.styles';
 import {

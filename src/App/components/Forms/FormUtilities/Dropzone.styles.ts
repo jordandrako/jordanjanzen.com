@@ -1,5 +1,5 @@
 import Dropzone from 'react-dropzone';
-import { fonts, semanticColors, styled } from '../../../../styling';
+import { fonts, semanticColors, styled } from 'styling';
 
 export const zone = styled(Dropzone)`
   height: 100px;

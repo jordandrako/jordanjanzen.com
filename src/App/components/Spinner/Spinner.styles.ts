@@ -1,4 +1,4 @@
-import { palette, styled } from '../../../styling';
+import { palette, styled } from 'styling';
 
 export const loader = styled.div`
   border: 3px solid ${palette.black};

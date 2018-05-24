@@ -1,14 +1,8 @@
+import { IHomeProps } from 'App/App.types';
 import { adjustHue } from 'polished';
 import * as React from 'react';
-import {
-  fonts,
-  palette,
-  screenSizes,
-  semanticColors,
-  styled,
-} from '../../styling';
-import { yearsSinceBirthday } from '../../utilities';
-import { IHomeProps } from '../App.types';
+import { yearsSinceBirthday } from 'utilities';
+import { fonts, palette, screenSizes, semanticColors, styled } from 'styling';
 import Button, { ButtonType } from '../components/Button';
 import CloudImage from '../components/CloudImage';
 import { Hero, Row } from '../components/Page';

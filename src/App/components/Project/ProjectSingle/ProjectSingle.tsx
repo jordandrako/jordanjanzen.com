@@ -1,6 +1,6 @@
+import { isLoggedIn } from 'base';
 import * as React from 'react';
-import { isLoggedIn } from '../../../../base';
-import { palette } from '../../../../styling';
+import { palette } from 'styling';
 import Loading from '../../../containers/Loading';
 import Button, { ButtonType } from '../../Button';
 import CloudImage from '../../CloudImage';

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { palette } from '../../../../styling/theme';
+import { palette } from 'styling';
 import Button, { ButtonType } from '../../Button';
 import StyledForm from '../StyledForm';
 import { IAddSkillFormProps } from './AddSkillForm.types';

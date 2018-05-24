@@ -1,4 +1,4 @@
-import { screenSizes, semanticColors, styled } from '../../../../styling';
+import { screenSizes, semanticColors, styled } from 'styling';
 import { IFlex, IRow } from './grid.types';
 
 export const MainContainer = styled.main`
@@ -56,7 +56,7 @@ export const Row = styled.section`
   }
 `;
 
-export const Hero = styled(Row)`
+export const Hero = Row.extend`
   margin: 0 0 2.5em;
   margin-top: 0 !important;
   max-width: calc(1000px + 4em);

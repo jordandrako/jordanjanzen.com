@@ -1,4 +1,4 @@
-import { palette, styled } from '../../../styling';
+import { palette, styled } from 'styling';
 import { ITodoStyleProps } from './Todo.types';
 
 export const Item = styled.li`

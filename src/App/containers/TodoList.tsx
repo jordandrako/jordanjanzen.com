@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { styled } from '../../styling';
+import { styled } from 'styling';
 import { ITodos, TAddTodo, TRemoveTodo, TUpdateTodo } from '../App.types';
 import AddTodoForm from '../components/Forms/AddTodoForm/AddTodoForm';
 import { Row } from '../components/Page/Grid';

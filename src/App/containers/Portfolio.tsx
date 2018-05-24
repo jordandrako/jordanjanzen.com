@@ -1,7 +1,7 @@
+import { isLoggedIn } from 'base';
 import * as React from 'react';
 import { Route, RouteComponentProps } from 'react-router-dom';
-import { isLoggedIn } from '../../base';
-import { styled } from '../../styling';
+import { styled } from 'styling';
 import { IPortfolioProps } from '../App.types';
 import AddProjectForm from '../components/Forms/AddProjectForm/AddProjectForm';
 import { Row } from '../components/Page';

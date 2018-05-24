@@ -1,4 +1,4 @@
-import { fonts, palette, styled } from '../../../styling';
+import { fonts, palette, styled } from 'styling';
 import { Row } from '../Page';
 
 const StyledForm = styled(Row)`

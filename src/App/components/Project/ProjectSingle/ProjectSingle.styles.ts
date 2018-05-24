@@ -1,11 +1,5 @@
 import { Link } from 'react-router-dom';
-import {
-  fonts,
-  palette,
-  screenSizes,
-  semanticColors,
-  styled,
-} from '../../../../styling';
+import { fonts, palette, screenSizes, semanticColors, styled } from 'styling';
 import { Row } from '../../Page';
 
 export const ClickOutside = styled(Link)`

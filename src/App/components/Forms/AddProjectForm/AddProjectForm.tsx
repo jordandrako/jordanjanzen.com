@@ -1,7 +1,7 @@
+import { IImage, IProject } from 'App/App.types';
 import * as React from 'react';
-import { semanticColors } from '../../../../styling';
-import { truncate } from '../../../../utilities';
-import { IImage, IProject } from '../../../App.types';
+import { semanticColors } from 'styling';
+import { truncate } from 'utilities';
 import Button, { ButtonType } from '../../Button';
 import { Row } from '../../Page';
 import Dropzone from '../FormUtilities/Dropzone';

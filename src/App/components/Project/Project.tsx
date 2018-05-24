@@ -1,6 +1,6 @@
 import * as React from 'react';
+import { toTitleCase } from 'utilities';
 import { IProjectProps } from '.';
-import { toTitleCase } from '../../../utilities';
 import Loading from '../../containers/Loading';
 import Button, { ButtonType } from '../Button';
 import CloudImage from '../CloudImage';

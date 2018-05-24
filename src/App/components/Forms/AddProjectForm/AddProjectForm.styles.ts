@@ -1,4 +1,4 @@
-import { palette, styled } from '../../../../styling';
+import { palette, styled } from 'styling';
 
 export const uploadedImageList = styled.ul`
   list-style: none;

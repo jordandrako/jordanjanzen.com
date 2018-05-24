@@ -1,7 +1,7 @@
 import { adjustHue } from 'polished';
 import { Link } from 'react-router-dom';
-import { fonts, palette, screenSizes, styled } from '../../../styling/index';
-const JJMark = require('../../../images/JJMark.svg');
+import { fonts, palette, screenSizes, styled } from 'styling';
+const JJMark = require('images/JJMark.svg');
 
 export const leftColumn = styled.aside`
   background: ${palette.black};

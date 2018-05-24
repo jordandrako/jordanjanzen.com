@@ -6,7 +6,7 @@ import {
   screenSizes,
   screenSizesPx,
   styled,
-} from '../styling';
+} from 'styling';
 import AppProvider, { AppContext } from './AppContext';
 import AppRoutes from './AppRoutes';
 import { Page } from './components/Page';

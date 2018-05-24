@@ -1,3 +1,4 @@
+import { isLoggedIn } from 'base';
 import * as React from 'react';
 import {
   Route,
@@ -5,8 +6,7 @@ import {
   Switch,
   withRouter,
 } from 'react-router-dom';
-import { isLoggedIn } from '../../base';
-import { asyncLoader } from '../../utilities';
+import { asyncLoader } from 'utilities';
 import { withProjects, withSkills, withTodos } from '../AppContext';
 import Loading from '../containers/Loading';
 import { IAppRoutesProps } from './AppRoutes.types';

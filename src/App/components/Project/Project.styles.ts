@@ -1,6 +1,6 @@
 import { adjustHue } from 'polished';
 import { Link } from 'react-router-dom';
-import { fonts, palette, screenSizes, styled } from '../../../styling';
+import { fonts, palette, screenSizes, styled } from 'styling';
 
 export const imageHeight = '250';
 

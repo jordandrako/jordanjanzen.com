@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { fonts, palette, semanticColors, styled } from '../../../styling';
+import { fonts, palette, semanticColors, styled } from 'styling';
 import { ButtonType, IButtonStyleProps } from './Button.types';
 
 const buttonTextColor = (props: IButtonStyleProps) => {

@@ -1,15 +1,8 @@
 import * as React from 'react';
 import DocumentTitle from 'react-document-title';
-// import { styled } from '../../styling';
 import Banner, { BannerAction, BannerType } from '../components/Banner';
 import { Row } from '../components/Page';
-// import { Main, Row } from '../components/Page';
 import StyledLoader from '../components/Spinner/Spinner';
-
-// const Load = styled(Main)`
-//   align-items: center;
-//   justify-content: center;
-// `;
 
 interface ILoadingProps {
   isLoading: boolean;

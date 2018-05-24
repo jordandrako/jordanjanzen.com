@@ -1,5 +1,5 @@
 import { transparentize } from 'polished';
-import { fonts, palette, styled } from '../../../styling';
+import { fonts, palette, styled } from 'styling';
 import Button from '../Button';
 import { BannerType, IBannerStyleProps } from './Banner.types';
 

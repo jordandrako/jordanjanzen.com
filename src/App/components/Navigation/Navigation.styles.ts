@@ -1,6 +1,6 @@
 import { darken } from 'polished';
 import { NavLink } from 'react-router-dom';
-import { fonts, palette, screenSizes, styled } from '../../../styling';
+import { fonts, palette, screenSizes, styled } from 'styling';
 
 export const navList = styled.ul`
   list-style: none;
