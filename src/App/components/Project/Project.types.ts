@@ -1,5 +1,5 @@
+import { IProject, IProjects } from 'App/App.types';
 import { History } from 'history';
-import { IProject, IProjects } from '../../App.types';
 
 export interface IProjectProps {
   details: IProject;

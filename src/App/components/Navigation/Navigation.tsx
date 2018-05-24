@@ -1,5 +1,5 @@
+import { isLoggedIn } from 'base';
 import * as React from 'react';
-import { isLoggedIn } from '../../../base';
 import * as Styled from './Navigation.styles';
 import { INavigationProps } from './Navigation.types';
 

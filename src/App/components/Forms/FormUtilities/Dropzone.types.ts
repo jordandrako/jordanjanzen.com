@@ -1,4 +1,4 @@
-import { IImage } from '../../../App.types';
+import { IImage } from 'App/App.types';
 
 export interface IDropzoneProps {
   addImage: (image: IImage) => void;
