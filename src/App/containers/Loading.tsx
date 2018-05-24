@@ -1,8 +1,16 @@
 import * as React from 'react';
 import DocumentTitle from 'react-document-title';
+import { styled } from 'styling';
 import Banner, { BannerAction, BannerType } from '../components/Banner';
 import { Row } from '../components/Page';
 import StyledLoader from '../components/Spinner/Spinner';
+
+const Float = styled.div`
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+`;
 
 interface ILoadingProps {
   isLoading: boolean;
@@ -11,7 +19,11 @@ interface ILoadingProps {
 const Loading = (props: ILoadingProps) => {
   // Handle the loading state
   if (props.isLoading) {
-    return <StyledLoader />;
+    return (
+      <Float>
+        <StyledLoader />
+      </Float>
+    );
   }
   // Handle the error state
   return (

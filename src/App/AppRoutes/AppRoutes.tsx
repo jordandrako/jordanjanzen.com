@@ -73,6 +73,7 @@ class AppRoutes extends React.Component<
         <Route path="/about" render={this._renderAbout} />
         <Route path="/portfolio" render={this._renderPortfolio} />
         <Route exact={true} path="/todo" render={this._renderTodoList} />
+        <Route exact={true} path="/loadTest" render={this._renderLoad} />
         {/* Unmatched URLs */}
         <Route component={AsyncNotFound} />
       </Switch>
@@ -90,6 +91,8 @@ class AppRoutes extends React.Component<
   private _renderPortfolio = (): JSX.Element => (
     <AsyncPortfolio isMobile={this.props.isMobile} />
   );
+
+  private _renderLoad = (): JSX.Element => <Loading isLoading={true} />;
 
   private _renderTodoList = (): JSX.Element =>
     isLoggedIn() ? (

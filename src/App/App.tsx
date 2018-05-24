@@ -33,6 +33,7 @@ export enum routeNames {
   about = 'About',
   portfolio = 'Portfolio',
   todo = 'Todo List',
+  load = 'Loading...',
   notFound = '404',
 }
 
@@ -46,6 +47,8 @@ const getTitle = (path: string): string => {
       return routeNames.portfolio;
     case '/todo':
       return routeNames.todo;
+    case '/loadTest':
+      return routeNames.load;
     default:
       return routeNames.notFound;
   }
