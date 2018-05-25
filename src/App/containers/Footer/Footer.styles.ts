@@ -79,13 +79,13 @@ export const overflowMenu = styled.div`
   }
 
   &.entering,
+  &.exiting,
   &.exited {
     right: -60px;
     opacity: 0;
   }
 
-  &.entered,
-  &.exiting {
+  &.entered {
     right: 0;
     opacity: 1;
   }

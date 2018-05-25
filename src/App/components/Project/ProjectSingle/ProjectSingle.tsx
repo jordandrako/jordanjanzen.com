@@ -1,5 +1,6 @@
 import { isLoggedIn } from 'base';
 import * as React from 'react';
+import DocumentTitle from 'react-document-title';
 import { palette } from 'styling';
 import Loading from '../../../containers/Loading';
 import Button, { ButtonType } from '../../Button';
@@ -48,90 +49,89 @@ export default class ProjectSingle extends React.Component<
 
     if (details && index) {
       return (
-        <div key={index}>
-          <Styled.ClickOutside to="/portfolio/" />
-          <Styled.Container>
-            <Styled.Single>
-              <Styled.Frame>
-                <Styled.Title>{details.name || 'Name'}</Styled.Title>
-                <Button
-                  to="/portfolio"
-                  buttonType={ButtonType.Delete}
-                  style={{ margin: 0 }}
-                />
-              </Styled.Frame>
-              <Styled.Content>
-                <p>{details.long_desc}</p>
-                {Object.keys(details.images).map((image, imageIndex) => (
-                  <CloudImage
-                    key={details.images[image].id}
-                    name={`Feature ${imageIndex} ${details.images[image].id}`}
-                    publicId={details.images[image].id}
-                    format={details.images[image].format}
-                    width={isMobile ? '400' : '800'}
-                    crop="limit"
-                    link={true}
+        <DocumentTitle title={`${details.name} | Jordan Janzen`}>
+          <div key={index}>
+            <Styled.ClickOutside to="/portfolio" />
+            <Styled.Container>
+              <Styled.Single>
+                <Styled.Frame>
+                  <Styled.Title>{details.name || 'Project'}</Styled.Title>
+                  <Button
+                    to="/portfolio"
+                    buttonType={ButtonType.Delete}
+                    style={{ margin: 0 }}
                   />
-                ))}
-              </Styled.Content>
-              <Styled.Frame>
-                <Button
-                  to={`/portfolio/${prevId}`}
-                  small={true}
-                  buttonType={ButtonType.Secondary}
-                >
-                  <i className="fa fa-arrow-left" aria-hidden="true" />
-                  {this.props.isMobile ? '' : ' prev'}
-                </Button>
-                {details.link !== '' ? (
+                </Styled.Frame>
+                <Styled.Content>
+                  <p>{details.long_desc}</p>
+                  {Object.keys(details.images).map((image, imageIndex) => (
+                    <CloudImage
+                      key={details.images[image].id}
+                      name={`Feature ${imageIndex} ${details.images[image].id}`}
+                      publicId={details.images[image].id}
+                      format={details.images[image].format}
+                      width={isMobile ? '400' : '800'}
+                      crop="limit"
+                      link={true}
+                    />
+                  ))}
+                </Styled.Content>
+                <Styled.Frame>
                   <Button
-                    href={details.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    to={`/portfolio/${prevId}`}
                     small={true}
                     buttonType={ButtonType.Secondary}
+                    icon="arrow-left"
                   >
-                    {this.props.isMobile ? (
-                      ''
-                    ) : (
-                      <i className="fa fa-external-link" aria-hidden="true" />
-                    )}{' '}
-                    Visit Site
+                    {isMobile ? '' : 'prev'}
                   </Button>
-                ) : null}
-                {details.repo !== '' ? (
+                  {details.link !== '' ? (
+                    <Button
+                      href={details.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      small={true}
+                      buttonType={ButtonType.Secondary}
+                      icon={!isMobile && 'external-link'}
+                    >
+                      Visit Site
+                    </Button>
+                  ) : null}
+                  {details.repo !== '' ? (
+                    <Button
+                      href={details.repo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      small={true}
+                      buttonType={ButtonType.Secondary}
+                      icon={!isMobile && 'github'}
+                    >
+                      View Repo
+                    </Button>
+                  ) : null}
+                  {isLoggedIn() && !isMobile ? (
+                    <Button
+                      small={true}
+                      buttonType={ButtonType.Secondary}
+                      bg={palette.red}
+                      onClick={this._handleDelete}
+                    >
+                      {this.state.delete ? 'Confirm?' : 'Delete'}
+                    </Button>
+                  ) : null}
                   <Button
-                    href={details.repo}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    to={`/portfolio/${nextId}`}
                     small={true}
                     buttonType={ButtonType.Secondary}
+                    iconReverse="arrow-right"
                   >
-                    <i className="fa fa-github" aria-hidden="true" /> View Repo
+                    {isMobile ? '' : 'next'}
                   </Button>
-                ) : null}
-                {isLoggedIn() ? (
-                  <Button
-                    small={true}
-                    buttonType={ButtonType.Secondary}
-                    bg={palette.red}
-                    onClick={this._handleDelete}
-                  >
-                    {this.state.delete ? 'Confirm?' : 'Delete'}
-                  </Button>
-                ) : null}
-                <Button
-                  to={`/portfolio/${nextId}`}
-                  small={true}
-                  buttonType={ButtonType.Secondary}
-                >
-                  {this.props.isMobile ? '' : 'next '}
-                  <i className="fa right fa-arrow-right" aria-hidden="true" />
-                </Button>
-              </Styled.Frame>
-            </Styled.Single>
-          </Styled.Container>
-        </div>
+                </Styled.Frame>
+              </Styled.Single>
+            </Styled.Container>
+          </div>
+        </DocumentTitle>
       );
     }
     return <Loading isLoading={true} />;

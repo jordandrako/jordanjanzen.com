@@ -38,16 +38,17 @@ export enum routeNames {
 }
 
 const getTitle = (path: string): string => {
-  switch (path) {
-    case '/':
+  const route = path && path.split('/')[1];
+  switch (route) {
+    case '':
       return routeNames.home;
-    case '/about':
+    case 'about':
       return routeNames.about;
-    case '/portfolio':
+    case 'portfolio':
       return routeNames.portfolio;
-    case '/todo':
+    case 'todo':
       return routeNames.todo;
-    case '/loadTest':
+    case 'loadTest':
       return routeNames.load;
     default:
       return routeNames.notFound;
@@ -70,7 +71,10 @@ class App extends React.Component<IAppProps, IAppState> {
     nextProps: IAppProps,
     prevState: IAppState
   ): object | null {
-    if (nextProps.location.pathname !== prevState.currentPage) {
+    const nextRoute = nextProps.location.pathname.split('/')[1];
+    const prevRoute =
+      prevState.currentPage && prevState.currentPage.split('/')[1];
+    if (nextRoute !== prevRoute) {
       return {
         currentPage: nextProps.location.pathname,
         prevPage: {

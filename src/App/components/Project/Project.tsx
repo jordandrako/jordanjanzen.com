@@ -74,8 +74,9 @@ export default class Project extends React.Component<IProjectProps, {}> {
                 to={`/portfolio/${index}`}
                 small={true}
                 buttonType={ButtonType.Primary}
+                icon="search"
               >
-                <i className="fa fa-search" aria-hidden="true" /> More Details
+                More Details
               </Button>
             </li>
             {details.link !== '' ? (
@@ -85,9 +86,9 @@ export default class Project extends React.Component<IProjectProps, {}> {
                   target="_blank"
                   small={true}
                   buttonType={ButtonType.Secondary}
+                  icon="external-link"
                 >
-                  <i className="fa fa-external-link" aria-hidden="true" /> Visit
-                  Site
+                  Visit Site
                 </Button>
               </li>
             ) : null}
@@ -98,8 +99,9 @@ export default class Project extends React.Component<IProjectProps, {}> {
                   target="_blank"
                   small={true}
                   buttonType={ButtonType.Secondary}
+                  icon="github"
                 >
-                  <i className="fa fa-github" aria-hidden="true" /> View Repo
+                  View Repo
                 </Button>
               </li>
             ) : null}
