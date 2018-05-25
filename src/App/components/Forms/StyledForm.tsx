@@ -19,6 +19,10 @@ const StyledForm = styled(Row)`
     flex-grow: 1;
   }
 
+  textarea {
+    resize: vertical;
+  }
+
   textarea,
   select,
   input:not([type='checkbox']) {
@@ -31,13 +35,14 @@ const StyledForm = styled(Row)`
     background: transparent;
     outline: none;
 
-    :focus {
+    &:focus {
       outline: none;
       border-color: ${palette.blue};
     }
-  }
-  textarea {
-    resize: vertical;
+
+    &:required {
+      border-left: 3px solid ${palette.blue};
+    }
   }
 `;
 
