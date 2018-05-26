@@ -364,8 +364,9 @@ class About extends React.Component<IAboutProps, {}> {
             href="https://res.cloudinary.com/jordan-janzen/image/upload/v1511291826/Jordan_Janzen_CV.pdf"
             target="_blank"
             buttonType={ButtonType.Cta}
+            icon="file-text"
           >
-            <i className="fa fa-file-text" aria-hidden="true" /> Download My CV
+            Download My CV
           </Button>
         </Row>
       </>
