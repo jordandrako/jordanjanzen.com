@@ -1,11 +1,6 @@
 import { isLoggedIn } from 'base';
 import * as React from 'react';
-import {
-  Route,
-  RouteComponentProps,
-  Switch,
-  withRouter,
-} from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { asyncLoader } from 'utilities';
 import { withProjects, withSkills, withTodos } from '../AppContext';
 import Loading from '../containers/Loading';
@@ -59,13 +54,7 @@ const AsyncTodoList = withTodos(
   )
 );
 
-class AppRoutes extends React.Component<
-  IAppRoutesProps & RouteComponentProps<any>
-> {
-  public constructor(props: IAppRoutesProps & RouteComponentProps<any>) {
-    super(props);
-  }
-
+class AppRoutes extends React.Component<IAppRoutesProps> {
   public render() {
     return (
       <Switch>
@@ -102,4 +91,4 @@ class AppRoutes extends React.Component<
     );
 }
 
-export default withRouter(AppRoutes);
+export default AppRoutes;

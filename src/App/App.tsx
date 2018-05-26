@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { RouteComponentProps, withRouter } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router-dom';
 import {
   globalStyles,
   loadTheme,
@@ -133,4 +133,4 @@ class App extends React.Component<IAppProps, IAppState> {
   };
 }
 
-export default withRouter(App);
+export default App;

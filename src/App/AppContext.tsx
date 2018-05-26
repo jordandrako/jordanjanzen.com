@@ -1,7 +1,7 @@
 import { auth, base, database, isLoggedIn, provider } from 'base';
 import * as React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
-import { ITheme, loadTheme, screenSizesPx } from 'styling';
+import { getTheme, ITheme, screenSizesPx } from 'styling';
 import { RebaseBinding } from 'typings/re-base';
 import { setLocalStorage, slugify } from 'utilities';
 import {
@@ -43,13 +43,9 @@ interface IAppContextState {
   };
 }
 
-interface IAppContextProps {
-  // history: History;
-}
+interface IAppContextProps extends RouteComponentProps<any> {}
 
-const appTheme = loadTheme({});
-
-const localStorageData: ILocalStorage = {
+const localItems: ILocalStorage = {
   projects: localStorage.getItem('projects'),
   skills: localStorage.getItem('skills'),
   todos: localStorage.getItem('todos'),
@@ -60,24 +56,20 @@ const defaultState: IAppContextState = {
     auth: {},
     bindType: 'none',
     isMobile: window.innerWidth <= screenSizesPx.tablet,
-    projects: localStorageData.projects
-      ? JSON.parse(localStorageData.projects)
-      : {},
-    skills: localStorageData.skills ? JSON.parse(localStorageData.skills) : {},
-    theme: appTheme,
-    todos: localStorageData.todos ? JSON.parse(localStorageData.todos) : {},
+    projects: localItems.projects ? JSON.parse(localItems.projects) : {},
+    skills: localItems.skills ? JSON.parse(localItems.skills) : {},
+    theme: getTheme(),
+    todos: localItems.todos ? JSON.parse(localItems.todos) : {},
   },
 };
 
 export const AppContext = React.createContext(defaultState.context);
 
-class AppProvider extends React.Component<
-  IAppContextProps & RouteComponentProps<any>,
-  IAppContextState
-> {
+class AppProvider extends React.Component<IAppContextProps, IAppContextState> {
   public componentDidMount(): void {
     this.getBinding('sync').then(() => {
-      const localEmpty = !localStorageData.projects;
+      const localEmpty = Object.keys(localItems).every(key => key === null);
+      console.warn(localEmpty);
       setTimeout(() => {
         setLocalStorage('projects', { ...this.state.context.projects });
         setLocalStorage('skills', { ...this.state.context.skills });
@@ -86,22 +78,8 @@ class AppProvider extends React.Component<
       }, 2000);
     });
     auth.onAuthStateChanged(
-      user => {
-        if (user) {
-          this.authHandler(user);
-        }
-      },
-      (error: any) => {
-        console.error(error);
-      }
-    );
-  }
-
-  public render() {
-    return (
-      <AppContext.Provider value={this.state.context}>
-        {this.props.children}
-      </AppContext.Provider>
+      user => user && this.authHandler(user),
+      (error: any) => console.error(error)
     );
   }
 
@@ -145,20 +123,17 @@ class AppProvider extends React.Component<
   };
 
   public updateTodo = (key: string, updatedProp: ITodo): void => {
-    const todos = { ...this.state.context.todos };
+    const todos: ITodos = { ...this.state.context.todos };
     const todo = todos[key];
     const updatedTodo = {
       ...todo,
       ...updatedProp,
     };
     todos[key] = updatedTodo;
-    this.updateData('todos', { ...todos });
+    this.updateData('todos', todos);
   };
 
-  public updateData = (
-    state: string,
-    data: IProjects | ISkills | ITodos
-  ): void => {
+  public updateData = (state: string, data: IProjects | ISkills): void => {
     setLocalStorage(state, data);
     this.setState({
       context: {
@@ -262,6 +237,14 @@ class AppProvider extends React.Component<
       updateTodo: this.updateTodo,
     },
   };
+
+  public render() {
+    return (
+      <AppContext.Provider value={this.state.context}>
+        {this.props.children}
+      </AppContext.Provider>
+    );
+  }
 }
 
 export default withRouter(AppProvider);
