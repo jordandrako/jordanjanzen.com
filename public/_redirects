@@ -1,3 +1,5 @@
+/* /index.html 200
+
 # Redirect domain aliases to primary domain
 https://www.jordanjanzen.com/* https://jordanjanzen.com/:splat 301!
 
