@@ -42,19 +42,21 @@ const Button: React.SFC<IButtonProps> = props => {
     wide,
   };
 
-  const buttonText = [
-    icon && (
-      <Styled.buttonIcon className={`fa fa-${icon}`} aria-hidden="true" />
-    ),
-    text || children || 'Button',
-    iconReverse && (
-      <Styled.buttonIcon
-        className={`fa fa-${iconReverse}`}
-        aria-hidden="true"
-        iconReverse={iconReverse}
-      />
-    ),
-  ];
+  const buttonText = () => (
+    <>
+      {icon && (
+        <Styled.buttonIcon className={`fa fa-${icon}`} aria-hidden="true" />
+      )}
+      {text || children || 'Button'}
+      {iconReverse && (
+        <Styled.buttonIcon
+          className={`fa fa-${iconReverse}`}
+          aria-hidden="true"
+          iconReverse={iconReverse}
+        />
+      )}
+    </>
+  );
 
   const onClick = disabled ? undefined : props.onClick;
 
@@ -66,7 +68,7 @@ const Button: React.SFC<IButtonProps> = props => {
   };
 
   const BaseButton = (
-    <Styled.baseButton {...props}>{buttonText}</Styled.baseButton>
+    <Styled.baseButton {...props}>{buttonText()}</Styled.baseButton>
   );
 
   if (buttonType === ButtonType.Delete) {
