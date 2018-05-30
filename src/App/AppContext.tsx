@@ -68,8 +68,9 @@ export const AppContext = React.createContext(defaultState.context);
 class AppProvider extends React.Component<IAppContextProps, IAppContextState> {
   public componentDidMount(): void {
     this.getBinding('sync').then(() => {
-      const localEmpty = Object.keys(localItems).every(key => key === null);
-      console.warn(localEmpty);
+      const localEmpty = Object.keys(localItems).every(
+        key => localItems[key] === null
+      );
       setTimeout(() => {
         setLocalStorage('projects', { ...this.state.context.projects });
         setLocalStorage('skills', { ...this.state.context.skills });
