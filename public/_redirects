@@ -1,0 +1,9 @@
+# Redirect domain aliases to primary domain
+https://www.jordanjanzen.com/* https://jordanjanzen.com/:splat 301!
+
+# These extra rules are required because HTTPS is not forced
+http://www.jordanjanzen.com/* https://jordanjanzen.com/:splat 301!
+
+# Optional: Redirect default Netlify subdomain to primary domain
+https://fervent-williams-b3a5ad.netlify.com/* https://jordanjanzen.com/:splat 301!
+http://fervent-williams-b3a5ad.netlify.com/* https://jordanjanzen.com/:splat 301!
