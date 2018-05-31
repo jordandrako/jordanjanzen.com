@@ -1,3 +1,4 @@
+# Redirect all to index.html for SPA.
 /* /index.html 200
 
 # Redirect domain aliases to primary domain
