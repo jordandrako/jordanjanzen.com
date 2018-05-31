@@ -66,7 +66,7 @@ export default class CloudImage extends React.Component<ICloudImageProps, {}> {
       width,
     } = this.props;
 
-    const url = `https://res.cloudinary.com/jordan-janzen/image/upload/\
+    const url = `https://res.cloudinary.com/jordan-janzen/image/upload/f_auto,\
 w_${width},h_${height},c_${crop},g_${gravity},o_${opacity},a_${angle},r_${radius}${
       bo ? `,bo_${bo}` : ''
     }${background ? `,b_${background}` : ''}/${
