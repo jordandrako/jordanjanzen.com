@@ -379,10 +379,10 @@ class About extends React.Component<IAboutProps, {}> {
 
   private _renderList = (category: string): (JSX.Element | undefined)[] => {
     return Object.keys(this.props.skills).map(key => {
-      if (this.props.skills[key]!.category === category) {
+      if (this.props.skills[key].category === category) {
         return (
           <li key={key}>
-            {this.props.skills[key]!.name}
+            {this.props.skills[key].name}
             {isLoggedIn() && (
               <Button
                 buttonType={ButtonType.Delete}

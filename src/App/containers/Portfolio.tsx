@@ -42,7 +42,7 @@ class Portfolio extends React.Component<IPortfolioProps, IPortfolioState> {
                 {Object.keys(projects)
                   .reverse()
                   .map(key => (
-                    <Project key={key} index={key} details={projects[key]!} />
+                    <Project key={key} index={key} details={projects[key]} />
                   ))}
               </ListOfProjects>
             </Row>
@@ -66,7 +66,7 @@ class Portfolio extends React.Component<IPortfolioProps, IPortfolioState> {
       isMobile={this.props.isMobile}
       projects={this.props.projects}
       index={routeProps.match.params.projectId}
-      details={this.props.projects[routeProps.match.params.projectId]!}
+      details={this.props.projects[routeProps.match.params.projectId]}
       removeProject={this.props.removeProject}
       {...routeProps}
     />

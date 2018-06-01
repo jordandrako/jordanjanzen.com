@@ -91,9 +91,9 @@ export default class AddProjectForm extends React.Component<
               <optgroup label="Core Skills">
                 {Object.keys(skills).map(
                   (key: string) =>
-                    skills[key]!.category === 'core' && (
-                      <option key={key} value={skills[key]!.name}>
-                        {skills[key]!.name}
+                    skills[key].category === 'core' && (
+                      <option key={key} value={skills[key].name}>
+                        {skills[key].name}
                       </option>
                     )
                 )}
@@ -101,9 +101,9 @@ export default class AddProjectForm extends React.Component<
               <optgroup label="Library Skills">
                 {Object.keys(skills).map(
                   key =>
-                    skills[key]!.category === 'library' && (
-                      <option key={key} value={skills[key]!.name}>
-                        {skills[key]!.name}
+                    skills[key].category === 'library' && (
+                      <option key={key} value={skills[key].name}>
+                        {skills[key].name}
                       </option>
                     )
                 )}
@@ -111,9 +111,9 @@ export default class AddProjectForm extends React.Component<
               <optgroup label="Design Skills">
                 {Object.keys(skills).map(
                   key =>
-                    skills[key]!.category === 'design' && (
-                      <option key={key} value={skills[key]!.name}>
-                        {skills[key]!.name}
+                    skills[key].category === 'design' && (
+                      <option key={key} value={skills[key].name}>
+                        {skills[key].name}
                       </option>
                     )
                 )}
