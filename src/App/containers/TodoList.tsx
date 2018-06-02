@@ -114,7 +114,9 @@ class TodoList extends React.Component<ITodoListProps, ITodoListState> {
   }
 
   private _toggleShowComplete() {
-    this.setState({ showComplete: !this.state.showComplete });
+    this.setState(prevState => ({
+      showComplete: !prevState.showComplete,
+    }));
   }
 
   private _renderTodo(
@@ -122,27 +124,29 @@ class TodoList extends React.Component<ITodoListProps, ITodoListState> {
   ): JSX.Element | null | (JSX.Element | null)[] {
     const { removeTodo, todos, updateTodo } = this.props;
     return Object.keys(todos).map(key => {
-      if (showComplete) {
-        return (
-          <Todo
-            key={key}
-            index={key}
-            details={todos[key]}
-            updateTodo={updateTodo}
-            removeTodo={removeTodo}
-          />
-        );
-      }
-      if (todos[key] && !todos[key].complete) {
-        return (
-          <Todo
-            key={key}
-            index={key}
-            details={todos[key]}
-            updateTodo={updateTodo}
-            removeTodo={removeTodo}
-          />
-        );
+      if (todos[key]) {
+        if (showComplete) {
+          return (
+            <Todo
+              key={key}
+              index={key}
+              details={todos[key]!}
+              updateTodo={updateTodo}
+              removeTodo={removeTodo}
+            />
+          );
+        }
+        if (!todos[key]!.complete) {
+          return (
+            <Todo
+              key={key}
+              index={key}
+              details={todos[key]!}
+              updateTodo={updateTodo}
+              removeTodo={removeTodo}
+            />
+          );
+        }
       }
       return null;
     });

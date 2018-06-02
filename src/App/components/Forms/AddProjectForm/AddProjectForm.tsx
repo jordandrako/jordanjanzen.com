@@ -91,9 +91,9 @@ export default class AddProjectForm extends React.Component<
               <optgroup label="Core Skills">
                 {Object.keys(skills).map(
                   (key: string) =>
-                    skills[key].category === 'core' && (
-                      <option key={key} value={skills[key].name}>
-                        {skills[key].name}
+                    skills[key]!.category === 'core' && (
+                      <option key={key} value={skills[key]!.name}>
+                        {skills[key]!.name}
                       </option>
                     )
                 )}
@@ -101,9 +101,9 @@ export default class AddProjectForm extends React.Component<
               <optgroup label="Library Skills">
                 {Object.keys(skills).map(
                   key =>
-                    skills[key].category === 'library' && (
-                      <option key={key} value={skills[key].name}>
-                        {skills[key].name}
+                    skills[key]!.category === 'library' && (
+                      <option key={key} value={skills[key]!.name}>
+                        {skills[key]!.name}
                       </option>
                     )
                 )}
@@ -111,9 +111,9 @@ export default class AddProjectForm extends React.Component<
               <optgroup label="Design Skills">
                 {Object.keys(skills).map(
                   key =>
-                    skills[key].category === 'design' && (
-                      <option key={key} value={skills[key].name}>
-                        {skills[key].name}
+                    skills[key]!.category === 'design' && (
+                      <option key={key} value={skills[key]!.name}>
+                        {skills[key]!.name}
                       </option>
                     )
                 )}
@@ -221,16 +221,14 @@ export default class AddProjectForm extends React.Component<
     };
     this.props.addProject(project);
     this._form.current!.reset();
-    const state = { ...this.state };
-    this.setState({
-      ...state,
+    this.setState(prevState => ({
+      ...prevState,
       images: [],
       skillValues: [],
-    });
+    }));
   };
 
   private _addImage = (image: IImage): void => {
-    // const key = image.id;
     const images = [...this.state.images];
     images.push(image);
     this.setState({ images });

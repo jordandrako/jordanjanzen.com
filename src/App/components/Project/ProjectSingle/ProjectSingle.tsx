@@ -138,8 +138,10 @@ export default class ProjectSingle extends React.Component<
   }
 
   private _removeProject = (key: string) => {
-    const state = { ...this.state };
-    this.setState({ ...state, delete: undefined });
+    this.setState(prevState => ({
+      ...prevState,
+      delete: undefined,
+    }));
     this.props.removeProject(key);
     return this.props.history.push('/portfolio');
   };

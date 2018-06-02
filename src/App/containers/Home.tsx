@@ -85,7 +85,7 @@ class Home extends React.Component<IHomeProps, {}> {
     const { projects, isMobile } = this.props;
 
     const projectIndex = projects ? Object.keys(projects).length - 1 : -1;
-    const projectKey = projects ? Object.keys(projects)[projectIndex] : undefined;
+    const projectKey = projects ? Object.keys(projects)[projectIndex] : null;
 
     return (
       <>
@@ -110,11 +110,11 @@ class Home extends React.Component<IHomeProps, {}> {
           {projectKey && (
             <>
               <h2>My latest project</h2>
-                <Project
-                  index={projectKey}
-                  details={projects[projectKey]}
-                  style={{ margin: '0 0 1em', width: '100%' }}
-                />
+              <Project
+                index={projectKey}
+                details={projects[projectKey]!}
+                style={{ margin: '0 0 1em', width: '100%' }}
+              />
             </>
           )}
           <Button to="/portfolio/" buttonType={ButtonType.Cta}>
