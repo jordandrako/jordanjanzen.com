@@ -2,82 +2,116 @@ import * as React from 'react';
 import * as Styled from './Button.styles';
 import { ButtonType, IButtonProps, IButtonStyleProps } from './Button.types';
 
-export default class Button extends React.Component<IButtonProps, {}> {
-  public constructor(props: IButtonProps) {
-    super(props);
-  }
+const Button: React.SFC<IButtonProps> = props => {
+  const {
+    arrows,
+    bg,
+    buttonType,
+    children,
+    circle,
+    className,
+    color,
+    disabled,
+    href,
+    icon,
+    iconReverse,
+    large,
+    pill,
+    rel,
+    small,
+    style,
+    target,
+    text,
+    to,
+    type,
+    wide,
+  } = props;
 
-  public render(): JSX.Element {
-    const styleProps: IButtonStyleProps = {
-      arrows: this.props.arrows,
-      bg: this.props.bg,
-      buttonType: this.props.buttonType,
-      circle: this.props.circle,
-      color: this.props.color,
-      del: this.props.del,
-      large: this.props.large,
-      pill: this.props.pill,
-      small: this.props.small,
-      wide: this.props.wide,
-    };
+  const styleProps: IButtonStyleProps = {
+    arrows,
+    bg,
+    buttonType,
+    circle,
+    color,
+    disabled,
+    icon,
+    iconReverse,
+    large,
+    pill,
+    small,
+    wide,
+  };
 
-    if (this.props.buttonType === ButtonType.Delete) {
-      if (this.props.to) {
-        return (
-          <Styled.linkWrapper to={this.props.to}>
-            <Styled.DeleteButton
-              {...styleProps}
-              className="fa fa-times-circle close"
-              onClick={this.props.onClick}
-            />
-          </Styled.linkWrapper>
-        );
-      }
-      return (
-        <Styled.DeleteButton
-          {...styleProps}
-          className="fa fa-times-circle close"
-          onClick={this.props.onClick}
+  const buttonText = () => (
+    <>
+      {icon && (
+        <Styled.buttonIcon className={`fa fa-${icon}`} aria-hidden="true" />
+      )}
+      {text || children || 'Button'}
+      {iconReverse && (
+        <Styled.buttonIcon
+          className={`fa fa-${iconReverse}`}
+          aria-hidden="true"
+          iconReverse={iconReverse}
         />
-      );
-    }
+      )}
+    </>
+  );
 
-    if (this.props.href) {
-      return (
-        <Styled.anchorWrapper
-          href={this.props.href}
-          target={this.props.target}
-          rel={
-            this.props.rel || this.props.target === '_blank'
-              ? 'noopener noreferrer'
-              : ''
-          }
-        >
-          <Styled.BaseButton {...styleProps} onClick={this.props.onClick}>
-            {this.props.text || this.props.children || 'Button'}
-          </Styled.BaseButton>
-        </Styled.anchorWrapper>
-      );
-    }
+  const onClick = disabled ? undefined : props.onClick;
 
-    if (this.props.to) {
+  const baseProps = {
+    className,
+    onClick,
+    style,
+    type,
+  };
+
+  const BaseButton = (
+    <Styled.baseButton {...props}>{buttonText()}</Styled.baseButton>
+  );
+
+  if (buttonType === ButtonType.Delete) {
+    if (to) {
       return (
-        <Styled.linkWrapper to={this.props.to}>
-          <Styled.BaseButton {...styleProps} onClick={this.props.onClick}>
-            {this.props.text || this.props.children || 'Button'}
-          </Styled.BaseButton>
+        <Styled.linkWrapper to={to}>
+          <Styled.deleteButton
+            {...styleProps}
+            {...baseProps}
+            className={`fa fa-times-circle ${className ? className : ''}`}
+            onClick={onClick}
+          />
         </Styled.linkWrapper>
       );
     }
 
     return (
-      <Styled.BaseButton
+      <Styled.deleteButton
         {...styleProps}
-        type={this.props.type ? this.props.type : undefined}
-        onClick={this.props.onClick}
-      >
-        {this.props.text || this.props.children || 'Button'}
-      </Styled.BaseButton>
+        {...baseProps}
+        className={`fa fa-times-circle ${className ? className : ''}`}
+        onClick={onClick}
+      />
     );
   }
-}
+
+  if (href) {
+    return (
+      <Styled.anchorWrapper
+        href={href}
+        target={target}
+        rel={rel || target === '_blank' ? 'noopener noreferrer' : ''}
+      >
+        {BaseButton}
+      </Styled.anchorWrapper>
+    );
+  }
+
+  if (to) {
+    return <Styled.linkWrapper to={to}>{BaseButton}</Styled.linkWrapper>;
+  }
+
+  return BaseButton;
+};
+
+export default Button;

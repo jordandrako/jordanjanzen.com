@@ -1,5 +1,3 @@
-import { TChildren } from '../../App.types';
-
 export interface IRow {
   full?: boolean;
   isChild?: boolean;
@@ -10,10 +8,4 @@ export interface IFlex {
   wrap?: boolean;
   align?: string;
   justify?: string;
-}
-
-export interface IPageProps {
-  title: string;
-  ext?: boolean;
-  children: TChildren;
 }

@@ -1,9 +1,10 @@
 {
   "name": "jordanjanzen.com",
+  "homepage": "https://jordanjanzen.com",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "prestart": "yarn checkenv",
+    "prestart": "yarn checkenv && scripts/branch.sh",
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
@@ -11,8 +12,9 @@
     "checkenv": "node scripts/check-env.js",
     "branchcheck": "git-branch-is master",
     "predeploy":
-      "yarn branchcheck && yarn checkenv && rm -rf build && cross-env REACT_APP_DATABASE=production yarn build",
-    "prestaging": "yarn checkenv && rm -rf build && yarn build",
+      "yarn branchcheck && yarn checkenv && scripts/branch.sh && rm -rf build && cross-env REACT_APP_DATABASE=production yarn build",
+    "prestaging":
+      "yarn checkenv && rm -rf build && scripts/branch.sh && yarn build",
     "deploy": "firebase deploy -P production",
     "staging": "firebase deploy -P staging",
     "lint:ts": "tslint -p tsconfig.json --fix",
@@ -22,7 +24,8 @@
   "dependencies": {
     "check-env": "^1.3.0",
     "dotenv": "^5.0.1",
-    "firebase": "^5.0.2",
+    "dynamic-polyfill": "^1.1.0",
+    "firebase": "^5.0.4",
     "history": "^4.7.2",
     "moment": "^2.22.1",
     "polished": "^1.9.2",
@@ -43,7 +46,6 @@
     "superagent": "^3.8.3"
   },
   "devDependencies": {
-    "@firebase/app-types": "^0.2.0",
     "@types/jest": "^22.2.3",
     "@types/node": "^10.0.8",
     "@types/react": "^16.3.13",

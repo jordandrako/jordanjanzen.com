@@ -1,5 +1,3 @@
-import { IAppState } from '../App.types';
-
-export interface IAppRoutes {}
-
-export interface IAppRoutesProps extends IAppState {}
+export interface IAppRoutesProps {
+  isMobile: boolean;
+}

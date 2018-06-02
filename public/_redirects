@@ -1,0 +1,18 @@
+# Redirect all to index.html for SPA.
+/* /index.html 200
+
+# Redirect domain aliases to primary domain
+https://www.jordanjanzen.com/* https://jordanjanzen.com/:splat 301!
+
+# These extra rules are required because HTTPS is not forced
+http://www.jordanjanzen.com/* https://jordanjanzen.com/:splat 301!
+
+# Optional: Redirect default Netlify subdomain to primary domain
+https://fervent-williams-b3a5ad.netlify.com/* https://jordanjanzen.com/:splat 301!
+http://fervent-williams-b3a5ad.netlify.com/* https://jordanjanzen.com/:splat 301!
+
+# Page redirects
+/home / 301
+/about-me /about 301
+/projects /portfolio 301
+/todo-list /todo 301

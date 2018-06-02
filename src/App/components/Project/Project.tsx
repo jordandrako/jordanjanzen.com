@@ -1,6 +1,6 @@
 import * as React from 'react';
+import { toTitleCase } from 'utilities';
 import { IProjectProps } from '.';
-import { toTitleCase } from '../../../utilities';
 import Loading from '../../containers/Loading';
 import Button, { ButtonType } from '../Button';
 import CloudImage from '../CloudImage';
@@ -15,7 +15,7 @@ export default class Project extends React.Component<IProjectProps, {}> {
 
   public render(): JSX.Element {
     const { details, index } = this.props;
-    if (details.images) {
+    if (details && details.images) {
       const firstImage = Object.keys(details.images)[0];
       const {
         id: imageId,
@@ -74,8 +74,9 @@ export default class Project extends React.Component<IProjectProps, {}> {
                 to={`/portfolio/${index}`}
                 small={true}
                 buttonType={ButtonType.Primary}
+                icon="search"
               >
-                <i className="fa fa-search" aria-hidden="true" /> More Details
+                More Details
               </Button>
             </li>
             {details.link !== '' ? (
@@ -85,9 +86,9 @@ export default class Project extends React.Component<IProjectProps, {}> {
                   target="_blank"
                   small={true}
                   buttonType={ButtonType.Secondary}
+                  icon="external-link"
                 >
-                  <i className="fa fa-external-link" aria-hidden="true" /> Visit
-                  Site
+                  Visit Site
                 </Button>
               </li>
             ) : null}
@@ -98,8 +99,9 @@ export default class Project extends React.Component<IProjectProps, {}> {
                   target="_blank"
                   small={true}
                   buttonType={ButtonType.Secondary}
+                  icon="github"
                 >
-                  <i className="fa fa-github" aria-hidden="true" /> View Repo
+                  View Repo
                 </Button>
               </li>
             ) : null}

@@ -1,22 +1,18 @@
-import { TChildren } from '../../App.types';
-
-export interface IButton {}
-
 export interface IButtonProps {
   arrows?: boolean | string;
   bg?: string;
   buttonType?: ButtonType;
-  children?: TChildren;
+  children?: React.ReactNode;
   circle?: boolean;
   className?: string;
   color?: string;
-  del?: boolean;
+  disabled?: boolean;
   href?: string;
   large?: boolean;
   pill?: boolean;
   rel?: string;
   small?: boolean;
-  style?: {};
+  style?: object;
   target?: string;
   text?: string;
   to?: string;
@@ -25,7 +21,12 @@ export interface IButtonProps {
   onClick?: (
     e?: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>
   ) => void;
-  icon?: boolean;
+
+  /**
+   * Use a font-awesome icon name, or false to turn off social button icon.
+   */
+  icon?: string | boolean;
+  iconReverse?: boolean | string;
 }
 
 export interface IButtonStyleProps {
@@ -35,11 +36,13 @@ export interface IButtonStyleProps {
   circle?: boolean;
   className?: string;
   color?: string;
-  del?: boolean;
+  disabled?: boolean;
   large?: boolean;
   pill?: boolean;
   small?: boolean;
   wide?: boolean;
+  icon?: boolean | string;
+  iconReverse?: boolean | string;
 }
 
 export enum ButtonType {
@@ -64,7 +67,6 @@ export enum SocialSites {
   twitter,
 }
 
-export interface ISocialButton extends IButtonProps {
+export interface ISocialButtonProps extends IButtonProps {
   social: SocialSites;
-  className?: string;
 }

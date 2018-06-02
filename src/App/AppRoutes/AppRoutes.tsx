@@ -1,21 +1,8 @@
+import { isLoggedIn } from 'base';
 import * as React from 'react';
-import {
-  Route,
-  RouteComponentProps,
-  Switch,
-  withRouter,
-} from 'react-router-dom';
-import { isLoggedIn } from '../../base';
-import { asyncLoader } from '../../utilities';
-import {
-  IAboutProps,
-  IHomeProps,
-  IPortfolioProps,
-  IProjects,
-  ISkills,
-  ITodoListProps,
-  ITodos,
-} from '../App.types';
+import { Route, Switch } from 'react-router-dom';
+import { asyncLoader } from 'utilities';
+import { withProjects, withSkills, withTodos } from '../AppContext';
 import Loading from '../containers/Loading';
 import { IAppRoutesProps } from './AppRoutes.types';
 
@@ -35,93 +22,73 @@ const AsyncUnauthenticated = asyncLoader({
   loader: () => import('../containers/Unauthenticated'),
 });
 
-const AsyncHome = asyncLoader({
-  ...asyncLoaderOptions,
-  loader: () => import('../containers/Home'),
-});
+const AsyncHome = withProjects(
+  asyncLoader({
+    ...asyncLoaderOptions,
+    loader: () => import('../containers/Home'),
+  })
+);
 
-const AsyncAbout = asyncLoader({
-  ...asyncLoaderOptions,
-  loader: () => import('../containers/About'),
-});
+const AsyncAbout = withSkills(
+  asyncLoader({
+    ...asyncLoaderOptions,
+    loader: () => import('../containers/About'),
+  })
+);
 
-const AsyncPortfolio = asyncLoader({
-  ...asyncLoaderOptions,
-  loader: () => import('../containers/Portfolio'),
-});
+const AsyncPortfolio = withProjects(
+  withSkills(
+    asyncLoader({
+      ...asyncLoaderOptions,
+      loader: () => import('../containers/Portfolio'),
+    })
+  )
+);
 
-const AsyncTodoList = asyncLoader({
-  ...asyncLoaderOptions,
-  loader: () => import('../containers/TodoList'),
-});
+const AsyncTodoList = withTodos(
+  withSkills(
+    asyncLoader({
+      ...asyncLoaderOptions,
+      loader: () => import('../containers/TodoList'),
+    })
+  )
+);
 
-class AppRoutes extends React.Component<
-  IAppRoutesProps & RouteComponentProps<any>
-> {
-  private _homeProps: IHomeProps;
-  private _aboutProps: IAboutProps;
-  private _portfolioProps: IPortfolioProps;
-  private _todoListProps: ITodoListProps;
-
-  public constructor(props: IAppRoutesProps & RouteComponentProps<any>) {
-    super(props);
-  }
-
+class AppRoutes extends React.Component<IAppRoutesProps> {
   public render() {
-    this._homeProps = {
-      isMobile: this.props.isMobile,
-      projects: this.props.projects as IProjects,
-    };
-
-    this._aboutProps = {
-      addSkill: this.props.addSkill,
-      removeSkill: this.props.removeSkill,
-      skills: this.props.skills as ISkills,
-    };
-
-    this._portfolioProps = {
-      addProject: this.props.addProject,
-      isMobile: this.props.isMobile,
-      projects: this.props.projects as IProjects,
-      removeProject: this.props.removeProject,
-      skills: this.props.skills as ISkills,
-    };
-
-    this._todoListProps = {
-      addTodo: this.props.addTodo,
-      removeTodo: this.props.removeTodo,
-      todos: this.props.todos as ITodos,
-      updateTodo: this.props.updateTodo,
-    };
-
     return (
       <Switch>
         <Route exact={true} path="/" render={this._renderHome} />
         <Route path="/about" render={this._renderAbout} />
         <Route path="/portfolio" render={this._renderPortfolio} />
         <Route exact={true} path="/todo" render={this._renderTodoList} />
+        <Route exact={true} path="/loadTest" render={this._renderLoad} />
         {/* Unmatched URLs */}
         <Route component={AsyncNotFound} />
       </Switch>
     );
   }
 
-  private _renderHome = (): JSX.Element => <AsyncHome {...this._homeProps} />;
+  private _renderHome = (): JSX.Element => (
+    <AsyncHome isMobile={this.props.isMobile} />
+  );
 
   private _renderAbout = (): JSX.Element => (
-    <AsyncAbout {...this._aboutProps} />
+    <AsyncAbout isMobile={this.props.isMobile} />
   );
 
   private _renderPortfolio = (): JSX.Element => (
-    <AsyncPortfolio {...this._portfolioProps} />
+    <AsyncPortfolio isMobile={this.props.isMobile} />
   );
+
+  private _renderLoad = (): JSX.Element => <Loading isLoading={true} />;
 
   private _renderTodoList = (): JSX.Element =>
     isLoggedIn() ? (
-      <AsyncTodoList {...this._todoListProps} />
+      <AsyncTodoList isMobile={this.props.isMobile} />
     ) : (
       <AsyncUnauthenticated />
     );
 }
 
-export default withRouter(AppRoutes);
+export default AppRoutes;

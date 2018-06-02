@@ -1,7 +1,8 @@
+import { History } from 'history';
 import * as React from 'react';
-import { RouteComponentProps, withRouter } from 'react-router-dom';
+import { Route, RouteComponentProps } from 'react-router-dom';
 import { Transition } from 'react-transition-group';
-import { toTitleCase } from '../../../utilities';
+import { toTitleCase } from 'utilities';
 import { ButtonType } from '../Button';
 import * as Styled from './Banner.styles';
 import {
@@ -15,8 +16,7 @@ interface IBannerState {
   closed: boolean;
 }
 
-class Banner
-  extends React.Component<IBannerProps & RouteComponentProps<any>, IBannerState>
+class Banner extends React.Component<IBannerProps, IBannerState>
   implements IBanner {
   public static defaultProps = {
     bannerType: BannerType.Info,
@@ -35,7 +35,7 @@ class Banner
     return null;
   }
 
-  public constructor(props: IBannerProps & RouteComponentProps<any>) {
+  public constructor(props: IBannerProps) {
     super(props);
 
     this.state = {
@@ -44,9 +44,9 @@ class Banner
   }
 
   public showHide = (): void => {
-    this.setState({
-      closed: !this.state.closed,
-    });
+    this.setState(prevState => ({
+      closed: !prevState.closed,
+    }));
   };
 
   public render(): JSX.Element {
@@ -54,18 +54,24 @@ class Banner
     const { bannerType, title } = this.props;
 
     return (
-      <Transition timeout={200} in={closed}>
-        {(status: string) => (
-          <Styled.root bannerType={bannerType} className={status}>
-            <h4>
-              {title ? title : `${toTitleCase(BannerType[bannerType])} Message`}
-            </h4>
-            {this._showHideButton()}
-            {this._bannerContent()}
-            {this._actionButton()}
-          </Styled.root>
+      <Route>
+        {(routeProps: RouteComponentProps<any>) => (
+          <Transition timeout={200} in={closed}>
+            {(status: string) => (
+              <Styled.root bannerType={bannerType} className={status}>
+                <h4>
+                  {title
+                    ? title
+                    : `${toTitleCase(BannerType[bannerType])} Message`}
+                </h4>
+                {this._showHideButton()}
+                {this._bannerContent()}
+                {this._actionButton(routeProps.history)}
+              </Styled.root>
+            )}
+          </Transition>
         )}
-      </Transition>
+      </Route>
     );
   }
 
@@ -78,8 +84,8 @@ class Banner
 
   private _bannerContent = (): JSX.Element => <p>{this.props.children}</p>;
 
-  private _actionButton = (): JSX.Element | null => {
-    const { action, actionText, customAction, history } = this.props;
+  private _actionButton = (history: History): JSX.Element | null => {
+    const { action, actionText, customAction } = this.props;
     const renderButton = action !== undefined || customAction !== undefined;
     let click: () => void;
     let text;
@@ -110,4 +116,4 @@ class Banner
   };
 }
 
-export default withRouter(Banner);
+export default Banner;

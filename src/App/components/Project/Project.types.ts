@@ -1,14 +1,12 @@
+import { IProject, IProjects } from 'App/App.types';
 import { History } from 'history';
-import { IProject, IProjects } from '../../App.types';
 
 export interface IProjectProps {
   details: IProject;
   index: string;
   hasBeenVisible?: boolean;
-  style?: {};
+  style?: object;
 }
-
-export interface IProjectStyleProps {}
 
 export interface IProjectSingleProps extends IProjectProps {
   removeProject: (key: string) => void;

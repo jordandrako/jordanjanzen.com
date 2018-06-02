@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { styled } from '../../styling';
+import { styled } from 'styling';
 import { ITodos, TAddTodo, TRemoveTodo, TUpdateTodo } from '../App.types';
 import AddTodoForm from '../components/Forms/AddTodoForm/AddTodoForm';
+import { Row } from '../components/Page/Grid';
 import Todo from '../components/Todo/Todo';
-import { Page, Row } from './Grid/grid';
 
 const ListOfTodos = styled.ul`
   list-style-type: none;
@@ -45,7 +45,7 @@ class TodoList extends React.Component<ITodoListProps, ITodoListState> {
     const { addTodo, todos } = this.props;
 
     return (
-      <Page title="Todo List">
+      <>
         <Row>
           <AddTodoForm addTodo={addTodo} />
         </Row>
@@ -109,12 +109,14 @@ class TodoList extends React.Component<ITodoListProps, ITodoListState> {
             </li>
           </ul>
         </Row>
-      </Page>
+      </>
     );
   }
 
   private _toggleShowComplete() {
-    this.setState({ showComplete: !this.state.showComplete });
+    this.setState(prevState => ({
+      showComplete: !prevState.showComplete,
+    }));
   }
 
   private _renderTodo(
@@ -122,27 +124,29 @@ class TodoList extends React.Component<ITodoListProps, ITodoListState> {
   ): JSX.Element | null | (JSX.Element | null)[] {
     const { removeTodo, todos, updateTodo } = this.props;
     return Object.keys(todos).map(key => {
-      if (showComplete) {
-        return (
-          <Todo
-            key={key}
-            index={key}
-            details={todos[key]!}
-            updateTodo={updateTodo}
-            removeTodo={removeTodo}
-          />
-        );
-      }
-      if (todos[key]! && !todos[key]!.complete) {
-        return (
-          <Todo
-            key={key}
-            index={key}
-            details={todos[key]!}
-            updateTodo={updateTodo}
-            removeTodo={removeTodo}
-          />
-        );
+      if (todos[key]) {
+        if (showComplete) {
+          return (
+            <Todo
+              key={key}
+              index={key}
+              details={todos[key]!}
+              updateTodo={updateTodo}
+              removeTodo={removeTodo}
+            />
+          );
+        }
+        if (!todos[key]!.complete) {
+          return (
+            <Todo
+              key={key}
+              index={key}
+              details={todos[key]!}
+              updateTodo={updateTodo}
+              removeTodo={removeTodo}
+            />
+          );
+        }
       }
       return null;
     });

@@ -1,4 +1,4 @@
-import { TAddSkill } from '../../../App.types';
+import { TAddSkill } from 'App/App.types';
 
 export interface IAddSkillFormProps {
   addSkill: TAddSkill;

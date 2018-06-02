@@ -1,13 +1,12 @@
+import { IAboutProps, TAddSkill } from 'App/App.types';
+import { isLoggedIn } from 'base';
 import * as React from 'react';
-import { isLoggedIn } from '../../base';
-import { screenSizes, styled } from '../../styling';
-import { fonts, palette } from '../../styling/theme';
-import { yearsSinceBirthday } from '../../utilities';
-import { IAboutProps, TAddSkill } from '../App.types';
+import { fonts, palette, screenSizes, styled } from 'styling';
+import { yearsSinceBirthday } from 'utilities';
 import Button, { ButtonType } from '../components/Button';
 import CloudImage from '../components/CloudImage';
 import AddSkillForm from '../components/Forms/AddSkillForm/AddSkillForm';
-import { Flex, Page, Row } from './Grid/grid';
+import { Flex, Row } from '../components/Page';
 
 const SkillsRow = styled(Row)`
   display: flex;
@@ -57,9 +56,7 @@ const DateColumn = styled.div`
   border-right: 2px solid ${palette.blue};
 `;
 
-const HistoryRow = styled(Flex)`
- /* Later */
-`;
+const HistoryRow = Flex;
 
 const HistoryColumn = styled.div`
   flex: 4;
@@ -76,7 +73,7 @@ class About extends React.Component<IAboutProps, {}> {
     const { skills, addSkill } = this.props;
 
     return (
-      <Page title="About">
+      <>
         <Row>
           <h2>About, Skills and Interests</h2>
           <SkillsRow isChild={true}>
@@ -367,11 +364,12 @@ class About extends React.Component<IAboutProps, {}> {
             href="https://res.cloudinary.com/jordan-janzen/image/upload/v1511291826/Jordan_Janzen_CV.pdf"
             target="_blank"
             buttonType={ButtonType.Cta}
+            icon="file-text"
           >
-            <i className="fa fa-file-text" aria-hidden="true" /> Download My CV
+            Download My CV
           </Button>
         </Row>
-      </Page>
+      </>
     );
   }
 
@@ -380,11 +378,13 @@ class About extends React.Component<IAboutProps, {}> {
   };
 
   private _renderList = (category: string): (JSX.Element | undefined)[] => {
-    return Object.keys(this.props.skills).map(key => {
-      if (this.props.skills[key]!.category === category) {
+    const { skills } = this.props;
+    return Object.keys(skills).map(key => {
+      const skill = skills[key] && skills[key];
+      if (skill && skill.category === category) {
         return (
           <li key={key}>
-            {this.props.skills[key]!.name}
+            {skill.name}
             {isLoggedIn() && (
               <Button
                 buttonType={ButtonType.Delete}

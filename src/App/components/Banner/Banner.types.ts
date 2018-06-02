@@ -1,12 +1,11 @@
 import * as React from 'react';
-import { TChildren } from '../../App.types';
 
 export interface IBanner {
   showHide: () => void;
 }
 
 export interface IBannerProps extends React.HTMLAttributes<HTMLElement> {
-  children: TChildren;
+  children: React.ReactNode;
   bannerType: BannerType;
   action?: BannerAction | BannerAction[];
   actionText?: string;

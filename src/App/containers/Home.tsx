@@ -1,18 +1,12 @@
+import { IHomeProps } from 'App/App.types';
 import { adjustHue } from 'polished';
 import * as React from 'react';
-import {
-  fonts,
-  palette,
-  screenSizes,
-  semanticColors,
-  styled,
-} from '../../styling';
-import { yearsSinceBirthday } from '../../utilities';
-import { IHomeProps } from '../App.types';
+import { fonts, palette, screenSizes, semanticColors, styled } from 'styling';
+import { yearsSinceBirthday } from 'utilities';
 import Button, { ButtonType } from '../components/Button';
 import CloudImage from '../components/CloudImage';
+import { Hero, Row } from '../components/Page';
 import Project from '../components/Project/Project';
-import { Hero, Page, Row } from './Grid/grid';
 
 const OuterHero = styled.div`
   width: 100%;
@@ -91,10 +85,10 @@ class Home extends React.Component<IHomeProps, {}> {
     const { projects, isMobile } = this.props;
 
     const projectIndex = projects ? Object.keys(projects).length - 1 : -1;
-    const projectKey = projects ? Object.keys(projects)[projectIndex] : '';
+    const projectKey = projects ? Object.keys(projects)[projectIndex] : null;
 
     return (
-      <Page title="Home">
+      <>
         <Hero>
           {!isMobile ? (
             <CloudImage
@@ -113,19 +107,21 @@ class Home extends React.Component<IHomeProps, {}> {
           )}
         </Hero>
         <Row>
-          <h2>My latest project</h2>
-          {projectKey ? (
-            <Project
-              index={projectKey}
-              details={projects[projectKey]!}
-              style={{ margin: '0 0 1em', width: '100%' }}
-            />
-          ) : null}
+          {projectKey && (
+            <>
+              <h2>My latest project</h2>
+              <Project
+                index={projectKey}
+                details={projects[projectKey]!}
+                style={{ margin: '0 0 1em', width: '100%' }}
+              />
+            </>
+          )}
           <Button to="/portfolio/" buttonType={ButtonType.Cta}>
             View My Portfolio
           </Button>
         </Row>
-      </Page>
+      </>
     );
   }
 
@@ -158,8 +154,9 @@ class Home extends React.Component<IHomeProps, {}> {
             href="https://res.cloudinary.com/jordan-janzen/image/upload/v1511291826/Jordan_Janzen_CV.pdf"
             target="_blank"
             buttonType={ButtonType.Cta}
+            icon="file-text"
           >
-            <i className="fa fa-file-text" aria-hidden="true" /> Download My CV
+            Download My CV
           </Button>
           <Entice>See what I can do for your company!</Entice>
         </Cta>

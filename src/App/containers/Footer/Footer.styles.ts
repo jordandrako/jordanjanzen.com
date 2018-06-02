@@ -1,6 +1,5 @@
 import { darken } from 'polished';
-import { palette, styled } from '../../../styling';
-import { screenSizes } from '../../../styling/style-utils';
+import { palette, screenSizes, styled } from 'styling';
 
 export const root = styled.footer`
   display: flex;
@@ -80,13 +79,13 @@ export const overflowMenu = styled.div`
   }
 
   &.entering,
+  &.exiting,
   &.exited {
     right: -60px;
     opacity: 0;
   }
 
-  &.entered,
-  &.exiting {
+  &.entered {
     right: 0;
     opacity: 1;
   }

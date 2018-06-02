@@ -1,5 +1,6 @@
+import { withAuth } from 'App/AppContext';
+import { isLoggedIn } from 'base';
 import * as React from 'react';
-import { isLoggedIn } from '../../../../base';
 import Button, { ButtonType, IButtonProps } from '../index';
 
 interface ILoginButtonProps extends IButtonProps {
@@ -8,19 +9,10 @@ interface ILoginButtonProps extends IButtonProps {
   logout: () => void;
 }
 
-interface ILoginButtonState {}
-
-export class LoginButton extends React.Component<
-  ILoginButtonProps,
-  ILoginButtonState
-> {
+class LoginButton extends React.Component<ILoginButtonProps, {}> {
   public static defaultProps = {
-    icon: true,
+    icon: 'google',
   };
-
-  constructor(props: ILoginButtonProps) {
-    super(props);
-  }
 
   public render() {
     return (
@@ -31,25 +23,16 @@ export class LoginButton extends React.Component<
         onClick={this._handleAuth}
         {...this.props}
       >
-        {this._buttonText()}
+        {this.props.text || isLoggedIn() ? 'Log Out' : 'Log In'}
       </Button>
     );
   }
 
-  private _buttonText = (): JSX.Element | string => {
-    const icon = <i className="fa fa-google" aria-hidden="true" />;
-    const text = this.props.text || isLoggedIn() ? 'Log Out' : 'Log In';
-    const iconText = (
-      <>
-        {icon}
-        {text}
-      </>
-    );
-    const ButtonText = this.props.icon ? iconText : text;
-    return ButtonText;
-  };
-
   private _handleAuth = (): void => {
-    isLoggedIn() ? this.props.logout() : this.props.login();
+    if (!this.props.disabled) {
+      isLoggedIn() ? this.props.logout() : this.props.login();
+    }
   };
 }
+
+export default withAuth(LoginButton);

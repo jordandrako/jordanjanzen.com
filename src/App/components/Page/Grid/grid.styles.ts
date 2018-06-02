@@ -1,8 +1,5 @@
-import * as React from 'react';
-import DocumentTitle from 'react-document-title';
-import { screenSizes, semanticColors, styled } from '../../../styling';
-import PageTitle from '../PageTitle';
-import { IFlex, IPageProps, IRow } from './grid.types';
+import { screenSizes, semanticColors, styled } from 'styling';
+import { IFlex, IRow } from './grid.types';
 
 export const MainContainer = styled.main`
   flex: 4;
@@ -59,7 +56,7 @@ export const Row = styled.section`
   }
 `;
 
-export const Hero = styled(Row)`
+export const Hero = Row.extend`
   margin: 0 0 2.5em;
   margin-top: 0 !important;
   max-width: calc(1000px + 4em);
@@ -77,17 +74,3 @@ export const Flex = styled.div`
   justify-content: ${(props: IFlex) =>
     props.justify ? props.justify : 'unset'};
 `;
-
-export const Page = (props: IPageProps) => {
-  const docTitle =
-    props.title === 'Home' ? 'Jordan Janzen' : `${props.title} | Jordan Janzen`;
-
-  return (
-    <DocumentTitle title={docTitle}>
-      <MainContainer>
-        <PageTitle title={props.title} ext={props.ext} />
-        <Main>{props.children}</Main>
-      </MainContainer>
-    </DocumentTitle>
-  );
-};

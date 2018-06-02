@@ -1,12 +1,12 @@
+import { isLoggedIn } from 'base';
 import * as React from 'react';
 import { Route, RouteComponentProps } from 'react-router-dom';
-import { isLoggedIn } from '../../base';
-import { styled } from '../../styling';
+import { styled } from 'styling';
 import { IPortfolioProps } from '../App.types';
 import AddProjectForm from '../components/Forms/AddProjectForm/AddProjectForm';
+import { Row } from '../components/Page';
 import Project from '../components/Project/Project';
 import ProjectSingle from '../components/Project/ProjectSingle/ProjectSingle';
-import { Page, Row } from './Grid/grid';
 
 const ListOfProjects = styled.ul`
   list-style-type: none;
@@ -34,7 +34,7 @@ class Portfolio extends React.Component<IPortfolioProps, IPortfolioState> {
     const { addProject, projects, skills } = this.props;
 
     return (
-      <Page title="Portfolio">
+      <>
         {projects &&
           Object.keys(projects).length > -1 && (
             <Row>
@@ -57,7 +57,7 @@ class Portfolio extends React.Component<IPortfolioProps, IPortfolioState> {
           path="/portfolio/:projectId"
           render={this._renderProjectSingle}
         />
-      </Page>
+      </>
     );
   }
 

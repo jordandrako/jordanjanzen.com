@@ -1,9 +1,9 @@
+import { IImage, IProject } from 'App/App.types';
 import * as React from 'react';
-import { semanticColors } from '../../../../styling';
-import { truncate } from '../../../../utilities';
-import { IImage, IProject } from '../../../App.types';
-import { Row } from '../../../containers/Grid/grid';
+import { semanticColors } from 'styling';
+import { truncate } from 'utilities';
 import Button, { ButtonType } from '../../Button';
+import { Row } from '../../Page';
 import Dropzone from '../FormUtilities/Dropzone';
 import StyledForm from '../StyledForm';
 import * as Styled from './AddProjectForm.styles';
@@ -221,16 +221,14 @@ export default class AddProjectForm extends React.Component<
     };
     this.props.addProject(project);
     this._form.current!.reset();
-    const state = { ...this.state };
-    this.setState({
-      ...state,
+    this.setState(prevState => ({
+      ...prevState,
       images: [],
       skillValues: [],
-    });
+    }));
   };
 
   private _addImage = (image: IImage): void => {
-    // const key = image.id;
     const images = [...this.state.images];
     images.push(image);
     this.setState({ images });

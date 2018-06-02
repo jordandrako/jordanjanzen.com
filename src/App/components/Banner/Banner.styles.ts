@@ -1,5 +1,5 @@
 import { transparentize } from 'polished';
-import { fonts, palette, styled } from '../../../styling';
+import { fonts, palette, styled } from 'styling';
 import Button from '../Button';
 import { BannerType, IBannerStyleProps } from './Banner.types';
 
@@ -87,6 +87,7 @@ export const showHide = styled.button`
 export const actionButton = styled(Button)`
   background: transparent;
   border: 2px solid ${palette.black};
+  color: ${palette.black};
   font-family: ${fonts.monospace};
   padding: 0.4em 1em;
 `;
