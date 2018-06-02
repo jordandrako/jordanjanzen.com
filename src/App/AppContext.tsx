@@ -1,4 +1,4 @@
-import { auth, base, database, isLoggedIn, provider } from 'base';
+import { auth, base, database, provider } from 'base';
 import * as firebase from 'firebase/app';
 import * as React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
@@ -76,7 +76,11 @@ class AppProvider extends React.Component<IAppContextProps, IAppContextState> {
       }, 2000);
     });
     auth.onAuthStateChanged(
-      (user: firebase.User | null) => user && this.authHandler(user),
+      (user: firebase.User | null) =>
+        user &&
+        this.authHandler(user)
+          .catch((error: any) => console.error(error))
+          .then(this.updatePage),
       (error: any) => console.error(error)
     );
   }
@@ -141,15 +145,16 @@ class AppProvider extends React.Component<IAppContextProps, IAppContextState> {
       };
 
       const sync = (state: string): RebaseBinding => {
-        return type === 'sync' && isLoggedIn()
-          ? base.syncState(state, {
-              context: this,
-              onFailure: () => {
-                bind(state);
-              },
-              state,
-            })
-          : bind(state);
+        if (type === 'sync') {
+          return base.syncState(state, {
+            context: this,
+            onFailure: () => {
+              bind(state);
+            },
+            state,
+          });
+        }
+        return bind(state);
       };
 
       resolve([sync('projects'), sync('skills'), sync('todos')]);
@@ -183,7 +188,10 @@ class AppProvider extends React.Component<IAppContextProps, IAppContextState> {
         } else if (data.owner === uid) {
           resolve(successfulLogin());
         } else {
-          reject('Log in denied. You are not the owner of this site.');
+          auth.signOut();
+          reject(
+            new Error('Log in denied. You are not the owner of this site.')
+          );
         }
       });
     });
@@ -192,7 +200,11 @@ class AppProvider extends React.Component<IAppContextProps, IAppContextState> {
   public login = (): void => {
     auth
       .signInWithPopup(provider)
-      .then(result => this.authHandler(result.user))
+      .then(result =>
+        this.authHandler(result.user)
+          .catch((error: any) => console.error(error))
+          .then(this.updatePage)
+      )
       .catch((error: any) => console.error(error));
   };
 
