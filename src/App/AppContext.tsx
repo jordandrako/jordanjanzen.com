@@ -1,4 +1,5 @@
 import { auth, base, database, isLoggedIn, provider } from 'base';
+import * as firebase from 'firebase/app';
 import * as React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { getTheme, ITheme, screenSizesPx } from 'styling';
@@ -22,25 +23,23 @@ import {
 } from './App.types';
 
 interface IAppContextState {
-  context: {
-    auth: {
-      login?: () => void;
-      logout?: () => void;
-    };
-    addProject?: TAddProject;
-    addSkill?: TAddSkill;
-    addTodo?: TAddTodo;
-    isMobile: boolean;
-    bindType: string;
-    projects: IProjects;
-    removeProject?: TRemoveProject;
-    removeSkill?: TRemoveSkill;
-    removeTodo?: TRemoveTodo;
-    skills: ISkills;
-    theme: ITheme;
-    todos: ITodos;
-    updateTodo?: TUpdateTodo;
+  auth: {
+    login?: () => void;
+    logout?: () => void;
   };
+  addProject?: TAddProject;
+  addSkill?: TAddSkill;
+  addTodo?: TAddTodo;
+  isMobile: boolean;
+  bindType: string;
+  projects: IProjects;
+  removeProject?: TRemoveProject;
+  removeSkill?: TRemoveSkill;
+  removeTodo?: TRemoveTodo;
+  skills: ISkills;
+  theme: ITheme;
+  todos: ITodos;
+  updateTodo?: TUpdateTodo;
 }
 
 interface IAppContextProps extends RouteComponentProps<any> {}
@@ -52,18 +51,16 @@ const localItems: ILocalStorage = {
 };
 
 const defaultState: IAppContextState = {
-  context: {
-    auth: {},
-    bindType: 'none',
-    isMobile: window.innerWidth <= screenSizesPx.tablet,
-    projects: localItems.projects ? JSON.parse(localItems.projects) : {},
-    skills: localItems.skills ? JSON.parse(localItems.skills) : {},
-    theme: getTheme(),
-    todos: localItems.todos ? JSON.parse(localItems.todos) : {},
-  },
+  auth: {},
+  bindType: 'none',
+  isMobile: window.innerWidth <= screenSizesPx.tablet,
+  projects: localItems.projects ? JSON.parse(localItems.projects) : {},
+  skills: localItems.skills ? JSON.parse(localItems.skills) : {},
+  theme: getTheme(),
+  todos: localItems.todos ? JSON.parse(localItems.todos) : {},
 };
 
-export const AppContext = React.createContext(defaultState.context);
+export const AppContext = React.createContext(defaultState);
 
 class AppProvider extends React.Component<IAppContextProps, IAppContextState> {
   public componentDidMount(): void {
@@ -72,76 +69,66 @@ class AppProvider extends React.Component<IAppContextProps, IAppContextState> {
         key => localItems[key] === null
       );
       setTimeout(() => {
-        setLocalStorage('projects', { ...this.state.context.projects });
-        setLocalStorage('skills', { ...this.state.context.skills });
-        setLocalStorage('todos', { ...this.state.context.todos });
+        setLocalStorage('projects', { ...this.state.projects });
+        setLocalStorage('skills', { ...this.state.skills });
+        setLocalStorage('todos', { ...this.state.todos });
         localEmpty && this.updatePage();
       }, 2000);
     });
     auth.onAuthStateChanged(
-      user => user && this.authHandler(user),
+      (user: firebase.User | null) => user && this.authHandler(user),
       (error: any) => console.error(error)
     );
   }
 
   public addProject = (project: IProject): void => {
-    const projects = { ...this.state.context.projects };
+    const projects = { ...this.state.projects };
     const timestamp = Date.now();
     projects[`project-${timestamp}`] = project;
-    this.updateData('projects', { ...projects });
+    this._updateContext('projects', { ...projects });
   };
 
   public addSkill = (skill: ISkill): void => {
-    const skills = { ...this.state.context.skills };
+    const skills = { ...this.state.skills };
     const name = slugify(skill.name);
     skills[`skill-${name}`] = skill;
-    this.updateData('skills', { ...skills });
+    this._updateContext('skills', { ...skills });
   };
 
   public addTodo = (todo: ITodo): void => {
-    const todos = { ...this.state.context.todos };
+    const todos = { ...this.state.todos };
     const timestamp = Date.now();
     todos[`todo-${timestamp}`] = { ...todo };
-    this.updateData('todos', { ...todos });
+    this._updateContext('todos', { ...todos });
   };
 
   public removeProject = (key: string): void => {
-    const projects = { ...this.state.context.projects };
-    delete projects[key];
-    this.updateData('projects', { ...projects });
+    const projects = { ...this.state.projects };
+    projects[key] = null;
+    this._updateContext('projects', { ...projects });
   };
 
   public removeSkill = (key: string): void => {
-    const skills = { ...this.state.context.skills };
-    delete skills[key];
-    this.updateData('skills', { ...skills });
+    const skills = { ...this.state.skills };
+    skills[key] = null;
+    this._updateContext('skills', { ...skills });
   };
 
   public removeTodo = (key: string): void => {
-    const todos = { ...this.state.context.todos };
-    delete todos[key];
-    this.updateData('todos', { ...todos });
+    const todos = { ...this.state.todos };
+    todos[key] = null;
+    this._updateContext('todos', { ...todos });
   };
 
   public updateTodo = (key: string, updatedProp: ITodo): void => {
-    const todos: ITodos = { ...this.state.context.todos };
+    const todos: ITodos = { ...this.state.todos };
     const todo = todos[key];
     const updatedTodo = {
       ...todo,
       ...updatedProp,
     };
     todos[key] = updatedTodo;
-    this.updateData('todos', todos);
-  };
-
-  public updateData = (state: string, data: IProjects | ISkills): void => {
-    setLocalStorage(state, data);
-    this.setState({
-      context: {
-        ...this.state.context,
-        [state]: { ...data },
-      },
-    });
+    this._updateContext('todos', todos);
   };
 
   public getBinding = (type: 'sync' | 'bind'): Promise<RebaseBinding[]> => {
@@ -149,7 +136,7 @@ class AppProvider extends React.Component<IAppContextProps, IAppContextState> {
       const bind = (state: string): RebaseBinding => {
         return base.bindToState(state, {
           context: this,
-          state: `context.${state}`,
+          state,
         });
       };
 
@@ -160,7 +147,7 @@ class AppProvider extends React.Component<IAppContextProps, IAppContextState> {
               onFailure: () => {
                 bind(state);
               },
-              state: `context.${state}`,
+              state,
             })
           : bind(state);
       };
@@ -221,31 +208,37 @@ class AppProvider extends React.Component<IAppContextProps, IAppContextState> {
   // tslint:disable-next-line:member-ordering
   public state: IAppContextState = {
     ...defaultState,
-
-    context: {
-      ...defaultState.context,
-      addProject: this.addProject,
-      addSkill: this.addSkill,
-      addTodo: this.addTodo,
-      auth: {
-        ...defaultState.context.auth,
-        login: this.login,
-        logout: this.logout,
-      },
-      removeProject: this.removeProject,
-      removeSkill: this.removeSkill,
-      removeTodo: this.removeTodo,
-      updateTodo: this.updateTodo,
+    addProject: this.addProject,
+    addSkill: this.addSkill,
+    addTodo: this.addTodo,
+    auth: {
+      ...defaultState.auth,
+      login: this.login,
+      logout: this.logout,
     },
+    removeProject: this.removeProject,
+    removeSkill: this.removeSkill,
+    removeTodo: this.removeTodo,
+    updateTodo: this.updateTodo,
+    // },
   };
 
   public render() {
     return (
-      <AppContext.Provider value={this.state.context}>
+      <AppContext.Provider value={this.state}>
         {this.props.children}
       </AppContext.Provider>
     );
   }
+
+  private _updateContext = (state: string, data: IProjects | ISkills): void => {
+    setLocalStorage(state, data);
+    this.setState((prevState, props) => ({
+      ...prevState,
+      [state]: { ...data },
+      // },
+    }));
+  };
 }
 
 export default withRouter(AppProvider);

@@ -221,16 +221,14 @@ export default class AddProjectForm extends React.Component<
     };
     this.props.addProject(project);
     this._form.current!.reset();
-    const state = { ...this.state };
-    this.setState({
-      ...state,
+    this.setState(prevState => ({
+      ...prevState,
       images: [],
       skillValues: [],
-    });
+    }));
   };
 
   private _addImage = (image: IImage): void => {
-    // const key = image.id;
     const images = [...this.state.images];
     images.push(image);
     this.setState({ images });

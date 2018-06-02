@@ -44,9 +44,9 @@ class Banner extends React.Component<IBannerProps, IBannerState>
   }
 
   public showHide = (): void => {
-    this.setState({
-      closed: !this.state.closed,
-    });
+    this.setState(prevState => ({
+      closed: !prevState.closed,
+    }));
   };
 
   public render(): JSX.Element {

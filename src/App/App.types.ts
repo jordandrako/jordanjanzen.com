@@ -22,7 +22,7 @@ export interface IProject extends Object {
 }
 
 export interface IProjects {
-  [key: string]: IProject;
+  [key: string]: IProject | null;
 }
 
 export interface ISkill extends Object {
@@ -31,7 +31,7 @@ export interface ISkill extends Object {
 }
 
 export interface ISkills {
-  [key: string]: ISkill;
+  [key: string]: ISkill | null;
 }
 
 export interface ITodo extends Object {
@@ -44,7 +44,7 @@ export interface ITodo extends Object {
 }
 
 export interface ITodos {
-  [key: string]: ITodo;
+  [key: string]: ITodo | null;
 }
 
 export interface IData {

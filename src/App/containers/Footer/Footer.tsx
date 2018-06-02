@@ -73,6 +73,8 @@ export default class Footer extends React.Component<
   }
 
   private _toggleOverflow = (): void => {
-    this.setState({ overflowOpen: !this.state.overflowOpen });
+    this.setState(prevState => ({
+      overflowOpen: !prevState.overflowOpen,
+    }));
   };
 }
