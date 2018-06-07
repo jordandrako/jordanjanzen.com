@@ -64,13 +64,13 @@ export const AppContext = React.createContext(defaultState);
 
 class AppProvider extends React.Component<IAppContextProps, IAppContextState> {
   public componentDidMount(): void {
-    this.getBinding('bind').catch(() => console.error);
+    this._getBinding('bind').catch(() => console.error);
 
     auth.onAuthStateChanged(
       (user: firebase.User | null) =>
         user &&
-        this.authHandler(user)
-          .then(this.updatePage)
+        this._authHandler(user)
+          .then(this._updatePage)
           .catch(() => console.error)
     );
   }
@@ -125,85 +125,17 @@ class AppProvider extends React.Component<IAppContextProps, IAppContextState> {
     this._updateContext('todos', todos);
   };
 
-  public getBinding = (type: 'sync' | 'bind'): Promise<RebaseBinding[]> => {
-    const bindOrSync = (state: string): Promise<RebaseBinding> => {
-      return new Promise((resolve, reject) => {
-        if (type === 'bind') {
-          resolve(
-            base.bindToState(state, {
-              context: this,
-              state,
-              then: () => setLocalStorage(state, this.state[state]),
-            })
-          );
-        }
-        if (type === 'sync') {
-          this.setState({ bindType: 'sync' });
-          resolve(
-            base.syncState(state, {
-              context: this,
-              state,
-              then: () => setLocalStorage(state, this.state[state]),
-            })
-          );
-        }
-        reject(new Error('You must pass "bind" or "sync" to this method.'));
-      });
-    };
-
-    return Promise.all([
-      bindOrSync('projects'),
-      bindOrSync('skills'),
-      bindOrSync('todos'),
-    ]);
-  };
-
-  public updatePage = (): void => {
-    this.props.history.push(location.pathname);
-  };
-
-  public authHandler = (authData: any): Promise<any> => {
-    const { uid } = authData;
-    const rootRef = database.ref();
-    const successfulLogin = async () => {
-      await this.getBinding('sync').catch(() => console.error);
-      this.updatePage();
-    };
-    return new Promise((resolve, reject) => {
-      rootRef.once('value').then(snapshot => {
-        const data = snapshot.val() || {};
-
-        if (!data.owner) {
-          rootRef
-            .set({
-              ...data,
-              owner: uid,
-            })
-            .then(() => resolve(successfulLogin()))
-            .catch(() => console.error);
-        } else if (data.owner === uid) {
-          resolve(successfulLogin());
-        } else {
-          auth.signOut();
-          reject(
-            new Error('Log in denied. You are not the owner of this site.')
-          );
-        }
-      });
-    });
-  };
-
   public login = async (): Promise<any> => {
     const result = await auth
       .signInWithPopup(provider)
       .catch(() => console.error);
-    await this.authHandler(result.user).catch(() => console.error);
+    await this._authHandler(result.user).catch(() => console.error);
   };
 
   public logout = async (): Promise<any> => {
-    await this.getBinding('bind').catch(() => console.error);
+    await this._getBinding('bind').catch(() => console.error);
     await auth.signOut().catch(() => console.error);
-    this.updatePage();
+    this._updatePage();
   };
 
   // tslint:disable-next-line:member-ordering
@@ -230,6 +162,78 @@ class AppProvider extends React.Component<IAppContextProps, IAppContextState> {
       </AppContext.Provider>
     );
   }
+
+  private _updatePage = (): void => {
+    this.props.history.push(location.pathname);
+  };
+
+  private _authHandler = (authData: any): Promise<any> => {
+    const { uid } = authData;
+    const rootRef = database.ref();
+    const successfulLogin = async () => {
+      await this._getBinding('sync').catch(() => console.error);
+      this._updatePage();
+    };
+    return new Promise((resolve, reject) => {
+      rootRef.once('value').then(snapshot => {
+        const data = snapshot.val() || {};
+
+        if (!data.owner) {
+          rootRef
+            .set({
+              ...data,
+              owner: uid,
+            })
+            .then(() => resolve(successfulLogin()))
+            .catch(() => console.error);
+        } else if (data.owner === uid) {
+          resolve(successfulLogin());
+        } else {
+          auth.signOut();
+          reject(
+            new Error('Log in denied. You are not the owner of this site.')
+          );
+        }
+      });
+    });
+  };
+
+  private _getBinding = async (
+    type: 'sync' | 'bind'
+  ): Promise<RebaseBinding[]> => {
+    const bindOrSync = (state: string): Promise<RebaseBinding> => {
+      return new Promise((resolve, reject) => {
+        if (type === 'bind') {
+          resolve(
+            base.bindToState(state, {
+              context: this,
+              state,
+              then: () => setLocalStorage(state, this.state[state]),
+            })
+          );
+        }
+        if (type === 'sync') {
+          this.setState({ bindType: 'sync' });
+          resolve(
+            base.syncState(state, {
+              context: this,
+              state,
+              then: () => setLocalStorage(state, this.state[state]),
+            })
+          );
+        }
+        reject(new Error('You must pass "bind" or "sync" to this method.'));
+      });
+    };
+
+    const binding = await Promise.all([
+      bindOrSync('projects'),
+      bindOrSync('skills'),
+      bindOrSync('todos'),
+    ]);
+
+    return binding;
+  };
 
   private _updateContext = (state: string, data: IProjects | ISkills): void => {
     setLocalStorage(state, data);
