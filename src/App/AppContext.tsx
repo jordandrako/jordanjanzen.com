@@ -170,10 +170,6 @@ class AppProvider extends React.Component<IAppContextProps, IAppContextState> {
   private _authHandler = (authData: any): Promise<any> => {
     const { uid } = authData;
     const rootRef = database.ref();
-    const successfulLogin = async () => {
-      await this._getBinding('sync').catch(() => console.error);
-      this._updatePage();
-    };
     return new Promise((resolve, reject) => {
       rootRef.once('value').then(snapshot => {
         const data = snapshot.val() || {};
@@ -184,10 +180,10 @@ class AppProvider extends React.Component<IAppContextProps, IAppContextState> {
               ...data,
               owner: uid,
             })
-            .then(() => resolve(successfulLogin()))
+            .then(() => resolve(this._successfulLogin()))
             .catch(() => console.error);
         } else if (data.owner === uid) {
-          resolve(successfulLogin());
+          resolve(this._successfulLogin());
         } else {
           auth.signOut();
           reject(
@@ -196,6 +192,11 @@ class AppProvider extends React.Component<IAppContextProps, IAppContextState> {
         }
       });
     });
+  };
+
+  private _successfulLogin = async () => {
+    await this._getBinding('sync').catch(() => console.error);
+    this._updatePage();
   };
 
   private _getBinding = async (
