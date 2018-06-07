@@ -63,17 +63,9 @@ const defaultState: IAppContextState = {
 export const AppContext = React.createContext(defaultState);
 
 class AppProvider extends React.Component<IAppContextProps, IAppContextState> {
-  public async componentDidMount(): Promise<void> {
-    const localEmpty = Object.keys(localItems).every(
-      key => localItems[key] === null
-    );
-    await this.getBinding('sync').catch(() => console.error);
-    setTimeout(() => {
-      setLocalStorage('projects', { ...this.state.projects });
-      setLocalStorage('skills', { ...this.state.skills });
-      setLocalStorage('todos', { ...this.state.todos });
-      localEmpty && this.updatePage();
-    }, 2000);
+  public componentDidMount(): void {
+    this.getBinding('bind').catch(() => console.error);
+
     auth.onAuthStateChanged(
       (user: firebase.User | null) =>
         user &&
@@ -134,31 +126,36 @@ class AppProvider extends React.Component<IAppContextProps, IAppContextState> {
   };
 
   public getBinding = (type: 'sync' | 'bind'): Promise<RebaseBinding[]> => {
-    return new Promise(resolve => {
-      const bind = (state: string): RebaseBinding => {
-        this.setState({ bindType: 'bind' });
-        return base.bindToState(state, {
-          context: this,
-          state,
-        });
-      };
-
-      const sync = (state: string): RebaseBinding => {
+    const bindOrSync = (state: string): Promise<RebaseBinding> => {
+      return new Promise((resolve, reject) => {
+        if (type === 'bind') {
+          resolve(
+            base.bindToState(state, {
+              context: this,
+              state,
+              then: () => setLocalStorage(state, this.state[state]),
+            })
+          );
+        }
         if (type === 'sync') {
           this.setState({ bindType: 'sync' });
-          return base.syncState(state, {
-            context: this,
-            onFailure: () => {
-              bind(state);
-            },
-            state,
-          });
+          resolve(
+            base.syncState(state, {
+              context: this,
+              state,
+              then: () => setLocalStorage(state, this.state[state]),
+            })
+          );
         }
-        return bind(state);
-      };
+        reject(new Error('You must pass "bind" or "sync" to this method.'));
+      });
+    };
 
-      resolve([sync('projects'), sync('skills'), sync('todos')]);
-    });
+    return Promise.all([
+      bindOrSync('projects'),
+      bindOrSync('skills'),
+      bindOrSync('todos'),
+    ]);
   };
 
   public updatePage = (): void => {
