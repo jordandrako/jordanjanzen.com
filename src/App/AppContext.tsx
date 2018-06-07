@@ -63,25 +63,23 @@ const defaultState: IAppContextState = {
 export const AppContext = React.createContext(defaultState);
 
 class AppProvider extends React.Component<IAppContextProps, IAppContextState> {
-  public componentDidMount(): void {
-    this.getBinding('sync').then(() => {
-      const localEmpty = Object.keys(localItems).every(
-        key => localItems[key] === null
-      );
-      setTimeout(() => {
-        setLocalStorage('projects', { ...this.state.projects });
-        setLocalStorage('skills', { ...this.state.skills });
-        setLocalStorage('todos', { ...this.state.todos });
-        localEmpty && this.updatePage();
-      }, 2000);
-    });
+  public async componentDidMount(): Promise<void> {
+    const localEmpty = Object.keys(localItems).every(
+      key => localItems[key] === null
+    );
+    await this.getBinding('sync').catch(() => console.error);
+    setTimeout(() => {
+      setLocalStorage('projects', { ...this.state.projects });
+      setLocalStorage('skills', { ...this.state.skills });
+      setLocalStorage('todos', { ...this.state.todos });
+      localEmpty && this.updatePage();
+    }, 2000);
     auth.onAuthStateChanged(
       (user: firebase.User | null) =>
         user &&
         this.authHandler(user)
-          .catch((error: any) => console.error(error))
-          .then(this.updatePage),
-      (error: any) => console.error(error)
+          .then(this.updatePage)
+          .catch(() => console.error)
     );
   }
 
@@ -138,6 +136,7 @@ class AppProvider extends React.Component<IAppContextProps, IAppContextState> {
   public getBinding = (type: 'sync' | 'bind'): Promise<RebaseBinding[]> => {
     return new Promise(resolve => {
       const bind = (state: string): RebaseBinding => {
+        this.setState({ bindType: 'bind' });
         return base.bindToState(state, {
           context: this,
           state,
@@ -146,6 +145,7 @@ class AppProvider extends React.Component<IAppContextProps, IAppContextState> {
 
       const sync = (state: string): RebaseBinding => {
         if (type === 'sync') {
+          this.setState({ bindType: 'sync' });
           return base.syncState(state, {
             context: this,
             onFailure: () => {
@@ -168,8 +168,9 @@ class AppProvider extends React.Component<IAppContextProps, IAppContextState> {
   public authHandler = (authData: any): Promise<any> => {
     const { uid } = authData;
     const rootRef = database.ref();
-    const successfulLogin = () => {
-      this.getBinding('sync').then(() => this.updatePage());
+    const successfulLogin = async () => {
+      await this.getBinding('sync').catch(() => console.error);
+      this.updatePage();
     };
     return new Promise((resolve, reject) => {
       rootRef.once('value').then(snapshot => {
@@ -182,9 +183,7 @@ class AppProvider extends React.Component<IAppContextProps, IAppContextState> {
               owner: uid,
             })
             .then(() => resolve(successfulLogin()))
-            .catch((error: any) => {
-              console.error(error);
-            });
+            .catch(() => console.error);
         } else if (data.owner === uid) {
           resolve(successfulLogin());
         } else {
@@ -197,24 +196,17 @@ class AppProvider extends React.Component<IAppContextProps, IAppContextState> {
     });
   };
 
-  public login = (): void => {
-    auth
+  public login = async (): Promise<any> => {
+    const result = await auth
       .signInWithPopup(provider)
-      .then(result =>
-        this.authHandler(result.user)
-          .catch((error: any) => console.error(error))
-          .then(this.updatePage)
-      )
-      .catch((error: any) => console.error(error));
+      .catch(() => console.error);
+    await this.authHandler(result.user).catch(() => console.error);
   };
 
-  public logout = (): void => {
-    this.getBinding('bind').then(result => {
-      auth
-        .signOut()
-        .then(() => this.updatePage())
-        .catch((error: any) => console.error(error));
-    });
+  public logout = async (): Promise<any> => {
+    await this.getBinding('bind').catch(() => console.error);
+    await auth.signOut().catch(() => console.error);
+    this.updatePage();
   };
 
   // tslint:disable-next-line:member-ordering
@@ -232,7 +224,6 @@ class AppProvider extends React.Component<IAppContextProps, IAppContextState> {
     removeSkill: this.removeSkill,
     removeTodo: this.removeTodo,
     updateTodo: this.updateTodo,
-    // },
   };
 
   public render() {
@@ -248,7 +239,6 @@ class AppProvider extends React.Component<IAppContextProps, IAppContextState> {
     this.setState((prevState, props) => ({
       ...prevState,
       [state]: { ...data },
-      // },
     }));
   };
 }
