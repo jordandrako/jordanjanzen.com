@@ -11,10 +11,8 @@
     "eject": "react-scripts-ts eject",
     "checkenv": "node scripts/check-env.js",
     "branchcheck": "git-branch-is master",
-    "predeploy":
-      "yarn branchcheck && yarn checkenv && scripts/branch.sh && rm -rf build && cross-env REACT_APP_DATABASE=production yarn build",
-    "prestaging":
-      "yarn checkenv && rm -rf build && scripts/branch.sh && yarn build",
+    "predeploy": "yarn branchcheck && yarn checkenv && scripts/branch.sh && rm -rf build && cross-env REACT_APP_DATABASE=production yarn build",
+    "prestaging": "yarn checkenv && rm -rf build && scripts/branch.sh && yarn build",
     "deploy": "firebase deploy -P production",
     "staging": "firebase deploy -P staging",
     "lint:ts": "tslint -p tsconfig.json --fix",
@@ -48,6 +46,7 @@
   "devDependencies": {
     "@types/jest": "^22.2.3",
     "@types/node": "^10.0.8",
+    "@types/re-base": "^3.2.0",
     "@types/react": "^16.3.13",
     "@types/react-document-title": "^2.0.2",
     "@types/react-dom": "^16.0.5",
