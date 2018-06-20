@@ -1,9 +1,9 @@
 import { auth, base, database, provider } from 'base';
 import * as firebase from 'firebase/app';
+import { RebaseBinding } from 're-base';
 import * as React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { getTheme, ITheme, screenSizesPx } from 'styling';
-import { RebaseBinding } from 'typings/re-base';
 import { setLocalStorage, slugify } from 'utilities';
 import {
   ILocalStorage,

@@ -1,9 +1,7 @@
-// TODO: remove re-base.ts and replace with import after re-base PR is merged in @types.
-import REBASE from './typings/re-base';
-const rebase = require('re-base') as REBASE;
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
+import * as rebase from 're-base';
 
 const {
   REACT_APP_DATABASE,
