@@ -56,7 +56,7 @@ export const Row = styled.section`
   }
 `;
 
-export const Hero = Row.extend`
+export const Hero = styled(Row)`
   margin: 0 0 2.5em;
   margin-top: 0 !important;
   max-width: calc(1000px + 4em);

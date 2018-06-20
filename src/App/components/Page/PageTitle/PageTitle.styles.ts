@@ -1,6 +1,6 @@
-import { darken, lighten } from 'polished';
-import { Link } from 'react-router-dom';
-import { fonts, palette, screenSizes, styled } from 'styling';
+import { darken, lighten } from "polished";
+import { Link } from "react-router-dom";
+import { fonts, palette, screenSizes, styled } from "styling";
 
 export const titleBar = styled.header`
   background: ${darken(0.05, palette.black)};
@@ -42,7 +42,7 @@ export const titleText = styled.h1`
   text-shadow: 0 2px 3px rgba(0, 0, 0, 0.45);
 `;
 
-export const currentItem = titleItem.extend`
+export const currentItem = styled(titleItem)`
   color: ${palette.lightwhite};
   padding: 0 15px;
   border-top: 3px solid ${palette.lightblue};
@@ -58,7 +58,7 @@ export const currentItem = titleItem.extend`
   }
 `;
 
-export const currentText = titleText.extend`
+export const currentText = styled(titleText)`
   font-size: 1.15rem;
   @media (max-width: ${screenSizes.tablet}) {
     font-size: 1rem;
@@ -69,7 +69,7 @@ export const titleIcon = styled.i`
   color: ${palette.yellow};
 `;
 
-export const devItem = titleItem.extend`
+export const devItem = styled(titleItem)`
   margin-left: auto;
   background: transparent;
   padding: 0 10px;
