@@ -9,7 +9,7 @@ const writeBranch = process.argv.indexOf('--branch') > -1;
 const checkEnv = process.argv.indexOf('--env') > -1;
 
 const gitBranch = branch.sync();
-const envPath = path.resolve(process.cwd(), '.env.local');
+const envPath = path.resolve(process.cwd(), '.env');
 const requiredEnv = [
   'REACT_APP_PROD_KEY',
   'REACT_APP_STAGING_KEY',
@@ -94,8 +94,8 @@ const envFuncs = () => {
 };
 
 const allFuncs = () => {
-  branchFuncs();
   envFuncs();
+  branchFuncs();
 };
 
 if (writeBranch) {
