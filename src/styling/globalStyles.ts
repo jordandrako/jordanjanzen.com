@@ -1,16 +1,9 @@
 import { injectGlobal } from 'styled-components';
 import styledNormalize from 'styled-normalize';
-import * as WebFont from 'webfontloader';
 import FiraCode from './fonts/FiraCode-Regular.ttf';
 import { screenSizes } from './style-utils';
 import { getTheme, loadTheme, palette } from './theme';
 import { IPartialTheme } from './theme.types';
-
-WebFont.load({
-  google: {
-    families: ['Roboto:400,400i,700']
-  }
-})
 
 export const globalStyles = (theme: IPartialTheme) => {
   let globalTheme = getTheme();
