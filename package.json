@@ -44,8 +44,7 @@
     "sha1": "^1.1.1",
     "styled-components": "^3.3.3",
     "styled-normalize": "^4.0.0",
-    "superagent": "^3.8.3",
-    "webfontloader": "^1.6.28"
+    "superagent": "^3.8.3"
   },
   "devDependencies": {
     "@types/jest": "^23.1.1",
@@ -60,7 +59,6 @@
     "@types/react-transition-group": "^2.0.11",
     "@types/sha1": "^1.1.1",
     "@types/superagent": "^3.8.1",
-    "@types/webfontloader": "^1.6.29",
     "babel-core": "^6.26.3",
     "babel-runtime": "^6.26.0",
     "cross-env": "^5.2.0",
