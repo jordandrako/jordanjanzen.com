@@ -71,7 +71,7 @@ class AppProvider extends React.Component<IAppContextProps, IAppContextState> {
         user &&
         this._authHandler(user)
           .then(this._updatePage)
-          .catch(() => console.error)
+          .catch(() => console.error),
     );
   }
 
@@ -125,21 +125,22 @@ class AppProvider extends React.Component<IAppContextProps, IAppContextState> {
     this._updateContext('todos', todos);
   };
 
-  public login = async (): Promise<any> => {
-    const result = await auth
-      .signInWithPopup(provider)
-      .catch(() => console.error);
-    await this._authHandler(result.user).catch(() => console.error);
+  public login = async (): Promise<void> => {
+    const result: firebase.auth.UserCredential = await auth.signInWithPopup(
+      provider,
+    );
+    result.user &&
+      (await this._authHandler(result.user).catch(() => console.error));
   };
 
-  public logout = async (): Promise<any> => {
+  public logout = async (): Promise<void> => {
     await this._getBinding('bind').catch(() => console.error);
     await auth.signOut().catch(() => console.error);
     this._updatePage();
   };
 
   // tslint:disable-next-line:member-ordering
-  public state: IAppContextState = {
+  public readonly state: IAppContextState = {
     ...defaultState,
     addProject: this.addProject,
     addSkill: this.addSkill,
@@ -167,27 +168,24 @@ class AppProvider extends React.Component<IAppContextProps, IAppContextState> {
     this.props.history.push(location.pathname);
   };
 
-  private _authHandler = (authData: any): Promise<any> => {
+  private _authHandler = (authData: firebase.User): Promise<any> => {
     const { uid } = authData;
-    const rootRef = database.ref();
+    const ownerRef = database.ref('/owner');
     return new Promise((resolve, reject) => {
-      rootRef.once('value').then(snapshot => {
-        const data = snapshot.val() || {};
+      ownerRef.once('value').then(snapshot => {
+        const owner = snapshot.val();
 
-        if (!data.owner) {
-          rootRef
-            .set({
-              ...data,
-              owner: uid,
-            })
-            .then(() => resolve(this._successfulLogin()))
+        if (!owner) {
+          ownerRef
+            .set(uid)
+            .then(() => resolve(this._authHandler(authData)))
             .catch(() => console.error);
-        } else if (data.owner === uid) {
+        } else if (owner === uid) {
           resolve(this._successfulLogin());
         } else {
           auth.signOut();
           reject(
-            new Error('Log in denied. You are not the owner of this site.')
+            new Error('Log in denied. You are not the owner of this site.'),
           );
         }
       });
@@ -200,7 +198,7 @@ class AppProvider extends React.Component<IAppContextProps, IAppContextState> {
   };
 
   private _getBinding = async (
-    type: 'sync' | 'bind'
+    type: 'sync' | 'bind',
   ): Promise<RebaseBinding[]> => {
     const bindOrSync = (state: string): Promise<RebaseBinding> => {
       return new Promise((resolve, reject) => {
@@ -210,28 +208,36 @@ class AppProvider extends React.Component<IAppContextProps, IAppContextState> {
               context: this,
               state,
               then: () => setLocalStorage(state, this.state[state]),
-            })
+            }),
           );
         }
         if (type === 'sync') {
-          this.setState({ bindType: 'sync' });
           resolve(
             base.syncState(state, {
               context: this,
               state,
               then: () => setLocalStorage(state, this.state[state]),
-            })
+            }),
           );
         }
         reject(new Error('You must pass "bind" or "sync" to this method.'));
       });
     };
 
-    const binding = await Promise.all([
-      bindOrSync('projects'),
-      bindOrSync('skills'),
-      bindOrSync('todos'),
-    ]);
+    let binding;
+
+    if (type === 'sync') {
+      binding = await Promise.all([
+        bindOrSync('projects'),
+        bindOrSync('skills'),
+        bindOrSync('todos'),
+      ]);
+    } else {
+      binding = await Promise.all([
+        bindOrSync('projects'),
+        bindOrSync('skills'),
+      ]);
+    }
 
     return binding;
   };
