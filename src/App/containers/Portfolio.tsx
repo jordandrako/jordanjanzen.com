@@ -54,7 +54,7 @@ class Portfolio extends React.Component<IPortfolioProps, IPortfolioState> {
         ) : null}
         <Route
           exact={true}
-          path="/portfolio/:projectId"
+          path='/portfolio/:projectId'
           render={this._renderProjectSingle}
         />
       </>

@@ -46,7 +46,7 @@ export const logo = styled.h2`
   position: relative;
 
   &:after {
-    content: '';
+    content: "";
     display: block;
     background: url(${JJMark}) no-repeat;
     background-position: center;

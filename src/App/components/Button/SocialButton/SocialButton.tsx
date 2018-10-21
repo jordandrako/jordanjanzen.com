@@ -47,7 +47,7 @@ export const SocialButton = (props: ISocialButtonProps) => {
   return (
     <Button
       href={link}
-      target="_blank"
+      target='_blank'
       small={true}
       bg={bg}
       color={color}
@@ -56,7 +56,7 @@ export const SocialButton = (props: ISocialButtonProps) => {
       {icon && (
         <Styled.buttonIcon
           className={`fa social fa-${socialIcon}`}
-          aria-hidden="true"
+          aria-hidden='true'
         />
       )}
       {text}
@@ -64,7 +64,7 @@ export const SocialButton = (props: ISocialButtonProps) => {
         iconReverse && (
           <Styled.buttonIcon
             className={`fa social fa-${socialIcon}`}
-            aria-hidden="true"
+            aria-hidden='true'
           />
         )}
     </Button>

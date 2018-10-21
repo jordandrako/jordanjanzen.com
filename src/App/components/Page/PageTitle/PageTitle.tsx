@@ -27,14 +27,14 @@ const PageTitle = (props: IPageTitleProps) => {
         )}
         <Styled.currentItem>
           <Styled.titleIcon
-            className="fa fa-file-code-o file"
-            aria-hidden="true"
+            className='fa fa-file-code-o file'
+            aria-hidden='true'
           />
           <Styled.currentText>{title}</Styled.currentText>
           <Button
-            to="/"
+            to='/'
             buttonType={ButtonType.Delete}
-            aria-hidden="true"
+            aria-hidden='true'
             style={{ margin: 0 }}
           />
         </Styled.currentItem>

@@ -95,7 +95,7 @@ w_${width},h_${height},c_${crop},g_${gravity},o_${opacity},a_${angle},r_${radius
       window.open(
         `https://res.cloudinary.com/jordan-janzen/image/upload/${
           this.props.publicId
-        }.${this.props.format}`
+        }.${this.props.format}`,
       );
   };
 }

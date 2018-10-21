@@ -26,7 +26,7 @@ polyfill({
       <BrowserRouter>
         <Route>{(props: RouteComponentProps<any>) => <App {...props} />}</Route>
       </BrowserRouter>,
-      document.getElementById('root') as HTMLElement
+      document.getElementById('root') as HTMLElement,
     );
   },
 });

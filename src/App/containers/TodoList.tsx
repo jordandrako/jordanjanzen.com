@@ -54,12 +54,12 @@ class TodoList extends React.Component<ITodoListProps, ITodoListState> {
           <h2>My Todos</h2>
           <form>
             <ShowComplete
-              type="checkbox"
-              name="show-complete"
+              type='checkbox'
+              name='show-complete'
               checked={this.state.showComplete}
               onChange={this._toggleShowComplete}
             />
-            <label htmlFor="show-complete" onClick={this._toggleShowComplete}>
+            <label htmlFor='show-complete' onClick={this._toggleShowComplete}>
               Show completed todos?
             </label>
           </form>
@@ -73,36 +73,36 @@ class TodoList extends React.Component<ITodoListProps, ITodoListState> {
           <ul>
             <li>
               <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="http://sambedingfield.com/"
+                target='_blank'
+                rel='noopener noreferrer'
+                href='http://sambedingfield.com/'
               >
                 Sam Bedingfield
               </a>
             </li>
             <li>
               <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="http://wesbos.com"
+                target='_blank'
+                rel='noopener noreferrer'
+                href='http://wesbos.com'
               >
                 Wes Bos
               </a>
             </li>
             <li>
               <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="http://ivesvh.com/"
+                target='_blank'
+                rel='noopener noreferrer'
+                href='http://ivesvh.com/'
               >
                 Ives van Hoorne
               </a>
             </li>
             <li>
               <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="https://line25.com/inspiration/designer-portfolio-websites"
+                target='_blank'
+                rel='noopener noreferrer'
+                href='https://line25.com/inspiration/designer-portfolio-websites'
               >
                 Line 25 list of 30 portfolios
               </a>
@@ -120,7 +120,7 @@ class TodoList extends React.Component<ITodoListProps, ITodoListState> {
   }
 
   private _renderTodo(
-    showComplete: boolean
+    showComplete: boolean,
   ): JSX.Element | null | (JSX.Element | null)[] {
     const { removeTodo, todos, updateTodo } = this.props;
     return Object.keys(todos).map(key => {

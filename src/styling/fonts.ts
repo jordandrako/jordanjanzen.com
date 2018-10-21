@@ -1,6 +1,6 @@
-import { IFonts } from "./theme.types";
+import { IFonts } from './theme.types';
 
 export const DefaultFonts: IFonts = {
-  fontFamily: "Roboto, sans-serif",
-  monospace: "FiraCode, monospace"
+  fontFamily: 'Roboto, sans-serif',
+  monospace: 'FiraCode, monospace',
 };

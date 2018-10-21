@@ -19,7 +19,7 @@ export interface IButtonProps {
   type?: string;
   wide?: boolean;
   onClick?: (
-    e?: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>
+    e?: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
   ) => void;
 
   /**

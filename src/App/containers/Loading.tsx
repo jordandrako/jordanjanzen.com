@@ -27,7 +27,7 @@ const Loading = (props: ILoadingProps) => {
   }
   // Handle the error state
   return (
-    <DocumentTitle title="😥 Sorry">
+    <DocumentTitle title='😥 Sorry'>
       <Row>
         <Banner bannerType={BannerType.Danger} action={BannerAction.Reload}>
           There seems to have been a problem loading this page...

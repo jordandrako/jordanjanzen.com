@@ -57,117 +57,117 @@ export default class AddProjectForm extends React.Component<
         <StyledForm>
           <form
             ref={this._form}
-            className="add-project"
+            className='add-project'
             onSubmit={this._createProject}
           >
             <input
               ref={this._name}
-              type="text"
-              name="name"
-              placeholder="Project Name"
+              type='text'
+              name='name'
+              placeholder='Project Name'
               required={true}
             />
             <select
               ref={this._category}
-              name="category"
-              placeholder="Project Category"
+              name='category'
+              placeholder='Project Category'
               required={true}
             >
-              <optgroup label="Select Category">
-                <option value="Design">Design</option>
-                <option value="Development">Development</option>
-                <option value="Landing Page">Landing Page</option>
+              <optgroup label='Select Category'>
+                <option value='Design'>Design</option>
+                <option value='Development'>Development</option>
+                <option value='Landing Page'>Landing Page</option>
               </optgroup>
             </select>
 
             <select
               multiple={true}
-              name="skills"
+              name='skills'
               onChange={this._handleValues}
               size={Object.keys(skills).length + 4}
               required={true}
             >
               <option>Select skills (ctrl + click)</option>
-              <optgroup label="Core Skills">
+              <optgroup label='Core Skills'>
                 {Object.keys(skills).map(
                   (key: string) =>
                     skills[key]!.category === 'core' && (
                       <option key={key} value={skills[key]!.name}>
                         {skills[key]!.name}
                       </option>
-                    )
+                    ),
                 )}
               </optgroup>
-              <optgroup label="Library Skills">
+              <optgroup label='Library Skills'>
                 {Object.keys(skills).map(
                   key =>
                     skills[key]!.category === 'library' && (
                       <option key={key} value={skills[key]!.name}>
                         {skills[key]!.name}
                       </option>
-                    )
+                    ),
                 )}
               </optgroup>
-              <optgroup label="Design Skills">
+              <optgroup label='Design Skills'>
                 {Object.keys(skills).map(
                   key =>
                     skills[key]!.category === 'design' && (
                       <option key={key} value={skills[key]!.name}>
                         {skills[key]!.name}
                       </option>
-                    )
+                    ),
                 )}
               </optgroup>
             </select>
             <textarea
               ref={this._shortDesc}
-              name="short_desc"
-              placeholder="Project Short Description (will default to truncated long description)"
+              name='short_desc'
+              placeholder='Project Short Description (will default to truncated long description)'
             />
             <textarea
               ref={this._longDesc}
-              name="long_desc"
-              placeholder="Project Long Description"
+              name='long_desc'
+              placeholder='Project Long Description'
               required={true}
             />
             <input
               ref={this._link}
-              type="text"
-              name="link"
-              placeholder="Project link"
+              type='text'
+              name='link'
+              placeholder='Project link'
             />
             <input
               ref={this._repo}
-              type="text"
-              name="repo"
-              placeholder="Project repository"
+              type='text'
+              name='repo'
+              placeholder='Project repository'
             />
             <p>Client info:</p>
             <input
               ref={this._clientName}
-              type="text"
-              name="client_name"
-              placeholder="Client Name"
+              type='text'
+              name='client_name'
+              placeholder='Client Name'
               required={true}
             />
             <input
               ref={this._clientIndustry}
-              type="text"
-              name="client_industry"
-              placeholder="Industry"
+              type='text'
+              name='client_industry'
+              placeholder='Industry'
               required={true}
             />
             <Row isChild={true}>
               <Dropzone
                 addImage={this._addImage}
-                accept="image/jpeg, image/png"
+                accept='image/jpeg, image/png'
               />
               <Styled.uploadedImageList>
                 {this._renderUploadedImageList()}
               </Styled.uploadedImageList>
             </Row>
             <Button
-              type="submit"
+              type='submit'
               buttonType={ButtonType.Submit}
               arrows={semanticColors.siteBackground}
             >
@@ -190,7 +190,7 @@ export default class AddProjectForm extends React.Component<
           buttonType={ButtonType.Delete}
           // tslint:disable-next-line jsx-no-lambda
           onClick={() => this._removeImage(key)}
-          className="fa fa-times-circle close"
+          className='fa fa-times-circle close'
         />
       </Styled.uploadedImage>
     ));

@@ -18,7 +18,7 @@ export default class Todo extends React.Component<ITodoProps, {}> {
     }
     const link = details.link ? (
       <p>
-        <a target="_blank" rel="noopener noreferrer" href={details.link}>
+        <a target='_blank' rel='noopener noreferrer' href={details.link}>
           {truncate(decodeURI(details.link), 30)}
         </a>
       </p>
@@ -26,54 +26,54 @@ export default class Todo extends React.Component<ITodoProps, {}> {
 
     return (
       <Styled.Item
-        className="todo-item"
+        className='todo-item'
         key={this._index}
         isComplete={details.complete}
       >
-        <div className="flag">
-          <button className="complete" onClick={this._toggleComplete}>
-            <div className="checkbox" />
-            <p className="label">COMPLETE</p>
+        <div className='flag'>
+          <button className='complete' onClick={this._toggleComplete}>
+            <div className='checkbox' />
+            <p className='label'>COMPLETE</p>
           </button>
-          <button className="remove" onClick={this._removeTodo}>
+          <button className='remove' onClick={this._removeTodo}>
             <div />
           </button>
         </div>
         <StyledForm>
           <input
-            type="text"
-            name="name"
+            type='text'
+            name='name'
             defaultValue={details.name}
-            placeholder="Todo"
+            placeholder='Todo'
             onChange={this._handleChange}
           />
           <select
-            name="category"
+            name='category'
             defaultValue={details.category}
             onChange={this._handleChange}
           >
             <option>Category</option>
-            <option value="design">Design</option>
-            <option value="content">Content</option>
-            <option value="component">Component</option>
-            <option value="quality">Quality</option>
-            <option value="backend">Backend</option>
-            <option value="other">Other</option>
+            <option value='design'>Design</option>
+            <option value='content'>Content</option>
+            <option value='component'>Component</option>
+            <option value='quality'>Quality</option>
+            <option value='backend'>Backend</option>
+            <option value='other'>Other</option>
           </select>
-          <label htmlFor="priority">Priority</label>
+          <label htmlFor='priority'>Priority</label>
           <select
-            name="priority"
+            name='priority'
             defaultValue={details.priority || '2'}
             onChange={this._handleChange}
           >
-            <option value="0">0</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
+            <option value='0'>0</option>
+            <option value='1'>1</option>
+            <option value='2'>2</option>
           </select>
           <textarea
-            name="desc"
+            name='desc'
             defaultValue={details.desc}
-            placeholder="Description"
+            placeholder='Description'
             onChange={this._handleChange}
             rows={3}
           />
@@ -90,7 +90,7 @@ export default class Todo extends React.Component<ITodoProps, {}> {
   private _handleChange = (
     ev: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    >,
   ): void => {
     const updatedProp = {
       [ev.target.name]:

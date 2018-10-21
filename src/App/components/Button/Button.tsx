@@ -45,13 +45,13 @@ const Button: React.SFC<IButtonProps> = props => {
   const buttonText = () => (
     <>
       {icon && (
-        <Styled.buttonIcon className={`fa fa-${icon}`} aria-hidden="true" />
+        <Styled.buttonIcon className={`fa fa-${icon}`} aria-hidden='true' />
       )}
       {text || children || 'Button'}
       {iconReverse && (
         <Styled.buttonIcon
           className={`fa fa-${iconReverse}`}
-          aria-hidden="true"
+          aria-hidden='true'
           iconReverse={iconReverse}
         />
       )}

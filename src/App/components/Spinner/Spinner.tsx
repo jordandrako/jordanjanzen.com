@@ -8,7 +8,7 @@ const StyledLoader = () => (
     <Styled.frame>
       <Button buttonType={ButtonType.Delete} />
     </Styled.frame>
-    <object type="image/svg+xml" data={codeLoader}>
+    <object type='image/svg+xml' data={codeLoader}>
       loading...
     </object>
     <Styled.scrollbar />

@@ -26,31 +26,31 @@ export default class AddSkillForm extends React.Component<
         <StyledForm>
           <form
             ref={this._form}
-            className="add-skill"
+            className='add-skill'
             onSubmit={this._createSkill}
           >
             <input
               ref={this._name}
-              type="text"
-              name="name"
-              placeholder="Skill"
+              type='text'
+              name='name'
+              placeholder='Skill'
               required={true}
             />
             <select
               ref={this._category}
-              name="category"
-              placeholder="Skill Category"
+              name='category'
+              placeholder='Skill Category'
               required={true}
             >
               <option>Select Category</option>
-              <option value="core">Core</option>
-              <option value="library">Library</option>
-              <option value="design">Design</option>
+              <option value='core'>Core</option>
+              <option value='library'>Library</option>
+              <option value='design'>Design</option>
             </select>
 
             <Button
               buttonType={ButtonType.Submit}
-              type="submit"
+              type='submit'
               arrows={palette.lightwhite}
             >
               + Add Skill
