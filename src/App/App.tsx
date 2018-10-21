@@ -5,7 +5,7 @@ import {
   loadTheme,
   screenSizes,
   screenSizesPx,
-  styled
+  styled,
 } from 'styling';
 import AppProvider, { AppContext } from './AppContext';
 import AppRoutes from './AppRoutes';
@@ -37,7 +37,7 @@ export enum routeNames {
   portfolio = 'Portfolio',
   todo = 'Todo List',
   load = 'Loading...',
-  notFound = '404'
+  notFound = '404',
 }
 
 const getTitle = (path: string): string => {
@@ -72,7 +72,7 @@ interface IAppProps extends RouteComponentProps<any> {}
 class App extends React.Component<IAppProps, IAppState> {
   public static getDerivedStateFromProps(
     nextProps: IAppProps,
-    prevState: IAppState
+    prevState: IAppState,
   ): object | null {
     const nextRoute = nextProps.location.pathname.split('/')[1];
     const prevRoute =
@@ -82,8 +82,8 @@ class App extends React.Component<IAppProps, IAppState> {
         currentPage: nextProps.location.pathname,
         prevPage: {
           name: getTitle(prevState.currentPage as string),
-          path: prevState.currentPage
-        }
+          path: prevState.currentPage,
+        },
       };
     }
     return null;
@@ -94,7 +94,7 @@ class App extends React.Component<IAppProps, IAppState> {
     this.state = {
       currentPage: null,
       isMobile: window.innerWidth <= screenSizesPx.tablet,
-      prevPage: null
+      prevPage: null,
     };
   }
 

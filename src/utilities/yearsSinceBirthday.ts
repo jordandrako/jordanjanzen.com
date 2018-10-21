@@ -7,7 +7,7 @@ import * as moment from 'moment';
  */
 export const yearsSinceBirthday = (
   date: string | number,
-  format: string = 'YYYYMMDD'
+  format: string = 'YYYYMMDD',
 ): number => {
   const Moment = moment(date, format);
   return Math.floor((moment().unix() - Moment.unix()) / 3.15569e7);

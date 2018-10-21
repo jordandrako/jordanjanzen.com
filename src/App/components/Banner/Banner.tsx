@@ -25,7 +25,7 @@ class Banner extends React.Component<IBannerProps, IBannerState>
 
   public static getDerivedStateFromProps(
     nextProps: IBannerProps,
-    prevState: IBannerState
+    prevState: IBannerState,
   ): IBannerState | null {
     if (!nextProps.in !== prevState.closed) {
       return {
@@ -77,8 +77,8 @@ class Banner extends React.Component<IBannerProps, IBannerState>
 
   private _showHideButton = (): JSX.Element => (
     <Styled.showHide onClick={this.showHide}>
-      <span className="horizontal" />
-      <span className="vertical" />
+      <span className='horizontal' />
+      <span className='vertical' />
     </Styled.showHide>
   );
 

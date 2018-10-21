@@ -33,48 +33,48 @@ export default class AddTodoForm extends React.Component<
         <StyledForm>
           <form
             ref={this._form}
-            className="add-todo"
+            className='add-todo'
             onSubmit={this._createTodo}
           >
             <input
               ref={this._name}
-              type="text"
-              name="name"
-              placeholder="Todo"
+              type='text'
+              name='name'
+              placeholder='Todo'
               required={true}
             />
             <select
               ref={this._category}
-              name="category"
-              placeholder="Todo Category"
+              name='category'
+              placeholder='Todo Category'
               required={true}
             >
-              <option value="">Select Category</option>
-              <option value="design">Design</option>
-              <option value="content">Content</option>
-              <option value="component">Component</option>
-              <option value="quality">Quality</option>
-              <option value="backend">Backend</option>
-              <option value="other">Other</option>
+              <option value=''>Select Category</option>
+              <option value='design'>Design</option>
+              <option value='content'>Content</option>
+              <option value='component'>Component</option>
+              <option value='quality'>Quality</option>
+              <option value='backend'>Backend</option>
+              <option value='other'>Other</option>
             </select>
-            <select ref={this._priority} name="priority">
-              <option value="2">Priority 2</option>
-              <option value="1">Priority 1</option>
-              <option value="0">Priority 0</option>
+            <select ref={this._priority} name='priority'>
+              <option value='2'>Priority 2</option>
+              <option value='1'>Priority 1</option>
+              <option value='0'>Priority 0</option>
             </select>
             <textarea
               ref={this._desc}
-              name="desc"
-              placeholder="Todo Description"
+              name='desc'
+              placeholder='Todo Description'
             />
             <input
               ref={this._link}
-              type="text"
-              name="link"
-              placeholder="Todo link"
+              type='text'
+              name='link'
+              placeholder='Todo link'
             />
             <Button
-              type="submit"
+              type='submit'
               buttonType={ButtonType.Submit}
               arrows={semanticColors.siteBackground}
             >

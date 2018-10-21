@@ -37,7 +37,7 @@ export const Item = styled.li`
 
         :after {
           transition: all 0.1s ease-in-out;
-          content: '';
+          content: "";
           display: block;
           background: ${palette.black};
           width: 12px;

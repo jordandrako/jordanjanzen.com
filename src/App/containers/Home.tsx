@@ -92,12 +92,12 @@ class Home extends React.Component<IHomeProps, {}> {
         <Hero>
           {!isMobile ? (
             <CloudImage
-              publicId="Jordan_Headshot_fade"
-              format="png"
-              name="Jordan's Headshot."
+              publicId='Jordan_Headshot_fade'
+              format='png'
+              name='Jordans Headshot.'
               border={false}
-              width="1000"
-              crop="limit"
+              width='1000'
+              crop='limit'
               style={{ backgroundPosition: 'left' }}
             >
               {this._heroContent()}
@@ -117,7 +117,7 @@ class Home extends React.Component<IHomeProps, {}> {
               />
             </>
           )}
-          <Button to="/portfolio/" buttonType={ButtonType.Cta}>
+          <Button to='/portfolio/' buttonType={ButtonType.Cta}>
             View My Portfolio
           </Button>
         </Row>
@@ -130,31 +130,33 @@ class Home extends React.Component<IHomeProps, {}> {
       <InnerHero>
         {this.props.isMobile ? (
           <CloudImage
-            publicId="Jordan_Headshot"
-            format="png"
-            name="Jordan's Headshot."
-            width="142"
-            height="142"
-            crop="fill"
-            gravity="face"
-            radius="max"
+            publicId='Jordan_Headshot'
+            format='png'
+            name='Jordans Headshot.'
+            width='142'
+            height='142'
+            crop='fill'
+            gravity='face'
+            radius='max'
           />
         ) : null}
         <Intro>
-          Hey there!<br />I'm a UX Engineer.
+          Hey there!
+          <br />
+          I'm a UX Engineer.
         </Intro>
         <p>
-          My name is <strong>Jordan Janzen</strong>.<br />I'm{' '}
-          <strong>{yearsSinceBirthday(19911109)} years old</strong> and living
-          in the <strong>Greater Seattle Area</strong>. I love building
+          My name is <strong>Jordan Janzen</strong>.<br />
+          I'm <strong>{yearsSinceBirthday(19911109)} years old</strong> and
+          living in the <strong>Greater Seattle Area</strong>. I love building
           libraries and web apps that look great and function even better.
         </p>
         <Cta>
           <Button
-            href="https://res.cloudinary.com/jordan-janzen/image/upload/v1511291826/Jordan_Janzen_CV.pdf"
-            target="_blank"
+            href='https://res.cloudinary.com/jordan-janzen/image/upload/v1511291826/Jordan_Janzen_CV.pdf'
+            target='_blank'
             buttonType={ButtonType.Cta}
-            icon="file-text"
+            icon='file-text'
           >
             Download My CV
           </Button>

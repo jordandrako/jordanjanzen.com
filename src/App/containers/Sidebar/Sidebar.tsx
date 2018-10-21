@@ -23,7 +23,7 @@ export default class Sidebar extends React.Component<
     return (
       <Styled.leftColumn>
         <Styled.top>
-          <Styled.logoLink to="/">
+          <Styled.logoLink to='/'>
             <Styled.logo>
               <span>JORDAN</span>
               <span>JANZEN</span>

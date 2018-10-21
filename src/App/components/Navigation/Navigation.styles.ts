@@ -84,12 +84,12 @@ export const link = styled(NavLink)`
     }
 
     &:before {
-      content: '==';
+      content: "==";
       padding-right: 0.25em;
       transform: translateX(100%);
     }
     &:after {
-      content: '=>';
+      content: "=>";
       padding-left: 0.25em;
       transform: translateX(-100%);
     }

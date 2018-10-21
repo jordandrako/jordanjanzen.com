@@ -18,7 +18,7 @@ export default class ProjectSingle extends React.Component<
 > {
   public static getDerivedStateFromProps(
     nextProps: IProjectSingleProps,
-    prevState: IProjectSingleState
+    prevState: IProjectSingleState,
   ) {
     if (nextProps.index !== prevState.delete) {
       return { delete: undefined };
@@ -51,13 +51,13 @@ export default class ProjectSingle extends React.Component<
       return (
         <DocumentTitle title={`${details.name} | Jordan Janzen`}>
           <div key={index}>
-            <Styled.ClickOutside to="/portfolio" />
+            <Styled.ClickOutside to='/portfolio' />
             <Styled.Container>
               <Styled.Single>
                 <Styled.Frame>
                   <Styled.Title>{details.name || 'Project'}</Styled.Title>
                   <Button
-                    to="/portfolio"
+                    to='/portfolio'
                     buttonType={ButtonType.Delete}
                     style={{ margin: 0 }}
                   />
@@ -71,7 +71,7 @@ export default class ProjectSingle extends React.Component<
                       publicId={details.images[image].id}
                       format={details.images[image].format}
                       width={isMobile ? '400' : '800'}
-                      crop="limit"
+                      crop='limit'
                       link={true}
                     />
                   ))}
@@ -81,15 +81,15 @@ export default class ProjectSingle extends React.Component<
                     to={`/portfolio/${prevId}`}
                     small={true}
                     buttonType={ButtonType.Secondary}
-                    icon="arrow-left"
+                    icon='arrow-left'
                   >
                     {isMobile ? '' : 'prev'}
                   </Button>
                   {details.link !== '' ? (
                     <Button
                       href={details.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      target='_blank'
+                      rel='noopener noreferrer'
                       small={true}
                       buttonType={ButtonType.Secondary}
                       icon={!isMobile && 'external-link'}
@@ -100,8 +100,8 @@ export default class ProjectSingle extends React.Component<
                   {details.repo !== '' ? (
                     <Button
                       href={details.repo}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      target='_blank'
+                      rel='noopener noreferrer'
                       small={true}
                       buttonType={ButtonType.Secondary}
                       icon={!isMobile && 'github'}
@@ -123,7 +123,7 @@ export default class ProjectSingle extends React.Component<
                     to={`/portfolio/${nextId}`}
                     small={true}
                     buttonType={ButtonType.Secondary}
-                    iconReverse="arrow-right"
+                    iconReverse='arrow-right'
                   >
                     {isMobile ? '' : 'next'}
                   </Button>

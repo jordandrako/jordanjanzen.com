@@ -32,12 +32,12 @@ export default class Project extends React.Component<IProjectProps, {}> {
                 publicId={imageId}
                 format={imageFormat}
                 name={imageName}
-                width="600"
+                width='600'
                 height={imageHeight}
-                crop="fill"
-                gravity="north"
-                background="rgb:000"
-                effects="e_blur:80"
+                crop='fill'
+                gravity='north'
+                background='rgb:000'
+                effects='e_blur:80'
                 dim={true}
               >
                 <Styled.ProjectTitle>{details.name}</Styled.ProjectTitle>
@@ -62,7 +62,7 @@ export default class Project extends React.Component<IProjectProps, {}> {
               <ul>
                 {details.skills &&
                   details.skills.map(
-                    skill => skill && <li key={skill}>{skill}</li>
+                    skill => skill && <li key={skill}>{skill}</li>,
                   )}
               </ul>
             </Styled.Skills>
@@ -74,7 +74,7 @@ export default class Project extends React.Component<IProjectProps, {}> {
                 to={`/portfolio/${index}`}
                 small={true}
                 buttonType={ButtonType.Primary}
-                icon="search"
+                icon='search'
               >
                 More Details
               </Button>
@@ -83,10 +83,10 @@ export default class Project extends React.Component<IProjectProps, {}> {
               <li>
                 <Button
                   href={details.link}
-                  target="_blank"
+                  target='_blank'
                   small={true}
                   buttonType={ButtonType.Secondary}
-                  icon="external-link"
+                  icon='external-link'
                 >
                   Visit Site
                 </Button>
@@ -96,10 +96,10 @@ export default class Project extends React.Component<IProjectProps, {}> {
               <li>
                 <Button
                   href={details.repo}
-                  target="_blank"
+                  target='_blank'
                   small={true}
                   buttonType={ButtonType.Secondary}
-                  icon="github"
+                  icon='github'
                 >
                   View Repo
                 </Button>

@@ -26,14 +26,14 @@ const AsyncHome = withProjects(
   asyncLoader({
     ...asyncLoaderOptions,
     loader: () => import('../containers/Home'),
-  })
+  }),
 );
 
 const AsyncAbout = withSkills(
   asyncLoader({
     ...asyncLoaderOptions,
     loader: () => import('../containers/About'),
-  })
+  }),
 );
 
 const AsyncPortfolio = withProjects(
@@ -41,8 +41,8 @@ const AsyncPortfolio = withProjects(
     asyncLoader({
       ...asyncLoaderOptions,
       loader: () => import('../containers/Portfolio'),
-    })
-  )
+    }),
+  ),
 );
 
 const AsyncTodoList = withTodos(
@@ -50,19 +50,19 @@ const AsyncTodoList = withTodos(
     asyncLoader({
       ...asyncLoaderOptions,
       loader: () => import('../containers/TodoList'),
-    })
-  )
+    }),
+  ),
 );
 
 class AppRoutes extends React.Component<IAppRoutesProps> {
   public render() {
     return (
       <Switch>
-        <Route exact={true} path="/" render={this._renderHome} />
-        <Route path="/about" render={this._renderAbout} />
-        <Route path="/portfolio" render={this._renderPortfolio} />
-        <Route exact={true} path="/todo" render={this._renderTodoList} />
-        <Route exact={true} path="/loadTest" render={this._renderLoad} />
+        <Route exact={true} path='/' render={this._renderHome} />
+        <Route path='/about' render={this._renderAbout} />
+        <Route path='/portfolio' render={this._renderPortfolio} />
+        <Route exact={true} path='/todo' render={this._renderTodoList} />
+        <Route exact={true} path='/loadTest' render={this._renderLoad} />
         {/* Unmatched URLs */}
         <Route component={AsyncNotFound} />
       </Switch>

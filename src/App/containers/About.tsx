@@ -100,10 +100,10 @@ class About extends React.Component<IAboutProps, {}> {
           <h3>A bit about me...</h3>
           <p>
             <CloudImage
-              publicId="Xander_with_finger_paint"
-              name="My son Xander finger painting with our dog Gizmo in the background."
-              align="right"
-              width="200"
+              publicId='Xander_with_finger_paint'
+              name='My son Xander finger painting with our dog Gizmo in the background.'
+              align='right'
+              width='200'
               link={true}
             />
             I'm really passionate about design and making everything I touch on
@@ -121,42 +121,45 @@ class About extends React.Component<IAboutProps, {}> {
             portfolio site? <strong>Of course not.</strong> Is actually building
             something in production the best way to learn something?{' '}
             <strong>¯\_(ツ)_/¯</strong>
-            <br />You can find more of what I'm learning by{' '}
+            <br />
+            You can find more of what I'm learning by{' '}
             <a
-              href="https://github.com/jordandrako/"
-              target="_blank"
-              rel="noopener noreferrer"
+              href='https://github.com/jordandrako/'
+              target='_blank'
+              rel='noopener noreferrer'
             >
               inspecting my GitHub profile
-            </a>.
+            </a>
+            .
           </p>
           <p>
-            <strong>My worklow: </strong>
-            I have used many systems, programs and workflows over the years,
-            jumping back forth between Windows and Linux. Currently, I'm most
-            comfortable using{' '}
+            <strong>My worklow: </strong>I have used many systems, programs and
+            workflows over the years, jumping back forth between Windows and
+            Linux. Currently, I'm most comfortable using{' '}
             <a
-              href="https://code.visualstudio.com/"
-              target="_blank"
-              rel="noopener noreferrer"
+              href='https://code.visualstudio.com/'
+              target='_blank'
+              rel='noopener noreferrer'
             >
               VS Code
-            </a>, complimented by{' '}
+            </a>
+            , complimented by{' '}
             <a
-              href="https://hyper.is"
-              target="_blank"
-              rel="noopener noreferrer"
+              href='https://hyper.is'
+              target='_blank'
+              rel='noopener noreferrer'
             >
               Hyper
             </a>{' '}
             with zsh or{' '}
             <a
-              href="http://cmder.net"
-              target="_blank"
-              rel="noopener noreferrer"
+              href='http://cmder.net'
+              target='_blank'
+              rel='noopener noreferrer'
             >
               Cmder
-            </a>.
+            </a>
+            .
           </p>
           <p>
             <strong>In my spare time</strong> I enjoy being the biggest nerd
@@ -164,17 +167,18 @@ class About extends React.Component<IAboutProps, {}> {
             and media servers. Mostly, though, I play PC games. If you'd like to
             add me on{' '}
             <a
-              href="https://steamcommunity.com/id/jordandrako/"
-              target="_blank"
-              rel="noopener noreferrer"
+              href='https://steamcommunity.com/id/jordandrako/'
+              target='_blank'
+              rel='noopener noreferrer'
             >
               Steam, here's my community page
-            </a>. I'm also obsessed with making the best coffee possible; my
+            </a>
+            . I'm also obsessed with making the best coffee possible; my
             favorite brewing methods are the Chemex, Kalita Wave and my{' '}
             <a
-              href="https://sca.coffee/certified-home-brewer/"
-              target="_blank"
-              rel="noopener noreferrer"
+              href='https://sca.coffee/certified-home-brewer/'
+              target='_blank'
+              rel='noopener noreferrer'
             >
               SCA
             </a>{' '}
@@ -192,17 +196,17 @@ class About extends React.Component<IAboutProps, {}> {
               <h4>
                 <em>
                   <a
-                    href="https://microsoft.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href='https://microsoft.com/'
+                    target='_blank'
+                    rel='noopener noreferrer'
                   >
                     Microsoft
                   </a>{' '}
                   through{' '}
                   <a
-                    href="https://aquent.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href='https://aquent.com/'
+                    target='_blank'
+                    rel='noopener noreferrer'
                   >
                     Aquent
                   </a>
@@ -214,13 +218,14 @@ class About extends React.Component<IAboutProps, {}> {
                 source software and Microsoft experiences. The primary
                 responsibility is developing{' '}
                 <a
-                  href="https://github.com/OfficeDev/office-ui-fabric-react"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href='https://github.com/OfficeDev/office-ui-fabric-react'
+                  target='_blank'
+                  rel='noopener noreferrer'
                 >
                   Office UI Fabric React
-                </a>, the official front-end framework for building experiences
-                that fit seamlessly into Office and Office 365.
+                </a>
+                , the official front-end framework for building experiences that
+                fit seamlessly into Office and Office 365.
               </p>
               <ul>
                 <li>Adhere to strict design language gisLoggedInelines.</li>
@@ -244,9 +249,9 @@ class About extends React.Component<IAboutProps, {}> {
               <h4>
                 <em>
                   <a
-                    href="https://outreachmediagroup.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href='https://outreachmediagroup.com/'
+                    target='_blank'
+                    rel='noopener noreferrer'
                   >
                     Outreach Inc.
                   </a>
@@ -286,9 +291,9 @@ class About extends React.Component<IAboutProps, {}> {
               <h4>
                 <em>
                   <a
-                    href="https://uzu-media.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href='https://uzu-media.com/'
+                    target='_blank'
+                    rel='noopener noreferrer'
                   >
                     UZU Media
                   </a>
@@ -361,10 +366,10 @@ class About extends React.Component<IAboutProps, {}> {
         <Row>
           <p>Want this to go?</p>
           <Button
-            href="https://res.cloudinary.com/jordan-janzen/image/upload/v1511291826/Jordan_Janzen_CV.pdf"
-            target="_blank"
+            href='https://res.cloudinary.com/jordan-janzen/image/upload/v1511291826/Jordan_Janzen_CV.pdf'
+            target='_blank'
             buttonType={ButtonType.Cta}
-            icon="file-text"
+            icon='file-text'
           >
             Download My CV
           </Button>
