@@ -19,7 +19,9 @@ const requiredEnv = [
 
 const isMaster = branch => {
   if (branch !== 'master') {
-    throw new Error('Production scripts must be run from the master branch!');
+    throw new Error(
+      `Production scripts must be run from the master branch! Branch: ${branch}`
+    );
   }
   return true;
 };
@@ -108,7 +110,7 @@ if (checkEnv) {
 
 if (all || isProduction) {
   if (isProduction) {
-    isMaster().catch(() => console.error);
+    isMaster(gitBranch);
   }
   allFuncs();
 }
