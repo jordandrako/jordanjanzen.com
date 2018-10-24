@@ -67,48 +67,6 @@ class TodoList extends React.Component<ITodoListProps, ITodoListState> {
             {todos && this._renderTodo(this.state.showComplete)}
           </ListOfTodos>
         </Row>
-
-        <Row>
-          <h2>Inspiration</h2>
-          <ul>
-            <li>
-              <a
-                target='_blank'
-                rel='noopener noreferrer'
-                href='http://sambedingfield.com/'
-              >
-                Sam Bedingfield
-              </a>
-            </li>
-            <li>
-              <a
-                target='_blank'
-                rel='noopener noreferrer'
-                href='http://wesbos.com'
-              >
-                Wes Bos
-              </a>
-            </li>
-            <li>
-              <a
-                target='_blank'
-                rel='noopener noreferrer'
-                href='http://ivesvh.com/'
-              >
-                Ives van Hoorne
-              </a>
-            </li>
-            <li>
-              <a
-                target='_blank'
-                rel='noopener noreferrer'
-                href='https://line25.com/inspiration/designer-portfolio-websites'
-              >
-                Line 25 list of 30 portfolios
-              </a>
-            </li>
-          </ul>
-        </Row>
       </>
     );
   }
