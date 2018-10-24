@@ -228,7 +228,8 @@ class About extends React.Component<IAboutProps, {}> {
                 fit seamlessly into Office and Office 365.
               </p>
               <ul>
-                <li>Adhere to strict design language gisLoggedInelines.</li>
+                <li>Produce clean, tested, maintainable code.</li>
+                <li>Adhere to strict design language guidelines.</li>
                 <li>
                   Develop within a large codebase that is integrated into dozens
                   of official Microsoft and 3rd-party products.
@@ -269,7 +270,8 @@ class About extends React.Component<IAboutProps, {}> {
               <ul>
                 <li>
                   Integrated landing pages with back-end software to deliver
-                  filtered, targeted, quality leads to many clients' CRMs.
+                  filtered, targeted, quality leads to many clients' CRMs and
+                  REST APIs.
                 </li>
                 <li>
                   Improved company margins by finding creative, strong
