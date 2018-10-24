@@ -3,7 +3,6 @@ import * as React from 'react';
 import { render } from 'react-dom';
 import * as ReactGA from 'react-ga';
 import { BrowserRouter, Route, RouteComponentProps } from 'react-router-dom';
-import App from './App/App';
 import registerServiceWorker from './registerServiceWorker';
 
 ReactGA.initialize('UA-109877572-1');
@@ -22,11 +21,17 @@ polyfill({
   ],
   options: ['gated', 'always'],
   afterFill() {
-    render(
-      <BrowserRouter>
-        <Route>{(props: RouteComponentProps<any>) => <App {...props} />}</Route>
-      </BrowserRouter>,
-      document.getElementById('root') as HTMLElement,
+    import(/* webpackChunkName: 'App', webpackPreload: true */ './App/App').then(
+      App => {
+        render(
+          <BrowserRouter>
+            <Route>
+              {(props: RouteComponentProps<any>) => <App.default {...props} />}
+            </Route>
+          </BrowserRouter>,
+          document.getElementById('root') as HTMLElement,
+        );
+      },
     );
   },
 });

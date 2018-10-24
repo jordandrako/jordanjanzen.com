@@ -14,25 +14,28 @@ const asyncLoaderOptions = {
 
 const AsyncNotFound = asyncLoader({
   ...asyncLoaderOptions,
-  loader: () => import('../containers/NotFound'),
+  loader: () =>
+    import(/* webpackChunkName: 'NotFound' */ '../containers/NotFound'),
 });
 
 const AsyncUnauthenticated = asyncLoader({
   ...asyncLoaderOptions,
-  loader: () => import('../containers/Unauthenticated'),
+  loader: () =>
+    import(/* webpackChunkName: 'Unauthenticated' */ '../containers/Unauthenticated'),
 });
 
 const AsyncHome = withProjects(
   asyncLoader({
     ...asyncLoaderOptions,
-    loader: () => import('../containers/Home'),
+    loader: () =>
+      import(/* webpackChunkName: 'Home', webpackPreload: true */ '../containers/Home'),
   }),
 );
 
 const AsyncAbout = withSkills(
   asyncLoader({
     ...asyncLoaderOptions,
-    loader: () => import('../containers/About'),
+    loader: () => import(/* webpackChunkName: 'About' */ '../containers/About'),
   }),
 );
 
@@ -40,7 +43,8 @@ const AsyncPortfolio = withProjects(
   withSkills(
     asyncLoader({
       ...asyncLoaderOptions,
-      loader: () => import('../containers/Portfolio'),
+      loader: () =>
+        import(/* webpackChunkName: 'Portfolio', webpackPrefetch: true */ '../containers/Portfolio'),
     }),
   ),
 );
@@ -49,7 +53,8 @@ const AsyncTodoList = withTodos(
   withSkills(
     asyncLoader({
       ...asyncLoaderOptions,
-      loader: () => import('../containers/TodoList'),
+      loader: () =>
+        import(/* webpackChunkName: 'TodoList' */ '../containers/TodoList'),
     }),
   ),
 );
