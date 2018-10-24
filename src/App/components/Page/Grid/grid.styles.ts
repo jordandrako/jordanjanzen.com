@@ -35,31 +35,34 @@ export const Main = styled.div`
 
 export const Row = styled.section`
   max-width: 1000px;
-  margin: ${(props: IRow) =>
-    props.full ? '0  0 2.5em' : props.isChild ? '0 0 2em' : '0 2em 2.5em'};
+  padding: ${(props: IRow) =>
+    props.full ? '0 0 1.5em' : props.isChild ? '.75em 0' : '1em 2em'};
 
   &:first-child {
-    margin-top: ${(props: IRow) => (props.isChild ? '0' : '2em')};
+    padding-top: ${(props: IRow) => (props.isChild ? '0' : '2em')};
   }
 
   &:last-child {
-    margin-bottom: ${(props: IRow) => (props.isChild ? '0' : '2em')};
+    padding-bottom: ${(props: IRow) => (props.isChild ? '0' : '2em')};
   }
 
   @media (max-width: ${screenSizes.tablet}) {
-    margin: ${(props: IRow) => {
+    padding: ${(props: IRow) => {
       if (props.full || props.isChild) {
         return '0 0 2em';
       }
-      return '0 1em 2em';
+      return '1em 1em';
     }};
   }
 `;
 
 export const Hero = styled(Row)`
-  margin: 0 0 2.5em;
-  margin-top: 0 !important;
+  padding: 0 0 2.5em;
   max-width: calc(1000px + 4em);
+
+  &:first-child {
+    padding-top: 0;
+  }
 
   @media (max-width: ${screenSizes.tablet}) {
     margin: 0 0 1.5em;
