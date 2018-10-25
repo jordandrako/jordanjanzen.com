@@ -40,7 +40,7 @@ const PageTitle = (props: IPageTitleProps) => {
         </Styled.currentItem>
         {process.env.REACT_APP_BRANCH !== 'master' && (
           <Styled.devItem>
-            <span>Branch: {process.env.REACT_APP_BRANCH}</span>
+            <span>Branch: {process.env.REACT_APP_BRANCH} | Build Date: {process.env.REACT_APP_LASTBUILD}</span>
           </Styled.devItem>
         )}
       </Styled.titleList>

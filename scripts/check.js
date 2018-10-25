@@ -8,6 +8,30 @@ const all = process.argv.indexOf('--all') > -1;
 const writeBranch = process.argv.indexOf('--branch') > -1;
 const checkEnv = process.argv.indexOf('--env') > -1;
 
+const formatDate = date => {
+  const monthNames = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+
+  const day = date.getDate();
+  const monthIndex = date.getMonth();
+  const year = date.getFullYear();
+
+  return `${monthNames[monthIndex]} ${day}, ${year}`;
+};
+
+const date = formatDate(new Date());
 const gitBranch = branch.sync();
 const envPath = path.resolve(process.cwd(), '.env');
 const requiredEnv = [
@@ -42,13 +66,13 @@ const getEnvArr = () => {
   return envArr;
 };
 
-const setEnvBranch = (value, env, branchVar = 'REACT_APP_BRANCH') => {
-  const branch = branchVar + '=';
-  const envValue = branch + value;
+const setEnvVar = (value, env, targetVar) => {
+  const envVar = targetVar + '=';
+  const envValue = envVar + value;
   const envArr = Array.isArray(env) ? env : getEnvArr();
   const matchIndexes = [];
   envArr.forEach((env, i) => {
-    if (env.indexOf(branch) > -1) {
+    if (env.indexOf(envVar) > -1) {
       matchIndexes.push(i);
     }
   });
@@ -68,7 +92,9 @@ const writeEnv = env => {
 
 const branchFuncs = () => {
   const env = getEnvArr();
-  const newEnv = setEnvBranch(gitBranch, env);
+  let newEnv;
+  newEnv = setEnvVar(gitBranch, env, 'REACT_APP_BRANCH');
+  newEnv = setEnvVar(date, env, 'REACT_APP_LASTBUILD');
   writeEnv(newEnv);
 };
 
