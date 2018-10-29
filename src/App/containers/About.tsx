@@ -1,8 +1,8 @@
 import { IAboutProps, TAddSkill } from 'App/App.types';
 import { isLoggedIn } from 'base';
+import * as differenceInCalendarYears from 'date-fns/difference_in_calendar_years';
 import * as React from 'react';
 import { fonts, palette, screenSizes, styled } from 'styling';
-import { yearsSinceBirthday } from 'utilities';
 import Button, { ButtonType } from '../components/Button';
 import CloudImage from '../components/CloudImage';
 import AddSkillForm from '../components/Forms/AddSkillForm/AddSkillForm';
@@ -110,7 +110,8 @@ class About extends React.Component<IAboutProps, {}> {
             the web better. I'm never satisfied with my skillset and am
             constantly striving to be better and learn as much as I can when the
             time allows. There isn't time to learn everything though. My wife
-            Lee and I had our son Xander {yearsSinceBirthday(20160216)} years
+            Lee and I had our son Xander{' '}
+            {differenceInCalendarYears(new Date(), new Date(2016, 2, 16))} years
             ago and watching him grow and play with our shiba inu Gizmo has been
             my greatest joy in life.
           </p>

@@ -30,7 +30,14 @@
     "no-empty-interface": false,
     "no-implicit-dependencies": false,
     "no-reference": false,
-    "no-submodule-imports": [true, "App", "images", "typings", "firebase"],
+    "no-submodule-imports": [
+      true,
+      "App",
+      "images",
+      "typings",
+      "firebase",
+      "date-fns"
+    ],
     "no-unused-expression": [true, "allow-fast-null-checks"],
     "no-var-requires": false,
     "object-shorthand-properties-first": false,

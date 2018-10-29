@@ -6,4 +6,3 @@ export * from './setLocalStorage';
 export * from './slugify';
 export * from './toTitleCase';
 export * from './truncate';
-export * from './yearsSinceBirthday';

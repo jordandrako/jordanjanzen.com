@@ -26,6 +26,7 @@
     "@fortawesome/free-brands-svg-icons": "^5.4.1",
     "@fortawesome/free-solid-svg-icons": "^5.4.1",
     "@fortawesome/react-fontawesome": "^0.1.3",
+    "date-fns": "^1.29.0",
     "dynamic-polyfill": "^1.1.0",
     "firebase": "^5.5.5",
     "history": "^4.7.2",

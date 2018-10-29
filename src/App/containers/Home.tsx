@@ -1,8 +1,8 @@
 import { IHomeProps } from 'App/App.types';
+import * as differenceInCalendarYears from 'date-fns/difference_in_calendar_years';
 import { adjustHue } from 'polished';
 import * as React from 'react';
 import { fonts, palette, screenSizes, semanticColors, styled } from 'styling';
-import { yearsSinceBirthday } from 'utilities';
 import Button, { ButtonType } from '../components/Button';
 import CloudImage from '../components/CloudImage';
 import { Hero, Row } from '../components/Page';
@@ -147,9 +147,14 @@ class Home extends React.Component<IHomeProps, {}> {
         </Intro>
         <p>
           My name is <strong>Jordan Janzen</strong>.<br />
-          I'm <strong>{yearsSinceBirthday(19911109)} years old</strong> and
-          living in the <strong>Greater Seattle Area</strong>. I love building
-          libraries and web apps that look great and function even better.
+          I'm{' '}
+          <strong>
+            {differenceInCalendarYears(new Date(), new Date(1991, 11, 9))} years
+            old
+          </strong>{' '}
+          and living in the <strong>Greater Seattle Area</strong>. I love
+          building libraries and web apps that look great and function even
+          better.
         </p>
         <Cta>
           <Button
