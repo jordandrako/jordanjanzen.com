@@ -1,6 +1,5 @@
-import { auth, base, database, provider } from 'base';
+import { auth, base, database, getUserInfo, provider } from 'base';
 import * as firebase from 'firebase/app';
-import { RebaseBinding } from 're-base';
 import * as React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { getTheme, ITheme, screenSizesPx } from 'styling';
@@ -172,15 +171,13 @@ class AppProvider extends React.Component<IAppContextProps, IAppContextState> {
     const { uid } = authData;
     const ownerRef = database.ref('/owner');
     return new Promise((resolve, reject) => {
-      ownerRef.once('value').then(snapshot => {
-        const owner = snapshot.val();
-
-        if (!owner) {
+      ownerRef.once('value').then(owner => {
+        if (!owner.val()) {
           ownerRef
             .set(uid)
             .then(() => resolve(this._authHandler(authData)))
             .catch(() => console.error);
-        } else if (owner === uid) {
+        } else if (owner.val() === uid) {
           resolve(this._successfulLogin());
         } else {
           auth.signOut();
@@ -197,49 +194,38 @@ class AppProvider extends React.Component<IAppContextProps, IAppContextState> {
     this._updatePage();
   };
 
-  private _getBinding = async (
-    type: 'sync' | 'bind',
-  ): Promise<RebaseBinding[]> => {
-    const bindOrSync = (state: string): Promise<RebaseBinding> => {
-      return new Promise((resolve, reject) => {
-        if (type === 'bind') {
-          resolve(
-            base.bindToState(state, {
-              context: this,
-              state,
-              then: () => setLocalStorage(state, this.state[state]),
-            }),
-          );
-        }
-        if (type === 'sync') {
-          resolve(
-            base.syncState(state, {
-              context: this,
-              state,
-              then: () => setLocalStorage(state, this.state[state]),
-            }),
-          );
-        }
-        reject(new Error('You must pass "bind" or "sync" to this method.'));
-      });
-    };
-
-    let binding;
+  private _getBinding = async (type: 'sync' | 'bind'): Promise<void> => {
+    const user = getUserInfo();
 
     if (type === 'sync') {
-      binding = await Promise.all([
-        bindOrSync('projects'),
-        bindOrSync('skills'),
-        bindOrSync('todos'),
-      ]);
+      base.syncState('projects', {
+        context: this,
+        state: 'projects',
+        then: () => setLocalStorage('projects', this.state.projects),
+      });
+      base.syncState('skills', {
+        context: this,
+        state: 'skills',
+        then: () => setLocalStorage('skills', this.state.skills),
+      });
+      user &&
+        base.syncState(`users/${user.uid}/todos`, {
+          context: this,
+          state: 'todos',
+          then: () => setLocalStorage('todos', this.state.todos),
+        });
     } else {
-      binding = await Promise.all([
-        bindOrSync('projects'),
-        bindOrSync('skills'),
-      ]);
+      base.bindToState('projects', {
+        context: this,
+        state: 'projects',
+        then: () => setLocalStorage('projects', this.state.projects),
+      });
+      base.bindToState('skills', {
+        context: this,
+        state: 'skills',
+        then: () => setLocalStorage('skills', this.state.skills),
+      });
     }
-
-    return binding;
   };
 
   private _updateContext = (state: string, data: IProjects | ISkills): void => {

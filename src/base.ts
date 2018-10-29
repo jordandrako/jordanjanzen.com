@@ -32,4 +32,20 @@ const isLoggedIn = () => {
   return !!firebase.auth().currentUser;
 };
 
-export { auth, database, provider, base, isLoggedIn };
+const getUserInfo = () => {
+  return firebase.auth().currentUser;
+};
+
+const isOwner = async (authData?: firebase.User) => {
+  const user = authData || getUserInfo();
+  let _isOwner = false;
+  if (user) {
+    const { uid } = user;
+    const ownerRef = database.ref('/owner');
+
+    _isOwner = await ownerRef.once('value').then(owner => owner.val() === uid);
+  }
+  return _isOwner;
+};
+
+export { auth, database, provider, base, isLoggedIn, isOwner, getUserInfo };
