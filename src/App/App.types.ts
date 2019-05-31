@@ -17,6 +17,7 @@ export interface IProject extends Object {
   long_desc: string | string[];
   name: string;
   repo?: string;
+  year?: string;
   short_desc?: string | string[];
   skills: string[];
 }

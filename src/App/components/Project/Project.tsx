@@ -49,16 +49,23 @@ export default class Project extends React.Component<IProjectProps, {}> {
               <Styled.Subheading>Client:</Styled.Subheading>
               <p>
                 {toTitleCase(clientName)}
-                <br />
-                {clientIndustry ? (
-                  <em>Industry: {toTitleCase(clientIndustry)}</em>
-                ) : null}
+                {clientIndustry && (
+                  <>
+                    <br />
+                    <em>Industry: {toTitleCase(clientIndustry)}</em>
+                  </>
+                )}
               </p>
             </Styled.Client>
             <Styled.Skills>
-              <Styled.Subheading>
-                Category: {toTitleCase(details.category)}
-              </Styled.Subheading>
+              {details.year && (
+                <Styled.Subheading>Year: {details.year}</Styled.Subheading>
+              )}
+              {details.category && (
+                <Styled.Subheading>
+                  Category: {toTitleCase(details.category)}
+                </Styled.Subheading>
+              )}
               <ul>
                 {details.skills &&
                   details.skills.map(

@@ -27,6 +27,7 @@ export default class AddProjectForm extends React.Component<
   private _name: React.RefObject<HTMLInputElement>;
   private _repo: React.RefObject<HTMLInputElement>;
   private _shortDesc: React.RefObject<HTMLTextAreaElement>;
+  private _year: React.RefObject<HTMLInputElement>;
 
   public constructor(props: IAddProjectFormProps) {
     super(props);
@@ -40,6 +41,7 @@ export default class AddProjectForm extends React.Component<
     this._name = React.createRef();
     this._repo = React.createRef();
     this._shortDesc = React.createRef();
+    this._year = React.createRef();
 
     this.state = {
       images: [],
@@ -141,6 +143,12 @@ export default class AddProjectForm extends React.Component<
               type='text'
               name='repo'
               placeholder='Project repository'
+            />
+            <input
+              ref={this._year}
+              type='text'
+              name='year'
+              placeholder='Project year'
             />
             <p>Client info:</p>
             <input
