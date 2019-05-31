@@ -47,7 +47,7 @@ const Button: React.SFC<IButtonProps> = props => {
       {icon && (
         <Styled.buttonIcon className={`fa fa-${icon}`} aria-hidden='true' />
       )}
-      {text || children || 'Button'}
+      {text || children || ''}
       {iconReverse && (
         <Styled.buttonIcon
           className={`fa fa-${iconReverse}`}
