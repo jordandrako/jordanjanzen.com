@@ -226,6 +226,7 @@ export default class AddProjectForm extends React.Component<
         this._shortDesc.current!.value ||
         truncate(this._longDesc.current!.value, 145),
       skills: this.state.skillValues,
+      year: this._year.current!.value,
     };
     this.props.addProject(project);
     this._form.current!.reset();
