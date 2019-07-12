@@ -1,5 +1,5 @@
 import { IHomeProps } from 'App/App.types';
-import { adjustHue } from 'polished';
+import { adjustHue, transparentize } from 'polished';
 import * as React from 'react';
 import { fonts, palette, screenSizes, semanticColors, styled } from 'styling';
 import { yearsSinceBirthday } from 'utilities';
@@ -13,8 +13,9 @@ const OuterHero = styled.div`
   height: 100%;
   background: linear-gradient(
     to right,
-    rgba(255, 255, 255, 0) 33%,
-    ${semanticColors.siteBackground} 100%
+    ${transparentize(1, semanticColors.siteBackground)} 25%,
+    ${transparentize(0.4, semanticColors.siteBackground)} 60%,
+    ${transparentize(0.1, semanticColors.siteBackground)} 100%
   );
   display: flex;
   justify-content: flex-end;
@@ -92,7 +93,7 @@ class Home extends React.Component<IHomeProps, {}> {
         <Hero>
           {!isMobile ? (
             <CloudImage
-              publicId='Jordan_Headshot_fade'
+              publicId='jordan_headshot_test'
               format='png'
               name='Jordans Headshot.'
               border={false}
@@ -130,7 +131,7 @@ class Home extends React.Component<IHomeProps, {}> {
       <InnerHero>
         {this.props.isMobile ? (
           <CloudImage
-            publicId='Jordan_Headshot'
+            publicId='jordan_headshot_test'
             format='png'
             name='Jordans Headshot.'
             width='142'
@@ -143,22 +144,22 @@ class Home extends React.Component<IHomeProps, {}> {
         <Intro>
           Hey there!
           <br />
-          I'm a UX Engineer.
+          I'm a Front-End Engineer.
         </Intro>
         <p>
           My name is <strong>Jordan Janzen</strong>.<br />
           I'm <strong>{yearsSinceBirthday(19911109)} years old</strong> and
           living in the <strong>Greater Seattle Area</strong>. I love building
-          libraries and web apps that look great and function even better.
+          libraries and web apps that provide a great user experience.
         </p>
         <Cta>
           <Button
-            href='https://res.cloudinary.com/jordan-janzen/image/upload/v1511291826/Jordan_Janzen_CV.pdf'
+            href='https://res.cloudinary.com/jordan-janzen/raw/upload/v1562904080/Jordan_Janzen_Resume_2019.docx'
             target='_blank'
             buttonType={ButtonType.Cta}
             icon='file-text'
           >
-            Download My CV
+            Download My Resume
           </Button>
           <Entice>See what I can do for your company!</Entice>
         </Cta>
