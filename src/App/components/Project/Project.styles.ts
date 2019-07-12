@@ -1,6 +1,7 @@
 import { adjustHue } from 'polished';
 import { Link } from 'react-router-dom';
 import { fonts, palette, screenSizes, styled } from 'styling';
+import { imageContainer } from '../CloudImage/CloudImage.styles';
 
 export const imageHeight = '250';
 
@@ -42,10 +43,24 @@ export const Thumbnail = styled.section`
     justify-content: center;
     padding: 4em 2em;
     border-width: 5px;
+    height: 100%;
 
     @media (max-width: ${screenSizes.phone}) {
       padding: 2em 0;
     }
+  }
+`;
+
+export const ProjectImage = styled(imageContainer)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4em 2em;
+  border-width: 5px;
+  height: 100%;
+
+  @media (max-width: ${screenSizes.phone}) {
+    padding: 2em 0;
   }
 `;
 
