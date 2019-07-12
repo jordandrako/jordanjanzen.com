@@ -15,7 +15,8 @@ const OuterHero = styled.div`
     to right,
     ${transparentize(1, semanticColors.siteBackground)} 25%,
     ${transparentize(0.4, semanticColors.siteBackground)} 60%,
-    ${transparentize(0.1, semanticColors.siteBackground)} 100%
+    ${transparentize(0.1, semanticColors.siteBackground)} 90%
+    ${semanticColors.siteBackground} 100%
   );
   display: flex;
   justify-content: flex-end;
