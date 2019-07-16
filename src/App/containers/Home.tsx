@@ -2,7 +2,6 @@ import { IHomeProps } from 'App/App.types';
 import { adjustHue, transparentize } from 'polished';
 import * as React from 'react';
 import { fonts, palette, screenSizes, semanticColors, styled } from 'styling';
-import { yearsSinceBirthday } from 'utilities';
 import Button, { ButtonType } from '../components/Button';
 import CloudImage from '../components/CloudImage';
 import { Hero, Row } from '../components/Page';
@@ -148,9 +147,7 @@ class Home extends React.Component<IHomeProps, {}> {
           I'm a Front-End Engineer.
         </Intro>
         <p>
-          My name is <strong>Jordan Janzen</strong>.<br />
-          I'm <strong>{yearsSinceBirthday(19911109)} years old</strong> and
-          living in the <strong>Greater Seattle Area</strong>. I love building
+          My name is <strong>Jordan Janzen</strong>.<br />I love building
           libraries and web apps that provide a great user experience.
         </p>
         <Cta>
