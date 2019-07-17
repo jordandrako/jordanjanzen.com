@@ -188,16 +188,16 @@ export default class AddProjectForm extends React.Component<
   }
 
   private _renderUploadedImageList = () =>
-    Object.keys(this.state.images).map(key => (
-      <Styled.uploadedImage key={key}>
+    this.state.images.map((image: IImage, imageIndex) => (
+      <Styled.uploadedImage key={image.name + imageIndex}>
         <img
-          src={this.state.images[key].url}
-          alt={this.state.images[key].name}
+          src={image.url}
+          alt={image.name}
         />
         <Button
           buttonType={ButtonType.Delete}
           // tslint:disable-next-line jsx-no-lambda
-          onClick={() => this._removeImage(key)}
+          onClick={() => this._removeImage(imageIndex)}
           className='fa fa-times-circle close'
         />
       </Styled.uploadedImage>
@@ -243,7 +243,7 @@ export default class AddProjectForm extends React.Component<
     this.setState({ images });
   };
 
-  private _removeImage = (index: string): void => {
+  private _removeImage = (index: number): void => {
     const images = [...this.state.images];
     delete images[index];
     this.setState({ images });

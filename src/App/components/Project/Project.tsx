@@ -16,12 +16,8 @@ export default class Project extends React.Component<IProjectProps, {}> {
   public render(): JSX.Element {
     const { details, index } = this.props;
     if (details && details.images) {
-      const firstImage = Object.keys(details.images)[0];
-      const {
-        id: imageId,
-        format: imageFormat,
-        name: imageName,
-      } = details.images[firstImage];
+      const firstImage = details.images[0];
+      const { id: imageId, format: imageFormat, name: imageName } = firstImage;
 
       const { name: clientName, industry: clientIndustry } = details.client;
       return (

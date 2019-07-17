@@ -1,7 +1,7 @@
-import { isLoggedIn } from 'base';
 import * as React from 'react';
 import DocumentTitle from 'react-document-title';
 import { palette } from 'styling';
+import { isLoggedIn } from '../../../../base';
 import Loading from '../../../containers/Loading';
 import Button, { ButtonType } from '../../Button';
 import CloudImage from '../../CloudImage';
@@ -18,7 +18,7 @@ export default class ProjectSingle extends React.Component<
 > {
   public static getDerivedStateFromProps(
     nextProps: IProjectSingleProps,
-    prevState: IProjectSingleState,
+    prevState: IProjectSingleState
   ) {
     if (nextProps.index !== prevState.delete) {
       return { delete: undefined };
@@ -64,12 +64,12 @@ export default class ProjectSingle extends React.Component<
                 </Styled.Frame>
                 <Styled.Content>
                   <p>{details.long_desc}</p>
-                  {Object.keys(details.images).map((image, imageIndex) => (
+                  {details.images.map((image, imageIndex) => (
                     <CloudImage
-                      key={details.images[image].id}
-                      name={`Feature ${imageIndex} ${details.images[image].id}`}
-                      publicId={details.images[image].id}
-                      format={details.images[image].format}
+                      key={image.id}
+                      name={`Feature ${imageIndex} ${image.id}`}
+                      publicId={image.id}
+                      format={image.format}
                       width={isMobile ? '400' : '800'}
                       crop='limit'
                       link={true}

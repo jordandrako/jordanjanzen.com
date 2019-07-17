@@ -35,7 +35,7 @@ export interface ISkills {
   [key: string]: ISkill | null;
 }
 
-export interface ITodo extends Object {
+export interface ITodo {
   category: string;
   complete: boolean;
   desc: string | string[];

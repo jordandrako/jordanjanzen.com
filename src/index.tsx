@@ -21,18 +21,18 @@ polyfill({
   ],
   options: ['gated', 'always'],
   afterFill() {
-    import(/* webpackChunkName: 'App', webpackPreload: true */ './App/App').then(
-      App => {
-        render(
-          <BrowserRouter>
-            <Route>
-              {(props: RouteComponentProps<any>) => <App.default {...props} />}
-            </Route>
-          </BrowserRouter>,
-          document.getElementById('root') as HTMLElement,
-        );
-      },
-    );
+    import(
+      /* webpackChunkName: 'App', webpackPreload: true */ './App/App'
+    ).then(App => {
+      render(
+        <BrowserRouter>
+          <Route>
+            {(props: RouteComponentProps<any>) => <App.default {...props} />}
+          </Route>
+        </BrowserRouter>,
+        document.getElementById('root') as HTMLElement
+      );
+    });
   },
 });
 registerServiceWorker();

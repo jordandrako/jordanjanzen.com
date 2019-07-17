@@ -1,3 +1,4 @@
+import { ITodo } from 'App/App.types';
 import * as React from 'react';
 import { truncate } from 'utilities';
 import StyledForm from '../Forms/StyledForm';
@@ -92,19 +93,20 @@ export default class Todo extends React.Component<ITodoProps, {}> {
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >,
   ): void => {
-    const updatedProp = {
+    const updatedProps: Partial<ITodo> = {
       [ev.target.name]:
         ev.target instanceof HTMLInputElement && ev.target.type === 'checkbox'
           ? ev.target.checked
           : ev.target.value,
     };
-    this.props.updateTodo(this._index, updatedProp);
+
+    this.props.updateTodo(this._index, updatedProps as ITodo);
   };
 
   private _toggleComplete = (ev: React.MouseEvent<HTMLButtonElement>): void => {
-    const updatedProp = {
+    const updatedProps: Partial<ITodo> = {
       complete: !this.props.details.complete,
     };
-    this.props.updateTodo(this._index, updatedProp);
+    this.props.updateTodo(this._index, updatedProps as ITodo);
   };
 }

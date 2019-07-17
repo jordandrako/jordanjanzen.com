@@ -1,7 +1,7 @@
-import { isLoggedIn } from 'base';
 import * as React from 'react';
 import { Route, RouteComponentProps } from 'react-router-dom';
 import { styled } from 'styling';
+import { isLoggedIn } from '../../base';
 import { IPortfolioProps } from '../App.types';
 import AddProjectForm from '../components/Forms/AddProjectForm/AddProjectForm';
 import { Row } from '../components/Page';
@@ -35,18 +35,17 @@ class Portfolio extends React.Component<IPortfolioProps, IPortfolioState> {
 
     return (
       <>
-        {projects &&
-          Object.keys(projects).length > -1 && (
-            <Row>
-              <ListOfProjects>
-                {Object.keys(projects)
-                  .reverse()
-                  .map(key => (
-                    <Project key={key} index={key} details={projects[key]!} />
-                  ))}
-              </ListOfProjects>
-            </Row>
-          )}
+        {projects && Object.keys(projects).length > -1 && (
+          <Row>
+            <ListOfProjects>
+              {Object.keys(projects)
+                .reverse()
+                .map(key => (
+                  <Project key={key} index={key} details={projects[key]!} />
+                ))}
+            </ListOfProjects>
+          </Row>
+        )}
         {isLoggedIn() && skills ? (
           <Row>
             <AddProjectForm addProject={addProject} skills={skills} />

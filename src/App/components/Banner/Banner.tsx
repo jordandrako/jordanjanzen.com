@@ -91,7 +91,7 @@ class Banner extends React.Component<IBannerProps, IBannerState>
     let text;
     switch (action) {
       case BannerAction.Reload:
-        click = () => history.push(location.pathname);
+        click = () => history.push(window.location.pathname);
         text = '🔄 Reload';
         break;
       case BannerAction.Home:

@@ -1,8 +1,8 @@
 import { IAboutProps, TAddSkill } from 'App/App.types';
-import { isLoggedIn } from 'base';
 import * as React from 'react';
 import { fonts, palette, screenSizes, styled } from 'styling';
 import { yearsSinceBirthday } from 'utilities';
+import { isLoggedIn } from '../../base';
 import Button, { ButtonType } from '../components/Button';
 import CloudImage from '../components/CloudImage';
 import AddSkillForm from '../components/Forms/AddSkillForm/AddSkillForm';
@@ -65,10 +65,6 @@ const HistoryColumn = styled.div`
 `;
 
 class About extends React.Component<IAboutProps, {}> {
-  constructor(props: IAboutProps) {
-    super(props);
-  }
-
   public render(): JSX.Element {
     const { skills, addSkill } = this.props;
 

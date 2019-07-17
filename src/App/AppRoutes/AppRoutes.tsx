@@ -1,7 +1,7 @@
-import { isLoggedIn } from 'base';
 import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { asyncLoader } from 'utilities';
+import { isLoggedIn } from '../../base';
 import { withProjects, withSkills, withTodos } from '../AppContext';
 import Loading from '../containers/Loading';
 import { IAppRoutesProps } from './AppRoutes.types';
@@ -21,22 +21,26 @@ const AsyncNotFound = asyncLoader({
 const AsyncUnauthenticated = asyncLoader({
   ...asyncLoaderOptions,
   loader: () =>
-    import(/* webpackChunkName: 'Unauthenticated' */ '../containers/Unauthenticated'),
+    import(
+      /* webpackChunkName: 'Unauthenticated' */ '../containers/Unauthenticated'
+    ),
 });
 
 const AsyncHome = withProjects(
   asyncLoader({
     ...asyncLoaderOptions,
     loader: () =>
-      import(/* webpackChunkName: 'Home', webpackPreload: true */ '../containers/Home'),
-  }),
+      import(
+        /* webpackChunkName: 'Home', webpackPreload: true */ '../containers/Home'
+      ),
+  })
 );
 
 const AsyncAbout = withSkills(
   asyncLoader({
     ...asyncLoaderOptions,
     loader: () => import(/* webpackChunkName: 'About' */ '../containers/About'),
-  }),
+  })
 );
 
 const AsyncPortfolio = withProjects(
@@ -44,9 +48,11 @@ const AsyncPortfolio = withProjects(
     asyncLoader({
       ...asyncLoaderOptions,
       loader: () =>
-        import(/* webpackChunkName: 'Portfolio', webpackPrefetch: true */ '../containers/Portfolio'),
-    }),
-  ),
+        import(
+          /* webpackChunkName: 'Portfolio', webpackPrefetch: true */ '../containers/Portfolio'
+        ),
+    })
+  )
 );
 
 const AsyncTodoList = withTodos(
@@ -55,8 +61,8 @@ const AsyncTodoList = withTodos(
       ...asyncLoaderOptions,
       loader: () =>
         import(/* webpackChunkName: 'TodoList' */ '../containers/TodoList'),
-    }),
-  ),
+    })
+  )
 );
 
 class AppRoutes extends React.Component<IAppRoutesProps> {

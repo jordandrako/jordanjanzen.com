@@ -1,8 +1,16 @@
 import * as React from 'react';
+import sha1 from 'sha1';
 import * as superagent from 'superagent';
 import * as Styled from './Dropzone.styles';
 import { IDropzoneProps } from './Dropzone.types';
-const sha1 = require('sha1');
+
+interface IParams {
+  api_key?: string;
+  upload_preset: string;
+  signature: string;
+  timestamp: number;
+  [key: string]: undefined | string | number;
+}
 
 class ImageDropzone extends React.Component<IDropzoneProps, {}> {
   public constructor(props: IDropzoneProps) {
@@ -40,7 +48,7 @@ class ImageDropzone extends React.Component<IDropzoneProps, {}> {
 
     // Disable tslint since the Cloudinary API requires these in a specific order.
     // tslint:disable:object-literal-sort-keys
-    const params = {
+    const params: IParams = {
       api_key: cloudinary.api,
       upload_preset: uploadPreset,
       signature,
@@ -51,8 +59,9 @@ class ImageDropzone extends React.Component<IDropzoneProps, {}> {
     const uploadRequest = superagent.post(url);
     uploadRequest.attach('file', file);
 
-    Object.keys(params).forEach(key => {
-      uploadRequest.field(key, params[key]);
+    Object.keys(params).forEach(param => {
+      const paramValue: any = params[param];
+      uploadRequest.field(param, paramValue);
     });
 
     uploadRequest.end((err, resp) => {

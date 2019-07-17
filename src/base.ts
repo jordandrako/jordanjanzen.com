@@ -22,14 +22,15 @@ const staging = {
 };
 
 const appDatabase = REACT_APP_DATABASE === 'production' ? production : staging;
+
 const app = firebase.initializeApp(appDatabase);
-const database = firebase.database(app);
-const auth = firebase.auth();
-const provider = new firebase.auth.GoogleAuthProvider();
-const base = rebase.createClass(database);
 
-const isLoggedIn = () => {
-  return !!firebase.auth().currentUser;
-};
+export const database = firebase.database(app);
 
-export { auth, database, provider, base, isLoggedIn };
+export const auth = firebase.auth();
+
+export const provider = new firebase.auth.GoogleAuthProvider();
+
+export const base = rebase.createClass(database);
+
+export const isLoggedIn = () => !!firebase.auth().currentUser;
