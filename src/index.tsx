@@ -1,12 +1,8 @@
 import polyfill from 'dynamic-polyfill';
 import * as React from 'react';
 import { render } from 'react-dom';
-import * as ReactGA from 'react-ga';
 import { BrowserRouter, Route, RouteComponentProps } from 'react-router-dom';
 import registerServiceWorker from './registerServiceWorker';
-
-ReactGA.initialize('UA-109877572-1');
-ReactGA.pageview(window.location.pathname + window.location.search);
 
 polyfill({
   agentFallback: 'polyfill',
