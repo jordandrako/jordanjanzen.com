@@ -20,7 +20,7 @@ export default class ProjectSingle extends React.Component<
     nextProps: IProjectSingleProps,
     prevState: IProjectSingleState
   ) {
-    if (nextProps.index !== prevState.delete) {
+    if (nextProps.projectId !== prevState.delete) {
       return { delete: undefined };
     }
     return null;
@@ -33,11 +33,11 @@ export default class ProjectSingle extends React.Component<
   }
 
   public render(): JSX.Element {
-    const { projects, details, index, isMobile } = this.props;
+    const { projects, details, projectId, isMobile } = this.props;
 
     const total = Object.keys(projects).length - 1;
 
-    const current = Object.keys(projects).indexOf(index);
+    const current = Object.keys(projects).indexOf(projectId);
 
     const nextIndex = current === total ? 0 : current + 1;
 
@@ -47,10 +47,10 @@ export default class ProjectSingle extends React.Component<
 
     const nextId = Object.keys(projects)[prevIndex];
 
-    if (details && index) {
+    if (details && projectId) {
       return (
         <DocumentTitle title={`${details.name} | Jordan Janzen`}>
-          <div key={index}>
+          <div key={projectId}>
             <Styled.ClickOutside to='/portfolio' />
             <Styled.Container>
               <Styled.Single>
@@ -64,17 +64,20 @@ export default class ProjectSingle extends React.Component<
                 </Styled.Frame>
                 <Styled.Content>
                   <p>{details.long_desc}</p>
-                  {details.images.map((image, imageIndex) => (
-                    <CloudImage
-                      key={image.id}
-                      name={`Feature ${imageIndex} ${image.id}`}
-                      publicId={image.id}
-                      format={image.format}
-                      width={isMobile ? '400' : '800'}
-                      crop='limit'
-                      link={true}
-                    />
-                  ))}
+                  {Object.keys(details.images).map((imageKey, imageIndex) => {
+                    const image = details.images[imageKey];
+                    return (
+                      <CloudImage
+                        key={image.id}
+                        name={`Feature ${imageIndex} ${image.id}`}
+                        publicId={image.id}
+                        format={image.format}
+                        width={isMobile ? '400' : '800'}
+                        crop='limit'
+                        link={true}
+                      />
+                    );
+                  })}
                 </Styled.Content>
                 <Styled.Frame>
                   <Button
@@ -147,7 +150,7 @@ export default class ProjectSingle extends React.Component<
   };
 
   private _handleDelete = () => {
-    const { index } = this.props;
+    const { projectId: index } = this.props;
     if (this.state.delete === undefined) {
       return this.setState({ delete: index });
     }

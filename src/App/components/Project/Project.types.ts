@@ -3,7 +3,7 @@ import { History } from 'history';
 
 export interface IProjectProps {
   details: IProject;
-  index: string;
+  projectId: string;
   hasBeenVisible?: boolean;
   style?: object;
 }

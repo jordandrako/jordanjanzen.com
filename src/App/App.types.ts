@@ -12,7 +12,9 @@ export interface IProject extends Object {
     industry: string;
     name: string;
   };
-  images: IImage[];
+  images: {
+    [key: string]: IImage;
+  };
   link?: string;
   long_desc: string | string[];
   name: string;

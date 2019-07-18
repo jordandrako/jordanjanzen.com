@@ -9,15 +9,15 @@ import * as Styled from './Project.styles';
 const imageHeight = '250';
 
 export default class Project extends React.Component<IProjectProps, {}> {
-  public constructor(props: IProjectProps) {
-    super(props);
-  }
-
   public render(): JSX.Element {
-    const { details, index } = this.props;
+    const { details, projectId: index } = this.props;
     if (details && details.images) {
-      const firstImage = details.images[0];
-      const { id: imageId, format: imageFormat, name: imageName } = firstImage;
+      const firstImage: string = Object.keys(details.images)[0];
+      const {
+        id: imageId,
+        format: imageFormat,
+        name: imageName,
+      } = details.images[firstImage];
 
       const { name: clientName, industry: clientIndustry } = details.client;
       return (
@@ -65,7 +65,7 @@ export default class Project extends React.Component<IProjectProps, {}> {
               <ul>
                 {details.skills &&
                   details.skills.map(
-                    skill => skill && <li key={skill}>{skill}</li>,
+                    skill => skill && <li key={skill}>{skill}</li>
                   )}
               </ul>
             </Styled.Skills>
