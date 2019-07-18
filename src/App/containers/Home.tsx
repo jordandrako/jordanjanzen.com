@@ -152,7 +152,7 @@ class Home extends React.Component<IHomeProps, {}> {
         </p>
         <Cta>
           <Button
-            href='https://res.cloudinary.com/jordan-janzen/raw/upload/v1562904080/Jordan_Janzen_Resume_2019.docx'
+            href='https://res.cloudinary.com/jordan-janzen/raw/upload/Jordan_Janzen_Resume_2019.docx'
             target='_blank'
             buttonType={ButtonType.Cta}
             icon='file-text'
