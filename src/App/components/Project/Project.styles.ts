@@ -30,10 +30,6 @@ export const ThumbnailLink = styled(Link)`
   border: none;
 `;
 
-// export const ThumbnailArea = styled.div`
-//   height: ${imageHeight}px;
-// `;
-
 export const Thumbnail = styled.section`
   margin-bottom: 0;
   height: ${imageHeight}px;
