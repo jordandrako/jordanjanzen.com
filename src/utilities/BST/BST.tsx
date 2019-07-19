@@ -2,9 +2,11 @@ import BSTNode from './BSTNode';
 
 export class BST<T extends number | string> {
   public root: BSTNode<T> | null;
+  private COUNT: number;
 
   public constructor() {
     this.root = null;
+    this.COUNT = 10;
   }
 
   /**
@@ -21,6 +23,12 @@ export class BST<T extends number | string> {
 
     this._insertNode(node, data);
   };
+
+  /**
+   * Inserts a node into the tree.
+   * @param data The data to insert into the tree.
+   */
+  public add = (data: T): void => this.insert(data);
 
   /**
    * Finds the smallest item in the tree.
@@ -68,7 +76,7 @@ export class BST<T extends number | string> {
       return null;
     }
 
-    while (current.data !== data) {
+    while (current && current.data !== data) {
       current = data < current.data ? current.left : current.right;
     }
 
@@ -124,7 +132,7 @@ export class BST<T extends number | string> {
 
     const result: T[] = [];
 
-    const traverseInOrder = (node: BSTNode<T> | null): void => {
+    const traverseInOrder = (node: BSTNode<T>): void => {
       node.left && traverseInOrder(node.left);
       result.push(node.data);
       node.right && traverseInOrder(node.right);
@@ -145,7 +153,7 @@ export class BST<T extends number | string> {
 
     const result: T[] = [];
 
-    const traversePreOrder = (node: BSTNode<T> | null): void => {
+    const traversePreOrder = (node: BSTNode<T>): void => {
       result.push(node.data);
       node.left && traversePreOrder(node.left);
       node.right && traversePreOrder(node.right);
@@ -166,7 +174,7 @@ export class BST<T extends number | string> {
 
     const result: T[] = [];
 
-    const traversePostOrder = (node: BSTNode<T> | null): void => {
+    const traversePostOrder = (node: BSTNode<T>): void => {
       node.left && traversePostOrder(node.left);
       node.right && traversePostOrder(node.right);
       result.push(node.data);
@@ -192,19 +200,55 @@ export class BST<T extends number | string> {
 
     while (queue.length > 0) {
       const node = queue.shift();
-      result.push(node.data);
+      node && result.push(node.data);
 
-      if (node.left !== null) {
+      if (node && node.left !== null) {
         queue.push(node.left);
       }
 
-      if (node.right !== null) {
+      if (node && node.right !== null) {
         queue.push(node.right);
       }
     }
 
     return result;
   };
+
+  /**
+   * Prints a visualization of the tree.
+   * @param root Node to treat as root of visualization. Defaults to `this.root`.
+   */
+  public visualize = (root: BSTNode<T> | null = this.root): void => {
+    this._visualize(root, 0);
+  };
+
+  // tslint:disable no-console
+  /**
+   * Recursive helper function that prints node data.
+   * @param root Node to treat as root of visualization.
+   */
+  private _visualize = (root: BSTNode<T> | null, space: number): void => {
+    if (root === null) {
+      return;
+    }
+
+    const _space = space + this.COUNT;
+
+    this._visualize(root.right, _space);
+
+    const pointerChar = '-';
+    let pointerString = '';
+    for (let i = this.COUNT; i < _space; i += 1) {
+      if (i % 10 === 0) {
+        pointerString = `${pointerString}|`;
+      }
+      pointerString = pointerString + pointerChar;
+    }
+    console.log(`${pointerString}${root.data}`);
+
+    this._visualize(root.left, _space);
+  };
+  // tslint:enable no-console
 
   /**
    * Recursive helper method to find the right place to insert a node into the tree.
@@ -241,7 +285,10 @@ export class BST<T extends number | string> {
    * @param node The node to start from.
    * @param data The data to remove.
    */
-  private _removeNode = (node: BSTNode<T>, data: T): BSTNode<T> | null => {
+  private _removeNode = (
+    node: BSTNode<T> | null,
+    data: T
+  ): BSTNode<T> | null => {
     if (node === null) {
       return null;
     }
