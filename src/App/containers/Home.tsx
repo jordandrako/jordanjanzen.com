@@ -1,7 +1,13 @@
 import { IHomeProps } from 'App/App.types';
 import { adjustHue, transparentize } from 'polished';
 import * as React from 'react';
-import { fonts, palette, screenSizes, semanticColors, styled } from 'styling';
+import {
+  fonts,
+  palette,
+  screenSizes,
+  semanticColors,
+  styled,
+} from '../../styling';
 import Button, { ButtonType } from '../components/Button';
 import CloudImage from '../components/CloudImage';
 import { Hero, Row } from '../components/Page';
@@ -152,7 +158,7 @@ class Home extends React.Component<IHomeProps, {}> {
         </p>
         <Cta>
           <Button
-            href='https://res.cloudinary.com/jordan-janzen/raw/upload/v1562904080/Jordan_Janzen_Resume_2019.docx'
+            href='https://res.cloudinary.com/jordan-janzen/raw/upload/Jordan_Janzen_Resume_2019.docx'
             target='_blank'
             buttonType={ButtonType.Cta}
             icon='file-text'

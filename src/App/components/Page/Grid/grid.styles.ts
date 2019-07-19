@@ -1,4 +1,4 @@
-import { screenSizes, semanticColors, styled } from 'styling';
+import { screenSizes, semanticColors, styled } from '../../../../styling';
 import { IFlex, IRow } from './grid.types';
 
 export const MainContainer = styled.main`

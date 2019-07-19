@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { asyncLoader } from 'utilities';
 import { isLoggedIn } from '../../base';
+import { asyncLoader } from '../../utilities';
 import { withProjects, withSkills, withTodos } from '../AppContext';
 import Loading from '../containers/Loading';
 import { IAppRoutesProps } from './AppRoutes.types';

@@ -6,7 +6,7 @@ import {
   screenSizes,
   screenSizesPx,
   styled,
-} from 'styling';
+} from '../styling';
 import AppProvider, { AppContext } from './AppContext';
 import AppRoutes from './AppRoutes';
 import { InitializeIcons } from './components/Icon';
@@ -72,7 +72,7 @@ interface IAppProps extends RouteComponentProps<any> {}
 class App extends React.Component<IAppProps, IAppState> {
   public static getDerivedStateFromProps(
     nextProps: IAppProps,
-    prevState: IAppState,
+    prevState: IAppState
   ): object | null {
     const nextRoute = nextProps.location.pathname.split('/')[1];
     const prevRoute =

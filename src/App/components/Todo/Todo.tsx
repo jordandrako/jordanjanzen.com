@@ -1,6 +1,6 @@
 import { ITodo } from 'App/App.types';
 import * as React from 'react';
-import { truncate } from 'utilities';
+import { truncate } from '../../../utilities';
 import StyledForm from '../Forms/StyledForm';
 import * as Styled from './Todo.styles';
 import { ITodoProps } from './Todo.types';
@@ -91,7 +91,7 @@ export default class Todo extends React.Component<ITodoProps, {}> {
   private _handleChange = (
     ev: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >,
+    >
   ): void => {
     const updatedProps: Partial<ITodo> = {
       [ev.target.name]:

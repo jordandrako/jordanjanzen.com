@@ -1,6 +1,6 @@
 import { darken, lighten } from 'polished';
 import { Link } from 'react-router-dom';
-import { fonts, palette, screenSizes, styled } from 'styling';
+import { fonts, palette, screenSizes, styled } from '../../../../styling';
 
 export const titleBar = styled.header`
   background: ${darken(0.05, palette.black)};

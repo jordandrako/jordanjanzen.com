@@ -1,4 +1,4 @@
-import * as firebase from 'firebase/app';
+import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
 import * as rebase from 're-base';
@@ -9,21 +9,29 @@ const {
   REACT_APP_STAGING_KEY,
 } = process.env;
 
-const production = {
-  apiKey: `${REACT_APP_PROD_KEY}`,
-  authDomain: 'jordan-janzen.firebaseapp.com',
-  databaseURL: 'https://jordan-janzen.firebaseio.com',
-};
+let config = {};
 
-const staging = {
-  apiKey: `${REACT_APP_STAGING_KEY}`,
-  authDomain: 'jordan-janzen-staging.firebaseapp.com',
-  databaseURL: 'https://jordan-janzen-staging.firebaseio.com',
-};
+switch (REACT_APP_DATABASE) {
+  case 'production':
+    config = {
+      ...config,
+      apiKey: `${REACT_APP_PROD_KEY}`,
+      authDomain: 'jordan-janzen.firebaseapp.com',
+      databaseURL: 'https://jordan-janzen.firebaseio.com',
+    };
+    break;
 
-const appDatabase = REACT_APP_DATABASE === 'production' ? production : staging;
+  default:
+    config = {
+      ...config,
+      apiKey: `${REACT_APP_STAGING_KEY}`,
+      authDomain: 'jordan-janzen-staging.firebaseapp.com',
+      databaseURL: 'https://jordan-janzen-staging.firebaseio.com',
+    };
+    break;
+}
 
-const app = firebase.initializeApp(appDatabase);
+const app = firebase.initializeApp(config);
 
 export const database = firebase.database(app);
 

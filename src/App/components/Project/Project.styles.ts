@@ -1,6 +1,6 @@
 import { adjustHue } from 'polished';
 import { Link } from 'react-router-dom';
-import { fonts, palette, screenSizes, styled } from 'styling';
+import { fonts, palette, screenSizes, styled } from '../../../styling';
 import { imageContainer } from '../CloudImage/CloudImage.styles';
 
 export const imageHeight = '250';

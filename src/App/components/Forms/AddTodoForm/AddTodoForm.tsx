@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { semanticColors } from 'styling';
+import { semanticColors } from '../../../../styling';
 import Button, { ButtonType } from '../../Button';
 import StyledForm from '../StyledForm';
 import { IAddTodoFormProps } from './AddTodoForm.types';

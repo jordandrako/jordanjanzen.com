@@ -1,7 +1,7 @@
 import * as React from 'react';
 import DocumentTitle from 'react-document-title';
-import { palette } from 'styling';
 import { isLoggedIn } from '../../../../base';
+import { palette } from '../../../../styling';
 import Loading from '../../../containers/Loading';
 import Button, { ButtonType } from '../../Button';
 import CloudImage from '../../CloudImage';

@@ -1,5 +1,5 @@
 import { darken } from 'polished';
-import { palette, screenSizes, styled } from 'styling';
+import { palette, screenSizes, styled } from '../../../styling';
 
 export const root = styled.footer`
   display: flex;

@@ -1,8 +1,8 @@
 import { IAboutProps, TAddSkill } from 'App/App.types';
 import * as React from 'react';
-import { fonts, palette, screenSizes, styled } from 'styling';
-import { yearsSinceBirthday } from 'utilities';
 import { isLoggedIn } from '../../base';
+import { fonts, palette, screenSizes, styled } from '../../styling';
+import { yearsSinceBirthday } from '../../utilities';
 import Button, { ButtonType } from '../components/Button';
 import CloudImage from '../components/CloudImage';
 import AddSkillForm from '../components/Forms/AddSkillForm/AddSkillForm';
