@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { getFileExtension, toTitleCase } from 'utilities';
+import { getFileExtension, toTitleCase } from '../../../../utilities';
 import Button, { ButtonType } from '../../Button';
 import * as Styled from './PageTitle.styles';
 import { IPageTitleProps } from './PageTitle.types';
@@ -40,7 +40,7 @@ const PageTitle = (props: IPageTitleProps) => {
         </Styled.currentItem>
         {process.env.REACT_APP_BRANCH !== 'master' && (
           <Styled.devItem>
-            <span>Branch: {process.env.REACT_APP_BRANCH}</span>
+            <span>Branch: {process.env.REACT_APP_BRANCH} | Build Date: {process.env.REACT_APP_LASTBUILD}</span>
           </Styled.devItem>
         )}
       </Styled.titleList>

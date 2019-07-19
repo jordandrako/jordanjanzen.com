@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { styled } from 'styling';
+import { styled } from '../../styling';
 import { ITodos, TAddTodo, TRemoveTodo, TUpdateTodo } from '../App.types';
 import AddTodoForm from '../components/Forms/AddTodoForm/AddTodoForm';
 import { Row } from '../components/Page/Grid';
@@ -78,7 +78,7 @@ class TodoList extends React.Component<ITodoListProps, ITodoListState> {
   }
 
   private _renderTodo(
-    showComplete: boolean,
+    showComplete: boolean
   ): JSX.Element | null | (JSX.Element | null)[] {
     const { removeTodo, todos, updateTodo } = this.props;
     return Object.keys(todos).map(key => {

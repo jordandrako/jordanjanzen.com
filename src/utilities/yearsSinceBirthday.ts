@@ -1,4 +1,4 @@
-import * as moment from 'moment';
+import moment from 'moment';
 
 /**
  * Calculates the age, or years since a date, rounded down.

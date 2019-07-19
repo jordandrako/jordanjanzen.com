@@ -1,7 +1,13 @@
 import { IHomeProps } from 'App/App.types';
 import { adjustHue, transparentize } from 'polished';
 import * as React from 'react';
-import { fonts, palette, screenSizes, semanticColors, styled } from 'styling';
+import {
+  fonts,
+  palette,
+  screenSizes,
+  semanticColors,
+  styled,
+} from '../../styling';
 import Button, { ButtonType } from '../components/Button';
 import CloudImage from '../components/CloudImage';
 import { Hero, Row } from '../components/Page';
@@ -112,7 +118,7 @@ class Home extends React.Component<IHomeProps, {}> {
             <>
               <h2>My latest project</h2>
               <Project
-                index={projectKey}
+                projectId={projectKey}
                 details={projects[projectKey]!}
                 style={{ margin: '0 0 1em', width: '100%' }}
               />

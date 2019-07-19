@@ -1,10 +1,10 @@
-import { ITodo } from 'App/App.types';
+import { ITodo, TRemoveTodo, TUpdateTodo } from 'App/App.types';
 
 export interface ITodoProps {
   details: ITodo;
   index: string;
-  removeTodo: (key: string) => void;
-  updateTodo: (key: string, updatedProp: {}) => void;
+  removeTodo: TRemoveTodo;
+  updateTodo: TUpdateTodo;
 }
 
 export interface ITodoStyleProps {

@@ -1,5 +1,5 @@
 import Dropzone from 'react-dropzone';
-import { fonts, semanticColors, styled } from 'styling';
+import { fonts, semanticColors, styled } from '../../../../styling';
 
 export const zone = styled(Dropzone)`
   height: 100px;
@@ -11,7 +11,7 @@ export const zone = styled(Dropzone)`
   cursor: pointer;
 
   &:before {
-    content: "Upload Files Here";
+    content: 'Upload Files Here';
     font-family: ${fonts.monospace};
     font-weight: 700;
     color: ${semanticColors.textColor};

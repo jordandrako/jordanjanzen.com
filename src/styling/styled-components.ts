@@ -1,9 +1,6 @@
 import * as styledComponents from 'styled-components';
 // tslint:disable-next-line no-duplicate-imports
-import {
-  StyledFunction,
-  ThemedStyledComponentsModule,
-} from 'styled-components';
+import { ThemedStyledComponentsModule } from 'styled-components';
 
 import { ITheme } from './theme.types';
 
@@ -15,5 +12,5 @@ const {
   ThemeProvider,
 } = styledComponents as ThemedStyledComponentsModule<ITheme>;
 
-export { css, injectGlobal, keyframes, styled, StyledFunction, ThemeProvider };
+export { css, injectGlobal, keyframes, styled, ThemeProvider };
 export default styled;

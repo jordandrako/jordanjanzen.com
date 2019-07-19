@@ -1,12 +1,8 @@
 import polyfill from 'dynamic-polyfill';
 import * as React from 'react';
 import { render } from 'react-dom';
-import * as ReactGA from 'react-ga';
 import { BrowserRouter, Route, RouteComponentProps } from 'react-router-dom';
 import registerServiceWorker from './registerServiceWorker';
-
-ReactGA.initialize('UA-109877572-1');
-ReactGA.pageview(window.location.pathname + window.location.search);
 
 polyfill({
   agentFallback: 'polyfill',
@@ -21,18 +17,18 @@ polyfill({
   ],
   options: ['gated', 'always'],
   afterFill() {
-    import(/* webpackChunkName: 'App', webpackPreload: true */ './App/App').then(
-      App => {
-        render(
-          <BrowserRouter>
-            <Route>
-              {(props: RouteComponentProps<any>) => <App.default {...props} />}
-            </Route>
-          </BrowserRouter>,
-          document.getElementById('root') as HTMLElement,
-        );
-      },
-    );
+    import(
+      /* webpackChunkName: 'App', webpackPreload: true */ './App/App'
+    ).then(App => {
+      render(
+        <BrowserRouter>
+          <Route>
+            {(props: RouteComponentProps<any>) => <App.default {...props} />}
+          </Route>
+        </BrowserRouter>,
+        document.getElementById('root') as HTMLElement
+      );
+    });
   },
 });
 registerServiceWorker();

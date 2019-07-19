@@ -1,22 +1,18 @@
 import * as React from 'react';
-import { toTitleCase } from 'utilities';
-import { IProjectProps } from '.';
+import { toTitleCase } from '../../../utilities';
 import Loading from '../../containers/Loading';
 import Button, { ButtonType } from '../Button';
 import CloudImage from '../CloudImage';
 import * as Styled from './Project.styles';
+import { IProjectProps } from './Project.types';
 
 const imageHeight = '250';
 
 export default class Project extends React.Component<IProjectProps, {}> {
-  public constructor(props: IProjectProps) {
-    super(props);
-  }
-
   public render(): JSX.Element {
-    const { details, index } = this.props;
+    const { details, projectId: index } = this.props;
     if (details && details.images) {
-      const firstImage = Object.keys(details.images)[0];
+      const firstImage: string = Object.keys(details.images)[0];
       const {
         id: imageId,
         format: imageFormat,
@@ -69,7 +65,7 @@ export default class Project extends React.Component<IProjectProps, {}> {
               <ul>
                 {details.skills &&
                   details.skills.map(
-                    skill => skill && <li key={skill}>{skill}</li>,
+                    skill => skill && <li key={skill}>{skill}</li>
                   )}
               </ul>
             </Styled.Skills>

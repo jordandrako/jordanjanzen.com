@@ -1,7 +1,7 @@
 import { IImage, IProject } from 'App/App.types';
 import * as React from 'react';
-import { semanticColors } from 'styling';
-import { truncate } from 'utilities';
+import { semanticColors } from '../../../../styling';
+import { truncate } from '../../../../utilities';
 import Button, { ButtonType } from '../../Button';
 import { Row } from '../../Page';
 import Dropzone from '../FormUtilities/Dropzone';
@@ -10,7 +10,9 @@ import * as Styled from './AddProjectForm.styles';
 import { IAddProjectFormProps } from './AddProjectForm.types';
 
 interface IAddProjectFormState {
-  images: IImage[];
+  images: {
+    [key: string]: IImage;
+  };
   skillValues: string[];
 }
 
@@ -44,7 +46,7 @@ export default class AddProjectForm extends React.Component<
     this._year = React.createRef();
 
     this.state = {
-      images: [],
+      images: {},
       skillValues: [],
     };
   }
@@ -97,7 +99,7 @@ export default class AddProjectForm extends React.Component<
                       <option key={key} value={skills[key]!.name}>
                         {skills[key]!.name}
                       </option>
-                    ),
+                    )
                 )}
               </optgroup>
               <optgroup label='Library Skills'>
@@ -107,7 +109,7 @@ export default class AddProjectForm extends React.Component<
                       <option key={key} value={skills[key]!.name}>
                         {skills[key]!.name}
                       </option>
-                    ),
+                    )
                 )}
               </optgroup>
               <optgroup label='Design Skills'>
@@ -117,7 +119,7 @@ export default class AddProjectForm extends React.Component<
                       <option key={key} value={skills[key]!.name}>
                         {skills[key]!.name}
                       </option>
-                    ),
+                    )
                 )}
               </optgroup>
             </select>
@@ -187,21 +189,20 @@ export default class AddProjectForm extends React.Component<
     );
   }
 
-  private _renderUploadedImageList = () =>
-    Object.keys(this.state.images).map(key => (
-      <Styled.uploadedImage key={key}>
-        <img
-          src={this.state.images[key].url}
-          alt={this.state.images[key].name}
-        />
+  private _renderUploadedImageList = () => {
+    const { images } = this.state;
+    return Object.keys(images).map((imageKey: string, imageIndex) => (
+      <Styled.uploadedImage key={images[imageKey].name + imageIndex}>
+        <img src={images[imageKey].url} alt={images[imageKey].name} />
         <Button
           buttonType={ButtonType.Delete}
           // tslint:disable-next-line jsx-no-lambda
-          onClick={() => this._removeImage(key)}
+          onClick={() => this._removeImage(imageKey)}
           className='fa fa-times-circle close'
         />
       </Styled.uploadedImage>
     ));
+  };
 
   private _createProject = (ev: React.FormEvent<HTMLFormElement>): void => {
     ev.preventDefault();
@@ -232,20 +233,20 @@ export default class AddProjectForm extends React.Component<
     this._form.current!.reset();
     this.setState(prevState => ({
       ...prevState,
-      images: [],
+      images: {},
       skillValues: [],
     }));
   };
 
   private _addImage = (image: IImage): void => {
-    const images = [...this.state.images];
-    images.push(image);
+    const images = { ...this.state.images };
+    images[image.id] = image;
     this.setState({ images });
   };
 
-  private _removeImage = (index: string): void => {
-    const images = [...this.state.images];
-    delete images[index];
+  private _removeImage = (imageKey: string): void => {
+    const images = { ...this.state.images };
+    delete images[imageKey];
     this.setState({ images });
     // TODO: use api to delete image from cloudinary
   };
