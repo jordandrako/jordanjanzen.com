@@ -248,7 +248,7 @@ export default class AddProjectForm extends React.Component<
     const images = { ...this.state.images };
     delete images[imageKey];
     this.setState({ images });
-    // TODO: use api to delete image from cloudinary
+    // @TODO: use api to delete image from cloudinary
   };
 
   private _handleValues = (ev: React.ChangeEvent<HTMLSelectElement>): void => {
