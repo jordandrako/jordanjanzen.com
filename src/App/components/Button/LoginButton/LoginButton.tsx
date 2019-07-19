@@ -1,6 +1,6 @@
 import { withAuth } from 'App/AppContext';
-import { isLoggedIn } from 'base';
-import * as React from 'react';
+import React from 'react';
+import { isLoggedIn } from '../../../../base';
 import Button, { ButtonType, IButtonProps } from '../index';
 
 interface ILoginButtonProps extends IButtonProps {

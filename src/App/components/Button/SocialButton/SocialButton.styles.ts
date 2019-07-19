@@ -1,4 +1,4 @@
-import { styled } from 'styling';
+import { styled } from '../../../../styling';
 import Button from '../../Button';
 
 export const root = styled(Button)`

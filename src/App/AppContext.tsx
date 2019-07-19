@@ -1,10 +1,10 @@
-import { auth, base, database, provider } from 'base';
-import * as firebase from 'firebase/app';
+import firebase from 'firebase/app';
 import { RebaseBinding } from 're-base';
-import * as React from 'react';
+import React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
-import { getTheme, ITheme, screenSizesPx } from 'styling';
-import { setLocalStorage, slugify } from 'utilities';
+import { auth, base, database, provider } from '../base';
+import { getTheme, ITheme, screenSizesPx } from '../styling';
+import { setLocalStorage, slugify } from '../utilities';
 import {
   ILocalStorage,
   IProject,
@@ -40,6 +40,7 @@ interface IAppContextState {
   theme: ITheme;
   todos: ITodos;
   updateTodo?: TUpdateTodo;
+  [key: string]: any;
 }
 
 interface IAppContextProps extends RouteComponentProps<any> {}
@@ -66,13 +67,14 @@ class AppProvider extends React.Component<IAppContextProps, IAppContextState> {
   public componentDidMount(): void {
     this._getBinding('bind').catch(() => console.error);
 
-    auth.onAuthStateChanged(
-      (user: firebase.User | null) =>
-        user &&
-        this._authHandler(user)
-          .then(this._updatePage)
-          .catch(() => console.error),
-    );
+    auth &&
+      auth.onAuthStateChanged(
+        (user: firebase.User | null) =>
+          user &&
+          this._authHandler(user)
+            .then(this._updatePage)
+            .catch(() => console.error)
+      );
   }
 
   public addProject = (project: IProject): void => {
@@ -117,7 +119,7 @@ class AppProvider extends React.Component<IAppContextProps, IAppContextState> {
   public updateTodo = (key: string, updatedProp: ITodo): void => {
     const todos: ITodos = { ...this.state.todos };
     const todo = todos[key];
-    const updatedTodo = {
+    const updatedTodo: ITodo = {
       ...todo,
       ...updatedProp,
     };
@@ -127,7 +129,7 @@ class AppProvider extends React.Component<IAppContextProps, IAppContextState> {
 
   public login = async (): Promise<void> => {
     const result: firebase.auth.UserCredential = await auth.signInWithPopup(
-      provider,
+      provider
     );
     result.user &&
       (await this._authHandler(result.user).catch(() => console.error));
@@ -165,7 +167,7 @@ class AppProvider extends React.Component<IAppContextProps, IAppContextState> {
   }
 
   private _updatePage = (): void => {
-    this.props.history.push(location.pathname);
+    this.props.history.push(window.location.pathname);
   };
 
   private _authHandler = (authData: firebase.User): Promise<any> => {
@@ -185,7 +187,7 @@ class AppProvider extends React.Component<IAppContextProps, IAppContextState> {
         } else {
           auth.signOut();
           reject(
-            new Error('Log in denied. You are not the owner of this site.'),
+            new Error('Log in denied. You are not the owner of this site.')
           );
         }
       });
@@ -198,7 +200,7 @@ class AppProvider extends React.Component<IAppContextProps, IAppContextState> {
   };
 
   private _getBinding = async (
-    type: 'sync' | 'bind',
+    type: 'sync' | 'bind'
   ): Promise<RebaseBinding[]> => {
     const bindOrSync = (state: string): Promise<RebaseBinding> => {
       return new Promise((resolve, reject) => {
@@ -208,7 +210,7 @@ class AppProvider extends React.Component<IAppContextProps, IAppContextState> {
               context: this,
               state,
               then: () => setLocalStorage(state, this.state[state]),
-            }),
+            })
           );
         }
         if (type === 'sync') {
@@ -217,7 +219,7 @@ class AppProvider extends React.Component<IAppContextProps, IAppContextState> {
               context: this,
               state,
               then: () => setLocalStorage(state, this.state[state]),
-            }),
+            })
           );
         }
         reject(new Error('You must pass "bind" or "sync" to this method.'));

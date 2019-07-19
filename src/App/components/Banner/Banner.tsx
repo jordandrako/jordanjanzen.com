@@ -2,7 +2,7 @@ import { History } from 'history';
 import * as React from 'react';
 import { Route, RouteComponentProps } from 'react-router-dom';
 import { Transition } from 'react-transition-group';
-import { toTitleCase } from 'utilities';
+import { toTitleCase } from '../../../utilities';
 import { ButtonType } from '../Button';
 import * as Styled from './Banner.styles';
 import {
@@ -25,7 +25,7 @@ class Banner extends React.Component<IBannerProps, IBannerState>
 
   public static getDerivedStateFromProps(
     nextProps: IBannerProps,
-    prevState: IBannerState,
+    prevState: IBannerState
   ): IBannerState | null {
     if (!nextProps.in !== prevState.closed) {
       return {
@@ -91,7 +91,7 @@ class Banner extends React.Component<IBannerProps, IBannerState>
     let text;
     switch (action) {
       case BannerAction.Reload:
-        click = () => history.push(location.pathname);
+        click = () => history.push(window.location.pathname);
         text = '🔄 Reload';
         break;
       case BannerAction.Home:

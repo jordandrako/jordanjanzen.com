@@ -16,7 +16,7 @@ export interface IButtonProps {
   target?: string;
   text?: string;
   to?: string;
-  type?: string;
+  type?: 'button' | 'reset' | 'submit';
   wide?: boolean;
   onClick?: (
     e?: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>,

@@ -1,6 +1,6 @@
 import { darken } from 'polished';
 import { NavLink } from 'react-router-dom';
-import { fonts, palette, screenSizes, styled } from 'styling';
+import { fonts, palette, screenSizes, styled } from '../../../styling';
 
 export const navList = styled.ul`
   list-style: none;
@@ -84,12 +84,12 @@ export const link = styled(NavLink)`
     }
 
     &:before {
-      content: "==";
+      content: '==';
       padding-right: 0.25em;
       transform: translateX(100%);
     }
     &:after {
-      content: "=>";
+      content: '=>';
       padding-left: 0.25em;
       transform: translateX(-100%);
     }

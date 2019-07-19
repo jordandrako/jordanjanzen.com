@@ -1,5 +1,5 @@
 import { adjustHue, transparentize } from 'polished';
-import { palette, semanticColors, styled } from 'styling';
+import { palette, semanticColors, styled } from '../../../styling';
 import { ICloudImageStyleProps } from './CloudImage.types';
 
 const borderSize = '3px';
@@ -15,7 +15,7 @@ export const imageContainer = styled.div`
   background-size: cover;
   background-position: center top;
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   border: ${(props: ICloudImageStyleProps) =>
     props.border
       ? `${borderSize} solid ${semanticColors.imageBorder}`

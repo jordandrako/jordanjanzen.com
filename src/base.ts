@@ -1,4 +1,4 @@
-import * as firebase from 'firebase/app';
+import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
 import * as rebase from 're-base';
@@ -9,27 +9,36 @@ const {
   REACT_APP_STAGING_KEY,
 } = process.env;
 
-const production = {
-  apiKey: `${REACT_APP_PROD_KEY}`,
-  authDomain: 'jordan-janzen.firebaseapp.com',
-  databaseURL: 'https://jordan-janzen.firebaseio.com',
-};
+let config = {};
 
-const staging = {
-  apiKey: `${REACT_APP_STAGING_KEY}`,
-  authDomain: 'jordan-janzen-staging.firebaseapp.com',
-  databaseURL: 'https://jordan-janzen-staging.firebaseio.com',
-};
+switch (REACT_APP_DATABASE) {
+  case 'production':
+    config = {
+      ...config,
+      apiKey: `${REACT_APP_PROD_KEY}`,
+      authDomain: 'jordan-janzen.firebaseapp.com',
+      databaseURL: 'https://jordan-janzen.firebaseio.com',
+    };
+    break;
 
-const appDatabase = REACT_APP_DATABASE === 'production' ? production : staging;
-const app = firebase.initializeApp(appDatabase);
-const database = firebase.database(app);
-const auth = firebase.auth();
-const provider = new firebase.auth.GoogleAuthProvider();
-const base = rebase.createClass(database);
+  default:
+    config = {
+      ...config,
+      apiKey: `${REACT_APP_STAGING_KEY}`,
+      authDomain: 'jordan-janzen-staging.firebaseapp.com',
+      databaseURL: 'https://jordan-janzen-staging.firebaseio.com',
+    };
+    break;
+}
 
-const isLoggedIn = () => {
-  return !!firebase.auth().currentUser;
-};
+const app = firebase.initializeApp(config);
 
-export { auth, database, provider, base, isLoggedIn };
+export const database = firebase.database(app);
+
+export const auth = firebase.auth();
+
+export const provider = new firebase.auth.GoogleAuthProvider();
+
+export const base = rebase.createClass(database);
+
+export const isLoggedIn = () => !!firebase.auth().currentUser;

@@ -1,4 +1,4 @@
-import { fonts, palette, styled } from 'styling';
+import { fonts, palette, styled } from '../../../styling';
 import { Row } from '../Page';
 
 const StyledForm = styled(Row)`
@@ -25,7 +25,7 @@ const StyledForm = styled(Row)`
 
   textarea,
   select,
-  input:not([type="checkbox"]) {
+  input:not([type='checkbox']) {
     font-family: ${fonts.monospace};
     font-size: 0.8rem;
     line-height: 1.6;

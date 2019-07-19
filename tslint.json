@@ -35,14 +35,6 @@
     "no-var-requires": false,
     "object-shorthand-properties-first": false,
     "quotemark": [true, "single"],
-    "trailing-comma": [
-      true,
-      {
-        "multiline": "always",
-        "singleline": "never",
-        "esSpecCompliant": true
-      }
-    ],
     "variable-name": [
       true,
       "ban-keywords",

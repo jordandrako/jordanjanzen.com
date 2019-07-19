@@ -12,11 +12,14 @@ export interface IProject extends Object {
     industry: string;
     name: string;
   };
-  images: IImage[];
+  images: {
+    [key: string]: IImage;
+  };
   link?: string;
   long_desc: string | string[];
   name: string;
   repo?: string;
+  year?: string;
   short_desc?: string | string[];
   skills: string[];
 }
@@ -34,7 +37,7 @@ export interface ISkills {
   [key: string]: ISkill | null;
 }
 
-export interface ITodo extends Object {
+export interface ITodo {
   category: string;
   complete: boolean;
   desc: string | string[];

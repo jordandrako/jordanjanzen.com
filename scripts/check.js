@@ -1,3 +1,4 @@
+// @ts-check
 const branch = require('git-branch');
 const fs = require('fs');
 const path = require('path');

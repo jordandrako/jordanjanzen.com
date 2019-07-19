@@ -1,7 +1,7 @@
 import { adjustHue } from 'polished';
 import { Link } from 'react-router-dom';
-import { fonts, palette, screenSizes, styled } from 'styling';
-const JJMark = require('images/JJMark.svg');
+import JJMark from '../../../images/JJMark.svg';
+import { fonts, palette, screenSizes, styled } from '../../../styling';
 
 export const leftColumn = styled.aside`
   background: ${palette.black};
@@ -46,7 +46,7 @@ export const logo = styled.h2`
   position: relative;
 
   &:after {
-    content: "";
+    content: '';
     display: block;
     background: url(${JJMark}) no-repeat;
     background-position: center;
