@@ -93,7 +93,17 @@ class About extends React.Component<IAboutProps, {}> {
           ) : null}
         </Row>
         <Row>
-          <h3>A bit about me...</h3>
+          <h3>TL;DR</h3>
+          <p>
+            Front-end engineer with 5+ years of experience in web development
+            and design. Passionate in developing web applications and libraries
+            that provide a great user experience. Strong background in graphic
+            design and branding enables effective cross-team communication.
+            Looking for more experience as a full stack or front-end engineer.
+          </p>
+        </Row>
+        <Row>
+          <h3>A bit more about me...</h3>
           <p>
             <CloudImage
               publicId='Xander_with_finger_paint'
@@ -139,22 +149,6 @@ class About extends React.Component<IAboutProps, {}> {
             >
               VS Code
             </a>
-            , complimented by{' '}
-            <a
-              href='https://hyper.is'
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              Hyper
-            </a>{' '}
-            with zsh or{' '}
-            <a
-              href='http://cmder.net'
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              Cmder
-            </a>
             .
           </p>
           <p>
@@ -170,22 +164,15 @@ class About extends React.Component<IAboutProps, {}> {
               Steam, here's my community page
             </a>
             . I'm also obsessed with making the best coffee possible; my
-            favorite brewing methods are the Chemex, Kalita Wave and my{' '}
-            <a
-              href='https://sca.coffee/certified-home-brewer/'
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              SCA
-            </a>{' '}
-            certified Behmor Brazen Plus drip machine (like I said, obsessed).
+            favorite brewing methods are the Chemex, Kalita Wave and my Behmor
+            Brazen Plus.
           </p>
         </Row>
         <Row>
           <h2>Work History</h2>
           <HistoryRow>
             <DateColumn>
-              <p>Jan 2018 - Now</p>
+              <p>Jan 2018 - July 2019</p>
             </DateColumn>
             <HistoryColumn>
               <h3>UX Engineer</h3>
@@ -208,31 +195,39 @@ class About extends React.Component<IAboutProps, {}> {
                   </a>
                 </em>
               </h4>
-              <p>
-                Member the OneDrive and SharePoint Design (ODSP) team using
-                TypeScript, React, and cutting edge techniques to create open
-                source software and Microsoft experiences. The primary
-                responsibility is developing{' '}
-                <a
-                  href='https://github.com/OfficeDev/office-ui-fabric-react'
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
-                  Office UI Fabric React
-                </a>
-                , the official front-end framework for building experiences that
-                fit seamlessly into Office and Office 365.
-              </p>
               <ul>
-                <li>Produce clean, tested, maintainable code.</li>
-                <li>Adhere to strict design language guidelines.</li>
                 <li>
-                  Develop within a large codebase that is integrated into dozens
-                  of official Microsoft and 3rd-party products.
+                  Contributed to several projects centered around{' '}
+                  <a
+                    href='https://github.com/OfficeDev/office-ui-fabric-react'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    Office UI Fabric React
+                  </a>
+                  , Microsoft's official open-source UI framework for building
+                  experience for Office 365.
                 </li>
                 <li>
-                  Work with a large team of people with a wider range of skills
-                  and backgrounds.
+                  Engineered an internal Human Interface Guidelines (HIG) site
+                  for Fabric that included rich documentation for designers,
+                  engineers, and product managers using React and TypeScript.
+                </li>
+                <li>
+                  Worked to port the internal HIG site code to rebuild the
+                  public site for{' '}
+                  <a
+                    href='https://uifabric.io'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    Office UI Fabric
+                  </a>
+                  .
+                </li>
+                <li>
+                  <strong>Tech stack and skills:</strong> React, TypeScript,
+                  Jest, Enzyme, Azure, Git, Kanban
                 </li>
               </ul>
             </HistoryColumn>
@@ -254,20 +249,23 @@ class About extends React.Component<IAboutProps, {}> {
                   </a>
                 </em>
               </h4>
-              <p>
-                Work with the Outreach Media Group's Cost Per Lead team to
-                create and manage landing pages and creative graphics targeted
-                at church leaders and faith-based consumers. Employ adaptive web
-                designs and creative development techniques to generate leads
-                for corporate clients' programs and advertising campaigns. A/B
-                test and optimize conversion rates to find the perfect design
-                and fit for each individual clients' needs.
-              </p>
               <ul>
                 <li>
-                  Integrated landing pages with back-end software to deliver
-                  filtered, targeted, quality leads to many clients' CRMs and
-                  REST APIs.
+                  Created and managed landing pages and creative graphics on the
+                  Cost Per Lead team using adaptive web designs to generate
+                  leads for clients' advertising campaigns.
+                </li>
+                <li>
+                  Found creative solutions using JavaScript to enhance the
+                  features of landing pages.
+                </li>
+                <li>
+                  A/B tested and optimized conversion rates to find the perfect
+                  design for each client.
+                </li>
+                <li>
+                  Converted the team to a Kanban task system to optimize
+                  communication and workflow.
                 </li>
                 <li>
                   Improved company margins by finding creative, strong
@@ -276,6 +274,10 @@ class About extends React.Component<IAboutProps, {}> {
                 <li>
                   Adapted to many managerial and life changes through the length
                   of employment.
+                </li>
+                <li>
+                  <strong>Tech stack and skills:</strong> JavaScript, REST APIs,
+                  A/B Testing, AWS, Git, Kanban
                 </li>
               </ul>
             </HistoryColumn>
@@ -297,19 +299,18 @@ class About extends React.Component<IAboutProps, {}> {
                   </a>
                 </em>
               </h4>
-              <p>
-                Design, develop and maintained websites built primarily with
-                content management systems, primarily Wordpress. Lead the design
-                process, from exploration to print, of client branding.
-              </p>
               <ul>
-                <li>Worked in a small, close team environment.</li>
                 <li>
-                  Used best practices to deliver strong and secure websites
+                  Designed, developed and maintained client websites built with
+                  WordPress or other CMSs.
                 </li>
                 <li>
-                  Researched individual needs and explored many solutions with
-                  each client.
+                  Led the design process, from exploration to print, of client
+                  branding.
+                </li>
+                <li>
+                  <strong>Tech stack and skills:</strong> WordPress, HTML, CSS,
+                  Photoshop, Illustrator, InDesign
                 </li>
               </ul>
             </HistoryColumn>
@@ -330,7 +331,7 @@ class About extends React.Component<IAboutProps, {}> {
           <h2>Education</h2>
           <Flex>
             <DateColumn>
-              <p>May 2012 - Aug 2014</p>
+              <p>Aug 2014</p>
             </DateColumn>
             <HistoryColumn>
               <h3>
@@ -364,12 +365,12 @@ class About extends React.Component<IAboutProps, {}> {
         <Row>
           <p>Want this to go?</p>
           <Button
-            href='https://res.cloudinary.com/jordan-janzen/image/upload/v1511291826/Jordan_Janzen_CV.pdf'
+            href='https://res.cloudinary.com/jordan-janzen/raw/upload/Jordan_Janzen_Resume_2019.docx'
             target='_blank'
             buttonType={ButtonType.Cta}
             icon='file-text'
           >
-            Download My CV
+            Download My Resume
           </Button>
         </Row>
       </>
