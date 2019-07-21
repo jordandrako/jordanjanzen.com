@@ -2,10 +2,5 @@
   "projects": {
     "staging": "jordan-janzen-staging",
     "production": "jordan-janzen"
-  },
-  "hosting": {
-    "headers": [
-      { "source":"/service-worker.js", "headers": [{"key": "Cache-Control", "value": "no-cache"}] }
-    ]
   }
 }
