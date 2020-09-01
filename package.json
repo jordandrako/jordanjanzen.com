@@ -3,6 +3,9 @@
   "homepage": "https://jordanjanzen.com",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "^10"
+  },
   "scripts": {
     "_check": "node scripts/check.js",
     "prestart": "yarn run check",
@@ -18,8 +21,7 @@
     "check:branch": "yarn _check --branch",
     "check": "yarn _check --all",
     "lint:ts": "tslint -p tsconfig.json --fix",
-    "lint:styles": "node_modules/.bin/stylelint --fix src",
-    "lint": "yarn lint:ts && yarn lint:styles"
+    "lint": "yarn lint:ts"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.6",
