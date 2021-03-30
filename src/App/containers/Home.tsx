@@ -99,12 +99,12 @@ class Home extends React.Component<IHomeProps, {}> {
         <Hero>
           {!isMobile ? (
             <CloudImage
-              publicId='jordan_headshot_test'
-              format='png'
-              name='Jordans Headshot.'
+              publicId="jordan_headshot_test"
+              format="png"
+              name="Jordans Headshot."
               border={false}
-              width='1000'
-              crop='limit'
+              width="1000"
+              crop="limit"
               style={{ backgroundPosition: 'left' }}
             >
               {this._heroContent()}
@@ -124,7 +124,7 @@ class Home extends React.Component<IHomeProps, {}> {
               />
             </>
           )}
-          <Button to='/portfolio/' buttonType={ButtonType.Cta}>
+          <Button to="/portfolio/" buttonType={ButtonType.Cta}>
             View My Portfolio
           </Button>
         </Row>
@@ -137,14 +137,14 @@ class Home extends React.Component<IHomeProps, {}> {
       <InnerHero>
         {this.props.isMobile ? (
           <CloudImage
-            publicId='jordan_headshot_test'
-            format='png'
-            name='Jordans Headshot.'
-            width='142'
-            height='142'
-            crop='fill'
-            gravity='face'
-            radius='max'
+            publicId="jordan_headshot_test"
+            format="png"
+            name="Jordans Headshot."
+            width="142"
+            height="142"
+            crop="fill"
+            gravity="face"
+            radius="max"
           />
         ) : null}
         <Intro>
@@ -158,10 +158,10 @@ class Home extends React.Component<IHomeProps, {}> {
         </p>
         <Cta>
           <Button
-            href='https://1drv.ms/w/s!AiOn_Ae2sW-_obN0bgwTz3WyoKqS7g?e=eGsxjP'
-            target='_blank'
+            href="https://cloud.jordanjanzen.com/s/XsnbqXSobCSmaMS"
+            target="_blank"
             buttonType={ButtonType.Cta}
-            icon='file-text'
+            icon="file-text"
           >
             Download My Resume
           </Button>
