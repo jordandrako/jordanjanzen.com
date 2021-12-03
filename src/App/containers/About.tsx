@@ -95,7 +95,7 @@ class About extends React.Component<IAboutProps, {}> {
         <Row>
           <h3>TL;DR</h3>
           <p>
-            Front-end engineer with 5+ years of experience in web development
+            Front-end engineer with 7+ years of experience in web development
             and design. Passionate in developing web applications and libraries
             that provide a great user experience. Strong background in graphic
             design and branding enables effective cross-team communication.
@@ -106,10 +106,10 @@ class About extends React.Component<IAboutProps, {}> {
           <h3>A bit more about me...</h3>
           <p>
             <CloudImage
-              publicId='Xander_with_finger_paint'
-              name='My son Xander finger painting with our dog Gizmo in the background.'
-              align='right'
-              width='200'
+              publicId="Xander_with_finger_paint"
+              name="My son Xander finger painting with our dog Gizmo in the background."
+              align="right"
+              width="200"
               link={true}
             />
             I'm really passionate about design and making everything I touch on
@@ -130,9 +130,9 @@ class About extends React.Component<IAboutProps, {}> {
             <br />
             You can find more of what I'm learning by{' '}
             <a
-              href='https://github.com/jordandrako/'
-              target='_blank'
-              rel='noopener noreferrer'
+              href="https://github.com/jordandrako/"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               inspecting my GitHub profile
             </a>
@@ -143,9 +143,9 @@ class About extends React.Component<IAboutProps, {}> {
             workflows over the years, jumping back forth between Windows and
             Linux. Currently, I'm most comfortable using{' '}
             <a
-              href='https://code.visualstudio.com/'
-              target='_blank'
-              rel='noopener noreferrer'
+              href="https://code.visualstudio.com/"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               VS Code
             </a>
@@ -157,9 +157,9 @@ class About extends React.Component<IAboutProps, {}> {
             and media servers. Mostly, though, I play PC games. If you'd like to
             add me on{' '}
             <a
-              href='https://steamcommunity.com/id/jordandrako/'
-              target='_blank'
-              rel='noopener noreferrer'
+              href="https://steamcommunity.com/id/jordandrako/"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               Steam, here's my community page
             </a>
@@ -172,24 +172,117 @@ class About extends React.Component<IAboutProps, {}> {
           <h2>Work History</h2>
           <HistoryRow>
             <DateColumn>
-              <p>Jan 2018 - July 2019</p>
+              <p>Oct 2020 - Present</p>
             </DateColumn>
             <HistoryColumn>
-              <h3>UX Engineer</h3>
+              <h3>User Experience Engineer (FTE)</h3>
               <h4>
                 <em>
                   <a
-                    href='https://microsoft.com/'
-                    target='_blank'
-                    rel='noopener noreferrer'
+                    href="https://www.bpcs.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Blueprint
+                  </a>
+                </em>
+              </h4>
+              <ul>
+                <li>
+                  Handled challenges of remote work during the COVID-19 pandemic
+                  while minimizing disruption to output.
+                </li>
+                <li>
+                  Worked with a portfolio of top-tier clients to build and
+                  improve on a variety of web application products by
+                  implementing best user experience practices.
+                </li>
+                <li>
+                  Contributed to a redesign and prototype of Blueprint’s
+                  flagship product, Conduit, which informed key decisions for
+                  the product’s next versions.
+                </li>
+                <li>
+                  Supported an overseas team to deliver the next generation of
+                  Conduit on a tight deadline.
+                </li>
+                <li>
+                  Contributed to the React frontend of a mature proprietary
+                  data-visualization application created by massive
+                  Redmond-based company.
+                </li>
+
+                <li>
+                  <strong>Tech stack and skills:</strong> React, TypeScript,
+                  Vue, Angular, Agile
+                </li>
+              </ul>
+            </HistoryColumn>
+          </HistoryRow>
+          <HistoryRow>
+            <DateColumn>
+              <p>Aug 2019 - Oct 2020</p>
+            </DateColumn>
+            <HistoryColumn>
+              <h3>Front-End Developer (Contract)</h3>
+              <h4>
+                <em>
+                  <a
+                    href="https://www.libertymutual.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Liberty Mutual
+                  </a>
+                </em>
+              </h4>
+              <ul>
+                <li>
+                  Made key decisions on company-wide design systems and
+                  component libraries.
+                </li>
+                <li>
+                  Contributed to internal design system component repository
+                  using React and TypeScript.
+                </li>
+                <li>
+                  Pioneered the switch from multiple repositories to a
+                  consolidated monorepo using Yarn Workspaces and Lerna, which
+                  has increased productivity and has been used as a template for
+                  other teams within the company.
+                </li>
+                <li>
+                  Contributed to design system documentation website using React
+                  and Nextjs.
+                </li>
+
+                <li>
+                  <strong>Tech stack and skills:</strong> React, TypeScript,
+                  Jest, Enzyme, React Testing Library, Git, Kanban
+                </li>
+              </ul>
+            </HistoryColumn>
+          </HistoryRow>
+          <HistoryRow>
+            <DateColumn>
+              <p>Jan 2018 - July 2019</p>
+            </DateColumn>
+            <HistoryColumn>
+              <h3>UX Engineer (Contract)</h3>
+              <h4>
+                <em>
+                  <a
+                    href="https://microsoft.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     Microsoft
                   </a>{' '}
                   through{' '}
                   <a
-                    href='https://aquent.com/'
-                    target='_blank'
-                    rel='noopener noreferrer'
+                    href="https://aquent.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     Aquent
                   </a>
@@ -199,9 +292,9 @@ class About extends React.Component<IAboutProps, {}> {
                 <li>
                   Contributed to several projects centered around{' '}
                   <a
-                    href='https://github.com/OfficeDev/office-ui-fabric-react'
-                    target='_blank'
-                    rel='noopener noreferrer'
+                    href="https://github.com/OfficeDev/office-ui-fabric-react"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     Office UI Fabric React
                   </a>
@@ -217,9 +310,9 @@ class About extends React.Component<IAboutProps, {}> {
                   Worked to port the internal HIG site code to rebuild the
                   public site for{' '}
                   <a
-                    href='https://uifabric.io'
-                    target='_blank'
-                    rel='noopener noreferrer'
+                    href="https://uifabric.io"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     Office UI Fabric
                   </a>
@@ -237,13 +330,13 @@ class About extends React.Component<IAboutProps, {}> {
               <p>Nov 2015 - Nov 2017</p>
             </DateColumn>
             <HistoryColumn>
-              <h3>Front-End UX Engineer</h3>
+              <h3>Front-End UX Engineer (FTE)</h3>
               <h4>
                 <em>
                   <a
-                    href='https://outreachmediagroup.com/'
-                    target='_blank'
-                    rel='noopener noreferrer'
+                    href="https://outreachmediagroup.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     Outreach Inc.
                   </a>
@@ -287,13 +380,13 @@ class About extends React.Component<IAboutProps, {}> {
               <p>Aug 2014 - Nov 2015</p>
             </DateColumn>
             <HistoryColumn>
-              <h3>Lead WordPress Developer and Graphic Designer</h3>
+              <h3>Front-End Developer and Graphic Designer (FTE)</h3>
               <h4>
                 <em>
                   <a
-                    href='https://uzu-media.com/'
-                    target='_blank'
-                    rel='noopener noreferrer'
+                    href="https://uzu-media.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     UZU Media
                   </a>
@@ -365,10 +458,10 @@ class About extends React.Component<IAboutProps, {}> {
         <Row>
           <p>Want this to go?</p>
           <Button
-            href='https://res.cloudinary.com/jordan-janzen/raw/upload/Jordan_Janzen_Resume_2019.docx'
-            target='_blank'
+            href="https://res.cloudinary.com/jordan-janzen/raw/upload/Jordan_Janzen_Resume_2019.docx"
+            target="_blank"
             buttonType={ButtonType.Cta}
-            icon='file-text'
+            icon="file-text"
           >
             Download My Resume
           </Button>
@@ -383,7 +476,7 @@ class About extends React.Component<IAboutProps, {}> {
 
   private _renderList = (category: string): (JSX.Element | undefined)[] => {
     const { skills } = this.props;
-    return Object.keys(skills).map(key => {
+    return Object.keys(skills).map((key) => {
       const skill = skills[key] && skills[key];
       if (skill && skill.category === category) {
         return (
