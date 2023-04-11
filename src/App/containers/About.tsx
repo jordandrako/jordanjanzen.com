@@ -458,7 +458,7 @@ class About extends React.Component<IAboutProps, {}> {
         <Row>
           <p>Want this to go?</p>
           <Button
-            href="https://1drv.ms/w/s!AiOn_Ae2sW-_qfgMiLv3mjWJJboLGw?e=Kas9Ka"
+            href="https://link.morels.me/jordans-resume"
             target="_blank"
             buttonType={ButtonType.Cta}
             icon="file-text"
